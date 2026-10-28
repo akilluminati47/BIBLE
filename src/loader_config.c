@@ -30,7 +30,44 @@ static const ConfigIntKey g_int_keys[] = {
     {"APP_GAMEID", offsetof(CONFIG, APP_GAMEID)},
     {"DISC_STOP", offsetof(CONFIG, DISC_STOP)},
     {"BIBLE_GLYPHS", offsetof(CONFIG, BIBLE_GLYPHS)},
+    {"BIBLE_INFO", offsetof(CONFIG, BIBLE_INFO)},
 };
+
+// BIBLE_COLOR = RRGGBB,RRGGBB,RRGGBB: the sky's top, horizon and floor (RIPPS2 writes its Color Theme's); a value that
+// does not read as three colours leaves RIPPS2's blue
+static int parse_bible_color(const char *name, const char *value)
+{
+    unsigned int c[3];
+    char *end;
+    const char *p = value;
+    int i;
+
+    if (!ci_eq(name, "BIBLE_COLOR"))
+        return 0;
+    for (i = 0; i < 3 && p != NULL; i++) {
+        while (*p == ' ' || *p == '#')
+            p++;
+        c[i] = (unsigned int)strtoul(p, &end, 16);
+        if (end == p)
+            return 1;
+        p = end;
+        while (*p == ' ')
+            p++;
+        if (i < 2 && *p++ != ',')
+            return 1;
+    }
+    for (i = 0; i < 3; i++)
+        GLOBCFG.BIBLE_SKY[i] = c[i] & 0xFFFFFF;
+    return 1;
+}
+
+// BIBLE: the splash's own keys, before it begins
+void LoaderApplyBibleSplash(void)
+{
+    SplashRenderSetGlyphs(GLOBCFG.BIBLE_GLYPHS);
+    SplashRenderSetInfo(GLOBCFG.BIBLE_INFO);
+    SplashRenderSetSky(GLOBCFG.BIBLE_SKY);
+}
 
 static int parse_scalar_int_key(const char *name, const char *value)
 {
@@ -1012,7 +1049,7 @@ int LoaderParseConfigFile(FILE *fp,
         if (name == NULL || *name == '\0')
             continue;
 
-        if (parse_scalar_int_key(name, value))
+        if (parse_scalar_int_key(name, value) || parse_bible_color(name, value))
             continue;
 
         if (ci_starts_with(name, "LOAD_IRX_E")) {
@@ -1194,7 +1231,7 @@ int LoaderBootstrapConfigAndSplash(int *splash_early_presented_out,
             int show_loading_overlay = (GLOBCFG.HOTKEY_DISPLAY != 1);
 
             SplashRenderSetVideoMode(GLOBCFG.VIDEO_MODE, native_video_mode);
-            SplashRenderSetGlyphs(GLOBCFG.BIBLE_GLYPHS);
+            LoaderApplyBibleSplash();
             SplashRenderTextBody(GLOBCFG.LOGO_DISP, is_psx_desr);
             if (show_loading_overlay) {
                 SplashDrawLoadingStatus(GLOBCFG.LOGO_DISP);
@@ -1236,7 +1273,7 @@ int LoaderBootstrapConfigAndSplash(int *splash_early_presented_out,
             int show_loading_overlay = (GLOBCFG.HOTKEY_DISPLAY != 1);
 
             SplashRenderSetVideoMode(GLOBCFG.VIDEO_MODE, native_video_mode);
-            SplashRenderSetGlyphs(GLOBCFG.BIBLE_GLYPHS);
+            LoaderApplyBibleSplash();
             SplashRenderTextBody(GLOBCFG.LOGO_DISP, is_psx_desr);
             SplashDrawCenteredStatusWithInfo(no_config_status,
                                              0xffff00,

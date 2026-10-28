@@ -416,6 +416,20 @@ static int seed_hotkey_clock_from_ps2(u64 tick_ms)
     return 1;
 }
 
+// BIBLE: BIBLE_INFO 0 (the default) leaves the logo splash to the sky, the logo and the buttons: no countdown, clock,
+// date or console details, and no progress lines (SplashRenderInfoOn, loader_ui.c)
+static int g_info_on = 0;
+
+void SplashRenderSetInfo(int on)
+{
+    g_info_on = on != 0;
+}
+
+int SplashRenderInfoOn(void)
+{
+    return g_info_on;
+}
+
 void SplashRenderTextBody(int logo_disp,
                           int is_psx_desr)
 {
@@ -488,6 +502,8 @@ void SplashRenderHotkeyClockDate(int logo_disp, u64 tick_ms)
     u64 elapsed_ms;
     u64 elapsed_seconds;
 
+    if (logo_disp >= 2 && !g_info_on) // BIBLE_INFO 0: no countdown, clock or date
+        return;
     if (!SplashRenderIsActive() || logo_disp < 1) {
         clear_hotkey_clock_date();
         g_hotkey_clock.initialized = 0;
@@ -719,7 +735,7 @@ void SplashRenderConsoleInfoLine(int logo_disp,
     int has_temp = has_text(temp_celsius);
     int has_autoboot = has_text(autoboot_countdown);
 
-    if (logo_disp <= 0)
+    if (logo_disp <= 0 || (logo_disp >= 2 && !g_info_on))
         return;
 
     build_console_info_line_text(info_line,

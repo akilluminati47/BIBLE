@@ -2,6 +2,7 @@
 #include "main.h"
 #include "console_info.h"
 #include "loader_launch.h"
+#include "loader_config.h"
 #include "loader_path.h"
 #include "splash_render.h"
 #include "splash_screen.h"
@@ -414,9 +415,10 @@ int LoaderRunLaunchWorkflow(int splash_early_presented,
     temp_celsius = NULL;
     ClearLaunchStatusConsoleInfoOverride();
 
-    if (!SplashRenderIsActive())
-        SplashRenderSetGlyphs(GLOBCFG.BIBLE_GLYPHS);
+    if (!SplashRenderIsActive()) {
+        LoaderApplyBibleSplash();
         SplashRenderTextBody(GLOBCFG.LOGO_DISP, is_psx_desr);
+    }
 
     if (GLOBCFG.LOGO_DISP > 0 || SplashRenderIsActive()) {
         ConsoleInfoCapture(&console_info, config_source, romver, romver_size);

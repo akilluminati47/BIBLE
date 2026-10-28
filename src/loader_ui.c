@@ -149,6 +149,11 @@ static void SplashDrawStatusBelowLogo(const char *text, u32 color)
 
     if (text == NULL || !SplashRenderIsActive())
         return;
+    if (!SplashRenderInfoOn()) { // BIBLE_INFO 0: the splash as it is, no line under the logo
+        SplashRenderBeginFrame();
+        SplashRenderPresent();
+        return;
+    }
 
     screen_w = SplashRenderGetScreenWidth();
     screen_h = SplashRenderGetScreenHeight();
@@ -228,6 +233,11 @@ static void SplashDrawStatusWithSublineForLaunch(int logo_disp,
         return;
     if (line1 == NULL || *line1 == '\0')
         return;
+    if (logo_disp >= 2 && !SplashRenderInfoOn()) { // BIBLE_INFO 0: the splash as it is
+        SplashRenderBeginFrame();
+        SplashRenderPresent();
+        return;
+    }
 
     line1_w = (int)strlen(line1) * 6;
     line2_w = (line2 != NULL) ? ((int)strlen(line2) * 6) : 0;
@@ -327,6 +337,11 @@ void SplashDrawLoadingStatus(int logo_disp)
 
     if (!SplashRenderIsActive())
         return;
+    if (logo_disp >= 2 && !SplashRenderInfoOn()) { // BIBLE_INFO 0: the splash as it is, no "Loading..."
+        SplashRenderBeginFrame();
+        SplashRenderPresent();
+        return;
+    }
 
     now_ms = Timer();
     if (s_loading_phase_tick_ms == 0)

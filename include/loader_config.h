@@ -14,6 +14,8 @@ typedef struct
 } LoaderConfigParseResult;
 
 typedef void (*LoaderEmergencyPollFn)(u64 *window_deadline_ms);
+
+void LoaderApplyBibleSplash(void); // BIBLE: BIBLE_GLYPHS, BIBLE_INFO and BIBLE_COLOR to the splash, before it begins
 typedef int (*LoaderParseVideoModeFn)(const char *value, int *out_mode);
 typedef void (*LoaderApplyVideoModeFn)(int cfg_mode);
 

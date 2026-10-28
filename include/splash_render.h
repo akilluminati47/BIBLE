@@ -10,7 +10,8 @@ void SplashRenderDrawTextPx(int x, int y, u32 color, const char *text);
 void SplashRenderDrawTextPxScaled(int x, int y, u32 color, const char *text, int scale);
 void SplashRenderDrawRoundedRect(int x, int y, int w, int h, int radius, u32 color, unsigned int opacity_percent);
 void SplashRenderRestoreBackgroundRect(int x, int y, int w, int h);
-void SplashRenderSetGlyphs(int on); // BIBLE: BIBLE_GLYPHS, before the splash begins
+void SplashRenderSetGlyphs(int mode); // BIBLE: BIBLE_GLYPHS (0 none, 1 the face buttons, 2 all), before the splash begins
+void SplashRenderSetSky(const unsigned int sky[3]); // BIBLE: BIBLE_COLOR, the sky's top, horizon and floor (0xRRGGBB)
 void SplashRenderSetHotkeysVisible(int visible);
 void SplashRenderSetLogoShimmerCountdown(u64 remaining_ms, u64 total_ms);
 void SplashRenderPresent(void);

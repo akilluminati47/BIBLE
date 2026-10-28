@@ -87,20 +87,38 @@ static int g_logo_visible = 0;
 static int g_hotkeys_x = -1;
 static int g_hotkeys_y = -1;
 static int g_hotkeys_visible = 0;
-// BIBLE: the four face buttons under the logo (LOGO_DISPLAY 2), BIBLE_GLYPHS in the config
-// hotkeys.png holds each button as a 20 x 20 icon at x 7, 21 rows apart, the face buttons from row 22 (triangle,
-// circle, cross, square); they are drawn twice that size, with nearest filtering, so every pixel stays square
-#define BIBLE_GLYPH_SRC_X 7
-#define BIBLE_GLYPH_SRC_Y 22
-#define BIBLE_GLYPH_SRC_PITCH 21
-#define BIBLE_GLYPH_SRC 20
-#define BIBLE_GLYPH_CELL 40
-#define BIBLE_GLYPH_GAP 16
-#define BIBLE_GLYPH_BELOW 16
+// BIBLE: the splash in RIPPS2's look (LOGO_DISPLAY 2 and up): RIPPS2's sky in place of the picture, and under the PS2
+// logo the controller's buttons from hotkeys.png. BIBLE_GLYPHS 1: the four face buttons; 2: all sixteen in four rows
+// (the face buttons; L1 R1 START SELECT; L2 R2 L3 R3; up, down, left, right); 0: the logo alone. The logo and the
+// rows are centred as one group. The sheet holds each button as an icon 21 wide at x 6, at the rows below; each is
+// drawn twice its size with nearest filtering, so every pixel stays square.
+#define BIBLE_GLYPH_SRC_X 6
+#define BIBLE_GLYPH_SRC_W 21
+#define BIBLE_GLYPH_CELL 42 // twice the sheet's 21
+#define BIBLE_GLYPH_GAP 14  // between two buttons of a row
+#define BIBLE_GLYPH_ROW_GAP 8
+#define BIBLE_GLYPH_BELOW 28 // from the logo to the first row
+enum {
+    GLY_TRIANGLE = 0, GLY_CIRCLE, GLY_CROSS, GLY_SQUARE, GLY_UP, GLY_DOWN, GLY_LEFT, GLY_RIGHT,
+    GLY_L1, GLY_L2, GLY_L3, GLY_R1, GLY_R2, GLY_R3, GLY_SELECT, GLY_START, GLY_COUNT
+};
+static const unsigned short g_glyph_src[GLY_COUNT][2] = { // each icon's first row in hotkeys.png, and its height
+    {22, 20}, {43, 20}, {64, 20}, {85, 20}, {106, 20}, {127, 20}, {148, 20}, {169, 20},
+    {191, 17}, {211, 20}, {232, 20}, {254, 17}, {274, 20}, {295, 20}, {319, 16}, {337, 19}};
+static const unsigned char g_glyph_rows[4][4] = {
+    {GLY_TRIANGLE, GLY_CIRCLE, GLY_CROSS, GLY_SQUARE},
+    {GLY_L1, GLY_R1, GLY_START, GLY_SELECT},
+    {GLY_L2, GLY_R2, GLY_L3, GLY_R3},
+    {GLY_UP, GLY_DOWN, GLY_LEFT, GLY_RIGHT}};
 static int g_bible_glyphs = 1;
 static int g_glyphs_x = -1;
 static int g_glyphs_y = -1;
-static int g_glyphs_visible = 0;
+static int g_glyphs_rows = 0; // the rows drawn: 0, 1 (the face buttons) or 4
+// BIBLE_COLOR: the sky's top, horizon and floor (0xRRGGBB) as RIPPS2's Storage page draws them at rest, the horizon
+// 290/480 of the way down. RIPPS2 writes its Color Theme's (or a Color Sweep's first colour's) into the config.
+#define BIBLE_SKY_HORIZON(h) ((h) * 290 / 480)
+static unsigned int g_sky[3] = {0x010209, 0x0B194C, 0x020410};
+static int g_sky_on = 0;
 static int g_logo_shimmer_left = 0;
 static int g_logo_shimmer_band_width = 0;
 static int g_logo_shimmer_visible_left = 0;
@@ -473,7 +491,8 @@ static void destroy_frame_state(void)
     g_logo_y = -1;
     g_logo_visible = 0;
     g_hotkeys_x = -1;
-    g_glyphs_visible = 0;
+    g_glyphs_rows = 0;
+    g_sky_on = 0;
     g_hotkeys_y = -1;
     g_hotkeys_visible = 0;
     reset_logo_shimmer_state();
@@ -541,15 +560,16 @@ static void draw_layer(const SPLASH_LAYER *layer, int x, int y, int z, unsigned 
                               GS_SETREG_RGBAQ(0x80, 0x80, 0x80, alpha, 0x00));
 }
 
-// BIBLE: one 32 x 32 cell of the hotkeys strip (its cells: AUTO, then triangle, circle, cross, square, ...)
-// BIBLE: face button k (0 triangle, 1 circle, 2 cross, 3 square) from hotkeys.png, BIBLE_GLYPH_CELL square at x, y
-static void draw_layer_cell(const SPLASH_LAYER *layer, int k, int x, int y, int z)
+// BIBLE: button id (GLY_*) from hotkeys.png in the BIBLE_GLYPH_CELL square at x, y; a shorter icon (L1, R1, SELECT,
+// START) in the middle of it
+static void draw_glyph(const SPLASH_LAYER *layer, int id, int x, int y, int z)
 {
-    const int v = BIBLE_GLYPH_SRC_Y + k * BIBLE_GLYPH_SRC_PITCH;
+    const int v = g_glyph_src[id][0], h = g_glyph_src[id][1];
 
     if (layer == NULL || !layer->ready)
         return;
 
+    y += (BIBLE_GLYPH_CELL - 2 * h) / 2;
     gsKit_prim_sprite_texture(g_gs,
                               (GSTEXTURE *)&layer->tex,
                               (float)x,
@@ -557,11 +577,60 @@ static void draw_layer_cell(const SPLASH_LAYER *layer, int k, int x, int y, int 
                               (float)BIBLE_GLYPH_SRC_X,
                               (float)v,
                               (float)(x + BIBLE_GLYPH_CELL),
-                              (float)(y + BIBLE_GLYPH_CELL),
-                              (float)(BIBLE_GLYPH_SRC_X + BIBLE_GLYPH_SRC),
-                              (float)(v + BIBLE_GLYPH_SRC),
+                              (float)(y + 2 * h),
+                              (float)(BIBLE_GLYPH_SRC_X + BIBLE_GLYPH_SRC_W),
+                              (float)(v + h),
                               z,
                               GS_SETREG_RGBAQ(0x80, 0x80, 0x80, GS_ALPHA_OPAQUE, 0x00));
+}
+
+// BIBLE: the sky's colour y lines down: top to horizon, then horizon to floor, as RIPPS2 draws its two gradients
+static unsigned int sky_at(int y)
+{
+    int hy = BIBLE_SKY_HORIZON(g_screen_h), a = 0, b = 1, t = y, n = hy, i;
+    unsigned int out = 0;
+
+    if (y > hy) {
+        a = 1;
+        b = 2;
+        t = y - hy;
+        n = g_screen_h - hy;
+    }
+    if (n <= 0)
+        return g_sky[b];
+    if (t < 0)
+        t = 0;
+    if (t > n)
+        t = n;
+    for (i = 0; i < 24; i += 8) {
+        int ca = (int)((g_sky[a] >> i) & 0xFF), cb = (int)((g_sky[b] >> i) & 0xFF);
+        out |= (unsigned int)((ca + (cb - ca) * t / n) & 0xFF) << i;
+    }
+    return out;
+}
+
+static u64 sky_rgbaq(unsigned int c)
+{
+    return GS_SETREG_RGBAQ((c >> 16) & 0xFF, (c >> 8) & 0xFF, c & 0xFF, GS_ALPHA_OPAQUE, 0x00);
+}
+
+// BIBLE: RIPPS2's sky over x0..x1, y0..y1 (the whole screen, or the piece an overlay gives back), split at the horizon
+static void draw_sky_rect(int x0, int y0, int x1, int y1, int z)
+{
+    int hy = BIBLE_SKY_HORIZON(g_screen_h);
+    u64 top, bottom;
+
+    if (g_gs == NULL || x0 >= x1 || y0 >= y1)
+        return;
+    if (y0 < hy && y1 > hy) {
+        draw_sky_rect(x0, y0, x1, hy, z);
+        draw_sky_rect(x0, hy, x1, y1, z);
+        return;
+    }
+    top = sky_rgbaq(sky_at(y0));
+    bottom = sky_rgbaq(sky_at(y1));
+    gsKit_prim_quad_gouraud(g_gs, (float)x0, (float)y0, (float)x1, (float)y0, (float)x0, (float)y1, (float)x1, (float)y1,
+                            z, top, top, bottom, bottom);
 }
 
 static void draw_layer_stretched(const SPLASH_LAYER *layer, int z)
@@ -795,7 +864,7 @@ void SplashRenderRestoreBackgroundRect(int x, int y, int w, int h)
     float v1;
     const SPLASH_LAYER *bg = &g_layers[LAYER_BG];
 
-    if (g_gs == NULL || !bg->ready || g_screen_w <= 0 || g_screen_h <= 0 || w <= 0 || h <= 0)
+    if (g_gs == NULL || (!g_sky_on && !bg->ready) || g_screen_w <= 0 || g_screen_h <= 0 || w <= 0 || h <= 0)
         return;
 
     x0 = x;
@@ -814,6 +883,10 @@ void SplashRenderRestoreBackgroundRect(int x, int y, int w, int h)
 
     if (x0 >= x1 || y0 >= y1)
         return;
+    if (g_sky_on) { // BIBLE: the sky is drawn, not a picture
+        draw_sky_rect(x0, y0, x1, y1, FG_Z);
+        return;
+    }
 
     u0 = ((float)x0 * (float)bg->tex.Width) / (float)g_screen_w;
     v0 = ((float)y0 * (float)bg->tex.Height) / (float)g_screen_h;
@@ -834,9 +907,17 @@ void SplashRenderRestoreBackgroundRect(int x, int y, int w, int h)
                               GS_SETREG_RGBAQ(0x80, 0x80, 0x80, GS_ALPHA_OPAQUE, 0x00));
 }
 
-void SplashRenderSetGlyphs(int on)
+void SplashRenderSetGlyphs(int mode)
 {
-    g_bible_glyphs = on ? 1 : 0;
+    g_bible_glyphs = mode < 0 ? 0 : mode > 2 ? 2 : mode;
+}
+
+void SplashRenderSetSky(const unsigned int sky[3])
+{
+    int i;
+
+    for (i = 0; i < 3; i++)
+        g_sky[i] = sky[i] & 0xFFFFFF;
 }
 
 void SplashRenderSetHotkeysVisible(int visible)
@@ -892,17 +973,22 @@ static void draw_static_layers(void)
 {
     const unsigned char logo_alpha = get_logo_base_alpha();
 
-    draw_layer_stretched(&g_layers[LAYER_BG], BG_Z);
+    if (g_sky_on)
+        draw_sky_rect(0, 0, g_screen_w, g_screen_h, BG_Z);
+    else
+        draw_layer_stretched(&g_layers[LAYER_BG], BG_Z);
     if (g_logo_visible) {
         draw_layer(&g_layers[LAYER_LOGO], g_logo_x, g_logo_y, FG_Z, logo_alpha);
         draw_logo_shimmer_overlay();
     }
     if (g_hotkeys_visible)
         draw_layer(&g_layers[LAYER_HOTKEYS], g_hotkeys_x, g_hotkeys_y, FG_Z, GS_ALPHA_OPAQUE);
-    if (g_glyphs_visible) { // BIBLE: triangle, circle, cross, square, left to right under the logo
-        int k;
-        for (k = 0; k < 4; k++)
-            draw_layer_cell(&g_layers[LAYER_HOTKEYS], k, g_glyphs_x + k * (BIBLE_GLYPH_CELL + BIBLE_GLYPH_GAP), g_glyphs_y, FG_Z);
+    if (g_glyphs_rows > 0) { // BIBLE: the buttons under the logo, four to a row
+        int r, k;
+        for (r = 0; r < g_glyphs_rows; r++)
+            for (k = 0; k < 4; k++)
+                draw_glyph(&g_layers[LAYER_HOTKEYS], g_glyph_rows[r][k], g_glyphs_x + k * (BIBLE_GLYPH_CELL + BIBLE_GLYPH_GAP),
+                           g_glyphs_y + r * (BIBLE_GLYPH_CELL + BIBLE_GLYPH_ROW_GAP), FG_Z);
     }
 }
 
@@ -927,7 +1013,6 @@ void SplashRenderPresent(void)
 
 int SplashRenderBegin(int logo_disp, int is_psx_desr)
 {
-    const SPLASH_IMAGE *bg;
     const SPLASH_IMAGE *logo;
     int center_x;
     int center_y;
@@ -972,11 +1057,7 @@ int SplashRenderBegin(int logo_disp, int is_psx_desr)
         return 1;
     }
 
-    bg = SplashGetBackgroundImage(is_psx_desr);
-    if (!upload_layer_texture(&g_layers[LAYER_BG], bg, GS_FILTER_LINEAR)) {
-        destroy_frame_state();
-        return 0;
-    }
+    g_sky_on = 1; // BIBLE: RIPPS2's sky (BIBLE_COLOR) in place of the background picture
 
     logo = SplashGetLogoImage(is_psx_desr);
     if (!upload_layer_texture(&g_layers[LAYER_LOGO], logo, GS_FILTER_NEAREST)) {
@@ -988,16 +1069,21 @@ int SplashRenderBegin(int logo_disp, int is_psx_desr)
                                            &g_logo_shimmer_visible_right);
 
     if (logo_disp == 2) {
+        // BIBLE: the logo and BIBLE_GLYPHS' rows centred as one group (the logo alone in the middle with them off)
+        int rows = g_bible_glyphs == 2 ? 4 : g_bible_glyphs == 1 ? 1 : 0;
+        int block_h = 0;
+
+        if (rows > 0 && !upload_layer_texture(&g_layers[LAYER_HOTKEYS], SplashGetHotkeysImage(), GS_FILTER_NEAREST))
+            rows = 0;
+        if (rows > 0)
+            block_h = BIBLE_GLYPH_BELOW + rows * BIBLE_GLYPH_CELL + (rows - 1) * BIBLE_GLYPH_ROW_GAP;
         g_logo_x = center_x - ((int)logo->width / 2) + MODE2_LOGO_X_FROM_CENTER;
-        g_logo_y = center_y - ((int)logo->height / 2) + MODE2_LOGO_Y_FROM_CENTER;
+        g_logo_y = center_y - ((int)logo->height + block_h) / 2 + MODE2_LOGO_Y_FROM_CENTER;
         g_logo_visible = 1;
         g_hotkeys_visible = 0;
-        // BIBLE: the four face buttons under the PS2 logo (BIBLE_GLYPHS, on unless the config says 0)
-        if (g_bible_glyphs && upload_layer_texture(&g_layers[LAYER_HOTKEYS], SplashGetHotkeysImage(), GS_FILTER_NEAREST)) {
-            g_glyphs_x = center_x - (4 * BIBLE_GLYPH_CELL + 3 * BIBLE_GLYPH_GAP) / 2;
-            g_glyphs_y = g_logo_y + (int)logo->height + BIBLE_GLYPH_BELOW;
-            g_glyphs_visible = 1;
-        }
+        g_glyphs_rows = rows;
+        g_glyphs_x = center_x - (4 * BIBLE_GLYPH_CELL + 3 * BIBLE_GLYPH_GAP) / 2;
+        g_glyphs_y = g_logo_y + (int)logo->height + BIBLE_GLYPH_BELOW;
         init_logo_shimmer_state();
         SplashRenderBeginFrame();
         SplashRenderPresent();

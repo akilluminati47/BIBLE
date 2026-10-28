@@ -78,7 +78,9 @@ typedef struct
     int APP_GAMEID;
     int DISC_STOP;
     int VIDEO_MODE;
-    int BIBLE_GLYPHS; // BIBLE: the four face buttons in a row under the logo (1, the default), or the logo alone (0)
+    int BIBLE_GLYPHS; // BIBLE: under the logo, 1 the four face buttons (the default), 2 every button in four rows, 0 none
+    int BIBLE_INFO;   // BIBLE: 1 shows the countdown, clock and console details on the logo splash; 0 (the default) does not
+    unsigned int BIBLE_SKY[3]; // BIBLE_COLOR: the sky's top, horizon and floor, 0xRRGGBB (RIPPS2's blue by default)
 } CONFIG;
 
 extern CONFIG GLOBCFG;
