@@ -200,7 +200,14 @@ void LoaderRunEmergencyVideoModeSelector(int *hotkey_launches_enabled,
 
             render_temp = ConsoleInfoRefreshTemperature(&console_info);
 
-            snprintf(line_mode, sizeof(line_mode), "VIDEO_MODE = %s [NATIVE %s]", selected_label, native_label);
+            // BIBLE: what the mode is (AUTO: the mode this console picks) in place of "[NATIVE <mode>]" on every line
+            if (selected_mode == CFG_VIDEO_MODE_AUTO)
+                snprintf(line_mode, sizeof(line_mode), "VIDEO_MODE = AUTO (THIS CONSOLE: %s)", native_label);
+            else
+                snprintf(line_mode, sizeof(line_mode), "VIDEO_MODE = %s (%s)", selected_label,
+                         selected_mode == CFG_VIDEO_MODE_PAL    ? "576I, 50 HZ" :
+                         selected_mode == CFG_VIDEO_MODE_480P   ? "60 HZ PROGRESSIVE, COMPONENT CABLE" :
+                                                                  "480I, 60 HZ");
             if (show_save_status) {
                 if (save_feedback_path[0] != '\0') {
                     size_t path_len = strlen(save_feedback_path);
