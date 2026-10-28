@@ -1493,13 +1493,15 @@ void SplashRenderEnd(void)
 }
 
 // BIBLE: the hand-off to the program being launched. The logo, the buttons and the sheet fade away over
-// BIBLE_HANDOFF_FADE_MS (text goes at once), both framebuffers are left holding the sky alone, and the GS keeps
+// BIBLE_HANDOFF_FADE_FRAMES (text goes at once), both framebuffers are left holding the sky alone, and the GS keeps
 // showing it: nothing resets the display until the program sets its own. RIPPS2 starts on that same sky in the same
 // mode (it reads them from the same settings), so the TV keeps its sync and nothing pops between the two.
-#define BIBLE_HANDOFF_FADE_MS 250
+// The fade counts frames, not Timer(): an AUTO launch has ended the timer (TimerEnd) before CleanUp, and a fade waiting
+// on Timer() never ended (the boot stopped on the splash after opening the ELF). Each present waits for a vsync.
+#define BIBLE_HANDOFF_FADE_FRAMES 15 // a quarter of a second at 60 Hz
 void SplashRenderHandoff(void)
 {
-    u64 t0;
+    int frame;
     int pass;
 
     if (g_gs == NULL)
@@ -1510,14 +1512,11 @@ void SplashRenderHandoff(void)
     }
     g_page_on = 0;
     g_page_sheet = 0;
-    t0 = Timer();
-    do {
-        u64 t = Timer() - t0;
-
-        g_fade = t >= BIBLE_HANDOFF_FADE_MS ? 0 : (int)(100 - t * 100 / BIBLE_HANDOFF_FADE_MS);
+    for (frame = 1; frame <= BIBLE_HANDOFF_FADE_FRAMES; frame++) {
+        g_fade = 100 - frame * 100 / BIBLE_HANDOFF_FADE_FRAMES;
         SplashRenderBeginFrame();
         SplashRenderPresent();
-    } while (g_fade > 0);
+    }
     g_logo_visible = 0;
     g_hotkeys_visible = 0;
     g_glyphs_rows = 0;
