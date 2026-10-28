@@ -129,6 +129,9 @@ static int compute_console_info_y(int logo_disp, int screen_h)
     int bottom_margin_px = ((screen_h * INFO_BOTTOM_MARGIN_PERCENT) + 50) / 100;
     int y = screen_h - bottom_margin_px - GLYPH_HEIGHT_PX + INFO_Y_ADJUST;
 
+    if (logo_disp == 2 && SplashRenderInfoLineY() >= 0) // BIBLE: above the logo, the buttons below it
+        return SplashRenderInfoLineY();
+
     if (logo_disp >= HOTKEY_TEXT_LOGO_DISPLAY_MIN) {
         int start_hotkey_y = get_hotkey_start_line_y();
         if (start_hotkey_y >= 0) {
@@ -428,18 +431,6 @@ void SplashRenderSetInfo(int on)
 int SplashRenderInfoOn(void)
 {
     return g_info_on;
-}
-
-int SplashInfoClockBottom(int screen_h)
-{
-    int top = ((screen_h * HOTKEY_CLOCK_TOP_MARGIN_PERCENT) + 50) / 100;
-
-    return top + 2 * HOTKEY_CLOCK_DATE_LINE_SPACING + GLYPH_HEIGHT_PX + GLYPH_SHADOW_PAD_Y;
-}
-
-int SplashInfoLineTop(int screen_h)
-{
-    return compute_console_info_y(2, screen_h);
 }
 
 void SplashRenderTextBody(int logo_disp,

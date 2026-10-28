@@ -163,6 +163,8 @@ static void SplashDrawStatusBelowLogo(const char *text, u32 color)
     logo_h = SplashRenderGetLogoHeight();
     anchor_center_x = logo_x + (logo_w / 2);
     y = logo_y + logo_h + 6;
+    if (SplashRenderTextTopY(7) >= 0) // BIBLE: above the logo
+        y = SplashRenderTextTopY(7);
 
     if (y > screen_h - 20)
         y = screen_h - 20;
@@ -258,6 +260,8 @@ static void SplashDrawStatusWithSublineForLaunch(int logo_disp,
         logo_h = SplashRenderGetLogoHeight();
         anchor_center_x = logo_x + (logo_w / 2);
         y1 = logo_y + logo_h + 4;
+        if (SplashRenderTextTopY(14 + 7) >= 0) // BIBLE: above the logo
+            y1 = SplashRenderTextTopY(14 + 7);
     } else {
         anchor_center_x = SplashRenderGetScreenCenterX();
         y1 = SplashRenderGetScreenCenterY() - 12;
@@ -367,6 +371,8 @@ void SplashDrawLoadingStatus(int logo_disp)
     if (logo_x >= 0 && logo_y >= 0 && logo_w > 0 && logo_h > 0) {
         anchor_center_x = logo_x + (logo_w / 2);
         loading_y = logo_y + logo_h + 6;
+        if (SplashRenderTextTopY(7) >= 0) // BIBLE: above the logo
+            loading_y = SplashRenderTextTopY(7);
     } else {
         loading_y = SplashRenderGetScreenCenterY() + 10;
     }
@@ -435,6 +441,8 @@ void SplashDrawCenteredStatusWithInfo(const char *text,
         logo_h = SplashRenderGetLogoHeight();
         anchor_center_x = logo_x + (logo_w / 2);
         y = logo_y + logo_h + 6;
+        if (SplashRenderTextTopY(7) >= 0) // BIBLE: above the logo
+            y = SplashRenderTextTopY(7);
         if (y > screen_h - 20)
             y = screen_h - 20;
         if (y < 0)
@@ -533,6 +541,8 @@ void SplashDrawRetryPromptWithInfo(const char *line1,
         logo_h = SplashRenderGetLogoHeight();
         anchor_center_x = logo_x + (logo_w / 2);
         y1 = logo_y + logo_h + 2;
+        if (SplashRenderTextTopY(18 + 7) >= 0) // BIBLE: above the logo
+            y1 = SplashRenderTextTopY(18 + 7);
         if (y1 > screen_h - 28)
             y1 = screen_h - 28;
         if (y1 < 0)
@@ -653,6 +663,8 @@ static void SplashDrawMissingPathPromptWithInfo(const char *button_name,
         logo_h = SplashRenderGetLogoHeight();
         anchor_center_x = logo_x + (logo_w / 2);
         y1 = logo_y + logo_h + 2;
+        if (SplashRenderTextTopY(2 * 18 + 7) >= 0) // BIBLE: above the logo
+            y1 = SplashRenderTextTopY(2 * 18 + 7);
         if (y1 > screen_h - 46)
             y1 = screen_h - 46;
         if (y1 < 0)
@@ -816,6 +828,8 @@ void SplashDrawEmergencyModeStatus(const char *reason)
         logo_h = SplashRenderGetLogoHeight();
         anchor_center_x = logo_x + (logo_w / 2);
         y1 = logo_y + logo_h + 2;
+        if (SplashRenderTextTopY(line2 != NULL ? 2 * 18 + 7 : 18 + 7) >= 0) // BIBLE: above the logo
+            y1 = SplashRenderTextTopY(line2 != NULL ? 2 * 18 + 7 : 18 + 7);
         if (line2 != NULL) {
             if (y1 > screen_h - 46)
                 y1 = screen_h - 46;

@@ -88,18 +88,21 @@ static int g_logo_visible = 0;
 static int g_hotkeys_x = -1;
 static int g_hotkeys_y = -1;
 static int g_hotkeys_visible = 0;
-// BIBLE: the splash in RIPPS2's look (LOGO_DISPLAY 2 and up): RIPPS2's sky in place of the picture, and under the PS2
-// logo the controller's buttons from hotkeys.png. BIBLE_GLYPHS 1: the four face buttons; 2: all sixteen in four rows
-// (the face buttons; L1 R1 START SELECT; L2 R2 L3 R3; up, down, left, right); 0: the logo alone. The logo and the
-// rows are centred as one group. The sheet holds each button as an icon 21 wide at x 6, at the rows below; each is
-// drawn twice its size with nearest filtering, so every pixel stays square.
+// BIBLE: the splash in RIPPS2's look (LOGO_DISPLAY 2 and up): RIPPS2's sky in place of the picture, the PS2 logo in
+// the middle of the screen whatever else shows, and under it the controller's buttons from hotkeys.png at their own
+// size (as OPL draws its button hints). BIBLE_GLYPHS 1: the four face buttons; 2: all sixteen in two rows of eight
+// (the face buttons, L1 R1 START SELECT; L2 R2 L3 R3, up down left right); 0: the logo alone. Text goes ABOVE the logo:
+// the info line nearest it, prompts, status lines and pages above that. The sheet holds each button as an icon 21
+// wide at x 6, at the rows below.
 #define BIBLE_GLYPH_SRC_X 6
 #define BIBLE_GLYPH_SRC_W 21
-#define BIBLE_GLYPH_CELL 42 // twice the sheet's 21
-#define BIBLE_GLYPH_GAP 14  // between two buttons of a row
+#define BIBLE_GLYPH_CELL 21 // the sheet's own size
+#define BIBLE_GLYPH_GAP 9   // between two buttons of a row
 #define BIBLE_GLYPH_ROW_GAP 8
-#define BIBLE_GLYPH_BELOW 28 // from the logo to the first row
-#define BIBLE_INFO_CLEAR 10  // BIBLE_INFO 1: from the clock and the info line to the logo and the rows
+#define BIBLE_GLYPH_BELOW 20 // from the logo to the first row
+#define BIBLE_TEXT_PAD 18    // from the logo up to the nearest text
+#define BIBLE_TEXT_GAP 12    // from the info line up to a prompt or page above it
+#define BIBLE_TEXT_H 7       // one line of the 5x7 font
 enum {
     GLY_TRIANGLE = 0, GLY_CIRCLE, GLY_CROSS, GLY_SQUARE, GLY_UP, GLY_DOWN, GLY_LEFT, GLY_RIGHT,
     GLY_L1, GLY_L2, GLY_L3, GLY_R1, GLY_R2, GLY_R3, GLY_SELECT, GLY_START, GLY_COUNT
@@ -107,15 +110,15 @@ enum {
 static const unsigned short g_glyph_src[GLY_COUNT][2] = { // each icon's first row in hotkeys.png, and its height
     {22, 20}, {43, 20}, {64, 20}, {85, 20}, {106, 20}, {127, 20}, {148, 20}, {169, 20},
     {191, 17}, {211, 20}, {232, 20}, {254, 17}, {274, 20}, {295, 20}, {319, 16}, {337, 19}};
-static const unsigned char g_glyph_rows[4][4] = {
-    {GLY_TRIANGLE, GLY_CIRCLE, GLY_CROSS, GLY_SQUARE},
-    {GLY_L1, GLY_R1, GLY_START, GLY_SELECT},
-    {GLY_L2, GLY_R2, GLY_L3, GLY_R3},
-    {GLY_UP, GLY_DOWN, GLY_LEFT, GLY_RIGHT}};
+static const unsigned char g_glyph_rows[2][8] = {
+    {GLY_TRIANGLE, GLY_CIRCLE, GLY_CROSS, GLY_SQUARE, GLY_L1, GLY_R1, GLY_START, GLY_SELECT},
+    {GLY_L2, GLY_R2, GLY_L3, GLY_R3, GLY_UP, GLY_DOWN, GLY_LEFT, GLY_RIGHT}};
 static int g_bible_glyphs = 1;
 static int g_glyphs_x = -1;
 static int g_glyphs_y = -1;
-static int g_glyphs_rows = 0; // the rows drawn: 0, 1 (the face buttons) or 4
+static int g_glyphs_rows = 0; // the rows drawn: 0, 1 (the face buttons) or 2 (all)
+static int g_glyphs_cols = 4; // buttons to a row: 4 (the face buttons) or 8
+static int g_bible_layout = 0; // LOGO_DISPLAY 2: the logo in the middle, text above it, the buttons below
 static int g_glyphs_covered = 0; // this frame put text or a box where the rows sit: the page shows the logo alone
 // BIBLE_COLOR: the sky's top, horizon and floor (0xRRGGBB) as RIPPS2's Storage page draws them at rest, the horizon
 // 290/480 of the way down. RIPPS2 writes its Color Theme's (or a Color Sweep's first colour's) into the config.
@@ -495,6 +498,7 @@ static void destroy_frame_state(void)
     g_logo_visible = 0;
     g_hotkeys_x = -1;
     g_glyphs_rows = 0;
+    g_bible_layout = 0;
     g_sky_on = 0;
     g_hotkeys_y = -1;
     g_hotkeys_visible = 0;
@@ -572,7 +576,7 @@ static void draw_glyph(const SPLASH_LAYER *layer, int id, int x, int y, int z)
     if (layer == NULL || !layer->ready)
         return;
 
-    y += (BIBLE_GLYPH_CELL - 2 * h) / 2;
+    y += (BIBLE_GLYPH_CELL - h) / 2;
     gsKit_prim_sprite_texture(g_gs,
                               (GSTEXTURE *)&layer->tex,
                               (float)x,
@@ -580,7 +584,7 @@ static void draw_glyph(const SPLASH_LAYER *layer, int id, int x, int y, int z)
                               (float)BIBLE_GLYPH_SRC_X,
                               (float)v,
                               (float)(x + BIBLE_GLYPH_CELL),
-                              (float)(y + 2 * h),
+                              (float)(y + h),
                               (float)(BIBLE_GLYPH_SRC_X + BIBLE_GLYPH_SRC_W),
                               (float)(v + h),
                               z,
@@ -988,7 +992,12 @@ static void draw_static_layers(void)
         draw_layer(&g_layers[LAYER_HOTKEYS], g_hotkeys_x, g_hotkeys_y, FG_Z, GS_ALPHA_OPAQUE);
 }
 
-// BIBLE: the glyph rows' box, 4 buttons wide, g_glyphs_rows high
+// BIBLE: the glyph rows' box, g_glyphs_cols buttons wide, g_glyphs_rows high
+static int glyphs_box_w(void)
+{
+    return g_glyphs_cols * BIBLE_GLYPH_CELL + (g_glyphs_cols - 1) * BIBLE_GLYPH_GAP;
+}
+
 static int glyphs_box_h(void)
 {
     return g_glyphs_rows * BIBLE_GLYPH_CELL + (g_glyphs_rows - 1) * BIBLE_GLYPH_ROW_GAP;
@@ -1000,7 +1009,7 @@ static void glyphs_cover(int x0, int y0, int x1, int y1)
 {
     if (g_glyphs_rows <= 0)
         return;
-    if (x1 > g_glyphs_x && x0 < g_glyphs_x + 4 * BIBLE_GLYPH_CELL + 3 * BIBLE_GLYPH_GAP &&
+    if (x1 > g_glyphs_x && x0 < g_glyphs_x + glyphs_box_w() &&
         y1 > g_glyphs_y && y0 < g_glyphs_y + glyphs_box_h())
         g_glyphs_covered = 1;
 }
@@ -1013,7 +1022,7 @@ static void draw_glyph_rows(void)
     if (g_glyphs_rows <= 0 || g_glyphs_covered)
         return;
     for (r = 0; r < g_glyphs_rows; r++)
-        for (k = 0; k < 4; k++)
+        for (k = 0; k < g_glyphs_cols; k++)
             draw_glyph(&g_layers[LAYER_HOTKEYS], g_glyph_rows[r][k], g_glyphs_x + k * (BIBLE_GLYPH_CELL + BIBLE_GLYPH_GAP),
                        g_glyphs_y + r * (BIBLE_GLYPH_CELL + BIBLE_GLYPH_ROW_GAP), FG_Z);
 }
@@ -1097,26 +1106,19 @@ int SplashRenderBegin(int logo_disp, int is_psx_desr)
                                            &g_logo_shimmer_visible_right);
 
     if (logo_disp == 2) {
-        // BIBLE: the logo and BIBLE_GLYPHS' rows centred as one group (the logo alone in the middle with them off)
-        int rows = g_bible_glyphs == 2 ? 4 : g_bible_glyphs == 1 ? 1 : 0;
-        int block_h = 0;
+        // BIBLE: the logo in the middle whatever shows; BIBLE_GLYPHS' rows under it, the text above it
+        int rows = g_bible_glyphs == 2 ? 2 : g_bible_glyphs == 1 ? 1 : 0;
 
         if (rows > 0 && !upload_layer_texture(&g_layers[LAYER_HOTKEYS], SplashGetHotkeysImage(), GS_FILTER_NEAREST))
             rows = 0;
-        if (rows > 0)
-            block_h = BIBLE_GLYPH_BELOW + rows * BIBLE_GLYPH_CELL + (rows - 1) * BIBLE_GLYPH_ROW_GAP;
-        if (SplashRenderInfoOn()) {
-            int text_top = SplashInfoClockBottom(g_screen_h) + BIBLE_INFO_CLEAR;
-            int text_bottom = SplashInfoLineTop(g_screen_h) - BIBLE_INFO_CLEAR;
-
-            center_y = (text_top + text_bottom) / 2;
-        }
         g_logo_x = center_x - ((int)logo->width / 2) + MODE2_LOGO_X_FROM_CENTER;
-        g_logo_y = center_y - ((int)logo->height + block_h) / 2 + MODE2_LOGO_Y_FROM_CENTER;
+        g_logo_y = center_y - ((int)logo->height / 2) + MODE2_LOGO_Y_FROM_CENTER;
         g_logo_visible = 1;
         g_hotkeys_visible = 0;
+        g_bible_layout = 1;
         g_glyphs_rows = rows;
-        g_glyphs_x = center_x - (4 * BIBLE_GLYPH_CELL + 3 * BIBLE_GLYPH_GAP) / 2;
+        g_glyphs_cols = rows == 2 ? 8 : 4;
+        g_glyphs_x = center_x - glyphs_box_w() / 2;
         g_glyphs_y = g_logo_y + (int)logo->height + BIBLE_GLYPH_BELOW;
         init_logo_shimmer_state();
         SplashRenderBeginFrame();
@@ -1312,6 +1314,28 @@ void SplashRenderDrawRoundedRect(int x,
 void SplashRenderDrawTextPx(int x, int y, u32 color, const char *text)
 {
     SplashRenderDrawTextPxScaled(x, y, color, text, FONT_SCALE);
+}
+
+// BIBLE: LOGO_DISPLAY 2 puts the info line BIBLE_TEXT_PAD above the logo; -1 for the upstream layouts
+int SplashRenderInfoLineY(void)
+{
+    if (!g_bible_layout || g_logo_y < 0)
+        return -1;
+    return g_logo_y - BIBLE_TEXT_PAD - BIBLE_TEXT_H;
+}
+
+// BIBLE: the first line's y for text block_h high that sits above the logo (above the info line when it shows), or
+// -1 for the upstream layouts, which keep their own places
+int SplashRenderTextTopY(int block_h)
+{
+    int bottom;
+
+    if (!g_bible_layout || g_logo_y < 0)
+        return -1;
+    bottom = g_logo_y - BIBLE_TEXT_PAD;
+    if (SplashRenderInfoOn())
+        bottom -= BIBLE_TEXT_H + BIBLE_TEXT_GAP;
+    return bottom - block_h < 8 ? 8 : bottom - block_h;
 }
 
 int SplashRenderIsActive(void)

@@ -119,6 +119,8 @@ static void DrawCreditsSplashFrame(void)
         anchor_center_x = logo_x + (logo_w / 2);
         y = logo_y + logo_h + 6;
     }
+    if (SplashRenderTextTopY(5 * 16 + 7) >= 0) // BIBLE: above the logo
+        y = SplashRenderTextTopY(5 * 16 + 7);
 
     if (y > screen_h - 70)
         y = screen_h - 70;

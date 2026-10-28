@@ -16,7 +16,7 @@
 #define VIDEO_SELECTOR_BOX_TEXT_PAD_Y 20
 #define VIDEO_SELECTOR_LINE_SPACING 22
 #define VIDEO_SELECTOR_TEXT_HEIGHT 7
-#define VIDEO_SELECTOR_BOX_GAP_FROM_LOGO 14
+#define VIDEO_SELECTOR_BOX_GAP_FROM_LOGO 18
 #define VIDEO_SELECTOR_BOX_SCREEN_MARGIN 8
 #define VIDEO_SELECTOR_SAVE_FEEDBACK_MS 3000
 #define PAD_MASK_RIGHT 0x0020
@@ -248,6 +248,11 @@ void LoaderRunEmergencyVideoModeSelector(int *hotkey_launches_enabled,
 
             box_w = max_line_w + (VIDEO_SELECTOR_BOX_TEXT_PAD_X * 2);
             box_h = text_block_h + (VIDEO_SELECTOR_BOX_TEXT_PAD_Y * 2);
+            if (logo_y >= 0 && logo_h > 0) { // BIBLE: the box above the logo, as every page's text
+                box_y = logo_y - VIDEO_SELECTOR_BOX_GAP_FROM_LOGO - box_h;
+                if (box_y < VIDEO_SELECTOR_BOX_SCREEN_MARGIN)
+                    box_y = VIDEO_SELECTOR_BOX_SCREEN_MARGIN;
+            }
             box_x = anchor_center_x - (box_w / 2);
 
             if (box_x < VIDEO_SELECTOR_BOX_SCREEN_MARGIN)
