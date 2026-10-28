@@ -82,6 +82,7 @@ jobs:
           fi
 
       - name: Compile PSX-ALL-DRIVERS-LAZY-LOADING build
+        continue-on-error: true # BIBLE targets the PS2; upstream's PSX build does not link against the current ps2sdk
         run: |
           make release COMMIT_HASH=${GITHUB_SHA::7} BINDIR=${{ env.OUT_ROOT }}PSX-ALL-DRIVERS-LAZY-LOADING/ PSX_ALL_DRIVERS_LAZY_LOADING=1 EGSM_BUILD=0 EMBED_PS1VN=1 ${{ env.DEBUG }} ${{ env.PRINTF_ARGS }}
 
@@ -105,7 +106,7 @@ jobs:
           cp LICENSE "${{ env.REL_DIR }}/LICENSE.TXT"
           cp README.md "${{ env.REL_DIR }}/README.md"
           cp tools/png_to_logo_rbga.py "${{ env.REL_DIR }}/png_to_logo_rbga.py"
-          mv "${{ env.OUT_ROOT }}PSX-ALL-DRIVERS-LAZY-LOADING/" "${{ env.REL_DIR }}/PSX-ALL-DRIVERS-LAZY-LOADING/"
+          if [ -d "${{ env.OUT_ROOT }}PSX-ALL-DRIVERS-LAZY-LOADING/" ]; then mv "${{ env.OUT_ROOT }}PSX-ALL-DRIVERS-LAZY-LOADING/" "${{ env.REL_DIR }}/PSX-ALL-DRIVERS-LAZY-LOADING/"; fi
           for name in PS2 PS2_MMCE PS2_MX4SIO PS2_HDD; do mv "${{ env.OUT_ROOT }}$name/" "${{ env.REL_DIR }}/$name/"; done
 
       - name: pack release
