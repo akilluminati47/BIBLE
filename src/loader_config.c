@@ -33,37 +33,103 @@ static const ConfigIntKey g_int_keys[] = {
     {"BIBLE_INFO", offsetof(CONFIG, BIBLE_INFO)},
 };
 
-// BIBLE_COLOR = RRGGBB,RRGGBB,RRGGBB: the sky's top, horizon and floor (RIPPS2 writes its Color Theme's); a value that
-// does not read as three colours leaves RIPPS2's blue
-static int parse_bible_color(const char *name, const char *value)
+// BIBLE: RRGGBB,RRGGBB,RRGGBB (the sky's top, horizon and floor) into sky; 0 when it does not read as three colours
+static int parse_sky(const char *value, unsigned int sky[3])
 {
     unsigned int c[3];
     char *end;
     const char *p = value;
     int i;
 
-    if (!ci_eq(name, "BIBLE_COLOR"))
-        return 0;
-    for (i = 0; i < 3 && p != NULL; i++) {
+    for (i = 0; i < 3; i++) {
         while (*p == ' ' || *p == '#')
             p++;
         c[i] = (unsigned int)strtoul(p, &end, 16);
         if (end == p)
-            return 1;
+            return 0;
         p = end;
         while (*p == ' ')
             p++;
         if (i < 2 && *p++ != ',')
-            return 1;
+            return 0;
     }
     for (i = 0; i < 3; i++)
-        GLOBCFG.BIBLE_SKY[i] = c[i] & 0xFFFFFF;
+        sky[i] = c[i] & 0xFFFFFF;
     return 1;
+}
+
+static int g_bible_color_set = 0; // BIBLE_COLOR in this config: it wins over RIPPS2's sky
+
+// BIBLE_COLOR = RRGGBB,RRGGBB,RRGGBB: the sky set by hand; a value that does not read as three colours is passed over
+static int parse_bible_color(const char *name, const char *value)
+{
+    if (!ci_eq(name, "BIBLE_COLOR"))
+        return 0;
+    if (parse_sky(value, GLOBCFG.BIBLE_SKY))
+        g_bible_color_set = 1;
+    return 1;
+}
+
+// BIBLE: RIPPS2 saves the sky its Color Theme draws with its settings (ripps2_bible_sky=RRGGBB,RRGGBB,RRGGBB in
+// settings_riptopl.cfg). With no BIBLE_COLOR here, it is read from the folder an AUTO entry starts from, on a memory
+// card only (no other drive is up yet), mc?: trying both cards. Nothing found keeps RIPPS2's blue.
+#define RIPPS2_SETTINGS_FILE "settings_riptopl.cfg"
+#define RIPPS2_SKY_KEY "ripps2_bible_sky="
+
+static int read_ripps2_sky_from(const char *path)
+{
+    FILE *fp = fopen(path, "r");
+    char line[256];
+    int found = 0;
+
+    if (fp == NULL)
+        return 0;
+    while (!found && fgets(line, sizeof(line), fp) != NULL)
+        if (!strncmp(line, RIPPS2_SKY_KEY, strlen(RIPPS2_SKY_KEY)))
+            found = parse_sky(line + strlen(RIPPS2_SKY_KEY), GLOBCFG.BIBLE_SKY);
+    fclose(fp);
+    return found;
+}
+
+static void read_ripps2_sky(void)
+{
+    static int done = 0;
+    int j;
+    int port;
+
+    if (done || g_bible_color_set)
+        return;
+    done = 1;
+    for (j = 0; j < CONFIG_KEY_INDEXES; j++) {
+        const char *entry = GLOBCFG.KEYPATHS[0][j];
+        const char *slash;
+        char path[256];
+        size_t dir_len;
+
+        if (entry == NULL || strncmp(entry, "mc", 2) != 0 || entry[2] == '\0' || entry[3] != ':')
+            continue;
+        slash = strrchr(entry, '/');
+        dir_len = (slash != NULL) ? (size_t)(slash - entry + 1) : 4;
+        if (dir_len + sizeof(RIPPS2_SETTINGS_FILE) > sizeof(path))
+            continue;
+        for (port = 0; port < 2; port++) {
+            memcpy(path, entry, dir_len);
+            path[dir_len] = '\0';
+            if (path[2] == '?')
+                path[2] = (char)('0' + port);
+            else if (port > 0)
+                break;
+            strcat(path, RIPPS2_SETTINGS_FILE);
+            if (read_ripps2_sky_from(path))
+                return;
+        }
+    }
 }
 
 // BIBLE: the splash's own keys, before it begins
 void LoaderApplyBibleSplash(void)
 {
+    read_ripps2_sky();
     SplashRenderSetGlyphs(GLOBCFG.BIBLE_GLYPHS);
     SplashRenderSetInfo(GLOBCFG.BIBLE_INFO);
     SplashRenderSetSky(GLOBCFG.BIBLE_SKY);
