@@ -85,6 +85,15 @@ jobs:
         run: |
           make release COMMIT_HASH=${GITHUB_SHA::7} BINDIR=${{ env.OUT_ROOT }}PSX-ALL-DRIVERS-LAZY-LOADING/ PSX_ALL_DRIVERS_LAZY_LOADING=1 EGSM_BUILD=1 EMBED_PS1VN=1 ${{ env.DEBUG }} ${{ env.PRINTF_ARGS }}
 
+      - name: Compile the PS2 builds (BIBLE)
+        run: |
+          # BIBLE starts on a PS2 as a second stage (an ELF the console's signed loader starts), one build per device
+          # set: memory card and USB; MMCE; MX4SIO; the internal HDD
+          for v in "PS2:" "PS2_MMCE:MMCE=1" "PS2_MX4SIO:MX4SIO=1" "PS2_HDD:HDD=1"; do
+            name=${v%%:*}; flags=${v#*:}
+            make release COMMIT_HASH=${GITHUB_SHA::7} BINDIR=${{ env.OUT_ROOT }}$name/ PSX_ALL_DRIVERS_LAZY_LOADING=0 $flags EGSM_BUILD=1 ${{ env.DEBUG }} ${{ env.PRINTF_ARGS }}
+          done
+
       - name: list
         run: |
           git ls-files -i --exclude-standard -c
@@ -97,6 +106,7 @@ jobs:
           cp README.md "${{ env.REL_DIR }}/README.md"
           cp tools/png_to_logo_rbga.py "${{ env.REL_DIR }}/png_to_logo_rbga.py"
           mv "${{ env.OUT_ROOT }}PSX-ALL-DRIVERS-LAZY-LOADING/" "${{ env.REL_DIR }}/PSX-ALL-DRIVERS-LAZY-LOADING/"
+          for name in PS2 PS2_MMCE PS2_MX4SIO PS2_HDD; do mv "${{ env.OUT_ROOT }}$name/" "${{ env.REL_DIR }}/$name/"; done
 
       - name: pack release
         if: env.USE_RELEASE == '1'
@@ -111,7 +121,7 @@ jobs:
         if: ${{ success() }}
         uses: actions/upload-artifact@v7
         with:
-          name: PSX-ALL-DRIVERS-LAZY-LOADING
+          name: BIBLE
           path: |
             ${{ env.ARTIFACT_DIR }}/**
 
