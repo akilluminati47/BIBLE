@@ -727,7 +727,9 @@ int LoaderRunLaunchWorkflow(int splash_early_presented,
                 button = button << 1; // sll of 1 cleared bit to move to next pad button
             }
         }
-        if (SplashRenderIsActive())
+        // BIBLE: the splash stays up through the launch (the status line draws on it, CleanUp fades it to the sky):
+        // ended here, the status line started the GS over, a black frame and the logo again before every launch
+        if (SplashRenderIsActive() && GLOBCFG.LOGO_DISP < 2)
             SplashRenderEnd();
 
         DPRINTF("Wait time consummed. Running AUTO entry\n");

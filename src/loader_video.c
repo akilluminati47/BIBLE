@@ -9,8 +9,25 @@ extern int g_native_video_mode;
 enum {
     GS_VIDEO_MODE_NTSC = 2,
     GS_VIDEO_MODE_PAL = 3,
-    GS_VIDEO_MODE_480P = 0x50
+    GS_VIDEO_MODE_480P = 0x50,
+    GS_VIDEO_MODE_1080I = 0x51,
+    GS_VIDEO_MODE_720P = 0x52,
+    GS_VIDEO_MODE_576P = 0x53
 };
+
+// BIBLE: RIPPS2's Video Mode, read from its settings with the sky: VIDEO_MODE = AUTO starts in it, so the TV keeps one
+// signal from BIBLE into RIPPS2. -1 when no RIPPS2 settings were found, or RIPPS2's is Auto: the console's own mode.
+static int g_ripps2_video_mode = -1;
+
+void LoaderSetRipps2VideoMode(int cfg_mode)
+{
+    g_ripps2_video_mode = (cfg_mode > CFG_VIDEO_MODE_AUTO && cfg_mode <= CFG_VIDEO_MODE_1080I) ? cfg_mode : -1;
+}
+
+int LoaderRipps2VideoMode(void)
+{
+    return g_ripps2_video_mode;
+}
 
 int LoaderParseVideoModeValue(const char *value, int *out_mode)
 {
@@ -27,6 +44,12 @@ int LoaderParseVideoModeValue(const char *value, int *out_mode)
         parsed_mode = CFG_VIDEO_MODE_PAL;
     else if (ci_eq(value, "480P"))
         parsed_mode = CFG_VIDEO_MODE_480P;
+    else if (ci_eq(value, "576P"))
+        parsed_mode = CFG_VIDEO_MODE_576P;
+    else if (ci_eq(value, "720P"))
+        parsed_mode = CFG_VIDEO_MODE_720P;
+    else if (ci_eq(value, "1080I"))
+        parsed_mode = CFG_VIDEO_MODE_1080I;
     else
         return 0;
 
@@ -43,13 +66,10 @@ int LoaderDetectNativeVideoMode(void)
 
 void LoaderApplyVideoMode(int cfg_mode)
 {
-    int effective_mode = cfg_mode;
+    int effective_mode = LoaderResolveEffectiveVideoMode(cfg_mode);
     short interlace = 1;
     short ffmd = 1;
     short gs_mode = GS_VIDEO_MODE_NTSC;
-
-    if (effective_mode == CFG_VIDEO_MODE_AUTO)
-        effective_mode = g_native_video_mode;
 
     switch (effective_mode) {
         case CFG_VIDEO_MODE_PAL:
@@ -58,6 +78,17 @@ void LoaderApplyVideoMode(int cfg_mode)
         case CFG_VIDEO_MODE_480P:
             interlace = 0;
             gs_mode = GS_VIDEO_MODE_480P;
+            break;
+        case CFG_VIDEO_MODE_576P:
+            interlace = 0;
+            gs_mode = GS_VIDEO_MODE_576P;
+            break;
+        case CFG_VIDEO_MODE_720P:
+            interlace = 0;
+            gs_mode = GS_VIDEO_MODE_720P;
+            break;
+        case CFG_VIDEO_MODE_1080I:
+            gs_mode = GS_VIDEO_MODE_1080I;
             break;
         case CFG_VIDEO_MODE_NTSC:
         default:
@@ -71,13 +102,19 @@ void LoaderApplyVideoMode(int cfg_mode)
 int LoaderResolveEffectiveVideoMode(int cfg_mode)
 {
     if (cfg_mode == CFG_VIDEO_MODE_AUTO)
-        return g_native_video_mode;
+        return g_ripps2_video_mode > CFG_VIDEO_MODE_AUTO ? g_ripps2_video_mode : g_native_video_mode;
 
     switch (cfg_mode) {
         case CFG_VIDEO_MODE_PAL:
             return CFG_VIDEO_MODE_PAL;
         case CFG_VIDEO_MODE_480P:
             return CFG_VIDEO_MODE_480P;
+        case CFG_VIDEO_MODE_576P:
+            return CFG_VIDEO_MODE_576P;
+        case CFG_VIDEO_MODE_720P:
+            return CFG_VIDEO_MODE_720P;
+        case CFG_VIDEO_MODE_1080I:
+            return CFG_VIDEO_MODE_1080I;
         case CFG_VIDEO_MODE_NTSC:
         default:
             return CFG_VIDEO_MODE_NTSC;
@@ -93,6 +130,12 @@ const char *LoaderVideoModeLabel(int cfg_mode)
             return "PAL";
         case CFG_VIDEO_MODE_480P:
             return "480P";
+        case CFG_VIDEO_MODE_576P:
+            return "576P";
+        case CFG_VIDEO_MODE_720P:
+            return "720P";
+        case CFG_VIDEO_MODE_1080I:
+            return "1080I";
         case CFG_VIDEO_MODE_AUTO:
         default:
             return "AUTO";
@@ -105,7 +148,10 @@ int LoaderStepVideoMode(int current_mode, int direction)
         CFG_VIDEO_MODE_AUTO,
         CFG_VIDEO_MODE_NTSC,
         CFG_VIDEO_MODE_PAL,
-        CFG_VIDEO_MODE_480P
+        CFG_VIDEO_MODE_480P,
+        CFG_VIDEO_MODE_576P,
+        CFG_VIDEO_MODE_720P,
+        CFG_VIDEO_MODE_1080I
     };
     int i;
     int index = 0;

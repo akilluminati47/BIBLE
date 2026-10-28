@@ -80,7 +80,7 @@ void LogDetectedPlatform(void)
 void CleanUp(void)
 {
     if (SplashRenderIsActive())
-        SplashRenderEnd();
+        SplashRenderHandoff(); // BIBLE: the sky alone left on screen for the program launched
 
     sceCdInit(SCECdEXIT);
     // Keep config_buf alive so argv pointers remain valid during ELF load.
@@ -386,8 +386,6 @@ void LoaderRunEmergencyMode(const char *reason)
         if (resolved_rescue_path != NULL &&
             *resolved_rescue_path != '\0' &&
             exist(resolved_rescue_path)) {
-            if (SplashRenderIsActive())
-                SplashRenderEnd();
             CleanUp();
             RunLoaderElf(resolved_rescue_path, NULL, 0, NULL);
         }

@@ -6,6 +6,7 @@
 #include <dmaKit.h>
 #include <gsKit.h>
 
+#include "loader_video.h"
 #include "splash_assets.h"
 #include "splash_render.h"
 #include "splash_screen.h"
@@ -77,7 +78,10 @@ enum {
     SPLASH_CFG_VIDEO_MODE_AUTO = 0,
     SPLASH_CFG_VIDEO_MODE_NTSC,
     SPLASH_CFG_VIDEO_MODE_PAL,
-    SPLASH_CFG_VIDEO_MODE_480P
+    SPLASH_CFG_VIDEO_MODE_480P,
+    SPLASH_CFG_VIDEO_MODE_576P,
+    SPLASH_CFG_VIDEO_MODE_720P,
+    SPLASH_CFG_VIDEO_MODE_1080I
 };
 
 static GSGLOBAL *g_gs = NULL;
@@ -142,45 +146,105 @@ static int g_logo_shimmer_visible_left = 0;
 static int g_logo_shimmer_visible_right = 0;
 static int g_video_cfg_mode = SPLASH_CFG_VIDEO_MODE_AUTO;
 static int g_video_native_mode = SPLASH_CFG_VIDEO_MODE_NTSC;
+static int g_wide = 0;   // BIBLE: Widescreen in the 4:3 modes, for a TV that stretches the picture to 16:9
+static int g_fade = 100; // BIBLE: the logo's, the buttons' and the sheet's opacity (percent), as the hand-off fades them
+// BIBLE: the layout's size (g_screen_w by g_screen_h are these once the splash begins) and its scale to the framebuffer
+static int g_virt_w = 640;
+static int g_virt_h = 448;
+static float g_sx = 1.0f;
+static float g_sy = 1.0f;
+
+// BIBLE: every primitive is drawn in the layout's pixels and lands in the framebuffer's through these
+static void prim_sprite(float x0, float y0, float x1, float y1, int z, u64 color)
+{
+    gsKit_prim_sprite(g_gs, x0 * g_sx, y0 * g_sy, x1 * g_sx, y1 * g_sy, z, color);
+}
+
+static void prim_sprite_texture(GSTEXTURE *tex, float x0, float y0, float u0, float v0, float x1, float y1, float u1,
+                                float v1, int z, u64 color)
+{
+    gsKit_prim_sprite_texture(g_gs, tex, x0 * g_sx, y0 * g_sy, u0, v0, x1 * g_sx, y1 * g_sy, u1, v1, z, color);
+}
+
+static void prim_quad_gouraud(float x0, float y0, float x1, float y1, float x2, float y2, float x3, float y3, int z,
+                              u64 c0, u64 c1, u64 c2, u64 c3)
+{
+    gsKit_prim_quad_gouraud(g_gs, x0 * g_sx, y0 * g_sy, x1 * g_sx, y1 * g_sy, x2 * g_sx, y2 * g_sy, x3 * g_sx, y3 * g_sy,
+                            z, c0, c1, c2, c3);
+}
 
 static int resolve_video_mode_for_splash(void)
 {
-    if (g_video_cfg_mode == SPLASH_CFG_VIDEO_MODE_AUTO)
-        return g_video_native_mode;
+    if (g_video_cfg_mode == SPLASH_CFG_VIDEO_MODE_AUTO) { // BIBLE: RIPPS2's mode when its settings were read
+        int mode = LoaderResolveEffectiveVideoMode(SPLASH_CFG_VIDEO_MODE_AUTO);
+
+        return mode > SPLASH_CFG_VIDEO_MODE_AUTO ? mode : g_video_native_mode;
+    }
     return g_video_cfg_mode;
 }
 
+// BIBLE: each mode's framebuffer, and the layout's size in it. The splash lays out in its own pixels (g_screen_w by
+// g_screen_h) and prim_* scale them by g_sx, g_sy to the framebuffer's. 4:3: 640 wide, 1:1. Widescreen in 480i and
+// 576i: 832 wide, the GS spending three clocks on a pixel in place of four, so the same signal carries a third more of
+// them and a TV that stretches the picture to 16:9 shows each the shape it has in 4:3: 1:1 again, and crisp. 480p and
+// 576p have no such step: 1280 wide under a layout 853 wide. 720p (1280 x 720) and 1080i (960 x 540 a field, as RIPPS2
+// draws it) are 16:9 by themselves: a layout of 853 x 448, NTSC's height, so the splash keeps its size on the screen.
+// A framebuffer over 832 wide is 16-bit and dithered, as RIPPS2's HD ones are, so two fit in the GS's 4 MB with the
+// textures.
 static void configure_gskit_video_mode(GSGLOBAL *gs)
 {
     int mode;
+    int hd;
 
     if (gs == NULL)
         return;
 
     mode = resolve_video_mode_for_splash();
+    hd = (mode == SPLASH_CFG_VIDEO_MODE_720P || mode == SPLASH_CFG_VIDEO_MODE_1080I);
     switch (mode) {
         case SPLASH_CFG_VIDEO_MODE_PAL:
             gs->Mode = GS_MODE_PAL;
             gs->Interlace = GS_INTERLACED;
             gs->Field = GS_FIELD;
-            gs->Width = 640;
+            gs->Width = g_wide ? 832 : 640;
             gs->Height = 512;
             break;
         case SPLASH_CFG_VIDEO_MODE_480P:
-            gs->Mode = GS_MODE_DTV_480P;
+        case SPLASH_CFG_VIDEO_MODE_576P:
+            gs->Mode = mode == SPLASH_CFG_VIDEO_MODE_480P ? GS_MODE_DTV_480P : GS_MODE_DTV_576P;
             gs->Interlace = GS_NONINTERLACED;
             gs->Field = GS_FRAME;
-            gs->Width = 640;
-            gs->Height = 448;
+            gs->Width = g_wide ? 1280 : 640;
+            gs->Height = mode == SPLASH_CFG_VIDEO_MODE_480P ? 448 : 512;
+            break;
+        case SPLASH_CFG_VIDEO_MODE_720P:
+            gs->Mode = GS_MODE_DTV_720P;
+            gs->Interlace = GS_NONINTERLACED;
+            gs->Field = GS_FRAME;
+            gs->Width = 1280;
+            gs->Height = 720;
+            break;
+        case SPLASH_CFG_VIDEO_MODE_1080I:
+            gs->Mode = GS_MODE_DTV_1080I;
+            gs->Interlace = GS_INTERLACED;
+            gs->Field = GS_FRAME;
+            gs->Width = 960;
+            gs->Height = 540;
             break;
         case SPLASH_CFG_VIDEO_MODE_NTSC:
         default:
             gs->Mode = GS_MODE_NTSC;
             gs->Interlace = GS_INTERLACED;
             gs->Field = GS_FIELD;
-            gs->Width = 640;
+            gs->Width = g_wide ? 832 : 640;
             gs->Height = 448;
             break;
+    }
+    g_virt_w = (int)gs->Width > 832 ? 853 : (int)gs->Width;
+    g_virt_h = hd ? 448 : (int)gs->Height;
+    if ((int)gs->Width > 832) {
+        gs->PSM = GS_PSM_CT16S;
+        gs->Dithering = GS_SETTING_ON;
     }
 }
 
@@ -190,7 +254,7 @@ void SplashRenderSetVideoMode(int cfg_mode, int native_mode)
         native_mode = SPLASH_CFG_VIDEO_MODE_NTSC;
     g_video_native_mode = native_mode;
 
-    if (cfg_mode < SPLASH_CFG_VIDEO_MODE_AUTO || cfg_mode > SPLASH_CFG_VIDEO_MODE_480P)
+    if (cfg_mode < SPLASH_CFG_VIDEO_MODE_AUTO || cfg_mode > SPLASH_CFG_VIDEO_MODE_1080I)
         cfg_mode = SPLASH_CFG_VIDEO_MODE_AUTO;
     g_video_cfg_mode = cfg_mode;
 }
@@ -225,7 +289,7 @@ static unsigned char get_logo_base_alpha(void)
     if (g_page_on) // BIBLE: from the splash's own alpha down to the page's dim one
         logo_transparency_percent = LOGO_TRANSPARENCY_PERCENT_DEFAULT +
                                     (BIBLE_PAGE_LOGO_TRANSPARENCY - LOGO_TRANSPARENCY_PERCENT_DEFAULT) * page_fade() / 100;
-    return transparency_percent_to_gs_alpha(logo_transparency_percent);
+    return (unsigned char)(transparency_percent_to_gs_alpha(logo_transparency_percent) * g_fade / 100);
 }
 
 static int compute_logo_shimmer_band_width(int logo_width)
@@ -569,18 +633,17 @@ static void draw_layer(const SPLASH_LAYER *layer, int x, int y, int z, unsigned 
     if (layer == NULL || !layer->ready)
         return;
 
-    gsKit_prim_sprite_texture(g_gs,
-                              (GSTEXTURE *)&layer->tex,
-                              (float)x,
-                              (float)y,
-                              0.0f,
-                              0.0f,
-                              (float)(x + (int)layer->tex.Width),
-                              (float)(y + (int)layer->tex.Height),
-                              (float)layer->tex.Width,
-                              (float)layer->tex.Height,
-                              z,
-                              GS_SETREG_RGBAQ(0x80, 0x80, 0x80, alpha, 0x00));
+    prim_sprite_texture((GSTEXTURE *)&layer->tex,
+                        (float)x,
+                        (float)y,
+                        0.0f,
+                        0.0f,
+                        (float)(x + (int)layer->tex.Width),
+                        (float)(y + (int)layer->tex.Height),
+                        (float)layer->tex.Width,
+                        (float)layer->tex.Height,
+                        z,
+                        GS_SETREG_RGBAQ(0x80, 0x80, 0x80, alpha, 0x00));
 }
 
 // BIBLE: button id (GLY_*) from hotkeys.png in the BIBLE_GLYPH_CELL square at x, y; a shorter icon (L1, R1, SELECT,
@@ -593,18 +656,17 @@ static void draw_glyph(const SPLASH_LAYER *layer, int id, int x, int y, int z, u
         return;
 
     y += (BIBLE_GLYPH_CELL - h) / 2;
-    gsKit_prim_sprite_texture(g_gs,
-                              (GSTEXTURE *)&layer->tex,
-                              (float)x,
-                              (float)y,
-                              (float)BIBLE_GLYPH_SRC_X,
-                              (float)v,
-                              (float)(x + BIBLE_GLYPH_CELL),
-                              (float)(y + h),
-                              (float)(BIBLE_GLYPH_SRC_X + BIBLE_GLYPH_SRC_W),
-                              (float)(v + h),
-                              z,
-                              GS_SETREG_RGBAQ(0x80, 0x80, 0x80, alpha, 0x00));
+    prim_sprite_texture((GSTEXTURE *)&layer->tex,
+                        (float)x,
+                        (float)y,
+                        (float)BIBLE_GLYPH_SRC_X,
+                        (float)v,
+                        (float)(x + BIBLE_GLYPH_CELL),
+                        (float)(y + h),
+                        (float)(BIBLE_GLYPH_SRC_X + BIBLE_GLYPH_SRC_W),
+                        (float)(v + h),
+                        z,
+                        GS_SETREG_RGBAQ(0x80, 0x80, 0x80, alpha, 0x00));
 }
 
 // BIBLE: the sky's colour y lines down: top to horizon, then horizon to floor, as RIPPS2 draws its two gradients
@@ -652,8 +714,8 @@ static void draw_sky_rect(int x0, int y0, int x1, int y1, int z)
     }
     top = sky_rgbaq(sky_at(y0));
     bottom = sky_rgbaq(sky_at(y1));
-    gsKit_prim_quad_gouraud(g_gs, (float)x0, (float)y0, (float)x1, (float)y0, (float)x0, (float)y1, (float)x1, (float)y1,
-                            z, top, top, bottom, bottom);
+    prim_quad_gouraud((float)x0, (float)y0, (float)x1, (float)y0, (float)x0, (float)y1, (float)x1, (float)y1,
+                      z, top, top, bottom, bottom);
 }
 
 static void draw_layer_stretched(const SPLASH_LAYER *layer, int z)
@@ -661,18 +723,17 @@ static void draw_layer_stretched(const SPLASH_LAYER *layer, int z)
     if (layer == NULL || !layer->ready)
         return;
 
-    gsKit_prim_sprite_texture(g_gs,
-                              (GSTEXTURE *)&layer->tex,
-                              0.0f,
-                              0.0f,
-                              0.0f,
-                              0.0f,
-                              (float)g_screen_w,
-                              (float)g_screen_h,
-                              (float)layer->tex.Width,
-                              (float)layer->tex.Height,
-                              z,
-                              GS_SETREG_RGBAQ(0x80, 0x80, 0x80, GS_ALPHA_OPAQUE, 0x00));
+    prim_sprite_texture((GSTEXTURE *)&layer->tex,
+                        0.0f,
+                        0.0f,
+                        0.0f,
+                        0.0f,
+                        (float)g_screen_w,
+                        (float)g_screen_h,
+                        (float)layer->tex.Width,
+                        (float)layer->tex.Height,
+                        z,
+                        GS_SETREG_RGBAQ(0x80, 0x80, 0x80, GS_ALPHA_OPAQUE, 0x00));
 }
 
 static void draw_filled_rect(int x0, int y0, int x1, int y1, int z, u64 color)
@@ -683,13 +744,12 @@ static void draw_filled_rect(int x0, int y0, int x1, int y1, int z, u64 color)
     if (x0 >= x1 || y0 >= y1)
         return;
 
-    gsKit_prim_sprite(g_gs,
-                      (float)x0,
-                      (float)y0,
-                      (float)x1,
-                      (float)y1,
-                      z,
-                      color);
+    prim_sprite((float)x0,
+                (float)y0,
+                (float)x1,
+                (float)y1,
+                z,
+                color);
 }
 
 static void draw_logo_subrect(int rel_x,
@@ -714,18 +774,17 @@ static void draw_logo_subrect(int rel_x,
     if (rel_w <= 0)
         return;
 
-    gsKit_prim_sprite_texture(g_gs,
-                              (GSTEXTURE *)&logo->tex,
-                              (float)(g_logo_x + rel_x),
-                              (float)g_logo_y,
-                              (float)rel_x,
-                              0.0f,
-                              (float)(g_logo_x + rel_x + rel_w),
-                              (float)(g_logo_y + (int)logo->tex.Height),
-                              (float)(rel_x + rel_w),
-                              (float)logo->tex.Height,
-                              z,
-                              GS_SETREG_RGBAQ(rgb, rgb, rgb, alpha, 0x00));
+    prim_sprite_texture((GSTEXTURE *)&logo->tex,
+                        (float)(g_logo_x + rel_x),
+                        (float)g_logo_y,
+                        (float)rel_x,
+                        0.0f,
+                        (float)(g_logo_x + rel_x + rel_w),
+                        (float)(g_logo_y + (int)logo->tex.Height),
+                        (float)(rel_x + rel_w),
+                        (float)logo->tex.Height,
+                        z,
+                        GS_SETREG_RGBAQ(rgb, rgb, rgb, alpha, 0x00));
 }
 
 static void draw_logo_subrect_shifted(int rel_x,
@@ -770,18 +829,17 @@ static void draw_logo_subrect_shifted(int rel_x,
     if (dst_x0 >= dst_x1 || src_x0 >= src_x1)
         return;
 
-    gsKit_prim_sprite_texture(g_gs,
-                              (GSTEXTURE *)&logo->tex,
-                              (float)(g_logo_x + dst_x0),
-                              (float)g_logo_y,
-                              (float)src_x0,
-                              0.0f,
-                              (float)(g_logo_x + dst_x1),
-                              (float)(g_logo_y + (int)logo->tex.Height),
-                              (float)src_x1,
-                              (float)logo->tex.Height,
-                              z,
-                              GS_SETREG_RGBAQ(rgb, rgb, rgb, alpha, 0x00));
+    prim_sprite_texture((GSTEXTURE *)&logo->tex,
+                        (float)(g_logo_x + dst_x0),
+                        (float)g_logo_y,
+                        (float)src_x0,
+                        0.0f,
+                        (float)(g_logo_x + dst_x1),
+                        (float)(g_logo_y + (int)logo->tex.Height),
+                        (float)src_x1,
+                        (float)logo->tex.Height,
+                        z,
+                        GS_SETREG_RGBAQ(rgb, rgb, rgb, alpha, 0x00));
 }
 
 static void draw_logo_shimmer_band_lens(int band_left,
@@ -916,23 +974,27 @@ void SplashRenderRestoreBackgroundRect(int x, int y, int w, int h)
     u1 = ((float)x1 * (float)bg->tex.Width) / (float)g_screen_w;
     v1 = ((float)y1 * (float)bg->tex.Height) / (float)g_screen_h;
 
-    gsKit_prim_sprite_texture(g_gs,
-                              (GSTEXTURE *)&bg->tex,
-                              (float)x0,
-                              (float)y0,
-                              u0,
-                              v0,
-                              (float)x1,
-                              (float)y1,
-                              u1,
-                              v1,
-                              FG_Z,
-                              GS_SETREG_RGBAQ(0x80, 0x80, 0x80, GS_ALPHA_OPAQUE, 0x00));
+    prim_sprite_texture((GSTEXTURE *)&bg->tex,
+                        (float)x0,
+                        (float)y0,
+                        u0,
+                        v0,
+                        (float)x1,
+                        (float)y1,
+                        u1,
+                        v1,
+                        FG_Z,
+                        GS_SETREG_RGBAQ(0x80, 0x80, 0x80, GS_ALPHA_OPAQUE, 0x00));
 }
 
 void SplashRenderSetGlyphs(int mode)
 {
     g_bible_glyphs = mode < 0 ? 0 : mode > 2 ? 2 : mode;
+}
+
+void SplashRenderSetWide(int on)
+{
+    g_wide = on != 0;
 }
 
 void SplashRenderSetSky(const unsigned int sky[3])
@@ -1002,11 +1064,12 @@ static void draw_static_layers(void)
         draw_layer_stretched(&g_layers[LAYER_BG], BG_Z);
     if (g_logo_visible) {
         draw_layer(&g_layers[LAYER_LOGO], g_logo_x, g_logo_y, FG_Z, logo_alpha);
-        if (!g_page_on)
+        if (!g_page_on && g_fade == 100)
             draw_logo_shimmer_overlay();
     }
     if (g_hotkeys_visible && !g_page_on)
-        draw_layer(&g_layers[LAYER_HOTKEYS], g_hotkeys_x, g_hotkeys_y, FG_Z, GS_ALPHA_OPAQUE);
+        draw_layer(&g_layers[LAYER_HOTKEYS], g_hotkeys_x, g_hotkeys_y, FG_Z,
+                   opacity_percent_to_gs_alpha((unsigned int)g_fade));
     else if (g_hotkeys_visible && g_page_sheet) // BIBLE: the launch keys page fades the sheet in
         draw_layer(&g_layers[LAYER_HOTKEYS], g_hotkeys_x, g_hotkeys_y, FG_Z,
                    opacity_percent_to_gs_alpha((unsigned int)page_fade()));
@@ -1044,7 +1107,8 @@ static void draw_glyph_rows(void)
     for (r = 0; r < g_glyphs_rows; r++)
         for (k = 0; k < g_glyphs_cols; k++)
             draw_glyph(&g_layers[LAYER_HOTKEYS], g_glyph_rows[r][k], g_glyphs_x + k * (BIBLE_GLYPH_CELL + BIBLE_GLYPH_GAP),
-                       g_glyphs_y + r * (BIBLE_GLYPH_CELL + BIBLE_GLYPH_ROW_GAP), FG_Z, GS_ALPHA_OPAQUE);
+                       g_glyphs_y + r * (BIBLE_GLYPH_CELL + BIBLE_GLYPH_ROW_GAP), FG_Z,
+                       opacity_percent_to_gs_alpha((unsigned int)g_fade));
 }
 
 void SplashRenderBeginFrame(void)
@@ -1074,6 +1138,7 @@ int SplashRenderBegin(int logo_disp, int is_psx_desr)
     int center_x;
     int center_y;
     int pass;
+    int filter;
 
     destroy_frame_state();
 
@@ -1092,16 +1157,22 @@ int SplashRenderBegin(int logo_disp, int is_psx_desr)
     gsKit_init_screen(g_gs);
     gsKit_display_buffer(g_gs);
     gsKit_mode_switch(g_gs, GS_ONESHOT);
-    // Prime both framebuffers to opaque black to avoid mode-switch garbage flashes.
+    // BIBLE: the layout's size, its scale to the framebuffer, and a smooth texture filter when that is not 1:1
+    g_screen_w = g_virt_w;
+    g_screen_h = g_virt_h;
+    g_sx = (float)g_gs->Width / (float)g_screen_w;
+    g_sy = (float)g_gs->Height / (float)g_screen_h;
+    filter = ((int)g_gs->Width == g_screen_w && (int)g_gs->Height == g_screen_h) ? GS_FILTER_NEAREST : GS_FILTER_LINEAR;
+    // Prime both framebuffers to opaque black to avoid mode-switch garbage flashes; BIBLE's layouts prime them with the
+    // sky, the splash's ground, so nothing dark shows between pages or before the first frame.
     for (pass = 0; pass < 2; pass++) {
         gsKit_clear(g_gs, GS_SETREG_RGBAQ(0x00, 0x00, 0x00, 0x80, 0x00));
+        if (logo_disp >= 2)
+            draw_sky_rect(0, 0, g_screen_w, g_screen_h, BG_Z);
         gsKit_queue_exec(g_gs);
         gsKit_finish();
         gsKit_sync_flip(g_gs);
     }
-
-    g_screen_w = (int)g_gs->Width;
-    g_screen_h = (int)g_gs->Height;
     center_x = g_screen_w / 2;
     center_y = g_screen_h / 2;
 
@@ -1117,7 +1188,7 @@ int SplashRenderBegin(int logo_disp, int is_psx_desr)
     g_sky_on = 1; // BIBLE: RIPPS2's sky (BIBLE_COLOR) in place of the background picture
 
     logo = SplashGetLogoImage(is_psx_desr);
-    if (!upload_layer_texture(&g_layers[LAYER_LOGO], logo, GS_FILTER_NEAREST)) {
+    if (!upload_layer_texture(&g_layers[LAYER_LOGO], logo, filter)) {
         destroy_frame_state();
         return 0;
     }
@@ -1129,7 +1200,7 @@ int SplashRenderBegin(int logo_disp, int is_psx_desr)
         // BIBLE: the logo in the middle whatever shows; BIBLE_GLYPHS' rows under it, the text above it
         int rows = g_bible_glyphs == 2 ? 2 : g_bible_glyphs == 1 ? 1 : 0;
 
-        if (!upload_layer_texture(&g_layers[LAYER_HOTKEYS], SplashGetHotkeysImage(), GS_FILTER_NEAREST))
+        if (!upload_layer_texture(&g_layers[LAYER_HOTKEYS], SplashGetHotkeysImage(), filter))
             rows = 0;
         g_logo_x = center_x - ((int)logo->width / 2) + MODE2_LOGO_X_FROM_CENTER;
         g_logo_y = center_y - ((int)logo->height / 2) + MODE2_LOGO_Y_FROM_CENTER;
@@ -1157,7 +1228,7 @@ int SplashRenderBegin(int logo_disp, int is_psx_desr)
         int hotkeys_x;
         int hotkeys_y;
 
-        if (!upload_layer_texture(&g_layers[LAYER_HOTKEYS], hotkeys, GS_FILTER_NEAREST)) {
+        if (!upload_layer_texture(&g_layers[LAYER_HOTKEYS], hotkeys, filter)) {
             destroy_frame_state();
             return 0;
         }
@@ -1231,13 +1302,12 @@ void SplashRenderDrawTextPxScaled(int x, int y, u32 color, const char *text, int
                 if (bits & (1u << (FONT_W - 1 - col))) {
                     int px = cx + (col * draw_scale);
                     int py = y + (row * draw_scale);
-                    gsKit_prim_sprite(g_gs,
-                                      (float)(px + shadow_offset_x),
-                                      (float)(py + shadow_offset_y),
-                                      (float)(px + shadow_offset_x + draw_scale),
-                                      (float)(py + shadow_offset_y + draw_scale),
-                                      TEXT_SHADOW_Z,
-                                      shadow_color);
+                    prim_sprite((float)(px + shadow_offset_x),
+                                (float)(py + shadow_offset_y),
+                                (float)(px + shadow_offset_x + draw_scale),
+                                (float)(py + shadow_offset_y + draw_scale),
+                                TEXT_SHADOW_Z,
+                                shadow_color);
                 }
             }
         }
@@ -1256,13 +1326,12 @@ void SplashRenderDrawTextPxScaled(int x, int y, u32 color, const char *text, int
                 if (bits & (1u << (FONT_W - 1 - col))) {
                     int px = cx + (col * draw_scale);
                     int py = y + (row * draw_scale);
-                    gsKit_prim_sprite(g_gs,
-                                      (float)px,
-                                      (float)py,
-                                      (float)(px + draw_scale),
-                                      (float)(py + draw_scale),
-                                      TEXT_Z,
-                                      gs_color);
+                    prim_sprite((float)px,
+                                (float)py,
+                                (float)(px + draw_scale),
+                                (float)(py + draw_scale),
+                                TEXT_Z,
+                                gs_color);
                 }
             }
         }
@@ -1420,6 +1489,43 @@ int SplashRenderIsActive(void)
 void SplashRenderEnd(void)
 {
     SplashRenderPresent();
+    destroy_frame_state();
+}
+
+// BIBLE: the hand-off to the program being launched. The logo, the buttons and the sheet fade away over
+// BIBLE_HANDOFF_FADE_MS (text goes at once), both framebuffers are left holding the sky alone, and the GS keeps
+// showing it: nothing resets the display until the program sets its own. RIPPS2 starts on that same sky in the same
+// mode (it reads them from the same settings), so the TV keeps its sync and nothing pops between the two.
+#define BIBLE_HANDOFF_FADE_MS 250
+void SplashRenderHandoff(void)
+{
+    u64 t0;
+    int pass;
+
+    if (g_gs == NULL)
+        return;
+    if (!g_sky_on) { // the upstream layouts end as they always have
+        SplashRenderEnd();
+        return;
+    }
+    g_page_on = 0;
+    g_page_sheet = 0;
+    t0 = Timer();
+    do {
+        u64 t = Timer() - t0;
+
+        g_fade = t >= BIBLE_HANDOFF_FADE_MS ? 0 : (int)(100 - t * 100 / BIBLE_HANDOFF_FADE_MS);
+        SplashRenderBeginFrame();
+        SplashRenderPresent();
+    } while (g_fade > 0);
+    g_logo_visible = 0;
+    g_hotkeys_visible = 0;
+    g_glyphs_rows = 0;
+    for (pass = 0; pass < 2; pass++) { // the sky alone in both framebuffers, whichever the GS is left showing
+        SplashRenderBeginFrame();
+        SplashRenderPresent();
+    }
+    g_fade = 100;
     destroy_frame_state();
 }
 

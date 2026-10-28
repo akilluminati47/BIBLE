@@ -26,8 +26,16 @@ BIBLE is the boot loader RIPPS2 sets up: a fork of saildot4k's PS2BBL Extended.
   `BIBLE_INFO` 1 shows console info, clock and countdown (off by default).
   The sky matches your RIPPS2 Color Theme: with no `BIBLE_COLOR` set, BIBLE reads the sky RIPPS2 saves with its
   settings, from the RIPPS2 folder its AUTO entry starts (`BIBLE_COLOR` in the config wins).
-  The same look in NTSC, PAL and 480p. Pages (video mode, credits, launch keys) fade in over the dimmed logo
+  The same look in every video mode. Pages (video mode, credits, launch keys) fade in over the dimmed logo
   with the buttons put away, so the launch keys plainly rest.
+- Video modes: `VIDEO_MODE` also takes `576P`, `720P` and `1080I`, the rest of RIPPS2's. `AUTO` (the default)
+  starts in RIPPS2's Video Mode when its settings are found beside the AUTO entry, else the console's own.
+- `BIBLE_WIDESCREEN`: `AUTO` (the default: RIPPS2's Widescreen, else the PS2's TV Screen 16:9 setting), `ON` or
+  `OFF`. In 480i, 576i, 480p and 576p the splash is drawn for a TV that stretches the picture to 16:9, with no
+  squash. 720p and 1080i are 16:9 already.
+- No pop into RIPPS2: at a launch the logo and buttons fade away and the sky stays on screen, in RIPPS2's mode;
+  RIPPS2 starts on that same sky. Hold TRIANGLE + CROSS at boot for the video mode page, which always opens in
+  the console's own interlaced mode (the way back from 720p or 1080i on a composite cable).
 - New: the launch keys page. Hold L2 + R2 at boot to read every key's launch path, whatever your splash settings.
 - Boot combos held from power on now open their pages (TRIANGLE + CROSS was missed when the pads were still
   starting up).

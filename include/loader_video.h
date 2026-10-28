@@ -7,6 +7,8 @@ int LoaderParseVideoModeValue(const char *value, int *out_mode);
 int LoaderDetectNativeVideoMode(void);
 void LoaderApplyVideoMode(int cfg_mode);
 int LoaderResolveEffectiveVideoMode(int cfg_mode);
+void LoaderSetRipps2VideoMode(int cfg_mode); // BIBLE: RIPPS2's Video Mode, what VIDEO_MODE = AUTO starts in (-1: none)
+int LoaderRipps2VideoMode(void);
 const char *LoaderVideoModeLabel(int cfg_mode);
 int LoaderStepVideoMode(int current_mode, int direction);
 

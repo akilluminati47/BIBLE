@@ -19,11 +19,13 @@ int SplashRenderInfoLineY(void);           // BIBLE: the info line's y above the
 int SplashRenderTextTopY(int block_h);     // BIBLE: where text block_h high starts above the logo, else -1
 void SplashRenderSetGlyphs(int mode); // BIBLE: BIBLE_GLYPHS (0 none, 1 the face buttons, 2 all), before the splash begins
 void SplashRenderSetSky(const unsigned int sky[3]); // BIBLE: BIBLE_COLOR, the sky's top, horizon and floor (0xRRGGBB)
+void SplashRenderSetWide(int on); // BIBLE: Widescreen in the 4:3 modes, before the splash begins
 void SplashRenderSetHotkeysVisible(int visible);
 void SplashRenderSetLogoShimmerCountdown(u64 remaining_ms, u64 total_ms);
 void SplashRenderPresent(void);
 int SplashRenderIsActive(void);
 void SplashRenderEnd(void);
+void SplashRenderHandoff(void); // BIBLE: before a launch: fade to the sky alone and leave it on screen
 int SplashRenderGetScreenWidth(void);
 int SplashRenderGetScreenHeight(void);
 int SplashRenderGetScreenCenterX(void);

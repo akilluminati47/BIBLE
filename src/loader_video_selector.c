@@ -34,6 +34,7 @@ void LoaderRunEmergencyVideoModeSelector(int *hotkey_launches_enabled,
 {
     int selected_mode = GLOBCFG.VIDEO_MODE;
     int applied_effective_mode;
+    int moved = 0; // BIBLE: Left or Right was pressed
     int prev_pad;
     int config_source = LoaderGetConfigSource();
     ConsoleInfo console_info;
@@ -68,9 +69,11 @@ void LoaderRunEmergencyVideoModeSelector(int *hotkey_launches_enabled,
         romver == NULL || romver_size == 0 || config_path_in_use == NULL || config_path_in_use_size == 0)
         return;
 
-    if (selected_mode < CFG_VIDEO_MODE_AUTO || selected_mode > CFG_VIDEO_MODE_480P)
+    if (selected_mode < CFG_VIDEO_MODE_AUTO || selected_mode > CFG_VIDEO_MODE_1080I)
         selected_mode = CFG_VIDEO_MODE_AUTO;
-    applied_effective_mode = LoaderResolveEffectiveVideoMode(selected_mode);
+    // BIBLE: this page is the way back from a mode the TV cannot show (720p or 1080i over a composite cable), so it opens
+    // in the console's own interlaced mode whatever is set; Left or Right shows the mode chosen
+    applied_effective_mode = native_video_mode;
     *hotkey_launches_enabled = 0;
 
     if (GLOBCFG.LOGO_DISP < 2) // BIBLE: the selector needs the splash; LOGO_DISPLAY 2 keeps BIBLE's own look
@@ -85,7 +88,7 @@ void LoaderRunEmergencyVideoModeSelector(int *hotkey_launches_enabled,
     source = console_info.source;
     ConsoleInfoRefreshTemperature(&console_info);
 
-    SplashRenderSetVideoMode(selected_mode, native_video_mode);
+    SplashRenderSetVideoMode(native_video_mode, native_video_mode);
     if (SplashRenderIsActive())
         SplashRenderEnd();
     SplashRenderTextBody(GLOBCFG.LOGO_DISP, is_psx_desr);
@@ -111,6 +114,8 @@ void LoaderRunEmergencyVideoModeSelector(int *hotkey_launches_enabled,
 
         if (mode_changed) {
             int new_effective_mode = LoaderResolveEffectiveVideoMode(selected_mode);
+
+            moved = 1;
 
             if (new_effective_mode != applied_effective_mode) {
                 LoaderApplyVideoMode(selected_mode);
@@ -200,13 +205,20 @@ void LoaderRunEmergencyVideoModeSelector(int *hotkey_launches_enabled,
 
             render_temp = ConsoleInfoRefreshTemperature(&console_info);
 
-            // BIBLE: what the mode is (AUTO: the mode this console picks) in place of "[NATIVE <mode>]" on every line
-            if (selected_mode == CFG_VIDEO_MODE_AUTO)
+            // BIBLE: what the mode is (AUTO: RIPPS2's when its settings were read, else the mode this console picks) in
+            // place of "[NATIVE <mode>]" on every line
+            if (selected_mode == CFG_VIDEO_MODE_AUTO && LoaderRipps2VideoMode() > CFG_VIDEO_MODE_AUTO)
+                snprintf(line_mode, sizeof(line_mode), "VIDEO_MODE = AUTO (RIPPS2: %s)",
+                         LoaderVideoModeLabel(LoaderRipps2VideoMode()));
+            else if (selected_mode == CFG_VIDEO_MODE_AUTO)
                 snprintf(line_mode, sizeof(line_mode), "VIDEO_MODE = AUTO (THIS CONSOLE: %s)", native_label);
             else
                 snprintf(line_mode, sizeof(line_mode), "VIDEO_MODE = %s (%s)", selected_label,
                          selected_mode == CFG_VIDEO_MODE_PAL    ? "576I, 50 HZ" :
                          selected_mode == CFG_VIDEO_MODE_480P   ? "60 HZ PROGRESSIVE, COMPONENT CABLE" :
+                         selected_mode == CFG_VIDEO_MODE_576P   ? "50 HZ PROGRESSIVE, COMPONENT CABLE" :
+                         selected_mode == CFG_VIDEO_MODE_720P   ? "HD 16:9, COMPONENT CABLE" :
+                         selected_mode == CFG_VIDEO_MODE_1080I  ? "HD 16:9, COMPONENT CABLE" :
                                                                   "480I, 60 HZ");
             if (show_save_status) {
                 if (save_feedback_path[0] != '\0') {
@@ -366,7 +378,8 @@ void LoaderRunEmergencyVideoModeSelector(int *hotkey_launches_enabled,
         prev_pad = pad;
     }
 
-    GLOBCFG.VIDEO_MODE = selected_mode;
+    // BIBLE: left without a change, the rest of this boot stays in the console's own mode (SELECT alone saves)
+    GLOBCFG.VIDEO_MODE = moved ? selected_mode : native_video_mode;
     SplashRenderSetVideoMode(GLOBCFG.VIDEO_MODE, native_video_mode);
     *block_hotkeys_until_release = 1;
     SplashRenderPageEnd();

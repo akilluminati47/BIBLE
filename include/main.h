@@ -81,6 +81,7 @@ typedef struct
     int BIBLE_GLYPHS; // BIBLE: under the logo, 1 the four face buttons (the default), 2 every button in four rows, 0 none
     int BIBLE_INFO;   // BIBLE: 1 shows the countdown, clock and console details on the logo splash; 0 (the default) does not
     unsigned int BIBLE_SKY[3]; // BIBLE_COLOR: the sky's top, horizon and floor, 0xRRGGBB (RIPPS2's blue by default)
+    int BIBLE_WIDESCREEN; // BIBLE: BIBLE_WIDESCREEN_* for the 4:3 modes (720p and 1080i are always 16:9)
 } CONFIG;
 
 extern CONFIG GLOBCFG;
@@ -89,7 +90,17 @@ enum {
     CFG_VIDEO_MODE_AUTO = 0,
     CFG_VIDEO_MODE_NTSC,
     CFG_VIDEO_MODE_PAL,
-    CFG_VIDEO_MODE_480P
+    CFG_VIDEO_MODE_480P,
+    CFG_VIDEO_MODE_576P, // BIBLE: the rest of RIPPS2's video modes, so BIBLE can start in the one RIPPS2 shows
+    CFG_VIDEO_MODE_720P,
+    CFG_VIDEO_MODE_1080I
+};
+
+// BIBLE_WIDESCREEN = OFF, ON or AUTO (the default: RIPPS2's Widescreen, else the console's TV Screen setting)
+enum {
+    BIBLE_WIDESCREEN_OFF = 0,
+    BIBLE_WIDESCREEN_ON,
+    BIBLE_WIDESCREEN_AUTO
 };
 
 void RunLoaderElf(const char *filename, const char *party, int argc, char *argv[]);

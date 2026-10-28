@@ -4,6 +4,7 @@
 #include "main.h"
 #include "loader_config.h"
 #include "loader_path.h"
+#include "loader_video.h"
 #include "splash_render.h"
 #include "splash_screen.h"
 
@@ -70,34 +71,83 @@ static int parse_bible_color(const char *name, const char *value)
     return 1;
 }
 
+// BIBLE_WIDESCREEN = AUTO (the default), ON or OFF
+static int parse_bible_widescreen(const char *name, const char *value)
+{
+    if (!ci_eq(name, "BIBLE_WIDESCREEN"))
+        return 0;
+    if (value != NULL && (ci_eq(value, "ON") || ci_eq(value, "1")))
+        GLOBCFG.BIBLE_WIDESCREEN = BIBLE_WIDESCREEN_ON;
+    else if (value != NULL && (ci_eq(value, "OFF") || ci_eq(value, "0")))
+        GLOBCFG.BIBLE_WIDESCREEN = BIBLE_WIDESCREEN_OFF;
+    else
+        GLOBCFG.BIBLE_WIDESCREEN = BIBLE_WIDESCREEN_AUTO;
+    return 1;
+}
+
 // BIBLE: RIPPS2 saves the sky its Color Theme draws with its settings (ripps2_bible_sky=RRGGBB,RRGGBB,RRGGBB in
-// settings_riptopl.cfg). With no BIBLE_COLOR here, it is read from the folder an AUTO entry starts from, on a memory
-// card only (no other drive is up yet), mc?: trying both cards. Nothing found keeps RIPPS2's blue.
+// settings_riptopl.cfg), beside its Video Mode (vmode=) and Widescreen (wide_screen=). They are read from the folder an
+// AUTO entry starts from, on a memory card only (no other drive is up yet), mc?: trying both cards: the sky unless
+// BIBLE_COLOR is set, the mode for VIDEO_MODE = AUTO and the shape for BIBLE_WIDESCREEN = AUTO. So BIBLE starts in the
+// picture RIPPS2 will show and the TV keeps one signal across the hand-off. Nothing found keeps RIPPS2's blue and the
+// console's own mode.
 #define RIPPS2_SETTINGS_FILE "settings_riptopl.cfg"
 #define RIPPS2_SKY_KEY "ripps2_bible_sky="
+#define RIPPS2_VMODE_KEY "vmode="
+#define RIPPS2_WIDE_KEY "wide_screen="
 
-static int read_ripps2_sky_from(const char *path)
+static int g_ripps2_wide = -1; // RIPPS2's Widescreen, -1 when no RIPPS2 settings were read
+
+// RIPPS2's Video Mode (its list: 0 Auto, 1 PAL, 2 NTSC, 3 480p, 4 576p, 5 VGA, 6 to 9 the 704-wide rows of the same
+// four, 10 720p, 11 1080i, 12 and 13 the 240p rows, 14 and 15 flicker-free PAL and NTSC) as BIBLE's: the same signal
+// to the TV. -1 for Auto, the console's own mode as BIBLE's AUTO.
+static int ripps2_vmode_to_cfg(int vmode)
+{
+    switch (vmode) {
+        case 1: case 6: case 12: case 14:
+            return CFG_VIDEO_MODE_PAL;
+        case 2: case 7: case 13: case 15:
+            return CFG_VIDEO_MODE_NTSC;
+        case 3: case 5: case 8:
+            return CFG_VIDEO_MODE_480P;
+        case 4: case 9:
+            return CFG_VIDEO_MODE_576P;
+        case 10:
+            return CFG_VIDEO_MODE_720P;
+        case 11:
+            return CFG_VIDEO_MODE_1080I;
+        default:
+            return -1;
+    }
+}
+
+static int read_ripps2_settings_from(const char *path)
 {
     FILE *fp = fopen(path, "r");
     char line[256];
-    int found = 0;
+    int sky_done = g_bible_color_set;
 
     if (fp == NULL)
         return 0;
-    while (!found && fgets(line, sizeof(line), fp) != NULL)
-        if (!strncmp(line, RIPPS2_SKY_KEY, strlen(RIPPS2_SKY_KEY)))
-            found = parse_sky(line + strlen(RIPPS2_SKY_KEY), GLOBCFG.BIBLE_SKY);
+    while (fgets(line, sizeof(line), fp) != NULL) {
+        if (!sky_done && !strncmp(line, RIPPS2_SKY_KEY, strlen(RIPPS2_SKY_KEY)))
+            sky_done = parse_sky(line + strlen(RIPPS2_SKY_KEY), GLOBCFG.BIBLE_SKY);
+        else if (!strncmp(line, RIPPS2_VMODE_KEY, strlen(RIPPS2_VMODE_KEY)))
+            LoaderSetRipps2VideoMode(ripps2_vmode_to_cfg(atoi(line + strlen(RIPPS2_VMODE_KEY))));
+        else if (!strncmp(line, RIPPS2_WIDE_KEY, strlen(RIPPS2_WIDE_KEY)))
+            g_ripps2_wide = atoi(line + strlen(RIPPS2_WIDE_KEY)) != 0;
+    }
     fclose(fp);
-    return found;
+    return 1;
 }
 
-static void read_ripps2_sky(void)
+static void read_ripps2_settings(void)
 {
     static int done = 0;
     int j;
     int port;
 
-    if (done || g_bible_color_set)
+    if (done)
         return;
     done = 1;
     for (j = 0; j < CONFIG_KEY_INDEXES; j++) {
@@ -120,16 +170,28 @@ static void read_ripps2_sky(void)
             else if (port > 0)
                 break;
             strcat(path, RIPPS2_SETTINGS_FILE);
-            if (read_ripps2_sky_from(path))
+            if (read_ripps2_settings_from(path))
                 return;
         }
     }
 }
 
+// BIBLE: Widescreen for the 4:3 modes: BIBLE_WIDESCREEN ON or OFF, or AUTO: RIPPS2's Widescreen, else the console's own
+// TV Screen setting (16:9 in the PS2's System Configuration)
+static int bible_widescreen(void)
+{
+    if (GLOBCFG.BIBLE_WIDESCREEN != BIBLE_WIDESCREEN_AUTO)
+        return GLOBCFG.BIBLE_WIDESCREEN == BIBLE_WIDESCREEN_ON;
+    if (g_ripps2_wide >= 0)
+        return g_ripps2_wide;
+    return OSDConfigGetScreenType() == TV_SCREEN_169;
+}
+
 // BIBLE: the splash's own keys, before it begins
 void LoaderApplyBibleSplash(void)
 {
-    read_ripps2_sky();
+    read_ripps2_settings();
+    SplashRenderSetWide(bible_widescreen());
     SplashRenderSetGlyphs(GLOBCFG.BIBLE_GLYPHS);
     SplashRenderSetInfo(GLOBCFG.BIBLE_INFO);
     SplashRenderSetSky(GLOBCFG.BIBLE_SKY);
@@ -1115,7 +1177,7 @@ int LoaderParseConfigFile(FILE *fp,
         if (name == NULL || *name == '\0')
             continue;
 
-        if (parse_scalar_int_key(name, value) || parse_bible_color(name, value))
+        if (parse_scalar_int_key(name, value) || parse_bible_color(name, value) || parse_bible_widescreen(name, value))
             continue;
 
         if (ci_starts_with(name, "LOAD_IRX_E")) {
@@ -1155,9 +1217,12 @@ int LoaderParseConfigFile(FILE *fp,
             if (parse_video_mode_fn != NULL &&
                 parse_video_mode_fn(value, &parsed_video_mode)) {
                 GLOBCFG.VIDEO_MODE = parsed_video_mode;
-                if (apply_video_mode_fn != NULL)
-                    apply_video_mode_fn(parsed_video_mode);
-                result->video_mode_applied = 1;
+                // BIBLE: AUTO is set after the whole config, once RIPPS2's settings are read from its AUTO entries
+                if (parsed_video_mode != CFG_VIDEO_MODE_AUTO) {
+                    if (apply_video_mode_fn != NULL)
+                        apply_video_mode_fn(parsed_video_mode);
+                    result->video_mode_applied = 1;
+                }
             } else {
                 DPRINTF("Ignoring invalid VIDEO_MODE value '%s'\n", value);
             }
@@ -1284,6 +1349,7 @@ int LoaderBootstrapConfigAndSplash(int *splash_early_presented_out,
         }
         // If config parsing did not produce a valid VIDEO_MODE, fall back to
         // the default AUTO/native mode now.
+        read_ripps2_settings(); // BIBLE: AUTO is RIPPS2's mode when its settings are found
         if (!video_mode_applied && apply_video_mode_fn != NULL)
             apply_video_mode_fn(GLOBCFG.VIDEO_MODE);
         if (config_read_success && !config_has_launch_key_entries)
@@ -1328,6 +1394,7 @@ int LoaderBootstrapConfigAndSplash(int *splash_early_presented_out,
         GLOBCFG.HOTKEY_DISPLAY = logo_to_hotkey_display(GLOBCFG.LOGO_DISP);
         // No config means no valid VIDEO_MODE was parsed, so apply the default
         // AUTO/native mode now.
+        read_ripps2_settings(); // BIBLE: AUTO is RIPPS2's mode when its settings are found
         if (!video_mode_applied && apply_video_mode_fn != NULL)
             apply_video_mode_fn(GLOBCFG.VIDEO_MODE);
 
