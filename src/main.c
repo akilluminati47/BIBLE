@@ -66,44 +66,6 @@ static void PollEmergencyComboWindow(u64 *window_deadline_ms)
         g_keys_page_requested = 1;
 }
 
-// BIBLE: right after PadInitPads the pads read nothing yet, so buttons held from power on were missed and TRIANGLE +
-// CROSS never opened the video mode page. Wait for each port to answer (a connected pad STABLE, an empty port
-// DISCONN; BOOT_COMBO_PAD_WAIT_MS at most), then read the held buttons a few frames before the launch keys start.
-#define BOOT_COMBO_PAD_WAIT_MS 600
-#define BOOT_COMBO_READS 4
-
-static void ReadBootCombos(void)
-{
-    u64 deadline = Timer() + BOOT_COMBO_PAD_WAIT_MS;
-    int i;
-
-    while (Timer() < deadline) {
-        int port;
-        int answered = 1;
-
-        for (port = 0; port < 2; port++) {
-            int st = padGetState(port, 0);
-
-            if (st != PAD_STATE_STABLE && st != PAD_STATE_FINDCTP1 && st != PAD_STATE_DISCONN && st != PAD_STATE_ERROR)
-                answered = 0;
-        }
-        if (answered)
-            break;
-        delay_ms(8);
-    }
-    for (i = 0; i < BOOT_COMBO_READS; i++) {
-        int pad_state = ReadCombinedPadStatus_raw();
-
-        if ((pad_state & PAD_R1) && (pad_state & PAD_START))
-            EMERGENCY();
-        if ((pad_state & PAD_MASK_TRIANGLE) && (pad_state & PAD_MASK_CROSS))
-            g_video_mode_selector_requested = 1;
-        if ((pad_state & PAD_L2) && (pad_state & PAD_R2))
-            g_keys_page_requested = 1;
-        delay_ms(16);
-    }
-}
-
 static int IsDiscTypeStoppable(int disc_type)
 {
     switch (disc_type) {
@@ -312,49 +274,63 @@ int main(int argc, char *argv[])
                                                    LoaderParseVideoModeValue,
                                                    LoaderApplyVideoMode);
     ArmDiscStopAfterConfigBootstrap(config_source);
-    ReadBootCombos();
 
     // Optional rescue flow: allow user to adjust VIDEO_MODE before launch dispatch.
-    if (g_video_mode_selector_requested) {
-        LoaderRunEmergencyVideoModeSelector(&g_hotkey_launches_enabled,
-                                            &g_block_hotkeys_until_release,
-                                            g_is_psx_desr,
-                                            g_native_video_mode,
-                                            ROMVER,
-                                            sizeof(ROMVER),
-                                            g_config_path_in_use,
-                                            sizeof(g_config_path_in_use));
-        g_video_mode_selector_requested = 0;
-    }
-    if (g_keys_page_requested) { // BIBLE: the launch keys page, then the launch keys once the buttons are let go
-        if (GLOBCFG.LOGO_DISP > 0 && !SplashRenderIsActive()) {
-            LoaderApplyBibleSplash();
-            SplashRenderTextBody(GLOBCFG.LOGO_DISP, g_is_psx_desr);
+    // BIBLE: the launch keys hand a held page combo back (TRIANGLE + CROSS, L2 + R2), so the pages and the launch keys
+    // take turns until something launches.
+    while (1) {
+        int workflow_result;
+
+        if (g_video_mode_selector_requested) {
+            LoaderRunEmergencyVideoModeSelector(&g_hotkey_launches_enabled,
+                                                &g_block_hotkeys_until_release,
+                                                g_is_psx_desr,
+                                                g_native_video_mode,
+                                                ROMVER,
+                                                sizeof(ROMVER),
+                                                g_config_path_in_use,
+                                                sizeof(g_config_path_in_use));
+            g_video_mode_selector_requested = 0;
         }
-        keyspage();
-        g_block_hotkeys_until_release = 1;
-        g_keys_page_requested = 0;
-    }
+        if (g_keys_page_requested) { // BIBLE: the launch keys page, then the launch keys once the buttons are let go
+            if (GLOBCFG.LOGO_DISP > 0 && !SplashRenderIsActive()) {
+                LoaderApplyBibleSplash();
+                SplashRenderTextBody(GLOBCFG.LOGO_DISP, g_is_psx_desr);
+            }
+            keyspage();
+            g_block_hotkeys_until_release = 1;
+            g_keys_page_requested = 0;
+        }
 
-    GameIDSetConfig(GLOBCFG.APP_GAMEID, GLOBCFG.CDROM_DISABLE_GAMEID);
-    if (GLOBCFG.LOGO_DISP > 0 || SplashRenderIsActive())
-        SplashRenderSetVideoMode(GLOBCFG.VIDEO_MODE, g_native_video_mode);
+        GameIDSetConfig(GLOBCFG.APP_GAMEID, GLOBCFG.CDROM_DISABLE_GAMEID);
+        if (GLOBCFG.LOGO_DISP > 0 || SplashRenderIsActive())
+            SplashRenderSetVideoMode(GLOBCFG.VIDEO_MODE, g_native_video_mode);
 
-    // Main launch workflow: countdown, hotkeys, AUTO fallback, then emergency mode.
-    if (LoaderRunLaunchWorkflow(splash_early_presented,
-                                &g_hotkey_launches_enabled,
-                                &g_block_hotkeys_until_release,
-                                0x0001,
-                                16,
-                                g_is_psx_desr,
-                                config_source,
-                                g_native_video_mode,
-                                ROMVER,
-                                sizeof(ROMVER),
-                                EXECPATHS,
-                                &rescue_combo_deadline,
-                                PollEmergencyComboWindow)) {
-        LoaderRunEmergencyMode("COULD NOT FIND ANY DEFAULT APPLICATIONS");
+        // Main launch workflow: countdown, hotkeys, AUTO fallback, then emergency mode.
+        workflow_result = LoaderRunLaunchWorkflow(splash_early_presented,
+                                                  &g_hotkey_launches_enabled,
+                                                  &g_block_hotkeys_until_release,
+                                                  0x0001,
+                                                  16,
+                                                  g_is_psx_desr,
+                                                  config_source,
+                                                  g_native_video_mode,
+                                                  ROMVER,
+                                                  sizeof(ROMVER),
+                                                  EXECPATHS,
+                                                  &rescue_combo_deadline,
+                                                  PollEmergencyComboWindow);
+        if (workflow_result == LOADER_LAUNCH_VIDEO_PAGE) {
+            g_video_mode_selector_requested = 1;
+            continue;
+        }
+        if (workflow_result == LOADER_LAUNCH_KEYS_PAGE) {
+            g_keys_page_requested = 1;
+            continue;
+        }
+        if (workflow_result)
+            LoaderRunEmergencyMode("COULD NOT FIND ANY DEFAULT APPLICATIONS");
+        break;
     }
 
     return 0;

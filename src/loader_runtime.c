@@ -298,7 +298,7 @@ static void DrawKeysPageFrame(void)
     int y;
     int c;
     int r;
-    char text[96];
+    char text[160];
 
     if (box_w > screen_w - 16)
         box_w = screen_w - 16;
@@ -342,7 +342,7 @@ int keyspage(void)
 {
     int use_splash = SplashRenderIsActive();
     int prev_pad = ReadCombinedPadStatus_raw();
-    char text[96];
+    char text[160];
     int k;
 
     if (use_splash)

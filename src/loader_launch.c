@@ -8,6 +8,19 @@
 #include "splash_screen.h"
 
 #define PAD_MASK_ANY 0xffff
+// BIBLE: buttons held from power on reach the launch keys before anything else reads them, so the page combos are
+// told apart here. One of their buttons alone waits LAUNCH_COMBO_SETTLE_MS for its partner before it launches.
+#define LAUNCH_COMBO_BUTTONS (PAD_TRIANGLE | PAD_CROSS | PAD_L2 | PAD_R2)
+#define LAUNCH_COMBO_SETTLE_MS 60
+
+static int LaunchComboFromPad(int pad_state)
+{
+    if ((pad_state & PAD_TRIANGLE) && (pad_state & PAD_CROSS))
+        return LOADER_LAUNCH_VIDEO_PAGE;
+    if ((pad_state & PAD_L2) && (pad_state & PAD_R2))
+        return LOADER_LAUNCH_KEYS_PAGE;
+    return 0;
+}
 // Default fast poll cadence for most launch families.
 #define LAUNCH_PATH_WAIT_STEP_DEFAULT_MS 50u
 // Coarser poll cadence for MX4SIO legacy massX/mx4sio mounts.
@@ -559,6 +572,19 @@ int LoaderRunLaunchWorkflow(int splash_early_presented,
                 if (pad_state & PAD_MASK_ANY)
                     continue;
                 *block_hotkeys_until_release = 0;
+            }
+
+            if (pad_state & LAUNCH_COMBO_BUTTONS) { // BIBLE: a page's two buttons, not a launch
+                int combo = LaunchComboFromPad(pad_state);
+
+                if (!combo) {
+                    delay_ms(LAUNCH_COMBO_SETTLE_MS);
+                    combo = LaunchComboFromPad(ReadCombinedPadStatus_raw());
+                }
+                if (combo) {
+                    DPRINTF("Page combo held: %d\n", combo);
+                    return combo;
+                }
             }
 
             for (x = 0; x < num_buttons; x++) { // check all pad buttons
