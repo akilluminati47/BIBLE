@@ -41,8 +41,10 @@ static int parse_scalar_int_key(const char *name, const char *value)
             const char *safe_value = (value != NULL) ? value : "0";
             int parsed_value = atoi(safe_value);
 
-            if (ci_eq(name, "KEY_READ_WAIT_TIME") && parsed_value < 500)
-                parsed_value = 500;
+            // BIBLE: 0 is allowed: one pad read, then straight to the AUTO entry (a button held from power on
+            // still opens its hotkey). Upstream held this at 500 ms or more.
+            if (ci_eq(name, "KEY_READ_WAIT_TIME") && parsed_value < 0)
+                parsed_value = 0;
 
             *target = parsed_value;
             return 1;
