@@ -24,7 +24,8 @@ BIBLE is the boot loader RIPPS2 sets up: a fork of saildot4k's PS2BBL Extended.
 - The splash: the PS2 logo centred on RIPPS2's sky, with the buttons under it and any text above it.
   `BIBLE_GLYPHS` 0 none, 1 the face buttons (default), 2 all sixteen in two rows of eight.
   `BIBLE_INFO` 1 shows console info, clock and countdown (off by default).
-  `BIBLE_COLOR` sets the sky's three colours; RIPPS2 writes it so the splash matches your Color Theme.
+  The sky matches your RIPPS2 Color Theme: with no `BIBLE_COLOR` set, BIBLE reads the sky RIPPS2 saves with its
+  settings, from the RIPPS2 folder its AUTO entry starts (`BIBLE_COLOR` in the config wins).
   The same look in NTSC, PAL and 480p. Pages (video mode, credits, launch keys) fade in over the dimmed logo
   with the buttons put away, so the launch keys plainly rest.
 - New: the launch keys page. Hold L2 + R2 at boot to read every key's launch path, whatever your splash settings.
@@ -35,7 +36,7 @@ BIBLE is the boot loader RIPPS2 sets up: a fork of saildot4k's PS2BBL Extended.
 
 **How RIPPS2 uses it**
 
-BIBLE cannot be signed, so it runs as a second stage started by the console's own signed loader (PS2BBL 1.2.0 on a memory card, an SD2PSX's loader, FMCB or OSDMenu). There is no BIBLE release yet.
+RIPPS2 will carry BIBLE as signed boot files and install it from its Settings (Boot Loader), in place of the PS2BBL 1.2.0 it carries today. BIBLE also runs as an ELF started by another loader (FMCB, OSDMenu, an SD2PSX's loader). There is no BIBLE release yet.
 
 <p align="center"><img src="assets/readme/ripps2-icon.png" alt="RIPPS2" width="48" height="48"><br><sub>BIBLE is part of <a href="https://github.com/akilluminati47/RIPPS2">RIPPS2</a>.</sub></p>
 
