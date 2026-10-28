@@ -93,13 +93,17 @@ static void DrawCreditsSplashFrame(void)
         "PLAYSTATION2 BASIC BOOTLOADER EXTENDED v"VERSION"."SUBVERSION"."PATCHLEVEL" - "STATUS"",
         "Compiled on "__DATE__" "__TIME__" COMMIT HASH: " COMMIT_HASH "",  
         "BY MATIAS ISRAELSON (EL_ISRA). EXTENDED BY R3Z3N and AI",
+        "TUNED UP BY AKILLUMINATI47 WITH CLAUDE",
         "BASED ON SP193 OSD INIT SAMPLES",
-        "THANKS: FJTRUJY, UYJULIAN, ASMBLUR, AKUHAK, PCM720, BERION, RIPTO, NUNO, GHOSTTOWNUS",
+        "THANKS: FJTRUJY, UYJULIAN, ASMBLUR, AKUHAK, PCM720,",
+        "BERION, RIPTO, NUNO, GHOSTTOWNUS, KRAHJOHLITO, KRHACKEN",
         "PRESS START TO RETURN TO LAUNCH KEYS",
     };
     const u32 colors[] = {
         0x00ffff,
         0x00ffff,
+        0xffffff,
+        0xffffff,
         0xffffff,
         0xffffff,
         0xffffff,
@@ -119,8 +123,8 @@ static void DrawCreditsSplashFrame(void)
         anchor_center_x = logo_x + (logo_w / 2);
         y = logo_y + logo_h + 6;
     }
-    if (SplashRenderTextTopY(5 * 16 + 7) >= 0) // BIBLE: above the logo
-        y = SplashRenderTextTopY(5 * 16 + 7);
+    if (SplashRenderTextTopY(7 * 16 + 7) >= 0) // BIBLE: above the logo
+        y = SplashRenderTextTopY(7 * 16 + 7);
 
     if (y > screen_h - 70)
         y = screen_h - 70;
@@ -155,6 +159,7 @@ int credits(void)
     if (!use_splash) {
         scr_printf("\tPlayStation2 Basic BootLoader Extended\n");
         scr_printf("\tBy Matias Israelson (AKA: El_isra). Extended by R3Z3N and AI\n");
+        scr_printf("\tTuned up by akilluminati47 with Claude\n");
         scr_printf("\thttps://ps2homebrewstore.com - Modified - 9 Paths\n");
         scr_printf("\tv" VERSION "-" SUBVERSION "-" PATCHLEVEL " - " STATUS
 #ifdef DEBUG
@@ -165,7 +170,8 @@ int credits(void)
                    "\n"
                    "\tBased on SP193 OSD Init samples.\n"
                    "\t\tall credits go to him\n"
-                   "\tThanks to: fjtrujy, uyjulian, asmblur, AKuHAK, PCM720, BERION, RIPTO, Nuno, GhostTownUS\n"
+                   "\tThanks to: fjtrujy, uyjulian, asmblur, AKuHAK, PCM720,\n"
+                   "\t\tBERION, RIPTO, Nuno, GhostTownUS, KrahJohlito, krHACKen\n"
                    "\tbuild hash [" COMMIT_HASH "]\n"
                    "\t\tcompiled on "__DATE__
                    " "__TIME__
