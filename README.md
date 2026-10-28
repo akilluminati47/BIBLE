@@ -1,3 +1,50 @@
+<h1 align="center">BIBLE</h1>
+<p align="center">
+  <a href="https://github.com/akilluminati47/RIPPS2">RIPPS2</a> ·
+  <a href="https://github.com/akilluminati47/BIBLE/actions">Builds</a> ·
+  <a href="https://github.com/saildot4k/PlayStation2-Basic-BootLoader-Extended">PS2BBL Extended</a> ·
+  <a href="https://github.com/israpps/PlayStation2-Basic-BootLoader">PS2BBL</a> ·
+  <a href="LICENSE">GPL-3.0</a>
+</p>
+
+<p align="center">
+  <img src="assets/readme/bible-splash.gif" width="640" alt="BIBLE's splash: the logo alone, with BIBLE_INFO, with the face buttons, with every button">
+</p>
+<p align="center">
+  <img src="assets/readme/bible-keys.png" width="212" alt="Launch keys page">
+  <img src="assets/readme/bible-video-mode.png" width="212" alt="Video mode page">
+  <img src="assets/readme/bible-credits.png" width="212" alt="Credits page"><br>
+  <sub>Hold L2 + R2 at boot for the launch keys page, TRIANGLE + CROSS for the video mode page; a key set to <code>$CREDITS</code> shows the credits.</sub>
+</p>
+
+BIBLE is the boot loader RIPPS2 sets up: a fork of saildot4k's PS2BBL Extended.
+
+**What this fork changes**
+
+- The splash: the PS2 logo centred on RIPPS2's sky, with the buttons under it and any text above it.
+  `BIBLE_GLYPHS` 0 none, 1 the face buttons (default), 2 all sixteen in two rows of eight.
+  `BIBLE_INFO` 1 shows console info, clock and countdown (off by default).
+  `BIBLE_COLOR` sets the sky's three colours; RIPPS2 writes it so the splash matches your Color Theme.
+  The same look in NTSC, PAL and 480p. Pages (video mode, credits, launch keys) fade in over the dimmed logo
+  with the buttons put away, so the launch keys plainly rest.
+- New: the launch keys page. Hold L2 + R2 at boot to read every key's launch path, whatever your splash settings.
+- Boot combos held from power on now open their pages (TRIANGLE + CROSS was missed when the pads were still
+  starting up).
+- `KEY_READ_WAIT_TIME = 0` is allowed (upstream's floor is 500 ms).
+- PS2 builds for memory card / USB, MMCE, MX4SIO and HDD. eGSM stage 2 is left out.
+
+**How RIPPS2 uses it**
+
+BIBLE cannot be signed, so it runs as a second stage started by the console's own signed loader (PS2BBL 1.2.0 on a memory card, an SD2PSX's loader, FMCB or OSDMenu). There is no BIBLE release yet.
+
+<p align="center"><img src="assets/readme/ripps2-icon.png" alt="RIPPS2" width="48" height="48"><br><sub>BIBLE is part of <a href="https://github.com/akilluminati47/RIPPS2">RIPPS2</a>.</sub></p>
+
+---
+
+<p align="center"><sub>Everything below is the upstream README of PS2BBL Extended, preserved unchanged.</sub></p>
+
+---
+
 
 <br />
 <p align="center">
