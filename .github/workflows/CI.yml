@@ -83,7 +83,7 @@ jobs:
 
       - name: Compile PSX-ALL-DRIVERS-LAZY-LOADING build
         run: |
-          make release COMMIT_HASH=${GITHUB_SHA::7} BINDIR=${{ env.OUT_ROOT }}PSX-ALL-DRIVERS-LAZY-LOADING/ PSX_ALL_DRIVERS_LAZY_LOADING=1 EGSM_BUILD=1 EMBED_PS1VN=1 ${{ env.DEBUG }} ${{ env.PRINTF_ARGS }}
+          make release COMMIT_HASH=${GITHUB_SHA::7} BINDIR=${{ env.OUT_ROOT }}PSX-ALL-DRIVERS-LAZY-LOADING/ PSX_ALL_DRIVERS_LAZY_LOADING=1 EGSM_BUILD=0 EMBED_PS1VN=1 ${{ env.DEBUG }} ${{ env.PRINTF_ARGS }}
 
       - name: Compile the PS2 builds (BIBLE)
         run: |
@@ -91,7 +91,7 @@ jobs:
           # set: memory card and USB; MMCE; MX4SIO; the internal HDD
           for v in "PS2:" "PS2_MMCE:MMCE=1" "PS2_MX4SIO:MX4SIO=1" "PS2_HDD:HDD=1"; do
             name=${v%%:*}; flags=${v#*:}
-            make release COMMIT_HASH=${GITHUB_SHA::7} BINDIR=${{ env.OUT_ROOT }}$name/ PSX_ALL_DRIVERS_LAZY_LOADING=0 $flags EGSM_BUILD=1 ${{ env.DEBUG }} ${{ env.PRINTF_ARGS }}
+            make release COMMIT_HASH=${GITHUB_SHA::7} BINDIR=${{ env.OUT_ROOT }}$name/ PSX_ALL_DRIVERS_LAZY_LOADING=0 $flags EGSM_BUILD=0 ${{ env.DEBUG }} ${{ env.PRINTF_ARGS }}
           done
 
       - name: list
