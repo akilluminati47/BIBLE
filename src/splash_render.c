@@ -88,8 +88,14 @@ static int g_hotkeys_x = -1;
 static int g_hotkeys_y = -1;
 static int g_hotkeys_visible = 0;
 // BIBLE: the four face buttons under the logo (LOGO_DISPLAY 2), BIBLE_GLYPHS in the config
-#define BIBLE_GLYPH_CELL 32
-#define BIBLE_GLYPH_GAP 18
+// hotkeys.png holds each button as a 20 x 20 icon at x 7, 21 rows apart, the face buttons from row 22 (triangle,
+// circle, cross, square); they are drawn twice that size, with nearest filtering, so every pixel stays square
+#define BIBLE_GLYPH_SRC_X 7
+#define BIBLE_GLYPH_SRC_Y 22
+#define BIBLE_GLYPH_SRC_PITCH 21
+#define BIBLE_GLYPH_SRC 20
+#define BIBLE_GLYPH_CELL 40
+#define BIBLE_GLYPH_GAP 16
 #define BIBLE_GLYPH_BELOW 16
 static int g_bible_glyphs = 1;
 static int g_glyphs_x = -1;
@@ -536,8 +542,11 @@ static void draw_layer(const SPLASH_LAYER *layer, int x, int y, int z, unsigned 
 }
 
 // BIBLE: one 32 x 32 cell of the hotkeys strip (its cells: AUTO, then triangle, circle, cross, square, ...)
-static void draw_layer_cell(const SPLASH_LAYER *layer, int cell, int x, int y, int z)
+// BIBLE: face button k (0 triangle, 1 circle, 2 cross, 3 square) from hotkeys.png, BIBLE_GLYPH_CELL square at x, y
+static void draw_layer_cell(const SPLASH_LAYER *layer, int k, int x, int y, int z)
 {
+    const int v = BIBLE_GLYPH_SRC_Y + k * BIBLE_GLYPH_SRC_PITCH;
+
     if (layer == NULL || !layer->ready)
         return;
 
@@ -545,12 +554,12 @@ static void draw_layer_cell(const SPLASH_LAYER *layer, int cell, int x, int y, i
                               (GSTEXTURE *)&layer->tex,
                               (float)x,
                               (float)y,
-                              0.0f,
-                              (float)(cell * BIBLE_GLYPH_CELL),
+                              (float)BIBLE_GLYPH_SRC_X,
+                              (float)v,
                               (float)(x + BIBLE_GLYPH_CELL),
                               (float)(y + BIBLE_GLYPH_CELL),
-                              (float)BIBLE_GLYPH_CELL,
-                              (float)((cell + 1) * BIBLE_GLYPH_CELL),
+                              (float)(BIBLE_GLYPH_SRC_X + BIBLE_GLYPH_SRC),
+                              (float)(v + BIBLE_GLYPH_SRC),
                               z,
                               GS_SETREG_RGBAQ(0x80, 0x80, 0x80, GS_ALPHA_OPAQUE, 0x00));
 }
@@ -893,7 +902,7 @@ static void draw_static_layers(void)
     if (g_glyphs_visible) { // BIBLE: triangle, circle, cross, square, left to right under the logo
         int k;
         for (k = 0; k < 4; k++)
-            draw_layer_cell(&g_layers[LAYER_HOTKEYS], 1 + k, g_glyphs_x + k * (BIBLE_GLYPH_CELL + BIBLE_GLYPH_GAP), g_glyphs_y, FG_Z);
+            draw_layer_cell(&g_layers[LAYER_HOTKEYS], k, g_glyphs_x + k * (BIBLE_GLYPH_CELL + BIBLE_GLYPH_GAP), g_glyphs_y, FG_Z);
     }
 }
 
