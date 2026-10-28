@@ -10,6 +10,8 @@
 #include "splash_render.h"
 #include "splash_screen.h"
 
+u64 Timer(void); // timer.c
+
 #define FONT_W 5
 #define FONT_H 7
 #define FONT_SCALE 2
@@ -119,6 +121,16 @@ static int g_glyphs_y = -1;
 static int g_glyphs_rows = 0; // the rows drawn: 0, 1 (the face buttons) or 2 (all)
 static int g_glyphs_cols = 4; // buttons to a row: 4 (the face buttons) or 8
 static int g_bible_layout = 0; // LOGO_DISPLAY 2: the logo in the middle, text above it, the buttons below
+// BIBLE: a page (the video mode selector, credits, the launch keys page) dims the logo, puts the buttons away and
+// fades its box and text in over BIBLE_PAGE_FADE_MS, so the launch keys plainly rest while it shows
+#define BIBLE_PAGE_FADE_MS 350
+#define BIBLE_PAGE_LOGO_TRANSPARENCY 80
+#define BIBLE_PAGE_BOX_COLOR 0x606060
+#define BIBLE_PAGE_BOX_OPACITY 80
+static int g_page_on = 0;
+static u64 g_page_t0 = 0;
+static const char *const g_glyph_key[GLY_COUNT] = {"TRIANGLE", "CIRCLE", "CROSS", "SQUARE", "UP", "DOWN", "LEFT",
+    "RIGHT", "L1", "L2", "L3", "R1", "R2", "R3", "SELECT", "START"};
 static int g_glyphs_covered = 0; // this frame put text or a box where the rows sit: the page shows the logo alone
 // BIBLE_COLOR: the sky's top, horizon and floor (0xRRGGBB) as RIPPS2's Storage page draws them at rest, the horizon
 // 290/480 of the way down. RIPPS2 writes its Color Theme's (or a Color Sweep's first colour's) into the config.
@@ -203,12 +215,16 @@ static unsigned char opacity_percent_to_gs_alpha(unsigned int opacity_percent)
     return (unsigned char)((opacity_percent * GS_ALPHA_OPAQUE + 50u) / 100u);
 }
 
+static int page_fade(void);
+
 static unsigned char get_logo_base_alpha(void)
 {
-    const unsigned int logo_transparency_percent = g_hotkeys_visible
-                                                       ? LOGO_TRANSPARENCY_PERCENT_WITH_HOTKEYS
-                                                       : LOGO_TRANSPARENCY_PERCENT_DEFAULT;
+    unsigned int logo_transparency_percent = g_hotkeys_visible
+                                                 ? LOGO_TRANSPARENCY_PERCENT_WITH_HOTKEYS
+                                                 : LOGO_TRANSPARENCY_PERCENT_DEFAULT;
 
+    if (g_page_on) // BIBLE: from the splash's own alpha down to the page's dim one
+        logo_transparency_percent += (BIBLE_PAGE_LOGO_TRANSPARENCY - logo_transparency_percent) * page_fade() / 100;
     return transparency_percent_to_gs_alpha(logo_transparency_percent);
 }
 
@@ -569,7 +585,7 @@ static void draw_layer(const SPLASH_LAYER *layer, int x, int y, int z, unsigned 
 
 // BIBLE: button id (GLY_*) from hotkeys.png in the BIBLE_GLYPH_CELL square at x, y; a shorter icon (L1, R1, SELECT,
 // START) in the middle of it
-static void draw_glyph(const SPLASH_LAYER *layer, int id, int x, int y, int z)
+static void draw_glyph(const SPLASH_LAYER *layer, int id, int x, int y, int z, unsigned char alpha)
 {
     const int v = g_glyph_src[id][0], h = g_glyph_src[id][1];
 
@@ -588,7 +604,7 @@ static void draw_glyph(const SPLASH_LAYER *layer, int id, int x, int y, int z)
                               (float)(BIBLE_GLYPH_SRC_X + BIBLE_GLYPH_SRC_W),
                               (float)(v + h),
                               z,
-                              GS_SETREG_RGBAQ(0x80, 0x80, 0x80, GS_ALPHA_OPAQUE, 0x00));
+                              GS_SETREG_RGBAQ(0x80, 0x80, 0x80, alpha, 0x00));
 }
 
 // BIBLE: the sky's colour y lines down: top to horizon, then horizon to floor, as RIPPS2 draws its two gradients
@@ -986,9 +1002,10 @@ static void draw_static_layers(void)
         draw_layer_stretched(&g_layers[LAYER_BG], BG_Z);
     if (g_logo_visible) {
         draw_layer(&g_layers[LAYER_LOGO], g_logo_x, g_logo_y, FG_Z, logo_alpha);
-        draw_logo_shimmer_overlay();
+        if (!g_page_on)
+            draw_logo_shimmer_overlay();
     }
-    if (g_hotkeys_visible)
+    if (g_hotkeys_visible && !g_page_on)
         draw_layer(&g_layers[LAYER_HOTKEYS], g_hotkeys_x, g_hotkeys_y, FG_Z, GS_ALPHA_OPAQUE);
 }
 
@@ -1019,12 +1036,12 @@ static void draw_glyph_rows(void)
 {
     int r, k;
 
-    if (g_glyphs_rows <= 0 || g_glyphs_covered)
+    if (g_glyphs_rows <= 0 || g_glyphs_covered || g_page_on)
         return;
     for (r = 0; r < g_glyphs_rows; r++)
         for (k = 0; k < g_glyphs_cols; k++)
             draw_glyph(&g_layers[LAYER_HOTKEYS], g_glyph_rows[r][k], g_glyphs_x + k * (BIBLE_GLYPH_CELL + BIBLE_GLYPH_GAP),
-                       g_glyphs_y + r * (BIBLE_GLYPH_CELL + BIBLE_GLYPH_ROW_GAP), FG_Z);
+                       g_glyphs_y + r * (BIBLE_GLYPH_CELL + BIBLE_GLYPH_ROW_GAP), FG_Z, GS_ALPHA_OPAQUE);
 }
 
 void SplashRenderBeginFrame(void)
@@ -1109,7 +1126,7 @@ int SplashRenderBegin(int logo_disp, int is_psx_desr)
         // BIBLE: the logo in the middle whatever shows; BIBLE_GLYPHS' rows under it, the text above it
         int rows = g_bible_glyphs == 2 ? 2 : g_bible_glyphs == 1 ? 1 : 0;
 
-        if (rows > 0 && !upload_layer_texture(&g_layers[LAYER_HOTKEYS], SplashGetHotkeysImage(), GS_FILTER_NEAREST))
+        if (!upload_layer_texture(&g_layers[LAYER_HOTKEYS], SplashGetHotkeysImage(), GS_FILTER_NEAREST))
             rows = 0;
         g_logo_x = center_x - ((int)logo->width / 2) + MODE2_LOGO_X_FROM_CENTER;
         g_logo_y = center_y - ((int)logo->height / 2) + MODE2_LOGO_Y_FROM_CENTER;
@@ -1181,6 +1198,15 @@ void SplashRenderDrawTextPxScaled(int x, int y, u32 color, const char *text, int
                                    0x00,
                                    transparency_percent_to_gs_alpha(GLYPH_SHADOW_TRANSPARENCY_PERCENT),
                                    0x00);
+    if (g_page_on && page_fade() < 100) { // BIBLE: a page's text fades in
+        int f = page_fade();
+
+        gs_color = GS_SETREG_RGBAQ((color >> 16) & 0xff, (color >> 8) & 0xff, color & 0xff,
+                                   opacity_percent_to_gs_alpha((unsigned int)f), 0x00);
+        shadow_color = GS_SETREG_RGBAQ(0x00, 0x00, 0x00,
+                                       transparency_percent_to_gs_alpha(GLYPH_SHADOW_TRANSPARENCY_PERCENT) * f / 100,
+                                       0x00);
+    }
     draw_scale = (scale > 0) ? scale : 1;
     advance = (FONT_W + 1) * draw_scale;
     shadow_offset_x = GLYPH_SHADOW_OFFSET_X;
@@ -1316,10 +1342,70 @@ void SplashRenderDrawTextPx(int x, int y, u32 color, const char *text)
     SplashRenderDrawTextPxScaled(x, y, color, text, FONT_SCALE);
 }
 
+static int page_fade(void)
+{
+    u64 t;
+
+    if (!g_page_on)
+        return 100;
+    t = Timer() - g_page_t0;
+    return t >= BIBLE_PAGE_FADE_MS ? 100 : (int)(t * 100 / BIBLE_PAGE_FADE_MS);
+}
+
+void SplashRenderPageBegin(void)
+{
+    if (!g_page_on) {
+        g_page_on = 1;
+        g_page_t0 = Timer();
+    }
+}
+
+void SplashRenderPageEnd(void)
+{
+    g_page_on = 0;
+}
+
+int SplashRenderPageFade(void)
+{
+    return page_fade();
+}
+
+// BIBLE: a page's box, faded in with it
+void SplashRenderPageBox(int x, int y, int w, int h)
+{
+    SplashRenderDrawRoundedRect(x, y, w, h, 0, BIBLE_PAGE_BOX_COLOR,
+                                (unsigned int)(BIBLE_PAGE_BOX_OPACITY * page_fade() / 100));
+}
+
+// BIBLE: the button glyph for a launch key's name (KEYS_ID), -1 for AUTO or an unknown name
+int SplashRenderGlyphForKey(const char *key)
+{
+    int i;
+
+    for (i = 0; key != NULL && i < GLY_COUNT; i++)
+        if (!strcmp(key, g_glyph_key[i]))
+            return i;
+    return -1;
+}
+
+// BIBLE: one button glyph at its own size, faded in with the page; 0 when the sheet is not loaded
+int SplashRenderDrawGlyph(int id, int x, int y)
+{
+    if (g_gs == NULL || id < 0 || id >= GLY_COUNT || !g_layers[LAYER_HOTKEYS].ready)
+        return 0;
+    draw_glyph(&g_layers[LAYER_HOTKEYS], id, x, y, TEXT_Z, opacity_percent_to_gs_alpha((unsigned int)page_fade()));
+    return 1;
+}
+
+int SplashRenderGlyphSize(void)
+{
+    return BIBLE_GLYPH_CELL;
+}
+
 // BIBLE: LOGO_DISPLAY 2 puts the info line BIBLE_TEXT_PAD above the logo; -1 for the upstream layouts
 int SplashRenderInfoLineY(void)
 {
-    if (!g_bible_layout || g_logo_y < 0)
+    if (!g_bible_layout || g_logo_y < 0 || g_page_on)
         return -1;
     return g_logo_y - BIBLE_TEXT_PAD - BIBLE_TEXT_H;
 }

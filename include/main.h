@@ -161,6 +161,7 @@ int dischandler(int skip_ps2logo, int argc, char *argv[], int wait_for_disc);
 // There is no need to call this on a PSX DESR since OSDSYS performs it at boot.
 void CDVDBootCertify(u8 romver[16]);
 int credits(void);
+int keyspage(void); // BIBLE: the launch keys page (L2 + R2 at boot)
 void CleanUp(void);
 void LoaderSetBootPathHint(const char *boot_path);
 const char *LoaderGetBootPathHint(void);

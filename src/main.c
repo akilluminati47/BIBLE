@@ -9,6 +9,7 @@
 #include "loader_video.h"
 #include "loader_video_selector.h"
 #include "splash_render.h"
+#include "splash_screen.h"
 
 int g_is_psx_desr = 0;
 
@@ -34,6 +35,7 @@ char *EXECPATHS[CONFIG_KEY_INDEXES];
 u8 ROMVER[16];
 unsigned char *config_buf = NULL; // pointer to allocated config file
 static int g_video_mode_selector_requested = 0;
+static int g_keys_page_requested = 0; // BIBLE: L2 + R2 held at boot
 static int g_block_hotkeys_until_release = 0;
 static int g_hotkey_launches_enabled = 1;
 static char g_config_path_in_use[256] = "";
@@ -60,6 +62,46 @@ static void PollEmergencyComboWindow(u64 *window_deadline_ms)
         EMERGENCY();
     if ((pad_state & PAD_MASK_TRIANGLE) && (pad_state & PAD_MASK_CROSS))
         g_video_mode_selector_requested = 1;
+    if ((pad_state & PAD_L2) && (pad_state & PAD_R2))
+        g_keys_page_requested = 1;
+}
+
+// BIBLE: right after PadInitPads the pads read nothing yet, so buttons held from power on were missed and TRIANGLE +
+// CROSS never opened the video mode page. Wait for each port to answer (a connected pad STABLE, an empty port
+// DISCONN; BOOT_COMBO_PAD_WAIT_MS at most), then read the held buttons a few frames before the launch keys start.
+#define BOOT_COMBO_PAD_WAIT_MS 600
+#define BOOT_COMBO_READS 4
+
+static void ReadBootCombos(void)
+{
+    u64 deadline = Timer() + BOOT_COMBO_PAD_WAIT_MS;
+    int i;
+
+    while (Timer() < deadline) {
+        int port;
+        int answered = 1;
+
+        for (port = 0; port < 2; port++) {
+            int st = padGetState(port, 0);
+
+            if (st != PAD_STATE_STABLE && st != PAD_STATE_FINDCTP1 && st != PAD_STATE_DISCONN && st != PAD_STATE_ERROR)
+                answered = 0;
+        }
+        if (answered)
+            break;
+        delay_ms(8);
+    }
+    for (i = 0; i < BOOT_COMBO_READS; i++) {
+        int pad_state = ReadCombinedPadStatus_raw();
+
+        if ((pad_state & PAD_R1) && (pad_state & PAD_START))
+            EMERGENCY();
+        if ((pad_state & PAD_MASK_TRIANGLE) && (pad_state & PAD_MASK_CROSS))
+            g_video_mode_selector_requested = 1;
+        if ((pad_state & PAD_L2) && (pad_state & PAD_R2))
+            g_keys_page_requested = 1;
+        delay_ms(16);
+    }
 }
 
 static int IsDiscTypeStoppable(int disc_type)
@@ -270,6 +312,7 @@ int main(int argc, char *argv[])
                                                    LoaderParseVideoModeValue,
                                                    LoaderApplyVideoMode);
     ArmDiscStopAfterConfigBootstrap(config_source);
+    ReadBootCombos();
 
     // Optional rescue flow: allow user to adjust VIDEO_MODE before launch dispatch.
     if (g_video_mode_selector_requested) {
@@ -282,6 +325,15 @@ int main(int argc, char *argv[])
                                             g_config_path_in_use,
                                             sizeof(g_config_path_in_use));
         g_video_mode_selector_requested = 0;
+    }
+    if (g_keys_page_requested) { // BIBLE: the launch keys page, then the launch keys once the buttons are let go
+        if (GLOBCFG.LOGO_DISP > 0 && !SplashRenderIsActive()) {
+            LoaderApplyBibleSplash();
+            SplashRenderTextBody(GLOBCFG.LOGO_DISP, g_is_psx_desr);
+        }
+        keyspage();
+        g_block_hotkeys_until_release = 1;
+        g_keys_page_requested = 0;
     }
 
     GameIDSetConfig(GLOBCFG.APP_GAMEID, GLOBCFG.CDROM_DISABLE_GAMEID);

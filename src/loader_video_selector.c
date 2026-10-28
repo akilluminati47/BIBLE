@@ -73,7 +73,8 @@ void LoaderRunEmergencyVideoModeSelector(int *hotkey_launches_enabled,
     applied_effective_mode = LoaderResolveEffectiveVideoMode(selected_mode);
     *hotkey_launches_enabled = 0;
 
-    GLOBCFG.LOGO_DISP = 3;
+    if (GLOBCFG.LOGO_DISP < 2) // BIBLE: the selector needs the splash; LOGO_DISPLAY 2 keeps BIBLE's own look
+        GLOBCFG.LOGO_DISP = 2;
     GLOBCFG.HOTKEY_DISPLAY = logo_to_hotkey_display(GLOBCFG.LOGO_DISP);
     LoaderApplyDisplayNameMode(GLOBCFG.HOTKEY_DISPLAY);
 
@@ -88,6 +89,7 @@ void LoaderRunEmergencyVideoModeSelector(int *hotkey_launches_enabled,
     if (SplashRenderIsActive())
         SplashRenderEnd();
     SplashRenderTextBody(GLOBCFG.LOGO_DISP, is_psx_desr);
+    SplashRenderPageBegin();
     save_feedback_path[0] = '\0';
 
     prev_pad = ReadCombinedPadStatus_raw();
@@ -248,11 +250,8 @@ void LoaderRunEmergencyVideoModeSelector(int *hotkey_launches_enabled,
 
             box_w = max_line_w + (VIDEO_SELECTOR_BOX_TEXT_PAD_X * 2);
             box_h = text_block_h + (VIDEO_SELECTOR_BOX_TEXT_PAD_Y * 2);
-            if (logo_y >= 0 && logo_h > 0) { // BIBLE: the box above the logo, as every page's text
-                box_y = logo_y - VIDEO_SELECTOR_BOX_GAP_FROM_LOGO - box_h;
-                if (box_y < VIDEO_SELECTOR_BOX_SCREEN_MARGIN)
-                    box_y = VIDEO_SELECTOR_BOX_SCREEN_MARGIN;
-            }
+            if (logo_y >= 0 && logo_h > 0) // BIBLE: the box over the dimmed logo, as on every page
+                box_y = logo_y + logo_h / 2 - box_h / 2;
             box_x = anchor_center_x - (box_w / 2);
 
             if (box_x < VIDEO_SELECTOR_BOX_SCREEN_MARGIN)
@@ -283,9 +282,9 @@ void LoaderRunEmergencyVideoModeSelector(int *hotkey_launches_enabled,
             line_select_word_x = line_select_prefix_x + line_select_prefix_w;
             line_select_suffix_x = line_select_word_x + line_select_word_w;
 
-            SplashRenderSetHotkeysVisible(1);
+            (void)hotkey_lines; // BIBLE: the launch keys rest while the page shows
+            SplashRenderSetHotkeysVisible(0);
             SplashRenderBeginFrame();
-            SplashRenderHotkeyLines(GLOBCFG.LOGO_DISP, hotkey_lines);
             SplashRenderConsoleInfoLine(GLOBCFG.LOGO_DISP,
                                         model,
                                         console_info.rom_fmt,
@@ -301,7 +300,7 @@ void LoaderRunEmergencyVideoModeSelector(int *hotkey_launches_enabled,
                                         box_h,
                                         0,
                                         VIDEO_SELECTOR_BOX_BG_COLOR,
-                                        VIDEO_SELECTOR_BOX_BG_OPACITY_PERCENT);
+                                        VIDEO_SELECTOR_BOX_BG_OPACITY_PERCENT * SplashRenderPageFade() / 100);
             SplashRenderDrawTextPxScaled(line_mode_x,
                                          line_mode_y,
                                          VIDEO_SELECTOR_HIGHLIGHT_COLOR,
@@ -363,6 +362,7 @@ void LoaderRunEmergencyVideoModeSelector(int *hotkey_launches_enabled,
     GLOBCFG.VIDEO_MODE = selected_mode;
     SplashRenderSetVideoMode(GLOBCFG.VIDEO_MODE, native_video_mode);
     *block_hotkeys_until_release = 1;
+    SplashRenderPageEnd();
     if (SplashRenderIsActive())
         SplashRenderEnd();
 
