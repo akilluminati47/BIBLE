@@ -87,6 +87,14 @@ static int g_logo_visible = 0;
 static int g_hotkeys_x = -1;
 static int g_hotkeys_y = -1;
 static int g_hotkeys_visible = 0;
+// BIBLE: the four face buttons under the logo (LOGO_DISPLAY 2), BIBLE_GLYPHS in the config
+#define BIBLE_GLYPH_CELL 32
+#define BIBLE_GLYPH_GAP 18
+#define BIBLE_GLYPH_BELOW 16
+static int g_bible_glyphs = 1;
+static int g_glyphs_x = -1;
+static int g_glyphs_y = -1;
+static int g_glyphs_visible = 0;
 static int g_logo_shimmer_left = 0;
 static int g_logo_shimmer_band_width = 0;
 static int g_logo_shimmer_visible_left = 0;
@@ -459,6 +467,7 @@ static void destroy_frame_state(void)
     g_logo_y = -1;
     g_logo_visible = 0;
     g_hotkeys_x = -1;
+    g_glyphs_visible = 0;
     g_hotkeys_y = -1;
     g_hotkeys_visible = 0;
     reset_logo_shimmer_state();
@@ -524,6 +533,26 @@ static void draw_layer(const SPLASH_LAYER *layer, int x, int y, int z, unsigned 
                               (float)layer->tex.Height,
                               z,
                               GS_SETREG_RGBAQ(0x80, 0x80, 0x80, alpha, 0x00));
+}
+
+// BIBLE: one 32 x 32 cell of the hotkeys strip (its cells: AUTO, then triangle, circle, cross, square, ...)
+static void draw_layer_cell(const SPLASH_LAYER *layer, int cell, int x, int y, int z)
+{
+    if (layer == NULL || !layer->ready)
+        return;
+
+    gsKit_prim_sprite_texture(g_gs,
+                              (GSTEXTURE *)&layer->tex,
+                              (float)x,
+                              (float)y,
+                              0.0f,
+                              (float)(cell * BIBLE_GLYPH_CELL),
+                              (float)(x + BIBLE_GLYPH_CELL),
+                              (float)(y + BIBLE_GLYPH_CELL),
+                              (float)BIBLE_GLYPH_CELL,
+                              (float)((cell + 1) * BIBLE_GLYPH_CELL),
+                              z,
+                              GS_SETREG_RGBAQ(0x80, 0x80, 0x80, GS_ALPHA_OPAQUE, 0x00));
 }
 
 static void draw_layer_stretched(const SPLASH_LAYER *layer, int z)
@@ -796,6 +825,11 @@ void SplashRenderRestoreBackgroundRect(int x, int y, int w, int h)
                               GS_SETREG_RGBAQ(0x80, 0x80, 0x80, GS_ALPHA_OPAQUE, 0x00));
 }
 
+void SplashRenderSetGlyphs(int on)
+{
+    g_bible_glyphs = on ? 1 : 0;
+}
+
 void SplashRenderSetHotkeysVisible(int visible)
 {
     g_hotkeys_visible = (visible != 0);
@@ -856,6 +890,11 @@ static void draw_static_layers(void)
     }
     if (g_hotkeys_visible)
         draw_layer(&g_layers[LAYER_HOTKEYS], g_hotkeys_x, g_hotkeys_y, FG_Z, GS_ALPHA_OPAQUE);
+    if (g_glyphs_visible) { // BIBLE: triangle, circle, cross, square, left to right under the logo
+        int k;
+        for (k = 0; k < 4; k++)
+            draw_layer_cell(&g_layers[LAYER_HOTKEYS], 1 + k, g_glyphs_x + k * (BIBLE_GLYPH_CELL + BIBLE_GLYPH_GAP), g_glyphs_y, FG_Z);
+    }
 }
 
 void SplashRenderBeginFrame(void)
@@ -944,6 +983,12 @@ int SplashRenderBegin(int logo_disp, int is_psx_desr)
         g_logo_y = center_y - ((int)logo->height / 2) + MODE2_LOGO_Y_FROM_CENTER;
         g_logo_visible = 1;
         g_hotkeys_visible = 0;
+        // BIBLE: the four face buttons under the PS2 logo (BIBLE_GLYPHS, on unless the config says 0)
+        if (g_bible_glyphs && upload_layer_texture(&g_layers[LAYER_HOTKEYS], SplashGetHotkeysImage(), GS_FILTER_NEAREST)) {
+            g_glyphs_x = center_x - (4 * BIBLE_GLYPH_CELL + 3 * BIBLE_GLYPH_GAP) / 2;
+            g_glyphs_y = g_logo_y + (int)logo->height + BIBLE_GLYPH_BELOW;
+            g_glyphs_visible = 1;
+        }
         init_logo_shimmer_state();
         SplashRenderBeginFrame();
         SplashRenderPresent();

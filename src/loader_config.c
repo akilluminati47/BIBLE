@@ -29,6 +29,7 @@ static const ConfigIntKey g_int_keys[] = {
     {"CDROM_DISABLE_GAMEID", offsetof(CONFIG, CDROM_DISABLE_GAMEID)},
     {"APP_GAMEID", offsetof(CONFIG, APP_GAMEID)},
     {"DISC_STOP", offsetof(CONFIG, DISC_STOP)},
+    {"BIBLE_GLYPHS", offsetof(CONFIG, BIBLE_GLYPHS)},
 };
 
 static int parse_scalar_int_key(const char *name, const char *value)
@@ -1193,6 +1194,7 @@ int LoaderBootstrapConfigAndSplash(int *splash_early_presented_out,
             int show_loading_overlay = (GLOBCFG.HOTKEY_DISPLAY != 1);
 
             SplashRenderSetVideoMode(GLOBCFG.VIDEO_MODE, native_video_mode);
+            SplashRenderSetGlyphs(GLOBCFG.BIBLE_GLYPHS);
             SplashRenderTextBody(GLOBCFG.LOGO_DISP, is_psx_desr);
             if (show_loading_overlay) {
                 SplashDrawLoadingStatus(GLOBCFG.LOGO_DISP);
@@ -1234,6 +1236,7 @@ int LoaderBootstrapConfigAndSplash(int *splash_early_presented_out,
             int show_loading_overlay = (GLOBCFG.HOTKEY_DISPLAY != 1);
 
             SplashRenderSetVideoMode(GLOBCFG.VIDEO_MODE, native_video_mode);
+            SplashRenderSetGlyphs(GLOBCFG.BIBLE_GLYPHS);
             SplashRenderTextBody(GLOBCFG.LOGO_DISP, is_psx_desr);
             SplashDrawCenteredStatusWithInfo(no_config_status,
                                              0xffff00,

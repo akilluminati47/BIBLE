@@ -10,6 +10,7 @@ void SplashRenderDrawTextPx(int x, int y, u32 color, const char *text);
 void SplashRenderDrawTextPxScaled(int x, int y, u32 color, const char *text, int scale);
 void SplashRenderDrawRoundedRect(int x, int y, int w, int h, int radius, u32 color, unsigned int opacity_percent);
 void SplashRenderRestoreBackgroundRect(int x, int y, int w, int h);
+void SplashRenderSetGlyphs(int on); // BIBLE: BIBLE_GLYPHS, before the splash begins
 void SplashRenderSetHotkeysVisible(int visible);
 void SplashRenderSetLogoShimmerCountdown(u64 remaining_ms, u64 total_ms);
 void SplashRenderPresent(void);

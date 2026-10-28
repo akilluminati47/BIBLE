@@ -415,6 +415,7 @@ int LoaderRunLaunchWorkflow(int splash_early_presented,
     ClearLaunchStatusConsoleInfoOverride();
 
     if (!SplashRenderIsActive())
+        SplashRenderSetGlyphs(GLOBCFG.BIBLE_GLYPHS);
         SplashRenderTextBody(GLOBCFG.LOGO_DISP, is_psx_desr);
 
     if (GLOBCFG.LOGO_DISP > 0 || SplashRenderIsActive()) {

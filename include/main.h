@@ -78,6 +78,7 @@ typedef struct
     int APP_GAMEID;
     int DISC_STOP;
     int VIDEO_MODE;
+    int BIBLE_GLYPHS; // BIBLE: the four face buttons in a row under the logo (1, the default), or the logo alone (0)
 } CONFIG;
 
 extern CONFIG GLOBCFG;
