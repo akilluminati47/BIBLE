@@ -127,7 +127,7 @@ jobs:
             ${{ env.ARTIFACT_DIR }}/**
 
       - name: Create prerelease
-        if: github.ref == 'refs/heads/main' && env.USE_RELEASE == '1'
+        if: github.ref == 'refs/heads/main' && env.USE_RELEASE == '1' && vars.BIBLE_RELEASES == '1' # BIBLE: no public build until the user says
         uses: mathieucarbou/marvinpinto-action-automatic-releases@latest
         with:
           repo_token: "${{ secrets.GITHUB_TOKEN }}"
