@@ -8,6 +8,7 @@
 
 #include "splash_assets.h"
 #include "splash_render.h"
+#include "splash_screen.h"
 
 #define FONT_W 5
 #define FONT_H 7
@@ -98,6 +99,7 @@ static int g_hotkeys_visible = 0;
 #define BIBLE_GLYPH_GAP 14  // between two buttons of a row
 #define BIBLE_GLYPH_ROW_GAP 8
 #define BIBLE_GLYPH_BELOW 28 // from the logo to the first row
+#define BIBLE_INFO_CLEAR 10  // BIBLE_INFO 1: from the clock and the info line to the logo and the rows
 enum {
     GLY_TRIANGLE = 0, GLY_CIRCLE, GLY_CROSS, GLY_SQUARE, GLY_UP, GLY_DOWN, GLY_LEFT, GLY_RIGHT,
     GLY_L1, GLY_L2, GLY_L3, GLY_R1, GLY_R2, GLY_R3, GLY_SELECT, GLY_START, GLY_COUNT
@@ -114,6 +116,7 @@ static int g_bible_glyphs = 1;
 static int g_glyphs_x = -1;
 static int g_glyphs_y = -1;
 static int g_glyphs_rows = 0; // the rows drawn: 0, 1 (the face buttons) or 4
+static int g_glyphs_covered = 0; // this frame put text or a box where the rows sit: the page shows the logo alone
 // BIBLE_COLOR: the sky's top, horizon and floor (0xRRGGBB) as RIPPS2's Storage page draws them at rest, the horizon
 // 290/480 of the way down. RIPPS2 writes its Color Theme's (or a Color Sweep's first colour's) into the config.
 #define BIBLE_SKY_HORIZON(h) ((h) * 290 / 480)
@@ -983,13 +986,36 @@ static void draw_static_layers(void)
     }
     if (g_hotkeys_visible)
         draw_layer(&g_layers[LAYER_HOTKEYS], g_hotkeys_x, g_hotkeys_y, FG_Z, GS_ALPHA_OPAQUE);
-    if (g_glyphs_rows > 0) { // BIBLE: the buttons under the logo, four to a row
-        int r, k;
-        for (r = 0; r < g_glyphs_rows; r++)
-            for (k = 0; k < 4; k++)
-                draw_glyph(&g_layers[LAYER_HOTKEYS], g_glyph_rows[r][k], g_glyphs_x + k * (BIBLE_GLYPH_CELL + BIBLE_GLYPH_GAP),
-                           g_glyphs_y + r * (BIBLE_GLYPH_CELL + BIBLE_GLYPH_ROW_GAP), FG_Z);
-    }
+}
+
+// BIBLE: the glyph rows' box, 4 buttons wide, g_glyphs_rows high
+static int glyphs_box_h(void)
+{
+    return g_glyphs_rows * BIBLE_GLYPH_CELL + (g_glyphs_rows - 1) * BIBLE_GLYPH_ROW_GAP;
+}
+
+// BIBLE: a page's text or box at x0..x1, y0..y1 over the glyph rows hides them for this frame (credits, the video
+// mode selector, prompts and status lines all write under the logo)
+static void glyphs_cover(int x0, int y0, int x1, int y1)
+{
+    if (g_glyphs_rows <= 0)
+        return;
+    if (x1 > g_glyphs_x && x0 < g_glyphs_x + 4 * BIBLE_GLYPH_CELL + 3 * BIBLE_GLYPH_GAP &&
+        y1 > g_glyphs_y && y0 < g_glyphs_y + glyphs_box_h())
+        g_glyphs_covered = 1;
+}
+
+// BIBLE: the buttons under the logo, four to a row
+static void draw_glyph_rows(void)
+{
+    int r, k;
+
+    if (g_glyphs_rows <= 0 || g_glyphs_covered)
+        return;
+    for (r = 0; r < g_glyphs_rows; r++)
+        for (k = 0; k < 4; k++)
+            draw_glyph(&g_layers[LAYER_HOTKEYS], g_glyph_rows[r][k], g_glyphs_x + k * (BIBLE_GLYPH_CELL + BIBLE_GLYPH_GAP),
+                       g_glyphs_y + r * (BIBLE_GLYPH_CELL + BIBLE_GLYPH_ROW_GAP), FG_Z);
 }
 
 void SplashRenderBeginFrame(void)
@@ -999,6 +1025,7 @@ void SplashRenderBeginFrame(void)
 
     gsKit_clear(g_gs, GS_SETREG_RGBAQ(0x00, 0x00, 0x00, 0x80, 0x00));
     draw_static_layers();
+    g_glyphs_covered = 0;
 }
 
 void SplashRenderPresent(void)
@@ -1006,6 +1033,7 @@ void SplashRenderPresent(void)
     if (g_gs == NULL)
         return;
 
+    draw_glyph_rows();
     gsKit_queue_exec(g_gs);
     gsKit_finish();
     gsKit_sync_flip(g_gs);
@@ -1077,6 +1105,12 @@ int SplashRenderBegin(int logo_disp, int is_psx_desr)
             rows = 0;
         if (rows > 0)
             block_h = BIBLE_GLYPH_BELOW + rows * BIBLE_GLYPH_CELL + (rows - 1) * BIBLE_GLYPH_ROW_GAP;
+        if (SplashRenderInfoOn()) {
+            int text_top = SplashInfoClockBottom(g_screen_h) + BIBLE_INFO_CLEAR;
+            int text_bottom = SplashInfoLineTop(g_screen_h) - BIBLE_INFO_CLEAR;
+
+            center_y = (text_top + text_bottom) / 2;
+        }
         g_logo_x = center_x - ((int)logo->width / 2) + MODE2_LOGO_X_FROM_CENTER;
         g_logo_y = center_y - ((int)logo->height + block_h) / 2 + MODE2_LOGO_Y_FROM_CENTER;
         g_logo_visible = 1;
@@ -1136,6 +1170,9 @@ void SplashRenderDrawTextPxScaled(int x, int y, u32 color, const char *text, int
     if (g_gs == NULL || text == NULL)
         return;
 
+    draw_scale = (scale > 0) ? scale : 1;
+    glyphs_cover(x, y, x + (int)strlen(text) * (FONT_W + 1) * draw_scale + GLYPH_SHADOW_OFFSET_X,
+                 y + FONT_H * draw_scale + GLYPH_SHADOW_OFFSET_Y);
     gs_color = color_to_gs(color);
     shadow_color = GS_SETREG_RGBAQ(0x00,
                                    0x00,
@@ -1222,6 +1259,7 @@ void SplashRenderDrawRoundedRect(int x,
     if (g_gs == NULL || w <= 0 || h <= 0)
         return;
 
+    glyphs_cover(x0, y0, x1, y1);
     if (x0 < 0)
         x0 = 0;
     if (y0 < 0)

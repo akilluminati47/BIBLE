@@ -23,6 +23,8 @@ void SplashRenderConsoleInfoLine(int logo_disp,
 void SplashRenderConsoleInfoCountdownOnly(const char *autoboot_countdown);
 void SplashRenderSetInfo(int on); // BIBLE: BIBLE_INFO, the countdown, clock and console details on the logo splash
 int SplashRenderInfoOn(void);
+int SplashInfoClockBottom(int screen_h); // BIBLE_INFO 1: the clock block's last line, from the top
+int SplashInfoLineTop(int screen_h);     // BIBLE_INFO 1: the console info line's top
 void SplashRenderConsoleInfoTemperatureOnly(const char *temp_celsius);
 
 #endif
