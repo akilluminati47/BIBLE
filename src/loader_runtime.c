@@ -224,7 +224,7 @@ int credits(void)
 // BIBLE: the launch keys page (L2 + R2 held at boot): every key's glyph with what it starts, in the splash's two
 // rows turned into two columns, over the dimmed logo, so the setup can always be read. START goes back.
 #define KEYS_PAGE_ROW_H 24
-#define KEYS_PAGE_COL_W 300
+#define KEYS_PAGE_COL_GAP 24 // between the two columns
 #define KEYS_PAGE_TEXT_X 28 // from the glyph's left to the text
 static const char *const g_keys_page_cols[2][8] = {
     {"TRIANGLE", "CIRCLE", "CROSS", "SQUARE", "L1", "R1", "START", "SELECT"},
@@ -289,8 +289,9 @@ static void DrawKeysPageFrame(void)
     int screen_w = SplashRenderGetScreenWidth();
     int screen_h = SplashRenderGetScreenHeight();
     int glyph = SplashRenderGlyphSize();
-    int max_chars = (KEYS_PAGE_COL_W - KEYS_PAGE_TEXT_X - 8) / 6;
-    int box_w = 2 * KEYS_PAGE_COL_W + 2 * PAGE_PAD_X;
+    int max_chars = (screen_w - 16 - 2 * PAGE_PAD_X - KEYS_PAGE_COL_GAP) / 2 / 6 - KEYS_PAGE_TEXT_X / 6;
+    int col_w[2] = {0, 0};
+    int box_w;
     int box_h = 7 + 12 + 7 + 14 + 8 * KEYS_PAGE_ROW_H + 8 + 7;
     int cx = PageCenterX(screen_w);
     int box_x;
@@ -298,13 +299,32 @@ static void DrawKeysPageFrame(void)
     int y;
     int c;
     int r;
-    char text[160];
+    char auto_text[160];
+    char text[2][8][160];
 
+    // each column as wide as its longest entry, so a short setup keeps a small box over the logo
+    for (c = 0; c < 2; c++)
+        for (r = 0; r < 8; r++) {
+            int w;
+
+            KeyLaunchText(KeyIndexByName(g_keys_page_cols[c][r]), text[c][r], sizeof(text[c][r]), max_chars);
+            w = KEYS_PAGE_TEXT_X + (int)strlen(text[c][r]) * 6;
+            if (w > col_w[c])
+                col_w[c] = w;
+        }
+    box_w = col_w[0] + KEYS_PAGE_COL_GAP + col_w[1] + 2 * PAGE_PAD_X;
+    KeyLaunchText(0, auto_text, sizeof(auto_text), (screen_w - 16 - 2 * PAGE_PAD_X) / 6 - 6);
+    if (box_w < (6 + (int)strlen(auto_text)) * 6 + 2 * PAGE_PAD_X)
+        box_w = (6 + (int)strlen(auto_text)) * 6 + 2 * PAGE_PAD_X;
+    if (box_w < (int)strlen(footer) * 6 + 2 * PAGE_PAD_X)
+        box_w = (int)strlen(footer) * 6 + 2 * PAGE_PAD_X;
     if (box_w > screen_w - 16)
         box_w = screen_w - 16;
     box_x = cx - box_w / 2;
     if (box_x < 8)
         box_x = 8;
+    if (box_x + box_w > screen_w - 8)
+        box_x = screen_w - 8 - box_w;
     box_y = PageCenterY(screen_h) - (box_h + 2 * PAGE_PAD_Y) / 2;
     if (box_y < 8)
         box_y = 8;
@@ -313,28 +333,26 @@ static void DrawKeysPageFrame(void)
     SplashRenderBeginFrame();
     SplashRenderPageBox(box_x, box_y, box_w, box_h + 2 * PAGE_PAD_Y);
     y = box_y + PAGE_PAD_Y;
-    SplashRenderDrawTextPxScaled(cx - (int)strlen(title) * 3, y, 0x00ffff, title, 1);
+    SplashRenderDrawTextPxScaled(box_x + box_w / 2 - (int)strlen(title) * 3, y, 0x00ffff, title, 1);
     y += 7 + 12;
-    KeyLaunchText(0, text, sizeof(text), (box_w - 2 * PAGE_PAD_X) / 6 - 6);
     SplashRenderDrawTextPxScaled(box_x + PAGE_PAD_X, y, 0xffffff, "AUTO:", 1);
-    SplashRenderDrawTextPxScaled(box_x + PAGE_PAD_X + 36, y, 0xc0c0c0, text, 1);
+    SplashRenderDrawTextPxScaled(box_x + PAGE_PAD_X + 36, y, 0xc0c0c0, auto_text, 1);
     y += 7 + 14;
     for (c = 0; c < 2; c++) {
-        int col_x = box_x + PAGE_PAD_X + c * KEYS_PAGE_COL_W;
+        int col_x = box_x + PAGE_PAD_X + (c ? col_w[0] + KEYS_PAGE_COL_GAP : 0);
 
         for (r = 0; r < 8; r++) {
             const char *key = g_keys_page_cols[c][r];
             int row_y = y + r * KEYS_PAGE_ROW_H;
 
-            KeyLaunchText(KeyIndexByName(key), text, sizeof(text), max_chars);
             if (!SplashRenderDrawGlyph(SplashRenderGlyphForKey(key), col_x, row_y))
                 SplashRenderDrawTextPxScaled(col_x, row_y + (glyph - 7) / 2, 0xffffff, key, 1);
             SplashRenderDrawTextPxScaled(col_x + KEYS_PAGE_TEXT_X, row_y + (glyph - 7) / 2,
-                                         strcmp(text, "-") ? 0xffffff : 0x808080, text, 1);
+                                         strcmp(text[c][r], "-") ? 0xffffff : 0x808080, text[c][r], 1);
         }
     }
     y += 8 * KEYS_PAGE_ROW_H + 8;
-    SplashRenderDrawTextPxScaled(cx - (int)strlen(footer) * 3, y, 0x15d670, footer, 1);
+    SplashRenderDrawTextPxScaled(box_x + box_w / 2 - (int)strlen(footer) * 3, y, 0x15d670, footer, 1);
     SplashRenderPresent();
 }
 
