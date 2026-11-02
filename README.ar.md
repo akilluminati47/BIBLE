@@ -115,13 +115,19 @@ BIBLE هو محمّل الإقلاع الذي يجهّزه RIPPS2: فرع من P
 هذا فرع من PS2BBL الذي صنعه [El Isra](https://github.com/israpps/PlayStation2-Basic-BootLoader/)
 
 
+<a id="documentation"></a>
+
 ## التوثيق
 
 مستضاف على [github pages](https://israpps.github.io/PlayStation2-Basic-BootLoader/) ولكن مع الإضافات أدناه:
 
+<a id="config-and-arguments"></a>
+
 ## الإعداد والوسائط
 
 عدّل ملف الإعداد حسب الحاجة. يُنصح بـ [R3Configurator](https://github.com/saildot4k/R3CONFIGURATOR) لتعديل ملف الإعداد. المسارات مضبوطة مسبقًا لتتوافق مع التنزيلات من [PS2 Homebrew Store](https://ps2homebrewstore.com). لذا لن تحتاج إلا إلى تعديل اختيار Auto، والأفضل ضبط وسائط NHDDL بحسب الجهاز الذي تحمّل منه ملفات ISO.
+
+<a id="config-path-search-order"></a>
 
 ### ترتيب البحث عن ملف الإعداد
 
@@ -142,10 +148,14 @@ BIBLE هو محمّل الإقلاع الذي يجهّزه RIPPS2: فرع من P
    - `cdrom0:/PS2BBL/CONFIG.INI`
    - البديل على بطاقة الذاكرة كما في البند 3 أعلاه.
 
+<a id="device-path-prefixes"></a>
+
 ### بادئات مسارات الأجهزة
 يدعم PS2BBL بادئات مسارات التشغيل/الإعداد هذه:
 - `mc0:/`, `mc1:/`, `mc?:/`
 - `usb:/` (المفضّلة)، و`mass:/` (القديمة)
+
+<a id="build-specific"></a>
 
 #### بحسب البنية:  
 - `mmce0:/`، `mmce1:/`، `mmce?:/` __بنيات MMCE__
@@ -167,6 +177,8 @@ BIBLE هو محمّل الإقلاع الذي يجهّزه RIPPS2: فرع من P
       NAME_SQUARE = POPSLOADER
       ```
 
+<a id="custom-splash-logo-from-cwd"></a>
+
 #### شعار بداية مخصّص من CWD
 إذا وُجد ملف شعار مخصّص (LOGO.BIN) في CWD (مجلد العمل الحالي)، فإنه يحل محل شعار PS2BBLE/PSXBBLE المدمج.
 
@@ -180,9 +192,13 @@ BIBLE هو محمّل الإقلاع الذي يجهّزه RIPPS2: فرع من P
 
   - ضع `LOGO.BIN` الذي أنشأته بجوار PS2BBL Extended. يجب أن يكون `mc?:/BOOT/` إذا كنت تستخدم التنزيلات من [PS2 Homebrew Store](https://ps2store.com)
 
+<a id="retrogem-visual-game-id"></a>
+
 ### معرّف اللعبة المرئي من Retrogem
 - يفعّل `APP_GAMEID = 1` معرّف اللعبة المرئي للتطبيقات/homebrew، حتى 11 حرفًا مأخوذة من اسم الملف أو قرص PS1/2
 - يعطّل `CDROM_DISABLE_GAMEID = 1` معرّف اللعبة المرئي للأقراص المشغَّلة عبر `cdrom`.
+
+<a id="disc-spin-control"></a>
 
 ### التحكم في دوران القرص
 - مفتاح/قيمة عام: `DISC_STOP = 0/1`
@@ -190,8 +206,12 @@ BIBLE هو محمّل الإقلاع الذي يجهّزه RIPPS2: فرع من P
 - يحافظ `DISC_STOP = 0` (أو حذفه) على السلوك الافتراضي.
 - يمكن إضافة `-disc_stop` لكل مدخل تشغيل لإيقاف القرص بعد العثور على ملف ELF الهدف.
 
+<a id="video-mode"></a>
+
 ### وضع الفيديو
 - `VIDEO_MODE = AUTO, NTSC, PAL, 480P` يستخدم الوضع الافتراضي لـ PS2 أو يفرض أحد الأوضاع الثلاثة الأخرى.
+
+<a id="emergency-video-mode-selector"></a>
 
 #### محدِّد وضع الفيديو للطوارئ
 - يُفتح بالضغط على `TRIANGLE + CROSS` أثناء الإقلاع
@@ -200,6 +220,8 @@ BIBLE هو محمّل الإقلاع الذي يجهّزه RIPPS2: فرع من P
   - `LEFT/RIGHT` للتنقل بين الأوضاع: `AUTO`، `NTSC`، `PAL`، `480P`
   - `SELECT` يحفظ الوضع المحدد في ملف الإعداد النشط
   - `START` يخرج من المحدِّد ويتابع إلى عرض المفاتيح
+
+<a id="cdrom-launch-args"></a>
 
 ### وسائط تشغيل CDROM
 بالنسبة لـ `LK_*_E* = cdrom`، الوسائط المدعومة هي:
@@ -210,17 +232,23 @@ BIBLE هو محمّل الإقلاع الذي يجهّزه RIPPS2: فرع من P
 - `-ps1vneg`
 - `-gsm=<v[:c]>`
 
+<a id="ps2logo-arguments-ps2-discs-only"></a>
+
 #### وسائط PS2LOGO (لأقراص PS2 فقط)
 - استخدم `cdrom` مسارًا لمدخل التشغيل.
 - أضف `-nologo` إلى وسائط المدخل لإقلاع أقراص PS2 مباشرة (تخطّي `rom0:PS2LOGO`).
 - من دون `-nologo`، يشغّل PS2BBL القرص عبر PS2LOGO ويرقّعه ليستخدم دائمًا منطقة القرص ويتجاوز فحص المجموع الاختباري للشعار.
 - DECKARD IE 75K وما بعده: يُطبَّق XPARAM.IRX تلقائيًا عند الحاجة للتشغيل من دون شعار.
 
+<a id="ps1-disc-arguments-per-launch"></a>
+
 #### وسائط أقراص PS1 (لكل تشغيل)
 تنطبق هذه على كل مدخل تشغيل `cdrom`، لا بشكل عام.
 - يفعّل `-ps1fast` سرعة القرص السريعة لـ PS1.
 - يفعّل `-ps1smooth` تنعيم الخامات.
 - يشغّل `-ps1vneg` برنامج PS1DRV عبر PS1VModeNegator. مفيد في الأجهزة التي يختلف فيها وضع الجهاز عن وضع القرص (مثل بعض حالات MechaPwn/الشرائح المعدّلة).
+
+<a id="app-arguments"></a>
 
 ### وسائط التطبيقات
 استخدم أسطر `ARG_<BUTTON>_E? =` لتمرير الوسائط إلى ملف ELF (انظر أمثلة INI).
@@ -257,6 +285,8 @@ ARG_R1_E1 = -video=480p
 ARG_R1_E1 = -mode=mmce
 ARG_R1_E1 = -mode=ata
 ```
+
+<a id="argument-precedence-and-order"></a>
 
 #### أسبقية الوسائط وترتيبها
 1. يحلّل PS2BBL ويستهلك فقط وسائط التحكم الخاصة بالمحمّل في نهاية `ARG_*`: `-appid`، `-titleid=`، `-dev9=`، `-patinfo`، `-disc_stop`، `-gsm=`.
@@ -296,13 +326,19 @@ LK_TRIANGLE_E1 = mc0:/APP_WLE-ISR/WLE-ISR.ELF
 ARG_TRIANGLE_E1 = -gsm=1080ix2
 ```
 
+<a id="deprecatedremoved"></a>
+
 ## مهمل/محذوف
 - ~~`RUNKELF`~~ صار PS2BBLE يتولى تشغيل elf/kelf داخليًا دون أن يحتاج المستخدم إلى تعريف إجراء تشغيل kelf.
 
 
+<a id="known-bugsissues"></a>
+
 ## الأخطاء/المشكلات المعروفة
 
 أخبرني أنت ;)
+
+<a id="credits--thanks"></a>
 
 ## الشكر والتقدير
 

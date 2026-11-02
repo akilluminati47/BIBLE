@@ -113,13 +113,19 @@ RIPPS2, BIBLE’ı imzalı önyükleme dosyaları olarak taşıyacak ve bugün t
 Bu, [El Isra](https://github.com/israpps/PlayStation2-Basic-BootLoader/) tarafından yapılan PS2BBL’ın bir fork’udur
 
 
+<a id="documentation"></a>
+
 ## Belgeler
 
 [github pages](https://israpps.github.io/PlayStation2-Basic-BootLoader/) üzerinde barındırılıyor, ancak aşağıdaki eklemelerle:
 
+<a id="config-and-arguments"></a>
+
 ## Yapılandırma ve argümanlar
 
 Yapılandırma dosyasını gerektiği gibi düzenleyin. Düzenlemek için [R3Configurator](https://github.com/saildot4k/R3CONFIGURATOR) önerilir. Yollar zaten [PS2 Homebrew Store](https://ps2homebrewstore.com) indirmeleriyle uyumlu olacak şekilde ayarlı. Yani yalnızca Auto seçiminizi düzenlemeniz ve en iyisi ISO yüklediğiniz aygıta göre NHDDL argümanlarını ayarlamanız yeterli olmalı.
+
+<a id="config-path-search-order"></a>
 
 ### Yapılandırma arama sırası
 
@@ -140,10 +146,14 @@ Yapılandırma araması artık açılışta gereksiz sürücüler yüklenmesin d
    - `cdrom0:/PS2BBL/CONFIG.INI`
    - Yukarıdaki 3. maddede tanımlandığı gibi hafıza kartı yedeği.
 
+<a id="device-path-prefixes"></a>
+
 ### Aygıt yolu önekleri
 PS2BBL şu başlatma/yapılandırma yolu öneklerini destekler:
 - `mc0:/`, `mc1:/`, `mc?:/`
 - `usb:/` (tercih edilen) ve `mass:/` (eski)
+
+<a id="build-specific"></a>
 
 #### Derlemeye özel:  
 - `mmce0:/`, `mmce1:/`, `mmce?:/` __MMCE derlemeleri__
@@ -165,6 +175,8 @@ Tuş adlarını göstermek için `LOGO_DISPLAY = 3` kullanın. Adlar `NAME_<BUTT
       NAME_SQUARE = POPSLOADER
       ```
 
+<a id="custom-splash-logo-from-cwd"></a>
+
 #### CWD’den özel açılış logosu
 CWD’de (geçerli çalışma dizini) özel bir logo dosyası (LOGO.BIN) bulunursa, yerleşik PS2BBLE/PSXBBLE logosunun yerini alır.
 
@@ -178,9 +190,13 @@ Bir PNG’yi beklenen ham dosyaya dönüştürün:
 
   - Oluşturulan `LOGO.BIN` dosyasını PS2BBL Extended’ın yanına koyun. [PS2 Homebrew Store](https://ps2store.com) indirmelerini kullanıyorsanız bu `mc?:/BOOT/` olmalı
 
+<a id="retrogem-visual-game-id"></a>
+
 ### Retrogem görsel oyun kimliği
 - `APP_GAMEID = 1`, dosya adından ya da PS1/2 diskinden alınan en fazla 11 karakterle uygulamalar/homebrew için görsel oyun kimliğini açar
 - `CDROM_DISABLE_GAMEID = 1`, `cdrom` ile başlatılan diskler için görsel oyun kimliğini kapatır.
+
+<a id="disc-spin-control"></a>
 
 ### Disk dönüş denetimi
 - Genel anahtar/değer: `DISC_STOP = 0/1`
@@ -188,8 +204,12 @@ Bir PNG’yi beklenen ham dosyaya dönüştürün:
 - `DISC_STOP = 0` (ya da yazılmazsa) varsayılan davranışı korur.
 - `-disc_stop`, hedef ELF bulunduktan sonra diski durdurmak için her başlatma girdisine eklenebilir.
 
+<a id="video-mode"></a>
+
 ### Video Modu
 - `VIDEO_MODE = AUTO, NTSC, PAL, 480P` PS2 varsayılanını kullanır ya da diğer 3 moddan birini zorlar.
+
+<a id="emergency-video-mode-selector"></a>
 
 #### Acil durum video modu seçicisi
 - Önyükleme sırasında `TRIANGLE + CROSS` ile açılır
@@ -198,6 +218,8 @@ Bir PNG’yi beklenen ham dosyaya dönüştürün:
   - `LEFT/RIGHT` modlar arasında geçiş yapar: `AUTO`, `NTSC`, `PAL`, `480P`
   - `SELECT` seçili modu etkin yapılandırma dosyasına kaydeder
   - `START` seçiciden çıkar ve tuş ekranına geçer
+
+<a id="cdrom-launch-args"></a>
 
 ### CDROM başlatma argümanları
 `LK_*_E* = cdrom` için desteklenen argümanlar:
@@ -208,17 +230,23 @@ Bir PNG’yi beklenen ham dosyaya dönüştürün:
 - `-ps1vneg`
 - `-gsm=<v[:c]>`
 
+<a id="ps2logo-arguments-ps2-discs-only"></a>
+
 #### PS2LOGO argümanları (yalnızca PS2 diskleri)
 - Başlatma girdisi yolu olarak `cdrom` kullanın.
 - PS2 disklerini doğrudan başlatmak için girdi argümanlarına `-nologo` ekleyin (`rom0:PS2LOGO` atlanır).
 - `-nologo` olmadan PS2BBL diski PS2LOGO üzerinden çalıştırır ve her zaman disk bölgesini kullanması ve logo sağlama toplamı denetimlerini atlaması için yamalar.
 - DECKARD IE 75K ve sonrası: logosuz başlatmalarda gerektiğinde XPARAM.IRX otomatik uygulanır.
 
+<a id="ps1-disc-arguments-per-launch"></a>
+
 #### PS1 disk argümanları (başlatma başına)
 Bunlar genel değil, her `cdrom` başlatma girdisi için ayrı ayrı geçerlidir.
 - `-ps1fast` hızlı PS1 disk hızını açar.
 - `-ps1smooth` doku yumuşatmayı açar.
 - `-ps1vneg` PS1DRV’yi PS1VModeNegator üzerinden çalıştırır. Konsol modu ile disk modunun farklı olduğu kurulumlarda işe yarar (örneğin bazı MechaPwn/modchip durumları).
+
+<a id="app-arguments"></a>
 
 ### Uygulama argümanları
 Bir ELF’e argüman geçmek için `ARG_<BUTTON>_E? =` satırlarını kullanın (INI örneklerine bakın).
@@ -255,6 +283,8 @@ ARG_R1_E1 = -video=480p
 ARG_R1_E1 = -mode=mmce
 ARG_R1_E1 = -mode=ata
 ```
+
+<a id="argument-precedence-and-order"></a>
 
 #### Argüman önceliği ve sırası
 1. PS2BBL, `ARG_*` içinden yalnızca sondaki yükleyici denetim argümanlarını ayrıştırır ve tüketir: `-appid`, `-titleid=`, `-dev9=`, `-patinfo`, `-disc_stop`, `-gsm=`.
@@ -294,13 +324,19 @@ LK_TRIANGLE_E1 = mc0:/APP_WLE-ISR/WLE-ISR.ELF
 ARG_TRIANGLE_E1 = -gsm=1080ix2
 ```
 
+<a id="deprecatedremoved"></a>
+
 ## Kullanımdan kaldırılan/Silinen
 - ~~`RUNKELF`~~ PS2BBLE artık elf/kelf başlatmayı kendi içinde hallediyor, kullanıcının bir kelf başlatma eylemi tanımlaması gerekmiyor.
 
 
+<a id="known-bugsissues"></a>
+
 ## Bilinen hatalar/sorunlar
 
 siz söyleyin ;)
+
+<a id="credits--thanks"></a>
 
 ## Emeği geçenler ve teşekkürler
 

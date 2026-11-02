@@ -113,13 +113,19 @@ RIPPS2 bude BIBLE nosit jako podepsané spouštěcí soubory a instalovat ho ze 
 Toto je fork PS2BBL od [El Isra](https://github.com/israpps/PlayStation2-Basic-BootLoader/)
 
 
+<a id="documentation"></a>
+
 ## Dokumentace
 
 Je na [github pages](https://israpps.github.io/PlayStation2-Basic-BootLoader/), ale s doplňky níže:
 
+<a id="config-and-arguments"></a>
+
 ## Konfigurace a argumenty
 
 Upravte konfigurační soubor podle potřeby. K úpravám se doporučuje [R3Configurator](https://github.com/saildot4k/R3CONFIGURATOR). Cesty jsou už nastavené tak, aby odpovídaly souborům staženým z [PS2 Homebrew Store](https://ps2homebrewstore.com). Měli byste tedy upravit jen svou volbu Auto a nejlépe nastavit argumenty pro NHDDL podle zařízení, ze kterého načítáte ISO.
+
+<a id="config-path-search-order"></a>
 
 ### Pořadí hledání konfigurace
 
@@ -140,10 +146,14 @@ Hledání konfigurace teď bere ohled na rodinu spouštění, aby se při startu
    - `cdrom0:/PS2BBL/CONFIG.INI`
    - Záloha na paměťové kartě jako v bodě 3 výše.
 
+<a id="device-path-prefixes"></a>
+
 ### Předpony cest zařízení
 PS2BBL podporuje tyto předpony spouštěcích a konfiguračních cest:
 - `mc0:/`, `mc1:/`, `mc?:/`
 - `usb:/` (preferovaná) a `mass:/` (stará)
+
+<a id="build-specific"></a>
 
 #### Podle sestavení:  
 - `mmce0:/`, `mmce1:/`, `mmce?:/` __sestavení MMCE__
@@ -165,6 +175,8 @@ Použijte `LOGO_DISPLAY = 3` pro zobrazení názvů kláves. Názvy určuje `NAM
       NAME_SQUARE = POPSLOADER
       ```
 
+<a id="custom-splash-logo-from-cwd"></a>
+
 #### Vlastní úvodní logo z CWD
 Pokud je v CWD (aktuálním pracovním adresáři) vlastní soubor loga (LOGO.BIN), nahradí vestavěné logo PS2BBLE/PSXBBLE.
 
@@ -178,9 +190,13 @@ Převeďte PNG na očekávaný surový soubor:
 
   - Vytvořený `LOGO.BIN` dejte vedle PS2BBL Extended. Mělo by to být `mc?:/BOOT/`, pokud používáte soubory z [PS2 Homebrew Store](https://ps2store.com)
 
+<a id="retrogem-visual-game-id"></a>
+
 ### Vizuální ID hry od Retrogem
 - `APP_GAMEID = 1` zapne vizuální ID hry pro aplikace/homebrew, až 11 znaků z názvu souboru nebo z disku PS1/2
 - `CDROM_DISABLE_GAMEID = 1` vypne vizuální ID hry pro disky spuštěné přes `cdrom`.
+
+<a id="disc-spin-control"></a>
 
 ### Ovládání otáčení disku
 - Globální klíč/hodnota: `DISC_STOP = 0/1`
@@ -188,8 +204,12 @@ Převeďte PNG na očekávaný surový soubor:
 - `DISC_STOP = 0` (nebo vynecháno) ponechá výchozí chování.
 - `-disc_stop` lze přidat ke každé spouštěcí položce, aby se disk zastavil po nalezení cílového ELF.
 
+<a id="video-mode"></a>
+
 ### Režim videa
 - `VIDEO_MODE = AUTO, NTSC, PAL, 480P` Použije výchozí režim PS2 nebo vynutí jeden z ostatních 3.
+
+<a id="emergency-video-mode-selector"></a>
 
 #### Nouzový výběr režimu videa
 - Otevře se pomocí `TRIANGLE + CROSS` během startu
@@ -198,6 +218,8 @@ Převeďte PNG na očekávaný surový soubor:
   - `LEFT/RIGHT` přepínají režimy: `AUTO`, `NTSC`, `PAL`, `480P`
   - `SELECT` uloží vybraný režim do aktivního konfiguračního souboru
   - `START` ukončí výběr a pokračuje na zobrazení kláves
+
+<a id="cdrom-launch-args"></a>
 
 ### Spouštěcí argumenty CDROM
 Pro `LK_*_E* = cdrom` jsou podporovány tyto argumenty:
@@ -208,17 +230,23 @@ Pro `LK_*_E* = cdrom` jsou podporovány tyto argumenty:
 - `-ps1vneg`
 - `-gsm=<v[:c]>`
 
+<a id="ps2logo-arguments-ps2-discs-only"></a>
+
 #### Argumenty PS2LOGO (jen disky PS2)
 - Jako cestu spouštěcí položky použijte `cdrom`.
 - Přidejte `-nologo` do argumentů položky, aby se disky PS2 spouštěly přímo (bez `rom0:PS2LOGO`).
 - Bez `-nologo` PS2BBL spustí disk přes PS2LOGO a upraví ho tak, aby vždy použil region disku a přeskočil kontrolu kontrolního součtu loga.
 - DECKARD IE 75K a novější: XPARAM.IRX se při spouštění bez loga použije automaticky, když je potřeba.
 
+<a id="ps1-disc-arguments-per-launch"></a>
+
 #### Argumenty disků PS1 (pro každé spuštění)
 Platí pro každou spouštěcí položku `cdrom`, ne globálně.
 - `-ps1fast` zapne rychlou rychlost disku PS1.
 - `-ps1smooth` zapne vyhlazování textur.
 - `-ps1vneg` spustí PS1DRV přes PS1VModeNegator. Užitečné tam, kde se režim konzole a režim disku liší (například některé případy MechaPwn/modčipů).
+
+<a id="app-arguments"></a>
 
 ### Argumenty aplikací
 Řádky `ARG_<BUTTON>_E? =` předávají argumenty do ELF (viz příklady INI).
@@ -255,6 +283,8 @@ ARG_R1_E1 = -video=480p
 ARG_R1_E1 = -mode=mmce
 ARG_R1_E1 = -mode=ata
 ```
+
+<a id="argument-precedence-and-order"></a>
 
 #### Přednost a pořadí argumentů
 1. PS2BBL zpracuje a spotřebuje jen koncové řídicí argumenty zavaděče z `ARG_*`: `-appid`, `-titleid=`, `-dev9=`, `-patinfo`, `-disc_stop`, `-gsm=`.
@@ -294,13 +324,19 @@ LK_TRIANGLE_E1 = mc0:/APP_WLE-ISR/WLE-ISR.ELF
 ARG_TRIANGLE_E1 = -gsm=1080ix2
 ```
 
+<a id="deprecatedremoved"></a>
+
 ## Zastaralé/Odstraněné
 - ~~`RUNKELF`~~ PS2BBLE teď spouští elf/kelf interně, aniž by uživatel musel definovat spouštěcí akci pro kelf.
 
 
+<a id="known-bugsissues"></a>
+
 ## Známé chyby/problémy
 
 to mi řekněte vy ;)
+
+<a id="credits--thanks"></a>
 
 ## Poděkování
 

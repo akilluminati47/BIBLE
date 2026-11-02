@@ -113,13 +113,19 @@ RIPPS2 将以签名启动文件的形式附带 BIBLE，并从其 Settings（Boot
 这是 [El Isra](https://github.com/israpps/PlayStation2-Basic-BootLoader/) 的 PS2BBL 的分支
 
 
+<a id="documentation"></a>
+
 ## 文档
 
 文档托管在 [github pages](https://israpps.github.io/PlayStation2-Basic-BootLoader/)，但有以下补充：
 
+<a id="config-and-arguments"></a>
+
 ## 配置与参数
 
 按需编辑配置文件。推荐使用 [R3Configurator](https://github.com/saildot4k/R3CONFIGURATOR) 编辑配置文件。路径已预先设置好，与 [PS2 Homebrew Store](https://ps2homebrewstore.com) 的下载相匹配。因此你通常只需编辑 Auto 选项，最好再根据加载 ISO 的设备设置 NHDDL 的参数。
+
+<a id="config-path-search-order"></a>
 
 ### 配置文件搜索顺序
 
@@ -140,10 +146,14 @@ RIPPS2 将以签名启动文件的形式附带 BIBLE，并从其 Settings（Boot
    - `cdrom0:/PS2BBL/CONFIG.INI`
    - 按上面第 3 点的记忆卡备选。
 
+<a id="device-path-prefixes"></a>
+
 ### 设备路径前缀
 PS2BBL 支持以下启动/配置路径前缀：
 - `mc0:/`, `mc1:/`, `mc?:/`
 - `usb:/`（首选）和 `mass:/`（旧式）
+
+<a id="build-specific"></a>
 
 #### 按构建区分：  
 - `mmce0:/`、`mmce1:/`、`mmce?:/` __MMCE 构建__
@@ -165,6 +175,8 @@ PS2BBL 支持以下启动/配置路径前缀：
       NAME_SQUARE = POPSLOADER
       ```
 
+<a id="custom-splash-logo-from-cwd"></a>
+
 #### 来自 CWD 的自定义启动标志
 如果在 CWD（当前工作目录）中找到自定义标志文件（LOGO.BIN），它会替换内置的 PS2BBLE/PSXBBLE 标志。
 
@@ -178,9 +190,13 @@ PS2BBL 支持以下启动/配置路径前缀：
 
   - 把生成的 `LOGO.BIN` 放在 PS2BBL Extended 旁边。如果你使用 [PS2 Homebrew Store](https://ps2store.com) 的下载，应为 `mc?:/BOOT/`
 
+<a id="retrogem-visual-game-id"></a>
+
 ### Retrogem 可视游戏 ID
 - `APP_GAMEID = 1` 为应用/homebrew 启用可视游戏 ID，最多 11 个字符，取自文件名或 PS1/2 光盘
 - `CDROM_DISABLE_GAMEID = 1` 为通过 `cdrom` 启动的光盘禁用可视游戏 ID。
+
+<a id="disc-spin-control"></a>
 
 ### 光盘转动控制
 - 全局键/值：`DISC_STOP = 0/1`
@@ -188,8 +204,12 @@ PS2BBL 支持以下启动/配置路径前缀：
 - `DISC_STOP = 0`（或省略）保持默认行为。
 - 可在每个启动条目中加入 `-disc_stop`，在找到目标 ELF 后停止光盘。
 
+<a id="video-mode"></a>
+
 ### 视频模式
 - `VIDEO_MODE = AUTO, NTSC, PAL, 480P` 使用 PS2 默认模式或强制使用另外 3 种模式之一。
+
+<a id="emergency-video-mode-selector"></a>
 
 #### 应急视频模式选择器
 - 启动时按 `TRIANGLE + CROSS` 进入
@@ -198,6 +218,8 @@ PS2BBL 支持以下启动/配置路径前缀：
   - `LEFT/RIGHT` 切换模式：`AUTO`、`NTSC`、`PAL`、`480P`
   - `SELECT` 将所选模式保存到当前配置文件
   - `START` 退出选择器并继续显示按键
+
+<a id="cdrom-launch-args"></a>
 
 ### CDROM 启动参数
 对于 `LK_*_E* = cdrom`，支持的参数有：
@@ -208,17 +230,23 @@ PS2BBL 支持以下启动/配置路径前缀：
 - `-ps1vneg`
 - `-gsm=<v[:c]>`
 
+<a id="ps2logo-arguments-ps2-discs-only"></a>
+
 #### PS2LOGO 参数（仅 PS2 光盘）
 - 使用 `cdrom` 作为启动条目路径。
 - 在条目参数中加入 `-nologo` 可直接启动 PS2 光盘（跳过 `rom0:PS2LOGO`）。
 - 不加 `-nologo` 时，PS2BBL 通过 PS2LOGO 运行光盘，并打补丁使其始终使用光盘区域、绕过标志校验和检查。
 - DECKARD IE 75K 及以后：无标志启动需要时会自动应用 XPARAM.IRX。
 
+<a id="ps1-disc-arguments-per-launch"></a>
+
 #### PS1 光盘参数（每次启动）
 这些参数作用于每个 `cdrom` 启动条目，而不是全局。
 - `-ps1fast` 启用 PS1 光盘快速读取。
 - `-ps1smooth` 启用纹理平滑。
 - `-ps1vneg` 通过 PS1VModeNegator 运行 PS1DRV。在主机模式和光盘模式不同的环境中很有用（例如某些 MechaPwn/改机芯片的情况）。
+
+<a id="app-arguments"></a>
 
 ### 应用参数
 使用 `ARG_<BUTTON>_E? =` 行向 ELF 传递参数（见 INI 示例）。
@@ -255,6 +283,8 @@ ARG_R1_E1 = -video=480p
 ARG_R1_E1 = -mode=mmce
 ARG_R1_E1 = -mode=ata
 ```
+
+<a id="argument-precedence-and-order"></a>
 
 #### 参数优先级与顺序
 1. PS2BBL 只解析并消耗 `ARG_*` 末尾的引导程序控制参数：`-appid`、`-titleid=`、`-dev9=`、`-patinfo`、`-disc_stop`、`-gsm=`。
@@ -294,13 +324,19 @@ LK_TRIANGLE_E1 = mc0:/APP_WLE-ISR/WLE-ISR.ELF
 ARG_TRIANGLE_E1 = -gsm=1080ix2
 ```
 
+<a id="deprecatedremoved"></a>
+
 ## 已弃用/已移除
 - ~~`RUNKELF`~~ PS2BBLE 现在会在内部处理 elf/kelf 的启动，用户无需定义 kelf 启动操作。
 
 
+<a id="known-bugsissues"></a>
+
 ## 已知错误/问题
 
 你来告诉我 ;)
+
+<a id="credits--thanks"></a>
 
 ## 致谢
 

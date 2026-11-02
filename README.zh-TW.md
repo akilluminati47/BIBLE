@@ -113,13 +113,19 @@ RIPPS2 將以簽署過的開機檔案附帶 BIBLE，並從其 Settings（Boot Lo
 這是 [El Isra](https://github.com/israpps/PlayStation2-Basic-BootLoader/) 的 PS2BBL 的分支
 
 
+<a id="documentation"></a>
+
 ## 文件
 
 文件放在 [github pages](https://israpps.github.io/PlayStation2-Basic-BootLoader/)，但有以下補充：
 
+<a id="config-and-arguments"></a>
+
 ## 設定與參數
 
 依需要編輯設定檔。建議使用 [R3Configurator](https://github.com/saildot4k/R3CONFIGURATOR) 編輯設定檔。路徑已預先設好，與 [PS2 Homebrew Store](https://ps2homebrewstore.com) 的下載相符。所以你通常只需編輯 Auto 選項，最好再依載入 ISO 的裝置設定 NHDDL 的參數。
+
+<a id="config-path-search-order"></a>
 
 ### 設定檔搜尋順序
 
@@ -140,10 +146,14 @@ RIPPS2 將以簽署過的開機檔案附帶 BIBLE，並從其 Settings（Boot Lo
    - `cdrom0:/PS2BBL/CONFIG.INI`
    - 依上面第 3 點的記憶卡備援。
 
+<a id="device-path-prefixes"></a>
+
 ### 裝置路徑前綴
 PS2BBL 支援下列啟動/設定路徑前綴：
 - `mc0:/`, `mc1:/`, `mc?:/`
 - `usb:/`（建議）與 `mass:/`（舊式）
+
+<a id="build-specific"></a>
 
 #### 依組建而定：  
 - `mmce0:/`、`mmce1:/`、`mmce?:/` __MMCE 組建__
@@ -165,6 +175,8 @@ PS2BBL 支援下列啟動/設定路徑前綴：
       NAME_SQUARE = POPSLOADER
       ```
 
+<a id="custom-splash-logo-from-cwd"></a>
+
 #### 來自 CWD 的自訂開機標誌
 如果在 CWD（目前的工作目錄）中找到自訂標誌檔（LOGO.BIN），它會取代內建的 PS2BBLE/PSXBBLE 標誌。
 
@@ -178,9 +190,13 @@ PS2BBL 支援下列啟動/設定路徑前綴：
 
   - 把產生的 `LOGO.BIN` 放在 PS2BBL Extended 旁邊。如果你使用 [PS2 Homebrew Store](https://ps2store.com) 的下載，應為 `mc?:/BOOT/`
 
+<a id="retrogem-visual-game-id"></a>
+
 ### Retrogem 視覺遊戲 ID
 - `APP_GAMEID = 1` 為應用程式/homebrew 啟用視覺遊戲 ID，最多 11 個字元，取自檔名或 PS1/2 光碟
 - `CDROM_DISABLE_GAMEID = 1` 為透過 `cdrom` 啟動的光碟停用視覺遊戲 ID。
+
+<a id="disc-spin-control"></a>
 
 ### 光碟轉動控制
 - 全域鍵/值：`DISC_STOP = 0/1`
@@ -188,8 +204,12 @@ PS2BBL 支援下列啟動/設定路徑前綴：
 - `DISC_STOP = 0`（或省略）維持預設行為。
 - 可在每個啟動項目加上 `-disc_stop`，在找到目標 ELF 後停止光碟。
 
+<a id="video-mode"></a>
+
 ### 視訊模式
 - `VIDEO_MODE = AUTO, NTSC, PAL, 480P` 使用 PS2 預設模式，或強制使用另外 3 種模式之一。
+
+<a id="emergency-video-mode-selector"></a>
 
 #### 緊急視訊模式選擇器
 - 開機時按 `TRIANGLE + CROSS` 進入
@@ -198,6 +218,8 @@ PS2BBL 支援下列啟動/設定路徑前綴：
   - `LEFT/RIGHT` 切換模式：`AUTO`、`NTSC`、`PAL`、`480P`
   - `SELECT` 將選取的模式存入目前的設定檔
   - `START` 離開選擇器並繼續顯示按鍵
+
+<a id="cdrom-launch-args"></a>
 
 ### CDROM 啟動參數
 對 `LK_*_E* = cdrom`，支援的參數有：
@@ -208,17 +230,23 @@ PS2BBL 支援下列啟動/設定路徑前綴：
 - `-ps1vneg`
 - `-gsm=<v[:c]>`
 
+<a id="ps2logo-arguments-ps2-discs-only"></a>
+
 #### PS2LOGO 參數（僅 PS2 光碟）
 - 使用 `cdrom` 作為啟動項目路徑。
 - 在項目參數加上 `-nologo` 可直接啟動 PS2 光碟（略過 `rom0:PS2LOGO`）。
 - 不加 `-nologo` 時，PS2BBL 透過 PS2LOGO 執行光碟，並修補它一律使用光碟區域、略過標誌檢查碼檢查。
 - DECKARD IE 75K 及之後：無標誌啟動需要時會自動套用 XPARAM.IRX。
 
+<a id="ps1-disc-arguments-per-launch"></a>
+
 #### PS1 光碟參數（每次啟動）
 這些參數作用於每個 `cdrom` 啟動項目，而非全域。
 - `-ps1fast` 啟用 PS1 光碟快速讀取。
 - `-ps1smooth` 啟用貼圖平滑。
 - `-ps1vneg` 透過 PS1VModeNegator 執行 PS1DRV。在主機模式與光碟模式不同的環境中很有用（例如某些 MechaPwn/改機晶片的情況）。
+
+<a id="app-arguments"></a>
 
 ### 應用程式參數
 使用 `ARG_<BUTTON>_E? =` 行向 ELF 傳遞參數（見 INI 範例）。
@@ -255,6 +283,8 @@ ARG_R1_E1 = -video=480p
 ARG_R1_E1 = -mode=mmce
 ARG_R1_E1 = -mode=ata
 ```
+
+<a id="argument-precedence-and-order"></a>
 
 #### 參數優先順序與次序
 1. PS2BBL 只解析並消耗 `ARG_*` 末端的載入程式控制參數：`-appid`、`-titleid=`、`-dev9=`、`-patinfo`、`-disc_stop`、`-gsm=`。
@@ -294,13 +324,19 @@ LK_TRIANGLE_E1 = mc0:/APP_WLE-ISR/WLE-ISR.ELF
 ARG_TRIANGLE_E1 = -gsm=1080ix2
 ```
 
+<a id="deprecatedremoved"></a>
+
 ## 已淘汰/已移除
 - ~~`RUNKELF`~~ PS2BBLE 現在會在內部處理 elf/kelf 的啟動，使用者不必定義 kelf 啟動動作。
 
 
+<a id="known-bugsissues"></a>
+
 ## 已知錯誤/問題
 
 你來告訴我 ;)
+
+<a id="credits--thanks"></a>
 
 ## 致謝
 

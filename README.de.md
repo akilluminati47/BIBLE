@@ -113,13 +113,19 @@ RIPPS2 wird BIBLE als signierte Boot-Dateien mitbringen und es über seine Setti
 Dies ist ein Fork von PS2BBL von [El Isra](https://github.com/israpps/PlayStation2-Basic-BootLoader/)
 
 
+<a id="documentation"></a>
+
 ## Dokumentation
 
 Sie liegt auf [github pages](https://israpps.github.io/PlayStation2-Basic-BootLoader/), aber mit den Ergänzungen unten:
 
+<a id="config-and-arguments"></a>
+
 ## Konfiguration und Argumente
 
 Bearbeite die Konfigurationsdatei nach Bedarf. Zum Bearbeiten wird [R3Configurator](https://github.com/saildot4k/R3CONFIGURATOR) empfohlen. Die Pfade sind bereits passend zu den Downloads aus dem [PS2 Homebrew Store](https://ps2homebrewstore.com) voreingestellt. Du solltest also nur deine Auto-Wahl anpassen und am besten die Argumente für NHDDL passend zu dem Gerät setzen, von dem du ISOs lädst.
+
+<a id="config-path-search-order"></a>
 
 ### Suchreihenfolge der Konfiguration
 
@@ -140,10 +146,14 @@ Die Suche nach der Konfiguration berücksichtigt jetzt die Boot-Familie, damit b
    - `cdrom0:/PS2BBL/CONFIG.INI`
    - Rückfall auf die Memory Card wie in Punkt 3 oben.
 
+<a id="device-path-prefixes"></a>
+
 ### Pfadpräfixe der Geräte
 PS2BBL unterstützt diese Präfixe für Start- und Konfigurationspfade:
 - `mc0:/`, `mc1:/`, `mc?:/`
 - `usb:/` (bevorzugt) und `mass:/` (alt)
+
+<a id="build-specific"></a>
 
 #### Je nach Build:  
 - `mmce0:/`, `mmce1:/`, `mmce?:/` __MMCE-Builds__
@@ -165,6 +175,8 @@ Nutze `LOGO_DISPLAY = 3`, um die Tastennamen anzuzeigen. Die Namen werden mit `N
       NAME_SQUARE = POPSLOADER
       ```
 
+<a id="custom-splash-logo-from-cwd"></a>
+
 #### Eigenes Startlogo aus dem CWD
 Liegt eine eigene Logodatei (LOGO.BIN) im CWD (aktuelles Arbeitsverzeichnis), ersetzt sie das eingebaute PS2BBLE/PSXBBLE-Logo.
 
@@ -178,9 +190,13 @@ Wandle ein PNG in die erwartete Rohdatei um:
 
   - Lege die erzeugte `LOGO.BIN` neben PS2BBL Extended. Das sollte `mc?:/BOOT/` sein, wenn du Downloads aus dem [PS2 Homebrew Store](https://ps2store.com) nutzt
 
+<a id="retrogem-visual-game-id"></a>
+
 ### Visuelle Spiel-ID von Retrogem
 - `APP_GAMEID = 1` schaltet die visuelle Spiel-ID für Apps/Homebrew ein, bis zu 11 Zeichen aus dem Dateinamen oder der PS1/2-Disc
 - `CDROM_DISABLE_GAMEID = 1` schaltet die visuelle Spiel-ID für über `cdrom` gestartete Discs aus.
+
+<a id="disc-spin-control"></a>
 
 ### Steuerung der Disc-Drehung
 - Globaler Schlüssel/Wert: `DISC_STOP = 0/1`
@@ -188,8 +204,12 @@ Wandle ein PNG in die erwartete Rohdatei um:
 - `DISC_STOP = 0` (oder weggelassen) behält das Standardverhalten.
 - `-disc_stop` kann pro Starteintrag gesetzt werden, um die Disc zu stoppen, sobald das Ziel-ELF gefunden ist.
 
+<a id="video-mode"></a>
+
 ### Videomodus
 - `VIDEO_MODE = AUTO, NTSC, PAL, 480P` Nutzt den Standard der PS2 oder erzwingt einen der anderen 3 Modi.
+
+<a id="emergency-video-mode-selector"></a>
 
 #### Notfall-Auswahl des Videomodus
 - Aufruf mit `TRIANGLE + CROSS` während des Starts
@@ -198,6 +218,8 @@ Wandle ein PNG in die erwartete Rohdatei um:
   - `LEFT/RIGHT` wechseln die Modi: `AUTO`, `NTSC`, `PAL`, `480P`
   - `SELECT` speichert den gewählten Modus in der aktiven Konfigurationsdatei
   - `START` verlässt die Auswahl und geht weiter zur Tastenanzeige
+
+<a id="cdrom-launch-args"></a>
 
 ### Startargumente für CDROM
 Für `LK_*_E* = cdrom` werden diese Argumente unterstützt:
@@ -208,17 +230,23 @@ Für `LK_*_E* = cdrom` werden diese Argumente unterstützt:
 - `-ps1vneg`
 - `-gsm=<v[:c]>`
 
+<a id="ps2logo-arguments-ps2-discs-only"></a>
+
 #### PS2LOGO-Argumente (nur PS2-Discs)
 - Nutze `cdrom` als Pfad des Starteintrags.
 - Füge `-nologo` zu den Argumenten des Eintrags hinzu, um PS2-Discs direkt zu starten (ohne `rom0:PS2LOGO`).
 - Ohne `-nologo` startet PS2BBL die Disc über PS2LOGO und patcht es so, dass immer die Region der Disc genutzt und die Prüfsumme des Logos übergangen wird.
 - DECKARD IE 75K und neuer: XPARAM.IRX wird bei Starts ohne Logo bei Bedarf automatisch angewandt.
 
+<a id="ps1-disc-arguments-per-launch"></a>
+
 #### Argumente für PS1-Discs (pro Start)
 Sie gelten pro `cdrom`-Starteintrag, nicht global.
 - `-ps1fast` schaltet die schnelle Disc-Geschwindigkeit der PS1 ein.
 - `-ps1smooth` schaltet die Texturglättung ein.
 - `-ps1vneg` startet PS1DRV über PS1VModeNegator. Nützlich, wenn Konsolenmodus und Disc-Modus abweichen (zum Beispiel bei manchen MechaPwn/Modchip-Fällen).
+
+<a id="app-arguments"></a>
 
 ### App-Argumente
 Nutze Zeilen `ARG_<BUTTON>_E? =`, um einem ELF Argumente zu übergeben (siehe INI-Beispiele).
@@ -255,6 +283,8 @@ ARG_R1_E1 = -video=480p
 ARG_R1_E1 = -mode=mmce
 ARG_R1_E1 = -mode=ata
 ```
+
+<a id="argument-precedence-and-order"></a>
 
 #### Vorrang und Reihenfolge der Argumente
 1. PS2BBL liest und verbraucht nur die Loader-Steuerargumente am Ende von `ARG_*`: `-appid`, `-titleid=`, `-dev9=`, `-patinfo`, `-disc_stop`, `-gsm=`.
@@ -294,13 +324,19 @@ LK_TRIANGLE_E1 = mc0:/APP_WLE-ISR/WLE-ISR.ELF
 ARG_TRIANGLE_E1 = -gsm=1080ix2
 ```
 
+<a id="deprecatedremoved"></a>
+
 ## Veraltet/Entfernt
 - ~~`RUNKELF`~~ PS2BBLE startet elf/kelf jetzt intern, ohne dass der Nutzer eine kelf-Startaktion festlegen muss.
 
 
+<a id="known-bugsissues"></a>
+
 ## Bekannte Fehler/Probleme
 
 sag du es mir ;)
+
+<a id="credits--thanks"></a>
 
 ## Credits und Dank
 

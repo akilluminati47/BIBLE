@@ -113,13 +113,19 @@ Dadalhin ng RIPPS2 ang BIBLE bilang mga signed boot file at ii-install ito mula 
 Ito ay fork ng PS2BBL ni [El Isra](https://github.com/israpps/PlayStation2-Basic-BootLoader/)
 
 
+<a id="documentation"></a>
+
 ## Dokumentasyon
 
 Naka-host ito sa [github pages](https://israpps.github.io/PlayStation2-Basic-BootLoader/) pero may mga dagdag sa ibaba:
 
+<a id="config-and-arguments"></a>
+
 ## Config at mga argument
 
 I-edit ang config file ayon sa kailangan. Inirerekomenda ang [R3Configurator](https://github.com/saildot4k/R3CONFIGURATOR) para i-edit ang config file mo. Naka-set na ang mga path para tumugma sa mga download mula sa [PS2 Homebrew Store](https://ps2homebrewstore.com). Ibig sabihin, ang Auto choice mo lang ang kailangang i-edit, at mas mabuting i-set ang mga argument ng NHDDL ayon sa device kung saan ka naglo-load ng mga ISO.
+
+<a id="config-path-search-order"></a>
 
 ### Pagkakasunod ng paghahanap ng config
 
@@ -140,10 +146,14 @@ Alam na ngayon ng paghahanap ng config ang boot family para hindi mag-load ng mg
    - `cdrom0:/PS2BBL/CONFIG.INI`
    - Fallback sa memory card ayon sa punto 3 sa itaas.
 
+<a id="device-path-prefixes"></a>
+
 ### Mga prefix ng device path
 Sinusuportahan ng PS2BBL ang mga prefix ng launch/config path na ito:
 - `mc0:/`, `mc1:/`, `mc?:/`
 - `usb:/` (mas gusto), at `mass:/` (luma)
+
+<a id="build-specific"></a>
 
 #### Ayon sa build:  
 - `mmce0:/`, `mmce1:/`, `mmce?:/` __mga MMCE build__
@@ -165,6 +175,8 @@ Gamitin ang `LOGO_DISPLAY = 3` para ipakita ang mga pangalan ng hotkey. Ang mga 
       NAME_SQUARE = POPSLOADER
       ```
 
+<a id="custom-splash-logo-from-cwd"></a>
+
 #### Sariling splash logo mula sa CWD
 Kung may sariling logo file (LOGO.BIN) sa CWD (current working directory), papalitan nito ang naka-embed na PS2BBLE/PSXBBLE logo.
 
@@ -182,6 +194,8 @@ I-convert ang PNG sa inaasahang raw file:
 - Ina-on ng `APP_GAMEID = 1` ang visual game ID para sa apps/homebrew, hanggang 11 character mula sa filename o PS1/2 Disc
 - Ina-off ng `CDROM_DISABLE_GAMEID = 1` ang visual game ID para sa mga disc na inilunsad sa `cdrom`.
 
+<a id="disc-spin-control"></a>
+
 ### Kontrol sa pag-ikot ng disc
 - Global na key/value: `DISC_STOP = 0/1`
 - Hinihinto ng `DISC_STOP = 1` ang optical disc pagkatapos ma-load ang config kapag may nakitang config file.
@@ -191,6 +205,8 @@ I-convert ang PNG sa inaasahang raw file:
 ### Video Mode
 - `VIDEO_MODE = AUTO, NTSC, PAL, 480P` Gagamitin ang default ng PS2 o pipilitin ang isa sa 3 ibang mode.
 
+<a id="emergency-video-mode-selector"></a>
+
 #### Pang-emergency na selector ng video mode
 - Pumasok gamit ang `TRIANGLE + CROSS` habang nagbo-boot
 - Pinipilit ng selector ang `LOGO_DISPLAY = 3` habang aktibo para makita mo ang logo at hotkey UI.
@@ -198,6 +214,8 @@ I-convert ang PNG sa inaasahang raw file:
   - `LEFT/RIGHT` umiikot sa mga mode: `AUTO`, `NTSC`, `PAL`, `480P`
   - `SELECT` sine-save ang napiling mode sa aktibong config file
   - `START` lumalabas sa selector at tumutuloy sa hotkey display
+
+<a id="cdrom-launch-args"></a>
 
 ### Mga launch argument ng CDROM
 Para sa `LK_*_E* = cdrom`, ang mga suportadong argument ay:
@@ -208,17 +226,23 @@ Para sa `LK_*_E* = cdrom`, ang mga suportadong argument ay:
 - `-ps1vneg`
 - `-gsm=<v[:c]>`
 
+<a id="ps2logo-arguments-ps2-discs-only"></a>
+
 #### Mga argument ng PS2LOGO (PS2 disc lang)
 - Gamitin ang `cdrom` bilang path ng launch entry.
 - Idagdag ang `-nologo` sa mga argument ng entry para direktang mag-boot ng PS2 disc (nilalaktawan ang `rom0:PS2LOGO`).
 - Kapag walang `-nologo`, pinapatakbo ng PS2BBL ang disc sa PS2LOGO at pina-patch ito para laging gamitin ang region ng disc at lampasan ang checksum check ng logo.
 - DECKARD IE 75K at mas bago: awtomatikong inilalapat ang XPARAM.IRX kapag kailangan para sa mga launch na walang logo.
 
+<a id="ps1-disc-arguments-per-launch"></a>
+
 #### Mga argument ng PS1 disc (bawat launch)
 Para ito sa bawat `cdrom` launch entry, hindi pangkalahatan.
 - Ina-on ng `-ps1fast` ang mabilis na bilis ng PS1 disc.
 - Ina-on ng `-ps1smooth` ang pagpapakinis ng texture.
 - Pinapatakbo ng `-ps1vneg` ang PS1DRV sa PS1VModeNegator. Kapaki-pakinabang sa mga setup kung saan magkaiba ang mode ng console at ng disc (halimbawa ilang kaso ng MechaPwn/modchip).
+
+<a id="app-arguments"></a>
 
 ### Mga argument ng app
 Gamitin ang mga linyang `ARG_<BUTTON>_E? =` para magpasa ng argument sa ELF (tingnan ang mga halimbawa ng INI).
@@ -255,6 +279,8 @@ ARG_R1_E1 = -video=480p
 ARG_R1_E1 = -mode=mmce
 ARG_R1_E1 = -mode=ata
 ```
+
+<a id="argument-precedence-and-order"></a>
 
 #### Pagkakauna at pagkakasunod ng mga argument
 1. Ang PS2BBL ay nagpa-parse at kumokonsumo lang ng mga trailing loader-control arg mula sa `ARG_*`: `-appid`, `-titleid=`, `-dev9=`, `-patinfo`, `-disc_stop`, `-gsm=`.
@@ -294,13 +320,19 @@ LK_TRIANGLE_E1 = mc0:/APP_WLE-ISR/WLE-ISR.ELF
 ARG_TRIANGLE_E1 = -gsm=1080ix2
 ```
 
+<a id="deprecatedremoved"></a>
+
 ## Hindi na ginagamit/Inalis
 - ~~`RUNKELF`~~ Hinahawakan na ngayon ng PS2BBLE ang paglunsad ng elf/kelf sa loob nito nang hindi na kailangang magtakda ang user ng kelf launch action.
 
 
+<a id="known-bugsissues"></a>
+
 ## Mga kilalang bug/isyu
 
 ikaw ang magsabi sa akin ;)
+
+<a id="credits--thanks"></a>
 
 ## Mga kredito at pasasalamat
 

@@ -113,13 +113,19 @@ A RIPPS2 aláírt indítófájlokként hozza majd a BIBLE-t, és a Settings (Boo
 Ez [El Isra](https://github.com/israpps/PlayStation2-Basic-BootLoader/) PS2BBL programjának forkja
 
 
+<a id="documentation"></a>
+
 ## Dokumentáció
 
 A [github pages](https://israpps.github.io/PlayStation2-Basic-BootLoader/) oldalon található, de az alábbi kiegészítésekkel:
 
+<a id="config-and-arguments"></a>
+
 ## Konfiguráció és argumentumok
 
 Szerkeszd a konfigurációs fájlt igény szerint. A szerkesztéshez a [R3Configurator](https://github.com/saildot4k/R3CONFIGURATOR) ajánlott. Az útvonalak már úgy vannak beállítva, hogy illeszkedjenek a [PS2 Homebrew Store](https://ps2homebrewstore.com) letöltéseihez. Így elég csak az Auto választásodat szerkeszteni, és érdemes az NHDDL argumentumait annak az eszköznek megfelelően beállítani, amelyről az ISO-kat töltöd.
+
+<a id="config-path-search-order"></a>
 
 ### A konfiguráció keresési sorrendje
 
@@ -140,10 +146,14 @@ A konfiguráció keresése most figyelembe veszi az indítási családot, hogy i
    - `cdrom0:/PS2BBL/CONFIG.INI`
    - Tartalék a memóriakártyán a fenti 3. pont szerint.
 
+<a id="device-path-prefixes"></a>
+
 ### Az eszközök útvonal-előtagjai
 A PS2BBL ezeket az indítási/konfigurációs útvonal-előtagokat támogatja:
 - `mc0:/`, `mc1:/`, `mc?:/`
 - `usb:/` (ajánlott) és `mass:/` (régi)
+
+<a id="build-specific"></a>
 
 #### Buildtől függően:  
 - `mmce0:/`, `mmce1:/`, `mmce?:/` __MMCE buildek__
@@ -165,6 +175,8 @@ A gombok nevének megjelenítéséhez használd a `LOGO_DISPLAY = 3` beállítá
       NAME_SQUARE = POPSLOADER
       ```
 
+<a id="custom-splash-logo-from-cwd"></a>
+
 #### Saját indítólogó a CWD-ből
 Ha a CWD-ben (aktuális munkakönyvtárban) saját logófájl (LOGO.BIN) található, az lecseréli a beépített PS2BBLE/PSXBBLE logót.
 
@@ -178,9 +190,13 @@ Alakíts át egy PNG-t a várt nyers fájllá:
 
   - Tedd a létrehozott `LOGO.BIN` fájlt a PS2BBL Extended mellé. Ez `mc?:/BOOT/` legyen, ha a [PS2 Homebrew Store](https://ps2store.com) letöltéseit használod
 
+<a id="retrogem-visual-game-id"></a>
+
 ### A Retrogem vizuális játékazonosítója
 - Az `APP_GAMEID = 1` bekapcsolja a vizuális játékazonosítót appokhoz/homebrew-hoz, legfeljebb 11 karakterrel a fájlnévből vagy a PS1/2 lemezről
 - A `CDROM_DISABLE_GAMEID = 1` kikapcsolja a vizuális játékazonosítót a `cdrom` útján indított lemezeknél.
+
+<a id="disc-spin-control"></a>
 
 ### A lemez forgásának vezérlése
 - Globális kulcs/érték: `DISC_STOP = 0/1`
@@ -188,8 +204,12 @@ Alakíts át egy PNG-t a várt nyers fájllá:
 - A `DISC_STOP = 0` (vagy elhagyva) megtartja az alapértelmezett viselkedést.
 - A `-disc_stop` minden indítási bejegyzéshez hozzáadható, hogy a lemez megálljon, amint megvan a cél ELF.
 
+<a id="video-mode"></a>
+
 ### Videómód
 - `VIDEO_MODE = AUTO, NTSC, PAL, 480P` A PS2 alapértelmezését használja, vagy kikényszeríti a másik 3 mód egyikét.
+
+<a id="emergency-video-mode-selector"></a>
 
 #### Vészhelyzeti videómód-választó
 - Indítás közben a `TRIANGLE + CROSS` gombbal nyílik meg
@@ -198,6 +218,8 @@ Alakíts át egy PNG-t a várt nyers fájllá:
   - `LEFT/RIGHT` lépteti a módokat: `AUTO`, `NTSC`, `PAL`, `480P`
   - `SELECT` elmenti a kiválasztott módot az aktív konfigurációs fájlba
   - `START` kilép a választóból, és továbblép a gombok kijelzésére
+
+<a id="cdrom-launch-args"></a>
 
 ### CDROM indítási argumentumok
 A `LK_*_E* = cdrom` esetén támogatott argumentumok:
@@ -208,17 +230,23 @@ A `LK_*_E* = cdrom` esetén támogatott argumentumok:
 - `-ps1vneg`
 - `-gsm=<v[:c]>`
 
+<a id="ps2logo-arguments-ps2-discs-only"></a>
+
 #### PS2LOGO argumentumok (csak PS2 lemezek)
 - Az indítási bejegyzés útvonalaként használd a `cdrom` értéket.
 - Add hozzá a `-nologo` argumentumot a bejegyzéshez, hogy a PS2 lemezek közvetlenül induljanak (a `rom0:PS2LOGO` kihagyásával).
 - `-nologo` nélkül a PS2BBL a PS2LOGO-n keresztül indítja a lemezt, és úgy foltozza, hogy mindig a lemez régióját használja és kikerülje a logó ellenőrzőösszegét.
 - DECKARD IE 75K és újabb: az XPARAM.IRX automatikusan alkalmazódik, ha a logó nélküli indításhoz szükséges.
 
+<a id="ps1-disc-arguments-per-launch"></a>
+
 #### PS1 lemezek argumentumai (indításonként)
 Ezek a `cdrom` indítási bejegyzésekre egyenként érvényesek, nem globálisan.
 - A `-ps1fast` bekapcsolja a gyors PS1 lemezsebességet.
 - A `-ps1smooth` bekapcsolja a textúrasimítást.
 - A `-ps1vneg` a PS1VModeNegator-on keresztül futtatja a PS1DRV-t. Hasznos ott, ahol a konzol és a lemez módja eltér (például egyes MechaPwn/modchip esetekben).
+
+<a id="app-arguments"></a>
 
 ### Appok argumentumai
 Az `ARG_<BUTTON>_E? =` sorokkal adhatsz át argumentumokat egy ELF-nek (lásd az INI példákat).
@@ -255,6 +283,8 @@ ARG_R1_E1 = -video=480p
 ARG_R1_E1 = -mode=mmce
 ARG_R1_E1 = -mode=ata
 ```
+
+<a id="argument-precedence-and-order"></a>
 
 #### Az argumentumok elsőbbsége és sorrendje
 1. A PS2BBL csak az `ARG_*` végén álló betöltővezérlő argumentumokat dolgozza fel és használja el: `-appid`, `-titleid=`, `-dev9=`, `-patinfo`, `-disc_stop`, `-gsm=`.
@@ -294,13 +324,19 @@ LK_TRIANGLE_E1 = mc0:/APP_WLE-ISR/WLE-ISR.ELF
 ARG_TRIANGLE_E1 = -gsm=1080ix2
 ```
 
+<a id="deprecatedremoved"></a>
+
 ## Elavult/Eltávolítva
 - ~~`RUNKELF`~~ A PS2BBLE most belsőleg indítja az elf/kelf fájlokat, a felhasználónak nem kell kelf indítási műveletet megadnia.
 
 
+<a id="known-bugsissues"></a>
+
 ## Ismert hibák/problémák
 
 te mondd meg ;)
+
+<a id="credits--thanks"></a>
 
 ## Köszönet és elismerés
 

@@ -113,13 +113,19 @@ RIPPS2 sẽ mang BIBLE dưới dạng các file khởi động đã ký và cài
 Đây là bản fork của PS2BBL do [El Isra](https://github.com/israpps/PlayStation2-Basic-BootLoader/) làm
 
 
+<a id="documentation"></a>
+
 ## Tài liệu
 
 Tài liệu nằm trên [github pages](https://israpps.github.io/PlayStation2-Basic-BootLoader/) nhưng có thêm các phần bên dưới:
 
+<a id="config-and-arguments"></a>
+
 ## Cấu hình và đối số
 
 Sửa file cấu hình khi cần. Nên dùng [R3Configurator](https://github.com/saildot4k/R3CONFIGURATOR) để sửa file cấu hình. Các đường dẫn đã được đặt sẵn khớp với bản tải từ [PS2 Homebrew Store](https://ps2homebrewstore.com). Nghĩa là bạn chỉ cần sửa lựa chọn Auto và tốt nhất là đặt đối số cho NHDDL theo thiết bị bạn nạp ISO.
+
+<a id="config-path-search-order"></a>
 
 ### Thứ tự tìm file cấu hình
 
@@ -140,10 +146,14 @@ Việc tìm cấu hình giờ đã nhận biết kiểu khởi động để tr�
    - `cdrom0:/PS2BBL/CONFIG.INI`
    - Dự phòng trên thẻ nhớ như ở mục 3 bên trên.
 
+<a id="device-path-prefixes"></a>
+
 ### Tiền tố đường dẫn thiết bị
 PS2BBL hỗ trợ các tiền tố đường dẫn khởi chạy/cấu hình sau:
 - `mc0:/`, `mc1:/`, `mc?:/`
 - `usb:/` (nên dùng) và `mass:/` (cũ)
+
+<a id="build-specific"></a>
 
 #### Tùy bản build:  
 - `mmce0:/`, `mmce1:/`, `mmce?:/` __bản build MMCE__
@@ -165,6 +175,8 @@ Dùng `LOGO_DISPLAY = 3` để hiện tên phím. Tên được đặt bằng `N
       NAME_SQUARE = POPSLOADER
       ```
 
+<a id="custom-splash-logo-from-cwd"></a>
+
 #### Logo khởi động riêng từ CWD
 Nếu tìm thấy file logo riêng (LOGO.BIN) trong CWD (thư mục làm việc hiện tại), nó sẽ thay logo PS2BBLE/PSXBBLE có sẵn.
 
@@ -178,9 +190,13 @@ Chuyển một PNG thành file thô như yêu cầu:
 
   - Đặt `LOGO.BIN` vừa tạo cạnh PS2BBL Extended. Đó nên là `mc?:/BOOT/` nếu bạn dùng bản tải từ [PS2 Homebrew Store](https://ps2store.com)
 
+<a id="retrogem-visual-game-id"></a>
+
 ### ID game trực quan của Retrogem
 - `APP_GAMEID = 1` bật ID game trực quan cho ứng dụng/homebrew, tối đa 11 ký tự lấy từ tên file hoặc đĩa PS1/2
 - `CDROM_DISABLE_GAMEID = 1` tắt ID game trực quan cho đĩa khởi chạy qua `cdrom`.
+
+<a id="disc-spin-control"></a>
 
 ### Điều khiển quay đĩa
 - Khóa/giá trị chung: `DISC_STOP = 0/1`
@@ -188,8 +204,12 @@ Chuyển một PNG thành file thô như yêu cầu:
 - `DISC_STOP = 0` (hoặc bỏ trống) giữ hành vi mặc định.
 - Có thể thêm `-disc_stop` vào từng mục khởi chạy để dừng đĩa sau khi tìm thấy ELF đích.
 
+<a id="video-mode"></a>
+
 ### Chế độ video
 - `VIDEO_MODE = AUTO, NTSC, PAL, 480P` Dùng mặc định của PS2 hoặc ép một trong 3 chế độ còn lại.
+
+<a id="emergency-video-mode-selector"></a>
 
 #### Bộ chọn chế độ video khẩn cấp
 - Vào bằng `TRIANGLE + CROSS` trong lúc khởi động
@@ -198,6 +218,8 @@ Chuyển một PNG thành file thô như yêu cầu:
   - `LEFT/RIGHT` chuyển chế độ: `AUTO`, `NTSC`, `PAL`, `480P`
   - `SELECT` lưu chế độ đang chọn vào file cấu hình đang dùng
   - `START` thoát bộ chọn và tiếp tục tới màn hình phím
+
+<a id="cdrom-launch-args"></a>
 
 ### Đối số khởi chạy CDROM
 Với `LK_*_E* = cdrom`, các đối số được hỗ trợ là:
@@ -208,17 +230,23 @@ Với `LK_*_E* = cdrom`, các đối số được hỗ trợ là:
 - `-ps1vneg`
 - `-gsm=<v[:c]>`
 
+<a id="ps2logo-arguments-ps2-discs-only"></a>
+
 #### Đối số PS2LOGO (chỉ đĩa PS2)
 - Dùng `cdrom` làm đường dẫn mục khởi chạy.
 - Thêm `-nologo` vào đối số của mục để khởi động đĩa PS2 trực tiếp (bỏ qua `rom0:PS2LOGO`).
 - Khi không có `-nologo`, PS2BBL chạy đĩa qua PS2LOGO và vá nó để luôn dùng vùng của đĩa và bỏ qua kiểm tra checksum logo.
 - DECKARD IE 75K trở về sau: XPARAM.IRX được áp dụng tự động khi cần cho các lần khởi chạy không logo.
 
+<a id="ps1-disc-arguments-per-launch"></a>
+
 #### Đối số đĩa PS1 (mỗi lần khởi chạy)
 Các đối số này áp dụng cho từng mục khởi chạy `cdrom`, không phải toàn cục.
 - `-ps1fast` bật tốc độ đọc đĩa PS1 nhanh.
 - `-ps1smooth` bật làm mịn texture.
 - `-ps1vneg` chạy PS1DRV qua PS1VModeNegator. Hữu ích khi chế độ của máy và của đĩa khác nhau (ví dụ một số trường hợp MechaPwn/chip mod).
+
+<a id="app-arguments"></a>
 
 ### Đối số ứng dụng
 Dùng các dòng `ARG_<BUTTON>_E? =` để truyền đối số cho ELF (xem ví dụ INI).
@@ -255,6 +283,8 @@ ARG_R1_E1 = -video=480p
 ARG_R1_E1 = -mode=mmce
 ARG_R1_E1 = -mode=ata
 ```
+
+<a id="argument-precedence-and-order"></a>
 
 #### Thứ tự ưu tiên của đối số
 1. PS2BBL chỉ phân tích và lấy đi các đối số điều khiển trình nạp ở cuối `ARG_*`: `-appid`, `-titleid=`, `-dev9=`, `-patinfo`, `-disc_stop`, `-gsm=`.
@@ -294,13 +324,19 @@ LK_TRIANGLE_E1 = mc0:/APP_WLE-ISR/WLE-ISR.ELF
 ARG_TRIANGLE_E1 = -gsm=1080ix2
 ```
 
+<a id="deprecatedremoved"></a>
+
 ## Đã lỗi thời/Đã gỡ bỏ
 - ~~`RUNKELF`~~ PS2BBLE giờ tự xử lý việc khởi chạy elf/kelf bên trong, người dùng không cần định nghĩa thao tác khởi chạy kelf.
 
 
+<a id="known-bugsissues"></a>
+
 ## Lỗi/vấn đề đã biết
 
 bạn nói cho tôi đi ;)
+
+<a id="credits--thanks"></a>
 
 ## Ghi công và cảm ơn
 

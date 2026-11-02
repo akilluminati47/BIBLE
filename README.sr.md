@@ -113,13 +113,19 @@ RIPPS2 će nositi BIBLE kao potpisane datoteke za pokretanje i instalirati ga iz
 Ovo je fork PS2BBL-a autora [El Isra](https://github.com/israpps/PlayStation2-Basic-BootLoader/)
 
 
+<a id="documentation"></a>
+
 ## Dokumentacija
 
 Nalazi se na [github pages](https://israpps.github.io/PlayStation2-Basic-BootLoader/), ali sa dodacima ispod:
 
+<a id="config-and-arguments"></a>
+
 ## Konfiguracija i argumenti
 
 Uredite konfiguracionu datoteku po potrebi. Za uređivanje se preporučuje [R3Configurator](https://github.com/saildot4k/R3CONFIGURATOR). Putanje su već podešene da odgovaraju preuzimanjima iz [PS2 Homebrew Store](https://ps2homebrewstore.com). Trebalo bi da uredite samo svoj izbor Auto i najbolje podesite argumente za NHDDL prema uređaju sa kog učitavate ISO datoteke.
+
+<a id="config-path-search-order"></a>
 
 ### Redosled traženja konfiguracije
 
@@ -140,10 +146,14 @@ Traženje konfiguracije sada uzima u obzir porodicu pokretanja, da se pri pokret
    - `cdrom0:/PS2BBL/CONFIG.INI`
    - Rezerva na memorijskoj kartici kao u tački 3 iznad.
 
+<a id="device-path-prefixes"></a>
+
 ### Prefiksi putanja uređaja
 PS2BBL podržava ove prefikse putanja za pokretanje/konfiguraciju:
 - `mc0:/`, `mc1:/`, `mc?:/`
 - `usb:/` (preporučeno) i `mass:/` (staro)
+
+<a id="build-specific"></a>
 
 #### Zavisno od izgradnje:  
 - `mmce0:/`, `mmce1:/`, `mmce?:/` __izgradnje MMCE__
@@ -165,6 +175,8 @@ Koristite `LOGO_DISPLAY = 3` za prikaz naziva tastera. Nazivi se određuju sa `N
       NAME_SQUARE = POPSLOADER
       ```
 
+<a id="custom-splash-logo-from-cwd"></a>
+
 #### Sopstveni početni logo iz CWD-a
 Ako se u CWD-u (trenutnoj radnoj fascikli) nađe sopstvena datoteka loga (LOGO.BIN), ona zamenjuje ugrađeni logo PS2BBLE/PSXBBLE.
 
@@ -178,9 +190,13 @@ Pretvorite PNG u očekivanu sirovu datoteku:
 
   - Napravljeni `LOGO.BIN` stavite pored PS2BBL Extended. To bi trebalo da bude `mc?:/BOOT/` ako koristite preuzimanja iz [PS2 Homebrew Store](https://ps2store.com)
 
+<a id="retrogem-visual-game-id"></a>
+
 ### Vizuelni ID igre od Retrogema
 - `APP_GAMEID = 1` uključuje vizuelni ID igre za aplikacije/homebrew, do 11 znakova iz naziva datoteke ili sa diska PS1/2
 - `CDROM_DISABLE_GAMEID = 1` isključuje vizuelni ID igre za diskove pokrenute preko `cdrom`.
+
+<a id="disc-spin-control"></a>
 
 ### Upravljanje okretanjem diska
 - Globalni ključ/vrednost: `DISC_STOP = 0/1`
@@ -188,8 +204,12 @@ Pretvorite PNG u očekivanu sirovu datoteku:
 - `DISC_STOP = 0` (ili izostavljeno) zadržava podrazumevano ponašanje.
 - `-disc_stop` može da se doda svakom unosu za pokretanje da se disk zaustavi kada se pronađe ciljni ELF.
 
+<a id="video-mode"></a>
+
 ### Video režim
 - `VIDEO_MODE = AUTO, NTSC, PAL, 480P` Koristi podrazumevani režim PS2 ili nameće jedan od ostala 3.
+
+<a id="emergency-video-mode-selector"></a>
 
 #### Hitni izbor video režima
 - Otvara se sa `TRIANGLE + CROSS` tokom pokretanja
@@ -198,6 +218,8 @@ Pretvorite PNG u očekivanu sirovu datoteku:
   - `LEFT/RIGHT` menjaju režime: `AUTO`, `NTSC`, `PAL`, `480P`
   - `SELECT` čuva izabrani režim u aktivnoj konfiguracionoj datoteci
   - `START` izlazi iz izbora i nastavlja na prikaz tastera
+
+<a id="cdrom-launch-args"></a>
 
 ### Argumenti pokretanja za CDROM
 Za `LK_*_E* = cdrom` podržani su ovi argumenti:
@@ -208,17 +230,23 @@ Za `LK_*_E* = cdrom` podržani su ovi argumenti:
 - `-ps1vneg`
 - `-gsm=<v[:c]>`
 
+<a id="ps2logo-arguments-ps2-discs-only"></a>
+
 #### Argumenti za PS2LOGO (samo PS2 diskovi)
 - Koristite `cdrom` kao putanju unosa.
 - Dodajte `-nologo` argumentima unosa da se PS2 diskovi pokreću direktno (bez `rom0:PS2LOGO`).
 - Bez `-nologo`, PS2BBL pokreće disk preko PS2LOGO i krpi ga da uvek koristi region diska i preskoči proveru kontrolnog zbira loga.
 - DECKARD IE 75K i noviji: XPARAM.IRX se primenjuje automatski kada je potrebno za pokretanja bez loga.
 
+<a id="ps1-disc-arguments-per-launch"></a>
+
 #### Argumenti za PS1 diskove (po pokretanju)
 Važe za svaki unos `cdrom`, a ne globalno.
 - `-ps1fast` uključuje brzu brzinu diska PS1.
 - `-ps1smooth` uključuje ublažavanje tekstura.
 - `-ps1vneg` pokreće PS1DRV preko PS1VModeNegator. Korisno tamo gde se režim konzole i režim diska razlikuju (na primer neki slučajevi MechaPwn/modčipova).
+
+<a id="app-arguments"></a>
 
 ### Argumenti aplikacija
 Redovima `ARG_<BUTTON>_E? =` predajete argumente ELF-u (pogledajte INI primere).
@@ -255,6 +283,8 @@ ARG_R1_E1 = -video=480p
 ARG_R1_E1 = -mode=mmce
 ARG_R1_E1 = -mode=ata
 ```
+
+<a id="argument-precedence-and-order"></a>
 
 #### Prednost i redosled argumenata
 1. PS2BBL obrađuje i troši samo završne kontrolne argumente loadera iz `ARG_*`: `-appid`, `-titleid=`, `-dev9=`, `-patinfo`, `-disc_stop`, `-gsm=`.
@@ -294,13 +324,19 @@ LK_TRIANGLE_E1 = mc0:/APP_WLE-ISR/WLE-ISR.ELF
 ARG_TRIANGLE_E1 = -gsm=1080ix2
 ```
 
+<a id="deprecatedremoved"></a>
+
 ## Zastarelo/Uklonjeno
 - ~~`RUNKELF`~~ PS2BBLE sada interno pokreće elf/kelf, bez potrebe da korisnik definiše radnju pokretanja kelf.
 
 
+<a id="known-bugsissues"></a>
+
 ## Poznate greške/problemi
 
 vi meni recite ;)
+
+<a id="credits--thanks"></a>
 
 ## Zasluge i zahvalnice
 

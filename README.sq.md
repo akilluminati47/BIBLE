@@ -113,13 +113,19 @@ RIPPS2 do ta mbajë BIBLE si skedarë nisjeje të nënshkruar dhe do ta instaloj
 Ky është një fork i PS2BBL nga [El Isra](https://github.com/israpps/PlayStation2-Basic-BootLoader/)
 
 
+<a id="documentation"></a>
+
 ## Dokumentimi
 
 Ndodhet në [github pages](https://israpps.github.io/PlayStation2-Basic-BootLoader/), por me shtesat më poshtë:
 
+<a id="config-and-arguments"></a>
+
 ## Konfigurimi dhe argumentet
 
 Ndrysho skedarin e konfigurimit sipas nevojës. Për ta ndryshuar rekomandohet [R3Configurator](https://github.com/saildot4k/R3CONFIGURATOR). Shtigjet janë vendosur tashmë që të përputhen me shkarkimet nga [PS2 Homebrew Store](https://ps2homebrewstore.com). Kështu duhet të ndryshosh vetëm zgjedhjen Auto dhe, më mirë, të vendosësh argumentet për NHDDL sipas pajisjes nga e cila ngarkon ISO-t.
+
+<a id="config-path-search-order"></a>
 
 ### Rendi i kërkimit të konfigurimit
 
@@ -140,10 +146,14 @@ Kërkimi i konfigurimit tani merr parasysh familjen e nisjes, që të mos ngarko
    - `cdrom0:/PS2BBL/CONFIG.INI`
    - Rezervë në kartën e memories si në pikën 3 më sipër.
 
+<a id="device-path-prefixes"></a>
+
 ### Parashtesat e shtigjeve të pajisjeve
 PS2BBL mbështet këto parashtesa shtigjesh nisjeje/konfigurimi:
 - `mc0:/`, `mc1:/`, `mc?:/`
 - `usb:/` (e preferuar) dhe `mass:/` (e vjetër)
+
+<a id="build-specific"></a>
 
 #### Sipas ndërtimit:  
 - `mmce0:/`, `mmce1:/`, `mmce?:/` __ndërtimet MMCE__
@@ -165,6 +175,8 @@ Përdor `LOGO_DISPLAY = 3` për të shfaqur emrat e tasteve. Emrat përcaktohen 
       NAME_SQUARE = POPSLOADER
       ```
 
+<a id="custom-splash-logo-from-cwd"></a>
+
 #### Logo e vetë e hapjes nga CWD
 Nëse në CWD (dosjen aktuale të punës) gjendet një skedar logoje i vetë (LOGO.BIN), ai zëvendëson logon e integruar PS2BBLE/PSXBBLE.
 
@@ -178,9 +190,13 @@ Shndërro një PNG në skedarin e papërpunuar të pritur:
 
   - Vendos `LOGO.BIN` e krijuar pranë PS2BBL Extended. Duhet të jetë `mc?:/BOOT/` nëse përdor shkarkime nga [PS2 Homebrew Store](https://ps2store.com)
 
+<a id="retrogem-visual-game-id"></a>
+
 ### ID vizuale e lojës nga Retrogem
 - `APP_GAMEID = 1` aktivizon ID-në vizuale të lojës për aplikacione/homebrew, deri në 11 karaktere nga emri i skedarit ose disku PS1/2
 - `CDROM_DISABLE_GAMEID = 1` çaktivizon ID-në vizuale të lojës për disqet e nisura nëpërmjet `cdrom`.
+
+<a id="disc-spin-control"></a>
 
 ### Kontrolli i rrotullimit të diskut
 - Çelës/vlerë globale: `DISC_STOP = 0/1`
@@ -188,8 +204,12 @@ Shndërro një PNG në skedarin e papërpunuar të pritur:
 - `DISC_STOP = 0` (ose i hequr) ruan sjelljen e parazgjedhur.
 - `-disc_stop` mund t'i shtohet çdo hyrjeje nisjeje për ta ndalur diskun pasi të gjendet ELF-i i synuar.
 
+<a id="video-mode"></a>
+
 ### Mënyra video
 - `VIDEO_MODE = AUTO, NTSC, PAL, 480P` Përdor parazgjedhjen e PS2 ose detyron një nga 3 mënyrat e tjera.
+
+<a id="emergency-video-mode-selector"></a>
 
 #### Zgjedhësi emergjent i mënyrës video
 - Hapet me `TRIANGLE + CROSS` gjatë nisjes
@@ -198,6 +218,8 @@ Shndërro një PNG në skedarin e papërpunuar të pritur:
   - `LEFT/RIGHT` ndërrojnë mënyrat: `AUTO`, `NTSC`, `PAL`, `480P`
   - `SELECT` ruan mënyrën e zgjedhur në skedarin aktiv të konfigurimit
   - `START` del nga zgjedhësi dhe vazhdon te shfaqja e tasteve
+
+<a id="cdrom-launch-args"></a>
 
 ### Argumentet e nisjes për CDROM
 Për `LK_*_E* = cdrom`, argumentet e mbështetura janë:
@@ -208,17 +230,23 @@ Për `LK_*_E* = cdrom`, argumentet e mbështetura janë:
 - `-ps1vneg`
 - `-gsm=<v[:c]>`
 
+<a id="ps2logo-arguments-ps2-discs-only"></a>
+
 #### Argumentet e PS2LOGO (vetëm disqe PS2)
 - Përdor `cdrom` si shteg të hyrjes së nisjes.
 - Shto `-nologo` te argumentet e hyrjes për t'i nisur disqet PS2 drejtpërdrejt (pa `rom0:PS2LOGO`).
 - Pa `-nologo`, PS2BBL e nis diskun nëpërmjet PS2LOGO dhe e arnon që të përdorë gjithmonë rajonin e diskut dhe të anashkalojë kontrollin e checksum të logos.
 - DECKARD IE 75K e më të rinj: XPARAM.IRX zbatohet automatikisht kur nevojitet për nisjet pa logo.
 
+<a id="ps1-disc-arguments-per-launch"></a>
+
 #### Argumentet e disqeve PS1 (për çdo nisje)
 Vlejnë për çdo hyrje nisjeje `cdrom`, jo globalisht.
 - `-ps1fast` aktivizon shpejtësinë e shpejtë të diskut PS1.
 - `-ps1smooth` aktivizon zbutjen e teksturave.
 - `-ps1vneg` nis PS1DRV nëpërmjet PS1VModeNegator. E dobishme kur mënyra e konsolës dhe ajo e diskut ndryshojnë (për shembull disa raste MechaPwn/modchip).
+
+<a id="app-arguments"></a>
 
 ### Argumentet e aplikacioneve
 Përdor rreshtat `ARG_<BUTTON>_E? =` për t'i dhënë argumente një ELF-i (shih shembujt INI).
@@ -255,6 +283,8 @@ ARG_R1_E1 = -video=480p
 ARG_R1_E1 = -mode=mmce
 ARG_R1_E1 = -mode=ata
 ```
+
+<a id="argument-precedence-and-order"></a>
 
 #### Përparësia dhe rendi i argumenteve
 1. PS2BBL analizon dhe konsumon vetëm argumentet e kontrollit të ngarkuesit në fund të `ARG_*`: `-appid`, `-titleid=`, `-dev9=`, `-patinfo`, `-disc_stop`, `-gsm=`.
@@ -294,13 +324,19 @@ LK_TRIANGLE_E1 = mc0:/APP_WLE-ISR/WLE-ISR.ELF
 ARG_TRIANGLE_E1 = -gsm=1080ix2
 ```
 
+<a id="deprecatedremoved"></a>
+
 ## E vjetruar/E hequr
 - ~~`RUNKELF`~~ PS2BBLE tani i nis elf/kelf brenda vetes, pa pasur nevojë që përdoruesi të përcaktojë një veprim nisjeje kelf.
 
 
+<a id="known-bugsissues"></a>
+
 ## Gabime/probleme të njohura
 
 më trego ti ;)
+
+<a id="credits--thanks"></a>
 
 ## Kreditet dhe falënderimet
 

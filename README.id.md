@@ -113,13 +113,19 @@ RIPPS2 akan membawa BIBLE sebagai file boot yang ditandatangani dan memasangnya 
 Ini adalah fork dari PS2BBL oleh [El Isra](https://github.com/israpps/PlayStation2-Basic-BootLoader/)
 
 
+<a id="documentation"></a>
+
 ## Dokumentasi
 
 Dihosting di [github pages](https://israpps.github.io/PlayStation2-Basic-BootLoader/) tetapi dengan tambahan di bawah:
 
+<a id="config-and-arguments"></a>
+
 ## Konfigurasi dan argumen
 
 Sunting file konfigurasi sesuai kebutuhan. Disarankan [R3Configurator](https://github.com/saildot4k/R3CONFIGURATOR) untuk menyuntingnya. Jalur sudah diatur agar cocok dengan unduhan dari [PS2 Homebrew Store](https://ps2homebrewstore.com). Jadi Anda cukup menyunting pilihan Auto dan sebaiknya mengatur argumen NHDDL sesuai perangkat tempat Anda memuat ISO.
+
+<a id="config-path-search-order"></a>
 
 ### Urutan pencarian konfigurasi
 
@@ -140,10 +146,14 @@ Pencarian konfigurasi kini mengenali keluarga boot agar tidak memuat driver yang
    - `cdrom0:/PS2BBL/CONFIG.INI`
    - Cadangan di kartu memori seperti poin 3 di atas.
 
+<a id="device-path-prefixes"></a>
+
 ### Awalan jalur perangkat
 PS2BBL mendukung awalan jalur peluncuran/konfigurasi berikut:
 - `mc0:/`, `mc1:/`, `mc?:/`
 - `usb:/` (disarankan), dan `mass:/` (lama)
+
+<a id="build-specific"></a>
 
 #### Khusus build:  
 - `mmce0:/`, `mmce1:/`, `mmce?:/` __build MMCE__
@@ -165,6 +175,8 @@ Gunakan `LOGO_DISPLAY = 3` untuk menampilkan nama tombol. Nama diatur oleh `NAME
       NAME_SQUARE = POPSLOADER
       ```
 
+<a id="custom-splash-logo-from-cwd"></a>
+
 #### Logo pembuka kustom dari CWD
 Jika file logo kustom (LOGO.BIN) ditemukan di CWD (direktori kerja saat ini), file itu menggantikan logo PS2BBLE/PSXBBLE bawaan.
 
@@ -178,9 +190,13 @@ Ubah PNG menjadi file mentah yang diharapkan:
 
   - Letakkan `LOGO.BIN` yang dibuat di samping PS2BBL Extended. Seharusnya `mc?:/BOOT/` jika memakai unduhan dari [PS2 Homebrew Store](https://ps2store.com)
 
+<a id="retrogem-visual-game-id"></a>
+
 ### ID game visual Retrogem
 - `APP_GAMEID = 1` menyalakan ID game visual untuk aplikasi/homebrew, hingga 11 karakter dari nama file atau disk PS1/2
 - `CDROM_DISABLE_GAMEID = 1` mematikan ID game visual untuk disk yang diluncurkan lewat `cdrom`.
+
+<a id="disc-spin-control"></a>
 
 ### Kendali putaran disk
 - Kunci/nilai global: `DISC_STOP = 0/1`
@@ -188,8 +204,12 @@ Ubah PNG menjadi file mentah yang diharapkan:
 - `DISC_STOP = 0` (atau dihilangkan) mempertahankan perilaku bawaan.
 - `-disc_stop` bisa ditambahkan per entri peluncuran untuk menghentikan disk setelah ELF tujuan ditemukan.
 
+<a id="video-mode"></a>
+
 ### Mode Video
 - `VIDEO_MODE = AUTO, NTSC, PAL, 480P` Memakai bawaan PS2 atau memaksa salah satu dari 3 mode lainnya.
+
+<a id="emergency-video-mode-selector"></a>
 
 #### Pemilih mode video darurat
 - Masuk dengan `TRIANGLE + CROSS` saat boot
@@ -198,6 +218,8 @@ Ubah PNG menjadi file mentah yang diharapkan:
   - `LEFT/RIGHT` mengganti mode: `AUTO`, `NTSC`, `PAL`, `480P`
   - `SELECT` menyimpan mode yang dipilih ke file konfigurasi aktif
   - `START` keluar dari pemilih dan lanjut ke tampilan tombol
+
+<a id="cdrom-launch-args"></a>
 
 ### Argumen peluncuran CDROM
 Untuk `LK_*_E* = cdrom`, argumen yang didukung adalah:
@@ -208,17 +230,23 @@ Untuk `LK_*_E* = cdrom`, argumen yang didukung adalah:
 - `-ps1vneg`
 - `-gsm=<v[:c]>`
 
+<a id="ps2logo-arguments-ps2-discs-only"></a>
+
 #### Argumen PS2LOGO (hanya disk PS2)
 - Gunakan `cdrom` sebagai jalur entri peluncuran.
 - Tambahkan `-nologo` ke argumen entri untuk mem-boot disk PS2 langsung (melewati `rom0:PS2LOGO`).
 - Tanpa `-nologo`, PS2BBL menjalankan disk lewat PS2LOGO dan menambalnya agar selalu memakai region disk dan melewati pemeriksaan checksum logo.
 - DECKARD IE 75K dan sesudahnya: XPARAM.IRX diterapkan otomatis bila dibutuhkan untuk peluncuran tanpa logo.
 
+<a id="ps1-disc-arguments-per-launch"></a>
+
 #### Argumen disk PS1 (per peluncuran)
 Ini berlaku per entri peluncuran `cdrom`, bukan secara global.
 - `-ps1fast` menyalakan kecepatan disk PS1 cepat.
 - `-ps1smooth` menyalakan penghalusan tekstur.
 - `-ps1vneg` menjalankan PS1DRV lewat PS1VModeNegator. Berguna pada perangkat yang mode konsol dan mode disk-nya berbeda (misalnya beberapa kasus MechaPwn/modchip).
+
+<a id="app-arguments"></a>
 
 ### Argumen aplikasi
 Gunakan baris `ARG_<BUTTON>_E? =` untuk memberi argumen ke ELF (lihat contoh INI).
@@ -255,6 +283,8 @@ ARG_R1_E1 = -video=480p
 ARG_R1_E1 = -mode=mmce
 ARG_R1_E1 = -mode=ata
 ```
+
+<a id="argument-precedence-and-order"></a>
 
 #### Prioritas dan urutan argumen
 1. PS2BBL mengurai dan memakai hanya argumen kendali loader di akhir `ARG_*`: `-appid`, `-titleid=`, `-dev9=`, `-patinfo`, `-disc_stop`, `-gsm=`.
@@ -294,13 +324,19 @@ LK_TRIANGLE_E1 = mc0:/APP_WLE-ISR/WLE-ISR.ELF
 ARG_TRIANGLE_E1 = -gsm=1080ix2
 ```
 
+<a id="deprecatedremoved"></a>
+
 ## Usang/Dihapus
 - ~~`RUNKELF`~~ PS2BBLE kini menangani peluncuran elf/kelf secara internal tanpa pengguna perlu mendefinisikan aksi peluncuran kelf.
 
 
+<a id="known-bugsissues"></a>
+
 ## Bug/masalah yang diketahui
 
 Anda yang beri tahu saya ;)
+
+<a id="credits--thanks"></a>
 
 ## Kredit & Terima Kasih
 

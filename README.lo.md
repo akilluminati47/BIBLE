@@ -113,13 +113,19 @@ RIPPS2 ຈະນຳ BIBLE ມາເປັນໄຟລ໌ບູດທີ່ເຊ
 ນີ້ແມ່ນ fork ຂອງ PS2BBL ໂດຍ [El Isra](https://github.com/israpps/PlayStation2-Basic-BootLoader/)
 
 
+<a id="documentation"></a>
+
 ## ເອກະສານ
 
 ຢູ່ເທິງ [github pages](https://israpps.github.io/PlayStation2-Basic-BootLoader/) ແຕ່ມີສ່ວນເພີ່ມຂ້າງລຸ່ມ:
 
+<a id="config-and-arguments"></a>
+
 ## ການຕັ້ງຄ່າ ແລະ argument
 
 ແກ້ໄຂໄຟລ໌ຕັ້ງຄ່າຕາມຕ້ອງການ. ແນະນຳ [R3Configurator](https://github.com/saildot4k/R3CONFIGURATOR) ສຳລັບແກ້ໄຂໄຟລ໌ຕັ້ງຄ່າ. ເສັ້ນທາງຖືກຕັ້ງໄວ້ລ່ວງໜ້າໃຫ້ກົງກັບການດາວໂຫຼດຈາກ [PS2 Homebrew Store](https://ps2homebrewstore.com). ສະນັ້ນທ່ານພຽງແຕ່ແກ້ໄຂຕົວເລືອກ Auto ແລະ ດີທີ່ສຸດແມ່ນຕັ້ງ argument ຂອງ NHDDL ຕາມອຸປະກອນທີ່ທ່ານໂຫຼດ ISO.
+
+<a id="config-path-search-order"></a>
 
 ### ລຳດັບການຊອກຫາການຕັ້ງຄ່າ
 
@@ -140,10 +146,14 @@ RIPPS2 ຈະນຳ BIBLE ມາເປັນໄຟລ໌ບູດທີ່ເຊ
    - `cdrom0:/PS2BBL/CONFIG.INI`
    - ສຳຮອງໃນບັດໜ່ວຍຄວາມຈຳຕາມຂໍ້ 3 ຂ້າງເທິງ.
 
+<a id="device-path-prefixes"></a>
+
 ### ຄຳນຳໜ້າເສັ້ນທາງອຸປະກອນ
 PS2BBL ຮອງຮັບຄຳນຳໜ້າເສັ້ນທາງເປີດ/ຕັ້ງຄ່າເຫຼົ່ານີ້:
 - `mc0:/`, `mc1:/`, `mc?:/`
 - `usb:/` (ແນະນຳ) ແລະ `mass:/` (ເກົ່າ)
+
+<a id="build-specific"></a>
 
 #### ຕາມລຸ້ນສ້າງ:  
 - `mmce0:/`, `mmce1:/`, `mmce?:/` __ລຸ້ນສ້າງ MMCE__
@@ -165,6 +175,8 @@ PS2BBL ຮອງຮັບຄຳນຳໜ້າເສັ້ນທາງເປີ�
       NAME_SQUARE = POPSLOADER
       ```
 
+<a id="custom-splash-logo-from-cwd"></a>
+
 #### ໂລໂກ້ໜ້າເປີດເອງຈາກ CWD
 ຖ້າພົບໄຟລ໌ໂລໂກ້ເອງ (LOGO.BIN) ໃນ CWD (ໂຟນເດີເຮັດວຽກປັດຈຸບັນ), ມັນຈະແທນໂລໂກ້ PS2BBLE/PSXBBLE ທີ່ຝັງໄວ້.
 
@@ -178,9 +190,13 @@ PS2BBL ຮອງຮັບຄຳນຳໜ້າເສັ້ນທາງເປີ�
 
   - ວາງ `LOGO.BIN` ທີ່ສ້າງໄວ້ຂ້າງ PS2BBL Extended. ຄວນເປັນ `mc?:/BOOT/` ຖ້າໃຊ້ການດາວໂຫຼດຈາກ [PS2 Homebrew Store](https://ps2store.com)
 
+<a id="retrogem-visual-game-id"></a>
+
 ### ID ເກມແບບພາບຂອງ Retrogem
 - `APP_GAMEID = 1` ເປີດ ID ເກມແບບພາບສຳລັບແອັບ/homebrew, ສູງສຸດ 11 ຕົວອັກສອນຈາກຊື່ໄຟລ໌ ຫຼື ແຜ່ນ PS1/2
 - `CDROM_DISABLE_GAMEID = 1` ປິດ ID ເກມແບບພາບສຳລັບແຜ່ນທີ່ເປີດຜ່ານ `cdrom`.
+
+<a id="disc-spin-control"></a>
 
 ### ການຄວບຄຸມການໝູນແຜ່ນ
 - ກະແຈ/ຄ່າທົ່ວໄປ: `DISC_STOP = 0/1`
@@ -188,8 +204,12 @@ PS2BBL ຮອງຮັບຄຳນຳໜ້າເສັ້ນທາງເປີ�
 - `DISC_STOP = 0` (ຫຼື ບໍ່ໃສ່) ຮັກສາພຶດຕິກຳເລີ່ມຕົ້ນ.
 - ສາມາດເພີ່ມ `-disc_stop` ໃສ່ແຕ່ລະລາຍການເພື່ອຢຸດແຜ່ນຫຼັງພົບ ELF ເປົ້າໝາຍ.
 
+<a id="video-mode"></a>
+
 ### ໂໝດວິດີໂອ
 - `VIDEO_MODE = AUTO, NTSC, PAL, 480P` ໃຊ້ຄ່າເລີ່ມຕົ້ນຂອງ PS2 ຫຼື ບັງຄັບໜຶ່ງໃນອີກ 3 ໂໝດ.
+
+<a id="emergency-video-mode-selector"></a>
 
 #### ຕົວເລືອກໂໝດວິດີໂອສຸກເສີນ
 - ເຂົ້າດ້ວຍ `TRIANGLE + CROSS` ລະຫວ່າງບູດ
@@ -198,6 +218,8 @@ PS2BBL ຮອງຮັບຄຳນຳໜ້າເສັ້ນທາງເປີ�
   - `LEFT/RIGHT` ສະຫຼັບໂໝດ: `AUTO`, `NTSC`, `PAL`, `480P`
   - `SELECT` ບັນທຶກໂໝດທີ່ເລືອກລົງໄຟລ໌ຕັ້ງຄ່າທີ່ໃຊ້ຢູ່
   - `START` ອອກຈາກຕົວເລືອກ ແລະ ໄປຕໍ່ທີ່ໜ້າສະແດງປຸ່ມ
+
+<a id="cdrom-launch-args"></a>
 
 ### argument ການເປີດ CDROM
 ສຳລັບ `LK_*_E* = cdrom`, argument ທີ່ຮອງຮັບແມ່ນ:
@@ -208,17 +230,23 @@ PS2BBL ຮອງຮັບຄຳນຳໜ້າເສັ້ນທາງເປີ�
 - `-ps1vneg`
 - `-gsm=<v[:c]>`
 
+<a id="ps2logo-arguments-ps2-discs-only"></a>
+
 #### argument ຂອງ PS2LOGO (ສະເພາະແຜ່ນ PS2)
 - ໃຊ້ `cdrom` ເປັນເສັ້ນທາງຂອງລາຍການ.
 - ເພີ່ມ `-nologo` ໃສ່ argument ຂອງລາຍການເພື່ອບູດແຜ່ນ PS2 ໂດຍກົງ (ຂ້າມ `rom0:PS2LOGO`).
 - ຖ້າບໍ່ມີ `-nologo`, PS2BBL ຈະເປີດແຜ່ນຜ່ານ PS2LOGO ແລະ ແພັດມັນໃຫ້ໃຊ້ພາກພື້ນຂອງແຜ່ນສະເໝີ ແລະ ຂ້າມການກວດ checksum ຂອງໂລໂກ້.
 - DECKARD IE 75K ແລະ ໃໝ່ກວ່າ: XPARAM.IRX ຈະຖືກໃຊ້ອັດຕະໂນມັດເມື່ອຈຳເປັນສຳລັບການເປີດແບບບໍ່ມີໂລໂກ້.
 
+<a id="ps1-disc-arguments-per-launch"></a>
+
 #### argument ຂອງແຜ່ນ PS1 (ຕໍ່ການເປີດ)
 ສິ່ງເຫຼົ່ານີ້ໃຊ້ກັບແຕ່ລະລາຍການ `cdrom`, ບໍ່ແມ່ນທົ່ວໄປ.
 - `-ps1fast` ເປີດຄວາມໄວແຜ່ນ PS1 ແບບໄວ.
 - `-ps1smooth` ເປີດການເຮັດໃຫ້ texture ລຽບ.
 - `-ps1vneg` ແລ່ນ PS1DRV ຜ່ານ PS1VModeNegator. ເປັນປະໂຫຍດເມື່ອໂໝດຂອງເຄື່ອງ ແລະ ຂອງແຜ່ນຕ່າງກັນ (ເຊັ່ນ ບາງກໍລະນີ MechaPwn/modchip).
+
+<a id="app-arguments"></a>
 
 ### argument ຂອງແອັບ
 ໃຊ້ແຖວ `ARG_<BUTTON>_E? =` ເພື່ອສົ່ງ argument ໃຫ້ ELF (ເບິ່ງຕົວຢ່າງ INI).
@@ -255,6 +283,8 @@ ARG_R1_E1 = -video=480p
 ARG_R1_E1 = -mode=mmce
 ARG_R1_E1 = -mode=ata
 ```
+
+<a id="argument-precedence-and-order"></a>
 
 #### ລຳດັບຄວາມສຳຄັນ ແລະ ລຳດັບຂອງ argument
 1. PS2BBL ແຍກ ແລະ ໃຊ້ສະເພາະ argument ຄວບຄຸມໂປຣແກຣມໂຫຼດທີ່ຢູ່ທ້າຍ `ARG_*`: `-appid`, `-titleid=`, `-dev9=`, `-patinfo`, `-disc_stop`, `-gsm=`.
@@ -294,13 +324,19 @@ LK_TRIANGLE_E1 = mc0:/APP_WLE-ISR/WLE-ISR.ELF
 ARG_TRIANGLE_E1 = -gsm=1080ix2
 ```
 
+<a id="deprecatedremoved"></a>
+
 ## ເຊົາໃຊ້/ຖືກລຶບ
 - ~~`RUNKELF`~~ ດຽວນີ້ PS2BBLE ຈັດການການເປີດ elf/kelf ເອງ ໂດຍຜູ້ໃຊ້ບໍ່ຕ້ອງກຳນົດການກະທຳເປີດ kelf.
 
 
+<a id="known-bugsissues"></a>
+
 ## ບັນຫາ/ຂໍ້ຜິດພາດທີ່ຮູ້
 
 ທ່ານບອກຂ້ອຍແດ່ ;)
+
+<a id="credits--thanks"></a>
 
 ## ຂອບໃຈ ແລະ ຜູ້ສ້າງ
 

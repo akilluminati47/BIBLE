@@ -113,13 +113,19 @@ RIPPS2 は BIBLE を署名済みのブートファイルとして同梱し、今
 これは [El Isra](https://github.com/israpps/PlayStation2-Basic-BootLoader/) による PS2BBL のフォークです
 
 
+<a id="documentation"></a>
+
 ## ドキュメント
 
 [github pages](https://israpps.github.io/PlayStation2-Basic-BootLoader/) にありますが、以下の追加があります：
 
+<a id="config-and-arguments"></a>
+
 ## 設定と引数
 
 必要に応じて設定ファイルを編集してください。編集には [R3Configurator](https://github.com/saildot4k/R3CONFIGURATOR) をおすすめします。パスは [PS2 Homebrew Store](https://ps2homebrewstore.com) からのダウンロードに合わせて設定済みです。そのため Auto の選択を編集し、ISO を読み込むデバイスに合わせて NHDDL の引数を設定するだけで済むはずです。
+
+<a id="config-path-search-order"></a>
 
 ### 設定ファイルの検索順
 
@@ -140,10 +146,14 @@ RIPPS2 は BIBLE を署名済みのブートファイルとして同梱し、今
    - `cdrom0:/PS2BBL/CONFIG.INI`
    - 上の 3 と同じメモリーカードの予備。
 
+<a id="device-path-prefixes"></a>
+
 ### デバイスパスの接頭辞
 PS2BBL は次の起動/設定パスの接頭辞に対応しています：
 - `mc0:/`, `mc1:/`, `mc?:/`
 - `usb:/`（推奨）と `mass:/`（旧式）
+
+<a id="build-specific"></a>
 
 #### ビルドごと：  
 - `mmce0:/`、`mmce1:/`、`mmce?:/` __MMCE ビルド__
@@ -165,6 +175,8 @@ PS2BBL は次の起動/設定パスの接頭辞に対応しています：
       NAME_SQUARE = POPSLOADER
       ```
 
+<a id="custom-splash-logo-from-cwd"></a>
+
 #### CWD からの独自スプラッシュロゴ
 CWD（現在の作業ディレクトリ）に独自のロゴファイル（LOGO.BIN）があると、内蔵の PS2BBLE/PSXBBLE ロゴの代わりに使われます。
 
@@ -178,9 +190,13 @@ PNG を想定どおりの生ファイルに変換します：
 
   - 作成した `LOGO.BIN` を PS2BBL Extended の隣に置きます。[PS2 Homebrew Store](https://ps2store.com) からのダウンロードを使っているなら `mc?:/BOOT/` になるはずです
 
+<a id="retrogem-visual-game-id"></a>
+
 ### Retrogem の視覚的なゲーム ID
 - `APP_GAMEID = 1` でアプリ/homebrew の視覚的なゲーム ID を有効にします。ファイル名または PS1/2 ディスクから最大 11 文字を取ります
 - `CDROM_DISABLE_GAMEID = 1` で `cdrom` から起動したディスクの視覚的なゲーム ID を無効にします。
+
+<a id="disc-spin-control"></a>
 
 ### ディスク回転の制御
 - 全体のキー/値：`DISC_STOP = 0/1`
@@ -188,8 +204,12 @@ PNG を想定どおりの生ファイルに変換します：
 - `DISC_STOP = 0`（または省略）で既定の動作のままです。
 - `-disc_stop` を起動エントリごとに付けると、対象の ELF が見つかった後にディスクを止めます。
 
+<a id="video-mode"></a>
+
 ### ビデオモード
 - `VIDEO_MODE = AUTO, NTSC, PAL, 480P` PS2 の既定を使うか、ほかの 3 つのモードのどれかを強制します。
+
+<a id="emergency-video-mode-selector"></a>
 
 #### 緊急用ビデオモード選択
 - 起動中に `TRIANGLE + CROSS` で入ります
@@ -198,6 +218,8 @@ PNG を想定どおりの生ファイルに変換します：
   - `LEFT/RIGHT` でモードを切り替え：`AUTO`、`NTSC`、`PAL`、`480P`
   - `SELECT` で選んだモードを使用中の設定ファイルに保存
   - `START` で選択を終えてキー表示へ進む
+
+<a id="cdrom-launch-args"></a>
 
 ### CDROM の起動引数
 `LK_*_E* = cdrom` で使える引数：
@@ -208,17 +230,23 @@ PNG を想定どおりの生ファイルに変換します：
 - `-ps1vneg`
 - `-gsm=<v[:c]>`
 
+<a id="ps2logo-arguments-ps2-discs-only"></a>
+
 #### PS2LOGO の引数（PS2 ディスクのみ）
 - 起動エントリのパスには `cdrom` を使います。
 - エントリの引数に `-nologo` を加えると PS2 ディスクを直接起動します（`rom0:PS2LOGO` を飛ばす）。
 - `-nologo` がない場合、PS2BBL は PS2LOGO 経由でディスクを起動し、常にディスクのリージョンを使ってロゴのチェックサム確認を回避するようパッチします。
 - DECKARD IE 75K 以降：ロゴなし起動で必要なときは XPARAM.IRX を自動で適用します。
 
+<a id="ps1-disc-arguments-per-launch"></a>
+
 #### PS1 ディスクの引数（起動ごと）
 これらは全体ではなく、`cdrom` の起動エントリごとに適用されます。
 - `-ps1fast` で PS1 ディスクの高速読み込みを有効にします。
 - `-ps1smooth` でテクスチャのスムージングを有効にします。
 - `-ps1vneg` で PS1VModeNegator 経由で PS1DRV を実行します。本体のモードとディスクのモードが違う環境で役立ちます（たとえば一部の MechaPwn/改造チップの例）。
+
+<a id="app-arguments"></a>
 
 ### アプリの引数
 ELF に引数を渡すには `ARG_<BUTTON>_E? =` の行を使います（INI の例を参照）。
@@ -255,6 +283,8 @@ ARG_R1_E1 = -video=480p
 ARG_R1_E1 = -mode=mmce
 ARG_R1_E1 = -mode=ata
 ```
+
+<a id="argument-precedence-and-order"></a>
 
 #### 引数の優先順位と順序
 1. PS2BBL は `ARG_*` の末尾にあるローダー制御用の引数だけを解析して取り除きます：`-appid`、`-titleid=`、`-dev9=`、`-patinfo`、`-disc_stop`、`-gsm=`。
@@ -294,13 +324,19 @@ LK_TRIANGLE_E1 = mc0:/APP_WLE-ISR/WLE-ISR.ELF
 ARG_TRIANGLE_E1 = -gsm=1080ix2
 ```
 
+<a id="deprecatedremoved"></a>
+
 ## 非推奨/削除
 - ~~`RUNKELF`~~ PS2BBLE は elf/kelf の起動を内部で処理するようになり、ユーザーが kelf の起動アクションを定義する必要はなくなりました。
 
 
+<a id="known-bugsissues"></a>
+
 ## 既知のバグ/問題
 
 あなたが教えて ;)
+
+<a id="credits--thanks"></a>
 
 ## クレジットと謝辞
 

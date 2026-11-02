@@ -113,13 +113,19 @@ RIPPS2는 BIBLE을 서명된 부트 파일로 함께 담아, 지금 담고 있�
 이것은 [El Isra](https://github.com/israpps/PlayStation2-Basic-BootLoader/)가 만든 PS2BBL의 포크입니다
 
 
+<a id="documentation"></a>
+
 ## 문서
 
 [github pages](https://israpps.github.io/PlayStation2-Basic-BootLoader/)에 있지만, 아래 추가 사항이 있습니다:
 
+<a id="config-and-arguments"></a>
+
 ## 설정과 인수
 
 필요에 따라 설정 파일을 편집하세요. 편집에는 [R3Configurator](https://github.com/saildot4k/R3CONFIGURATOR)를 권장합니다. 경로는 이미 [PS2 Homebrew Store](https://ps2homebrewstore.com)의 다운로드에 맞춰 설정되어 있습니다. 그러니 Auto 선택만 편집하고, ISO를 불러오는 장치에 맞게 NHDDL 인수를 설정하는 것이 가장 좋습니다.
+
+<a id="config-path-search-order"></a>
 
 ### 설정 파일 검색 순서
 
@@ -140,10 +146,14 @@ RIPPS2는 BIBLE을 서명된 부트 파일로 함께 담아, 지금 담고 있�
    - `cdrom0:/PS2BBL/CONFIG.INI`
    - 위 3번과 같은 메모리 카드 예비.
 
+<a id="device-path-prefixes"></a>
+
 ### 장치 경로 접두사
 PS2BBL은 다음 실행/설정 경로 접두사를 지원합니다:
 - `mc0:/`, `mc1:/`, `mc?:/`
 - `usb:/`(권장)와 `mass:/`(구식)
+
+<a id="build-specific"></a>
 
 #### 빌드별:  
 - `mmce0:/`, `mmce1:/`, `mmce?:/` __MMCE 빌드__
@@ -165,6 +175,8 @@ PS2BBL은 다음 실행/설정 경로 접두사를 지원합니다:
       NAME_SQUARE = POPSLOADER
       ```
 
+<a id="custom-splash-logo-from-cwd"></a>
+
 #### CWD의 사용자 스플래시 로고
 CWD(현재 작업 디렉터리)에 사용자 로고 파일(LOGO.BIN)이 있으면 내장된 PS2BBLE/PSXBBLE 로고를 대신합니다.
 
@@ -178,9 +190,13 @@ PNG를 기대하는 원시 파일로 변환하세요:
 
   - 만든 `LOGO.BIN`을 PS2BBL Extended 옆에 두세요. [PS2 Homebrew Store](https://ps2store.com)의 다운로드를 쓴다면 `mc?:/BOOT/`여야 합니다
 
+<a id="retrogem-visual-game-id"></a>
+
 ### Retrogem 시각적 게임 ID
 - `APP_GAMEID = 1`은 파일 이름이나 PS1/2 디스크에서 가져온 최대 11자로 앱/homebrew의 시각적 게임 ID를 켭니다
 - `CDROM_DISABLE_GAMEID = 1`은 `cdrom`으로 실행한 디스크의 시각적 게임 ID를 끕니다.
+
+<a id="disc-spin-control"></a>
 
 ### 디스크 회전 제어
 - 전역 키/값: `DISC_STOP = 0/1`
@@ -188,8 +204,12 @@ PNG를 기대하는 원시 파일로 변환하세요:
 - `DISC_STOP = 0`(또는 생략)은 기본 동작을 유지합니다.
 - `-disc_stop`을 실행 항목마다 붙이면 대상 ELF를 찾은 뒤 디스크를 멈춥니다.
 
+<a id="video-mode"></a>
+
 ### 비디오 모드
 - `VIDEO_MODE = AUTO, NTSC, PAL, 480P` PS2 기본값을 쓰거나 다른 3개 모드 중 하나를 강제합니다.
+
+<a id="emergency-video-mode-selector"></a>
 
 #### 비상용 비디오 모드 선택기
 - 부팅 중 `TRIANGLE + CROSS`로 들어갑니다
@@ -198,6 +218,8 @@ PNG를 기대하는 원시 파일로 변환하세요:
   - `LEFT/RIGHT`로 모드 전환: `AUTO`, `NTSC`, `PAL`, `480P`
   - `SELECT`로 선택한 모드를 사용 중인 설정 파일에 저장
   - `START`로 선택기를 나가 키 표시로 계속
+
+<a id="cdrom-launch-args"></a>
 
 ### CDROM 실행 인수
 `LK_*_E* = cdrom`에서 지원하는 인수:
@@ -208,17 +230,23 @@ PNG를 기대하는 원시 파일로 변환하세요:
 - `-ps1vneg`
 - `-gsm=<v[:c]>`
 
+<a id="ps2logo-arguments-ps2-discs-only"></a>
+
 #### PS2LOGO 인수(PS2 디스크만)
 - 실행 항목의 경로로 `cdrom`을 쓰세요.
 - 항목 인수에 `-nologo`를 더하면 PS2 디스크를 바로 부팅합니다(`rom0:PS2LOGO` 건너뜀).
 - `-nologo`가 없으면 PS2BBL은 PS2LOGO를 거쳐 디스크를 실행하고, 항상 디스크 지역을 쓰며 로고 체크섬 검사를 건너뛰도록 패치합니다.
 - DECKARD IE 75K 이후: 로고 없는 실행에 필요할 때 XPARAM.IRX를 자동으로 적용합니다.
 
+<a id="ps1-disc-arguments-per-launch"></a>
+
 #### PS1 디스크 인수(실행마다)
 이 인수는 전역이 아니라 `cdrom` 실행 항목마다 적용됩니다.
 - `-ps1fast`는 PS1 디스크 고속 읽기를 켭니다.
 - `-ps1smooth`는 텍스처 스무딩을 켭니다.
 - `-ps1vneg`는 PS1VModeNegator를 거쳐 PS1DRV를 실행합니다. 콘솔 모드와 디스크 모드가 다른 환경(예: 일부 MechaPwn/모드칩 경우)에서 유용합니다.
+
+<a id="app-arguments"></a>
 
 ### 앱 인수
 ELF에 인수를 넘기려면 `ARG_<BUTTON>_E? =` 줄을 쓰세요(INI 예시 참고).
@@ -255,6 +283,8 @@ ARG_R1_E1 = -video=480p
 ARG_R1_E1 = -mode=mmce
 ARG_R1_E1 = -mode=ata
 ```
+
+<a id="argument-precedence-and-order"></a>
 
 #### 인수의 우선순위와 순서
 1. PS2BBL은 `ARG_*` 끝에 있는 로더 제어 인수만 해석해 소비합니다: `-appid`, `-titleid=`, `-dev9=`, `-patinfo`, `-disc_stop`, `-gsm=`.
@@ -294,13 +324,19 @@ LK_TRIANGLE_E1 = mc0:/APP_WLE-ISR/WLE-ISR.ELF
 ARG_TRIANGLE_E1 = -gsm=1080ix2
 ```
 
+<a id="deprecatedremoved"></a>
+
 ## 폐기/제거됨
 - ~~`RUNKELF`~~ 이제 PS2BBLE이 elf/kelf 실행을 내부에서 처리하므로 사용자가 kelf 실행 동작을 정의할 필요가 없습니다.
 
 
+<a id="known-bugsissues"></a>
+
 ## 알려진 버그/문제
 
 여러분이 알려 주세요 ;)
+
+<a id="credits--thanks"></a>
 
 ## 크레디트와 감사
 

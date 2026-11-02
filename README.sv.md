@@ -113,13 +113,19 @@ RIPPS2 kommer att bära med sig BIBLE som signerade startfiler och installera de
 Det här är en fork av PS2BBL av [El Isra](https://github.com/israpps/PlayStation2-Basic-BootLoader/)
 
 
+<a id="documentation"></a>
+
 ## Dokumentation
 
 Den finns på [github pages](https://israpps.github.io/PlayStation2-Basic-BootLoader/), men med tilläggen nedan:
 
+<a id="config-and-arguments"></a>
+
 ## Konfiguration och argument
 
 Redigera konfigurationsfilen efter behov. För att redigera den rekommenderas [R3Configurator](https://github.com/saildot4k/R3CONFIGURATOR). Sökvägarna är redan inställda för att stämma med nedladdningar från [PS2 Homebrew Store](https://ps2homebrewstore.com). Du ska alltså bara behöva redigera ditt Auto-val och helst ställa in argument för NHDDL efter enheten du läser in ISO-filer från.
+
+<a id="config-path-search-order"></a>
 
 ### Sökordning för konfigurationen
 
@@ -140,10 +146,14 @@ Sökningen efter konfigurationen tar nu hänsyn till startfamiljen, så att inga
    - `cdrom0:/PS2BBL/CONFIG.INI`
    - Reserv på minneskort enligt punkt 3 ovan.
 
+<a id="device-path-prefixes"></a>
+
 ### Sökvägsprefix för enheter
 PS2BBL stöder dessa prefix för start- och konfigurationssökvägar:
 - `mc0:/`, `mc1:/`, `mc?:/`
 - `usb:/` (föredras) och `mass:/` (äldre)
+
+<a id="build-specific"></a>
 
 #### Beroende på bygge:  
 - `mmce0:/`, `mmce1:/`, `mmce?:/` __MMCE-byggen__
@@ -165,6 +175,8 @@ Använd `LOGO_DISPLAY = 3` för att visa tangenternas namn. Namnen anges med `NA
       NAME_SQUARE = POPSLOADER
       ```
 
+<a id="custom-splash-logo-from-cwd"></a>
+
 #### Egen startlogo från CWD
 Om en egen logofil (LOGO.BIN) finns i CWD (aktuell arbetsmapp) ersätter den den inbyggda PS2BBLE/PSXBBLE-logon.
 
@@ -178,9 +190,13 @@ Konvertera en PNG till den förväntade råfilen:
 
   - Lägg den skapade `LOGO.BIN` bredvid PS2BBL Extended. Det bör vara `mc?:/BOOT/` om du använder nedladdningar från [PS2 Homebrew Store](https://ps2store.com)
 
+<a id="retrogem-visual-game-id"></a>
+
 ### Visuellt spel-ID från Retrogem
 - `APP_GAMEID = 1` slår på visuellt spel-ID för appar/homebrew, upp till 11 tecken från filnamnet eller PS1/2-skivan
 - `CDROM_DISABLE_GAMEID = 1` slår av visuellt spel-ID för skivor som startas via `cdrom`.
+
+<a id="disc-spin-control"></a>
 
 ### Styrning av skivans rotation
 - Global nyckel/värde: `DISC_STOP = 0/1`
@@ -188,8 +204,12 @@ Konvertera en PNG till den förväntade råfilen:
 - `DISC_STOP = 0` (eller utelämnat) behåller standardbeteendet.
 - `-disc_stop` kan läggas till per startpost för att stoppa skivan när mål-ELF:en hittats.
 
+<a id="video-mode"></a>
+
 ### Videoläge
 - `VIDEO_MODE = AUTO, NTSC, PAL, 480P` Använder PS2:ans standard eller tvingar fram ett av de andra 3 lägena.
+
+<a id="emergency-video-mode-selector"></a>
 
 #### Nödväljare för videoläge
 - Öppnas med `TRIANGLE + CROSS` under start
@@ -198,6 +218,8 @@ Konvertera en PNG till den förväntade råfilen:
   - `LEFT/RIGHT` bläddrar mellan lägena: `AUTO`, `NTSC`, `PAL`, `480P`
   - `SELECT` sparar det valda läget i den aktiva konfigurationsfilen
   - `START` lämnar väljaren och fortsätter till tangentvisningen
+
+<a id="cdrom-launch-args"></a>
 
 ### Startargument för CDROM
 För `LK_*_E* = cdrom` stöds dessa argument:
@@ -208,17 +230,23 @@ För `LK_*_E* = cdrom` stöds dessa argument:
 - `-ps1vneg`
 - `-gsm=<v[:c]>`
 
+<a id="ps2logo-arguments-ps2-discs-only"></a>
+
 #### PS2LOGO-argument (endast PS2-skivor)
 - Använd `cdrom` som startpostens sökväg.
 - Lägg till `-nologo` i postens argument för att starta PS2-skivor direkt (utan `rom0:PS2LOGO`).
 - Utan `-nologo` startar PS2BBL skivan via PS2LOGO och patchar den så att skivans region alltid används och logons kontrollsumma hoppas över.
 - DECKARD IE 75K och senare: XPARAM.IRX tillämpas automatiskt vid behov för starter utan logo.
 
+<a id="ps1-disc-arguments-per-launch"></a>
+
 #### Argument för PS1-skivor (per start)
 De gäller per `cdrom`-startpost, inte globalt.
 - `-ps1fast` slår på snabb skivhastighet för PS1.
 - `-ps1smooth` slår på texturutjämning.
 - `-ps1vneg` kör PS1DRV via PS1VModeNegator. Användbart i uppsättningar där konsolens och skivans läge skiljer sig (till exempel vissa MechaPwn/modchip-fall).
+
+<a id="app-arguments"></a>
 
 ### App-argument
 Använd rader `ARG_<BUTTON>_E? =` för att skicka argument till en ELF (se INI-exemplen).
@@ -255,6 +283,8 @@ ARG_R1_E1 = -video=480p
 ARG_R1_E1 = -mode=mmce
 ARG_R1_E1 = -mode=ata
 ```
+
+<a id="argument-precedence-and-order"></a>
 
 #### Argumentens företräde och ordning
 1. PS2BBL läser och förbrukar bara laddarens styrargument i slutet av `ARG_*`: `-appid`, `-titleid=`, `-dev9=`, `-patinfo`, `-disc_stop`, `-gsm=`.
@@ -294,13 +324,19 @@ LK_TRIANGLE_E1 = mc0:/APP_WLE-ISR/WLE-ISR.ELF
 ARG_TRIANGLE_E1 = -gsm=1080ix2
 ```
 
+<a id="deprecatedremoved"></a>
+
 ## Föråldrat/Borttaget
 - ~~`RUNKELF`~~ PS2BBLE startar nu elf/kelf internt, utan att användaren behöver ange en kelf-startåtgärd.
 
 
+<a id="known-bugsissues"></a>
+
 ## Kända buggar/problem
 
 det får du berätta för mig ;)
+
+<a id="credits--thanks"></a>
 
 ## Tack och erkännanden
 
