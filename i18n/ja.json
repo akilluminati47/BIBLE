@@ -1,0 +1,666 @@
+{
+ "002e3896fc22": {
+  "en": "002e3896fc22",
+  "t": "   - MMCE ブート：`mmce?:/PS2BBL/CONFIG.INI`"
+ },
+ "009050688382": {
+  "en": "009050688382",
+  "t": "4. `:PATINFO` の起動パスでは、PS2BBL はパーティション属性の `SYSTEM.CNF` を解析し、CNF の `arg*` エントリをユーザーのアプリ引数の後に追加します。"
+ },
+ "075b75340cb8": {
+  "en": "075b75340cb8",
+  "t": "### ディスク回転の制御"
+ },
+ "08c4d5ce9f91": {
+  "en": "08c4d5ce9f91",
+  "t": "2. デバイスから読み込まれた場合："
+ },
+ "0d2174dc83ca": {
+  "en": "0d2174dc83ca",
+  "t": "- `DISC_STOP_AT_BOOT=1` 設定の読み込み後に必ず光学ディスクを止めるコンパイル時プロファイル"
+ },
+ "0d2b0afd3f6c": {
+  "en": "0d2b0afd3f6c",
+  "t": "- `-ps1fast` で PS1 ディスクの高速読み込みを有効にします。"
+ },
+ "0f47fa9660dd": {
+  "en": "0f47fa9660dd",
+  "t": "5. `-patinfo` が設定され、起動パスに `:PATINFO` が含まれる場合、ユーザーのアプリ引数のうち残った最初のものが対象の ELF のパスになり（CNF のブートパスを上書き）、アプリの argv から取り除かれます。残る引数がない場合は起動を中止し（OSDMenu と同じ）、CNF の `BOOT2/BOOT/path` は使いません。"
+ },
+ "10e49ad3c8d0": {
+  "en": "10e49ad3c8d0",
+  "t": "  <a href=\"https://github.com/akilluminati47/RIPPS2\">RIPPS2</a> ·"
+ },
+ "138c6cc4b754": {
+  "en": "138c6cc4b754",
+  "t": "CWD（現在の作業ディレクトリ）に独自のロゴファイル（LOGO.BIN）があると、内蔵の PS2BBLE/PSXBBLE ロゴの代わりに使われます。"
+ },
+ "159f3f6b8e94": {
+  "en": "159f3f6b8e94",
+  "t": "3. メモリーカードの予備："
+ },
+ "1638bfe84685": {
+  "en": "1638bfe84685",
+  "t": "必要に応じて設定ファイルを編集してください。編集には [R3Configurator](https://github.com/saildot4k/R3CONFIGURATOR) をおすすめします。パスは [PS2 Homebrew Store](https://ps2homebrewstore.com) からのダウンロードに合わせて設定済みです。そのため Auto の選択を編集し、ISO を読み込むデバイスに合わせて NHDDL の引数を設定するだけで済むはずです。"
+ },
+ "164d82fd0dc4": {
+  "en": "164d82fd0dc4",
+  "t": "- `1080ix3` = 1080i を強制、幅/高さ x3"
+ },
+ "1e9995e783fc": {
+  "en": "1e9995e783fc",
+  "t": "   - PS2 の場合：`mc?:/SYS-CONF/PS2BBL.INI`"
+ },
+ "1ec5c04ec3af": {
+  "en": "1ec5c04ec3af",
+  "t": "- `3` = フィールド反転 タイプ 3"
+ },
+ "200e77165cb3": {
+  "en": "200e77165cb3",
+  "t": "   - `cdrom0:/PS2BBL/CONFIG.INI`"
+ },
+ "20e55fa78502": {
+  "en": "20e55fa78502",
+  "t": "- `KEY_READ_WAIT_TIME = 0` を許可しました（upstream の下限は 500 ms）。"
+ },
+ "228b3fdf1eec": {
+  "en": "228b3fdf1eec",
+  "t": "  - 省略した場合、PS2BBL は DEV9 のポリシーを強制しません。"
+ },
+ "24439e94a180": {
+  "en": "24439e94a180",
+  "t": "- `ata:/` exFAT HDD の BDM デバイス"
+ },
+ "25f56fc0dd9e": {
+  "en": "25f56fc0dd9e",
+  "t": "これらは全体ではなく、`cdrom` の起動エントリごとに適用されます。"
+ },
+ "29a4c699928e": {
+  "en": "29a4c699928e",
+  "t": "- `v` = ビデオモード："
+ },
+ "29c939657e98": {
+  "en": "29c939657e98",
+  "t": "  - [PS2BBL](https://github.com/israpps/PlayStation2-Basic-BootLoader/) の @israpps"
+ },
+ "2b406c409d68": {
+  "en": "2b406c409d68",
+  "t": "## クレジットと謝辞"
+ },
+ "2d1c0c3dc3a3": {
+  "en": "2d1c0c3dc3a3",
+  "t": "- [El Isra](https://israpps.github.io/)（PS2BBL の開発者）より： "
+ },
+ "2e1844667faa": {
+  "en": "2e1844667faa",
+  "t": "- 電源投入時から押し続けたコンボでページが開くようになりました（コントローラーがまだ\n  起動中だと TRIANGLE + CROSS を取りこぼしていました）。"
+ },
+ "2e5eb51f690b": {
+  "en": "2e5eb51f690b",
+  "t": "- 操作："
+ },
+ "2f9dde551617": {
+  "en": "2f9dde551617",
+  "t": "**このフォークの変更点**"
+ },
+ "33014f963b64": {
+  "en": "33014f963b64",
+  "t": "1. PS2BBL は `ARG_*` の末尾にあるローダー制御用の引数だけを解析して取り除きます：`-appid`、`-titleid=`、`-dev9=`、`-patinfo`、`-disc_stop`、`-gsm=`。"
+ },
+ "34f273d336d6": {
+  "en": "34f273d336d6",
+  "t": "BIBLE は RIPPS2 がセットアップするブートローダーで、saildot4k の PS2BBL Extended のフォークです。"
+ },
+ "36e7bf643ef8": {
+  "en": "36e7bf643ef8",
+  "t": "### アプリの引数"
+ },
+ "38dcd9eb7ded": {
+  "en": "38dcd9eb7ded",
+  "t": "- 起動する elf の引数を先に書き、その後に必要な PS2BBL 内部の引数を続けます（下記参照）。[NHDDL](https://github.com/pcm720/nhddl) は引数を使うのに最適で、NHDDL の起動が速くなります。"
+ },
+ "391adc91b06c": {
+  "en": "391adc91b06c",
+  "t": "- 全体のキー/値：`DISC_STOP = 0/1`"
+ },
+ "3adb267042c1": {
+  "en": "3adb267042c1",
+  "t": "## 非推奨/削除"
+ },
+ "3d92d62b98f7": {
+  "en": "3d92d62b98f7",
+  "t": "- ビデオモード：`VIDEO_MODE` は `576P`、`720P`、`1080I` も受け付けます（RIPPS2 の残りのモード）。`AUTO`（既定）は\n  AUTO エントリの隣に RIPPS2 の設定があればその Video Mode で、なければ本体自身のモードで起動します。"
+ },
+ "3eba597b9c5f": {
+  "en": "3eba597b9c5f",
+  "t": "- `1080ix2` = 1080i を強制、幅/高さ x2"
+ },
+ "3fef7c9294f4": {
+  "en": "3fef7c9294f4",
+  "t": "  <a href=\"https://github.com/akilluminati47/BIBLE/actions\">ビルド</a> ·"
+ },
+ "4019cd997962": {
+  "en": "4019cd997962",
+  "t": "  - `NICHDD` は DEV9（ネットワークアダプター）と HDD の両方を電源オンのままにします。"
+ },
+ "406206a51560": {
+  "en": "406206a51560",
+  "t": "- `APP_GAMEID = 1` でアプリ/homebrew の視覚的なゲーム ID を有効にします。ファイル名または PS1/2 ディスクから最大 11 文字を取ります"
+ },
+ "4088157bc12a": {
+  "en": "4088157bc12a",
+  "t": "  - このプロジェクトの土台となる OSD 初期化ライブラリの @SP193"
+ },
+ "40a28018c31c": {
+  "en": "40a28018c31c",
+  "t": "#### PS1 ディスクの引数（起動ごと）"
+ },
+ "439feb54907f": {
+  "en": "439feb54907f",
+  "t": "- `-ps1vneg`"
+ },
+ "43fcd64b5833": {
+  "en": "43fcd64b5833",
+  "t": "5. `DISC_STOP_AT_BOOT=1 付きでコンパイルした場合"
+ },
+ "449dee5852ac": {
+  "en": "449dee5852ac",
+  "t": "RIPPS2 は BIBLE を署名済みのブートファイルとして同梱し、今同梱している PS2BBL 1.2.0 の代わりに Settings（Boot Loader）からインストールする予定です。BIBLE はほかのローダー（FMCB、OSDMenu、SD2PSX のローダー）から起動される ELF としても動きます。BIBLE のリリースはまだありません。"
+ },
+ "4793c8125dc9": {
+  "en": "4793c8125dc9",
+  "t": "### eGSM (external Graphics Synthesize Mode)"
+ },
+ "4822d5ecd6f5": {
+  "en": "4822d5ecd6f5",
+  "t": "- 新機能：起動キーのページ。起動時に L2 + R2 を押し続けると、スプラッシュの設定に関係なく、各キーの起動パスを読めます。"
+ },
+ "4995cc5a4675": {
+  "en": "4995cc5a4675",
+  "t": "6. 残りの引数は順序を保ったまま起動するアプリに渡されます。"
+ },
+ "4a75c7695a03": {
+  "en": "4a75c7695a03",
+  "t": "あなたが教えて ;)"
+ },
+ "4b1b74371c50": {
+  "en": "4b1b74371c50",
+  "t": "- `-disc_stop` は `cdrom` の起動エントリでは無視されます。"
+ },
+ "4bcc83d2703e": {
+  "en": "4bcc83d2703e",
+  "t": "**RIPPS2 での使い方**"
+ },
+ "4c5f14b856c2": {
+  "en": "4c5f14b856c2",
+  "t": "   - APA HDD ブート：`hdd0:__sysconf:pfs:/PS2BBL/CONFIG.INI`"
+ },
+ "4ca733fed7d8": {
+  "en": "4ca733fed7d8",
+  "t": "- 起動エントリのパスには `cdrom` を使います。"
+ },
+ "4cb76a5bb7c0": {
+  "en": "4cb76a5bb7c0",
+  "t": "- `-gsm=<v[:c]>`"
+ },
+ "4daebfa16bdc": {
+  "en": "4daebfa16bdc",
+  "t": "   - PSX-DESR の場合：`mc?:/SYS-CONF/PSXBBL.INI`"
+ },
+ "4e318690a5f7": {
+  "en": "4e318690a5f7",
+  "t": "- `mx4sio:/`（推奨）と `massX:/`（旧式）  __MX4SIO ビルド__"
+ },
+ "502c67628795": {
+  "en": "502c67628795",
+  "t": "- 選択中は `LOGO_DISPLAY = 3` を強制するので、ロゴとキーの画面を見ながら操作できます。"
+ },
+ "511c26550b7a": {
+  "en": "511c26550b7a",
+  "t": "- `DISC_STOP = 1` は、設定ファイルが見つかった場合、設定の読み込み後に光学ディスクを止めます。"
+ },
+ "514e9776a6b8": {
+  "en": "514e9776a6b8",
+  "t": "  - `2` PS2BBLE/PSXBBLE ロゴと本体情報"
+ },
+ "5189562652cb": {
+  "en": "5189562652cb",
+  "t": "- `-dev9=<mode>` で対象の ELF を起動する前に DEV9/HDD のポリシーを設定します。対応モード："
+ },
+ "52a815bf5a23": {
+  "en": "52a815bf5a23",
+  "t": "    - [OSDMenu](https://github.com/pcm720/OSDMenu) の Retrogem gameID、PS1 Video Negator、eGSM、PS2LOGO のコード"
+ },
+ "53c15c59e52b": {
+  "en": "53c15c59e52b",
+  "t": "  - PNG は RGBA 8 ビットのインデックスカラー、チャンネルあたり 255 色、解像度 256x64 にしてください。"
+ },
+ "5519f5e8f4ae": {
+  "en": "5519f5e8f4ae",
+  "t": "    PlayStation 2™ と PSX-DESR 向けの柔軟なブートローダー"
+ },
+ "5933320f9ba5": {
+  "en": "5933320f9ba5",
+  "t": "ELF に引数を渡すには `ARG_<BUTTON>_E? =` の行を使います（INI の例を参照）。"
+ },
+ "5bb677ad2c61": {
+  "en": "5bb677ad2c61",
+  "t": "  - `3` 設定ファイルの `NAME_BUTTON = <TITLE>` を表示するキーのグラフィック"
+ },
+ "5d5f73d54d7f": {
+  "en": "5d5f73d54d7f",
+  "t": "## 既知のバグ/問題"
+ },
+ "5d73be2078e5": {
+  "en": "5d73be2078e5",
+  "t": "- メモリーカード / USB、MMCE、MX4SIO、HDD 向けの PS2 ビルド。eGSM のステージ 2 は含めていません。"
+ },
+ "6071ff1f11ca": {
+  "en": "6071ff1f11ca",
+  "t": "### Retrogem の視覚的なゲーム ID"
+ },
+ "61eb73b67bf7": {
+  "en": "61eb73b67bf7",
+  "t": "    - [NHDDL](https://github.com/pcm720/nhddl) のビデオモードのオプション"
+ },
+ "641317004793": {
+  "en": "641317004793",
+  "t": "- saildot4k より"
+ },
+ "641f6dbfad30": {
+  "en": "641f6dbfad30",
+  "t": "- `-gsm=<v[:c]>` で内蔵の eGSM 経由で対象の ELF を実行します（`rom?:` パスでは無視）。"
+ },
+ "6656cd8cf3ca": {
+  "en": "6656cd8cf3ca",
+  "t": "  - `START` で選択を終えてキー表示へ進む"
+ },
+ "6682c393a791": {
+  "en": "6682c393a791",
+  "t": "  <a href=\"https://github.com/saildot4k/PlayStation2-Basic-BootLoader-Extended\">PS2BBL Extended</a> ·"
+ },
+ "675253f496d9": {
+  "en": "675253f496d9",
+  "t": "  - ロゴ、背景、キーのグラフィックの [@Berion](https://www.psx-place.com/members/berion.1431/)"
+ },
+ "69d4c3170060": {
+  "en": "69d4c3170060",
+  "t": "   - 上の 3 と同じメモリーカードの予備。"
+ },
+ "6debe9f38567": {
+  "en": "6debe9f38567",
+  "t": "NHDDL をビデオモード 480p で起動し、nhddl.yaml なしで mmce と exfat の HDD から ISO を探す例です。ドライバーの読み込みや nhddl.yaml の検索と読み込みで時間を無駄にしないのが利点です。NHDDL を起動して ISO 一覧を表示する最速の方法です。"
+ },
+ "704784bb456b": {
+  "en": "704784bb456b",
+  "t": "- `2` = フィールド反転 タイプ 2"
+ },
+ "70710f40217d": {
+  "en": "70710f40217d",
+  "t": "  - 注意：HDD なしのビルドではこのオプションは効果がありません。"
+ },
+ "71858737f5c1": {
+  "en": "71858737f5c1",
+  "t": "#### ビルドごと：  "
+ },
+ "7425333403ea": {
+  "en": "7425333403ea",
+  "t": "- `xfrom:/` パス __PSX DESR ビルド__"
+ },
+ "767d07f95351": {
+  "en": "767d07f95351",
+  "t": "- `-nologo`"
+ },
+ "7bb989a3fb7e": {
+  "en": "7bb989a3fb7e",
+  "t": "<h1 align=\"center\">BIBLE</h1>"
+ },
+ "7d52c1b8a6a4": {
+  "en": "7d52c1b8a6a4",
+  "t": "- `-gsm=<v[:c]>` で内蔵の eGSM 経由で対象の ELF を実行します（`rom?:` パスでは無視）。使う場合は最後の引数にしてください。"
+ },
+ "7f48b942e063": {
+  "en": "7f48b942e063",
+  "t": "  - リリースパッケージ（スクリプトはリリースのルートにあります）："
+ },
+ "81f7471dcefd": {
+  "en": "81f7471dcefd",
+  "t": "- 空 = なし（既定）"
+ },
+ "84c6c36434d4": {
+  "en": "84c6c36434d4",
+  "t": "- `-patinfo` で `:PATINFO` エントリの PATINFO 処理を有効にします。"
+ },
+ "85953d7c3ac5": {
+  "en": "85953d7c3ac5",
+  "t": "  - eGSM は起動する対象（ELF/ディスク）に適用され、PS2BBL 自体には適用されません。\n  eGSM の形式（OSDMenu 式）："
+ },
+ "859e8018755b": {
+  "en": "859e8018755b",
+  "t": "  - `LEFT/RIGHT` でモードを切り替え：`AUTO`、`NTSC`、`PAL`、`480P`"
+ },
+ "85d3494a3c15": {
+  "en": "85d3494a3c15",
+  "t": "### LOGO_DISPLAY"
+ },
+ "87104d1e4715": {
+  "en": "87104d1e4715",
+  "t": "- エントリの引数に `-nologo` を加えると PS2 ディスクを直接起動します（`rom0:PS2LOGO` を飛ばす）。"
+ },
+ "8864c9dc9624": {
+  "en": "8864c9dc9624",
+  "t": "- `-gsm=fp2:1`"
+ },
+ "89f87574605b": {
+  "en": "89f87574605b",
+  "t": "[github pages](https://israpps.github.io/PlayStation2-Basic-BootLoader/) にありますが、以下の追加があります："
+ },
+ "8acd450b3e09": {
+  "en": "8acd450b3e09",
+  "t": "#### PS2LOGO の引数（PS2 ディスクのみ）"
+ },
+ "8c1803695e4c": {
+  "en": "8c1803695e4c",
+  "t": "  - `NIC` は DEV9/ネットワークをオンのままにし、`pfs0:` をアンマウントして `hdd0:`/`hdd1:` を即座にアイドルにします。"
+ },
+ "8ce3834f1354": {
+  "en": "8ce3834f1354",
+  "t": "4. PSX での最後の予備"
+ },
+ "8daca164d7be": {
+  "en": "8daca164d7be",
+  "t": "- `DISC_STOP = 0`（または省略）で既定の動作のままです。"
+ },
+ "9109da4b6d16": {
+  "en": "9109da4b6d16",
+  "t": "#### 引数の優先順位と順序"
+ },
+ "942059e5f559": {
+  "en": "942059e5f559",
+  "t": "<p align=\"center\"><img src=\"assets/readme/ripps2-icon.png\" alt=\"RIPPS2\" width=\"48\" height=\"48\"><br><sub>BIBLE は <a href=\"https://github.com/akilluminati47/RIPPS2\">RIPPS2</a> の一部です。</sub></p>"
+ },
+ "9422bbe6a402": {
+  "en": "9422bbe6a402",
+  "t": "- ~~`RUNKELF`~~ PS2BBLE は elf/kelf の起動を内部で処理するようになり、ユーザーが kelf の起動アクションを定義する必要はなくなりました。"
+ },
+ "986a0196fb5a": {
+  "en": "986a0196fb5a",
+  "t": "  <sub>起動時に L2 + R2 を押し続けると起動キーのページ、TRIANGLE + CROSS でビデオモードのページが開きます。<code>$CREDITS</code> に設定したキーはクレジットを表示します。</sub>"
+ },
+ "999269fc568a": {
+  "en": "999269fc568a",
+  "t": "- `-appid` で `APP_GAMEID = 0` でもアプリの視覚的なゲーム ID を強制します。"
+ },
+ "99dfbd99b669": {
+  "en": "99dfbd99b669",
+  "t": "PNG を想定どおりの生ファイルに変換します："
+ },
+ "9a2ff94c7bee": {
+  "en": "9a2ff94c7bee",
+  "t": "- `-ps1fast`"
+ },
+ "9e14e0197f55": {
+  "en": "9e14e0197f55",
+  "t": "- スプラッシュ：RIPPS2 の空の中央に PS2 ロゴ、その下にボタン、上にテキストを配置します。\n  `BIBLE_GLYPHS` 0 なし、1 前面ボタン（既定）、2 十六個すべてを八個ずつ二列で。\n  `BIBLE_INFO` 1 で本体情報、時計、カウントダウンを表示します（既定はオフ）。\n  空は RIPPS2 の Color Theme に合わせます：`BIBLE_COLOR` がなければ、BIBLE は RIPPS2 が設定と一緒に保存する\n  空を、AUTO エントリが起動する RIPPS2 フォルダーから読みます（設定ファイルの `BIBLE_COLOR` が優先）。\n  どのビデオモードでも同じ見た目です。ページ（ビデオモード、クレジット、起動キー）は暗くしたロゴの上にフェードインし、\n  ボタンは片付けられるので、起動キーを落ち着いて読めます。"
+ },
+ "9f17d88941ea": {
+  "en": "9f17d88941ea",
+  "t": "- `fp2` = プログレッシブ走査を強制（480p/576p）"
+ },
+ "9f61ad6cbb52": {
+  "en": "9f61ad6cbb52",
+  "t": "- 空 = 強制しない（既定）"
+ },
+ "a0525e7d534f": {
+  "en": "a0525e7d534f",
+  "t": "- `-ps1vneg` で PS1VModeNegator 経由で PS1DRV を実行します。本体のモードとディスクのモードが違う環境で役立ちます（たとえば一部の MechaPwn/改造チップの例）。"
+ },
+ "a3a65a7af403": {
+  "en": "a3a65a7af403",
+  "t": "- 起動中に `TRIANGLE + CROSS` で入ります"
+ },
+ "a44babacaf8b": {
+  "en": "a44babacaf8b",
+  "t": "   - `xfrom:/PS2BBL/CONFIG.INI`"
+ },
+ "a6090e73dd04": {
+  "en": "a6090e73dd04",
+  "t": "### CDROM の起動引数"
+ },
+ "a63cb36e571e": {
+  "en": "a63cb36e571e",
+  "t": "- `1` = フィールド反転 タイプ 1"
+ },
+ "aa77b29709a0": {
+  "en": "aa77b29709a0",
+  "t": "  - `BOOT2/BOOT/path=PATINFO` の場合、PS2BBL はパーティションの属性領域から埋め込みの ELF を読み込み、内部の `-la=E...` の受け渡しを使います。"
+ },
+ "ad807f2f9ae8": {
+  "en": "ad807f2f9ae8",
+  "t": "- `CDROM_DISABLE_GAMEID = 1` で `cdrom` から起動したディスクの視覚的なゲーム ID を無効にします。"
+ },
+ "ad9f1afbaa28": {
+  "en": "ad9f1afbaa28",
+  "t": "- `-gsm=1080ix2`"
+ },
+ "ae898dca6d64": {
+  "en": "ae898dca6d64",
+  "t": "- `-ps1smooth` でテクスチャのスムージングを有効にします。"
+ },
+ "aed791467a10": {
+  "en": "aed791467a10",
+  "t": "`LK_*_E* = cdrom` で使える引数："
+ },
+ "b2ddfe0e68bd": {
+  "en": "b2ddfe0e68bd",
+  "t": "PS2 ディスクでは、eGSM は `OSDGSM.CNF` から自動で読み込まれます（INI でのパス設定は不要）。設定ファイルの形式は[こちら](https://github.com/pcm720/OSDMenu/blob/main/patcher/README.md#osdgsmcnf)を参照してください。"
+ },
+ "b3ba04fd4da5": {
+  "en": "b3ba04fd4da5",
+  "t": "   - BDM ブート：`usb:/PS2BBL/CONFIG.INI` / `mass:/PS2BBL/CONFIG.INI` / `ata:/PS2BBL/CONFIG.INI`"
+ },
+ "b471aa6e5908": {
+  "en": "b471aa6e5908",
+  "t": "- `-gsm=fp2`"
+ },
+ "b739b09f5b15": {
+  "en": "b739b09f5b15",
+  "t": "  - いつも助けてくれる @uyjulian と @fjtrujy"
+ },
+ "b9a70d5fa7b3": {
+  "en": "b9a70d5fa7b3",
+  "t": "### 設定ファイルの検索順"
+ },
+ "bb5f8da78b41": {
+  "en": "bb5f8da78b41",
+  "t": "  - 作成した `LOGO.BIN` を PS2BBL Extended の隣に置きます。[PS2 Homebrew Store](https://ps2store.com) からのダウンロードを使っているなら `mc?:/BOOT/` になるはずです"
+ },
+ "bb72aacfa09f": {
+  "en": "bb72aacfa09f",
+  "t": "- `hdd0:partition:pfs:/<path to elf>` __HDD ビルド__"
+ },
+ "bbfa9a74fbf2": {
+  "en": "bbfa9a74fbf2",
+  "t": "  - PS2BBL はパーティションの属性領域（`PS2ICON3D`）から `SYSTEM.CNF` を読み、`BOOT2/BOOT/path`、`arg*`、`skip_argv0`、`HDDUNITPOWER` を適用します。"
+ },
+ "beaeeff57019": {
+  "en": "beaeeff57019",
+  "t": "- `ilink:/`（BDM マスストレージのルート）__未実装__"
+ },
+ "bf1858271ce3": {
+  "en": "bf1858271ce3",
+  "t": "#### CWD からの独自スプラッシュロゴ"
+ },
+ "bf621297607e": {
+  "en": "bf621297607e",
+  "t": "## ドキュメント"
+ },
+ "bf8021c1dc5a": {
+  "en": "bf8021c1dc5a",
+  "t": "<p align=\"center\"><sub>以下はすべて PS2BBL Extended の元の README を翻訳したもので、ほかは何も変えていません。</sub></p>"
+ },
+ "c06e0a279296": {
+  "en": "c06e0a279296",
+  "t": "- `usb:/`（推奨）と `mass:/`（旧式）"
+ },
+ "c10219799837": {
+  "en": "c10219799837",
+  "t": "  <a href=\"LICENSE\">GPL-3.0</a>"
+ },
+ "c48fea10b14c": {
+  "en": "c48fea10b14c",
+  "t": "- `VIDEO_MODE = AUTO, NTSC, PAL, 480P` PS2 の既定を使うか、ほかの 3 つのモードのどれかを強制します。"
+ },
+ "c545cdcece82": {
+  "en": "c545cdcece82",
+  "t": "キー名を表示するには `LOGO_DISPLAY = 3` を使います。名前は `NAME_<BUTTON>` で定義します。"
+ },
+ "c7ce0d2e1ff8": {
+  "en": "c7ce0d2e1ff8",
+  "t": "- `-nologo` がない場合、PS2BBL は PS2LOGO 経由でディスクを起動し、常にディスクのリージョンを使ってロゴのチェックサム確認を回避するようパッチします。"
+ },
+ "c839d62b7d87": {
+  "en": "c839d62b7d87",
+  "t": "  - `SELECT` で選んだモードを使用中の設定ファイルに保存"
+ },
+ "c8c06c6a31a8": {
+  "en": "c8c06c6a31a8",
+  "t": "## 設定と引数"
+ },
+ "d22941defd02": {
+  "en": "d22941defd02",
+  "t": "これは [El Isra](https://github.com/israpps/PlayStation2-Basic-BootLoader/) による PS2BBL のフォークです"
+ },
+ "d3848ab732aa": {
+  "en": "d3848ab732aa",
+  "t": "- `-ps1smooth`"
+ },
+ "d552d6dc7534": {
+  "en": "d552d6dc7534",
+  "t": "### ビデオモード"
+ },
+ "d5c51f8e6ac2": {
+  "en": "d5c51f8e6ac2",
+  "t": "- `-titleid=SLUS_123.45` でアプリのタイトル ID を上書きします（最大 11 文字）。"
+ },
+ "da330e7a0139": {
+  "en": "da330e7a0139",
+  "t": "- `mc0:/`, `mc1:/`, `mc?:/`"
+ },
+ "da9818557f89": {
+  "en": "da9818557f89",
+  "t": "#### 緊急用ビデオモード選択"
+ },
+ "dbdd3c74a6e3": {
+  "en": "dbdd3c74a6e3",
+  "t": "   - MX4SIO ブート：`mx4sio:/PS2BBL/CONFIG.INI`"
+ },
+ "ddfc333f97d7": {
+  "en": "ddfc333f97d7",
+  "t": "2. 解析は下から上へ進み、制御用でない最初の引数で止まります（OSDMenu 式の末尾の扱い）。"
+ },
+ "de02177eb37e": {
+  "en": "de02177eb37e",
+  "t": "eGSM の ARG の例："
+ },
+ "de664ca47abc": {
+  "en": "de664ca47abc",
+  "t": "- `-nogameid`"
+ },
+ "de782301e641": {
+  "en": "de782301e641",
+  "t": "  - [PS1 Video Negator](https://github.com/ps2homebrew/PS1VModeNeg) の @sp193"
+ },
+ "dfbebe092d40": {
+  "en": "dfbebe092d40",
+  "t": "- `BIBLE_WIDESCREEN`：`AUTO`（既定：RIPPS2 の Widescreen、なければ PS2 の 16:9 画面設定）、`ON` または\n  `OFF`。480i、576i、480p、576p では、映像を 16:9 に引き伸ばすテレビ向けにスプラッシュを描くので、\n  潰れません。720p と 1080i は最初から 16:9 です。"
+ },
+ "dfef928c9dd2": {
+  "en": "dfef928c9dd2",
+  "t": "- `c` = 互換モード："
+ },
+ "e17e9a226952": {
+  "en": "e17e9a226952",
+  "t": "- `-disc_stop` で対象の ELF を読み込んだ後にディスクを止めます（`DISC_STOP_AT_BOOT` ビルドでない場合のエントリごとの指定に便利）。"
+ },
+ "e2f6ac3e8203": {
+  "en": "e2f6ac3e8203",
+  "t": "  <a href=\"https://github.com/israpps/PlayStation2-Basic-BootLoader\">PS2BBL</a> ·"
+ },
+ "e3b8cc6236ca": {
+  "en": "e3b8cc6236ca",
+  "t": "  - PS2BBLE の 10 パス、アイデア、説得の @nathanneurotic"
+ },
+ "e6d271e7c0bd": {
+  "en": "e6d271e7c0bd",
+  "t": "起動時に不要なドライバーを読み込まないよう、設定の検索はブートの系統を考慮するようになりました："
+ },
+ "e6eb20871642": {
+  "en": "e6eb20871642",
+  "t": "  - `IOPRP=PATINFO`（または独自のパス）の場合、PS2BBL は内部の `-la=I...` の受け渡しでステージ 2 に渡します。"
+ },
+ "e948a4e2ffd1": {
+  "en": "e948a4e2ffd1",
+  "t": "PS2BBL は次の起動/設定パスの接頭辞に対応しています："
+ },
+ "e95c77643cfe": {
+  "en": "e95c77643cfe",
+  "t": "- `mmce0:/`、`mmce1:/`、`mmce?:/` __MMCE ビルド__"
+ },
+ "eae8f93205fd": {
+  "en": "eae8f93205fd",
+  "t": "  - `0` ロゴも本体情報もなし"
+ },
+ "ed21c5ac66ff": {
+  "en": "ed21c5ac66ff",
+  "t": "- RIPPS2 に入るときのちらつきなし：起動時にロゴとボタンがフェードアウトし、空は RIPPS2 のモードのまま画面に残ります。\n  RIPPS2 はその同じ空の上で始まります。起動時に TRIANGLE + CROSS を押し続けるとビデオモードのページが開き、これは常に\n  本体自身のインターレースモードで開きます（コンポジットケーブルで 720p や 1080i から戻る道）。"
+ },
+ "ed675d1ac190": {
+  "en": "ed675d1ac190",
+  "t": "- DECKARD IE 75K 以降：ロゴなし起動で必要なときは XPARAM.IRX を自動で適用します。"
+ },
+ "f194a33a1232": {
+  "en": "f194a33a1232",
+  "t": "- `fp1` = プログレッシブ走査を強制（240p/288p）"
+ },
+ "f49f3f803d4d": {
+  "en": "f49f3f803d4d",
+  "t": "### デバイスパスの接頭辞"
+ },
+ "fbd93fd380b1": {
+  "en": "fbd93fd380b1",
+  "t": "  - `1` 本体情報"
+ },
+ "fd03d61bc9f2": {
+  "en": "fd03d61bc9f2",
+  "t": "- `-disc_stop` を起動エントリごとに付けると、対象の ELF が見つかった後にディスクを止めます。"
+ },
+ "fd5efe6c6f4c": {
+  "en": "fd5efe6c6f4c",
+  "t": "  - @pcm720："
+ },
+ "fdee3f98ecaa": {
+  "en": "fdee3f98ecaa",
+  "t": "- `1080ix1` = 1080i を強制、幅/高さ x1"
+ },
+ "fe658db8cc2f": {
+  "en": "fe658db8cc2f",
+  "t": "  - 最新の SDK でこの怪物を作るよう励ましてくれた @asmblur"
+ },
+ "fec43ce445f9": {
+  "en": "fec43ce445f9",
+  "t": "使用例："
+ },
+ "ff7f439f5d79": {
+  "en": "ff7f439f5d79",
+  "t": "1. `CONFIG.INI`（CWD：現在の作業ディレクトリ）"
+ },
+ "ffed62f66519": {
+  "en": "ffed62f66519",
+  "t": "    - 例："
+ },
+ "fffd2a6caa3f": {
+  "en": "fffd2a6caa3f",
+  "t": "  - `-patinfo` がある場合、残った最初の引数が CNF の `BOOT2/BOOT/path` の対象を上書きします。\n  これは HDD ビルド向けです。  \n  PATINFO の例：  "
+ }
+}

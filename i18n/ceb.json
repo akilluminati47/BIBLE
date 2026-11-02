@@ -1,0 +1,666 @@
+{
+ "002e3896fc22": {
+  "en": "002e3896fc22",
+  "t": "   - MMCE boot: `mmce?:/PS2BBL/CONFIG.INI`"
+ },
+ "009050688382": {
+  "en": "009050688382",
+  "t": "4. Para sa mga launch path nga `:PATINFO`, i-parse sa PS2BBL ang partition-attribute nga `SYSTEM.CNF` ug idugtong ang mga `arg*` entry sa CNF human sa mga argument sa app sa user."
+ },
+ "075b75340cb8": {
+  "en": "075b75340cb8",
+  "t": "### Kontrol sa pagtuyok sa disc"
+ },
+ "08c4d5ce9f91": {
+  "en": "08c4d5ce9f91",
+  "t": "2. Kung gi-load gikan sa device:"
+ },
+ "0d2174dc83ca": {
+  "en": "0d2174dc83ca",
+  "t": "- `DISC_STOP_AT_BOOT=1` compile-time profile nga kanunay mohunong sa optical disc human ma-load ang config"
+ },
+ "0d2b0afd3f6c": {
+  "en": "0d2b0afd3f6c",
+  "t": "- Ang `-ps1fast` mo-on sa paspas nga katulin sa PS1 disc."
+ },
+ "0f47fa9660dd": {
+  "en": "0f47fa9660dd",
+  "t": "5. Kung naka-set ang `-patinfo` ug adunay `:PATINFO` ang launch path, ang unang nahibilin nga argument sa app sa user mahimong path sa target ELF (moilis sa boot path sa CNF) ug tangtangon kini sa argv sa app. Kung walay nahibilin nga argument, i-abort ang launch (parehas sa OSDMenu), ug dili gamiton ang `BOOT2/BOOT/path` sa CNF."
+ },
+ "10e49ad3c8d0": {
+  "en": "10e49ad3c8d0",
+  "t": "  <a href=\"https://github.com/akilluminati47/RIPPS2\">RIPPS2</a> ·"
+ },
+ "138c6cc4b754": {
+  "en": "138c6cc4b754",
+  "t": "Kung adunay kaugalingong logo file (LOGO.BIN) sa CWD (current working directory), ilisan niini ang naka-embed nga PS2BBLE/PSXBBLE logo."
+ },
+ "159f3f6b8e94": {
+  "en": "159f3f6b8e94",
+  "t": "3. Fallback sa memory card:"
+ },
+ "1638bfe84685": {
+  "en": "1638bfe84685",
+  "t": "I-edit ang config file sumala sa gikinahanglan. Girekomendar ang [R3Configurator](https://github.com/saildot4k/R3CONFIGURATOR) sa pag-edit sa imong config file. Na-set na ang mga path aron motugma sa mga download gikan sa [PS2 Homebrew Store](https://ps2homebrewstore.com). Buot ipasabot, ang imong Auto choice ra ang kinahanglang i-edit, ug mas maayo nga i-set ang mga argument sa NHDDL sumala sa device diin ka nag-load og mga ISO."
+ },
+ "164d82fd0dc4": {
+  "en": "164d82fd0dc4",
+  "t": "- `1080ix3` = pugsa ang 1080i, gilapdon/gitas-on x3"
+ },
+ "1e9995e783fc": {
+  "en": "1e9995e783fc",
+  "t": "   - Sa PS2: `mc?:/SYS-CONF/PS2BBL.INI`"
+ },
+ "1ec5c04ec3af": {
+  "en": "1ec5c04ec3af",
+  "t": "- `3` = field flipping matang 3"
+ },
+ "200e77165cb3": {
+  "en": "200e77165cb3",
+  "t": "   - `cdrom0:/PS2BBL/CONFIG.INI`"
+ },
+ "20e55fa78502": {
+  "en": "20e55fa78502",
+  "t": "- Gitugotan ang `KEY_READ_WAIT_TIME = 0` (500 ms ang pinakaubos sa upstream)."
+ },
+ "228b3fdf1eec": {
+  "en": "228b3fdf1eec",
+  "t": "  - kung wala, dili mopugos ang PS2BBL og DEV9 policy."
+ },
+ "24439e94a180": {
+  "en": "24439e94a180",
+  "t": "- `ata:/` BDM device para sa exFAT HDD"
+ },
+ "25f56fc0dd9e": {
+  "en": "25f56fc0dd9e",
+  "t": "Para kini sa matag `cdrom` launch entry, dili sa kinatibuk-an."
+ },
+ "29a4c699928e": {
+  "en": "29a4c699928e",
+  "t": "- `v` = video mode:"
+ },
+ "29c939657e98": {
+  "en": "29c939657e98",
+  "t": "  - @israpps para sa [PS2BBL](https://github.com/israpps/PlayStation2-Basic-BootLoader/)"
+ },
+ "2b406c409d68": {
+  "en": "2b406c409d68",
+  "t": "## Mga kredito ug pasalamat"
+ },
+ "2d1c0c3dc3a3": {
+  "en": "2d1c0c3dc3a3",
+  "t": "- Gikan kang [El Isra](https://israpps.github.io/) (Developer sa PS2BBL): "
+ },
+ "2e1844667faa": {
+  "en": "2e1844667faa",
+  "t": "- Ang mga combo nga gipugngan sukad sa pag-on moabli na karon sa ilang mga page (ang TRIANGLE + CROSS malimtan samtang nagsugod pa\n  ang mga controller)."
+ },
+ "2e5eb51f690b": {
+  "en": "2e5eb51f690b",
+  "t": "- Mga kontrol:"
+ },
+ "2f9dde551617": {
+  "en": "2f9dde551617",
+  "t": "**Unsa ang giusab niini nga fork**"
+ },
+ "33014f963b64": {
+  "en": "33014f963b64",
+  "t": "1. Ang PS2BBL mag-parse ug mokonsumo lang sa mga trailing loader-control arg gikan sa `ARG_*`: `-appid`, `-titleid=`, `-dev9=`, `-patinfo`, `-disc_stop`, `-gsm=`."
+ },
+ "34f273d336d6": {
+  "en": "34f273d336d6",
+  "t": "Ang BIBLE mao ang boot loader nga gi-set up sa RIPPS2: usa ka fork sa PS2BBL Extended ni saildot4k."
+ },
+ "36e7bf643ef8": {
+  "en": "36e7bf643ef8",
+  "t": "### Mga argument sa app"
+ },
+ "38dcd9eb7ded": {
+  "en": "38dcd9eb7ded",
+  "t": "- Ibutang una ang mga argument sa elf nga ilansad, dayon idugtong ang gustong internal nga argument sa PS2BBL (tan-awa sa ubos). Maayong kandidato ang [NHDDL](https://github.com/pcm720/nhddl) para sa mga argument, kay mopaspas kini sa boot sa NHDDL."
+ },
+ "391adc91b06c": {
+  "en": "391adc91b06c",
+  "t": "- Global nga key/value: `DISC_STOP = 0/1`"
+ },
+ "3adb267042c1": {
+  "en": "3adb267042c1",
+  "t": "## Dili na gigamit/Gitangtang"
+ },
+ "3d92d62b98f7": {
+  "en": "3d92d62b98f7",
+  "t": "- Mga video mode: modawat usab ang `VIDEO_MODE` og `576P`, `720P` ug `1080I`, ang uban pang mode sa RIPPS2. Ang `AUTO` (default)\n  magsugod sa Video Mode sa RIPPS2 kung naa ang mga setting niini tupad sa AUTO entry, kung dili sa kaugalingong mode sa console."
+ },
+ "3eba597b9c5f": {
+  "en": "3eba597b9c5f",
+  "t": "- `1080ix2` = pugsa ang 1080i, gilapdon/gitas-on x2"
+ },
+ "3fef7c9294f4": {
+  "en": "3fef7c9294f4",
+  "t": "  <a href=\"https://github.com/akilluminati47/BIBLE/actions\">Mga build</a> ·"
+ },
+ "4019cd997962": {
+  "en": "4019cd997962",
+  "t": "  - Ang `NICHDD` magpabilin nga naka-on ang DEV9 (network adapter) ug HDD."
+ },
+ "406206a51560": {
+  "en": "406206a51560",
+  "t": "- Ang `APP_GAMEID = 1` mo-on sa visual game ID para sa apps/homebrew, hangtod 11 ka character gikan sa filename o PS1/2 Disc"
+ },
+ "4088157bc12a": {
+  "en": "4088157bc12a",
+  "t": "  - @SP193 para sa mga OSD initialization library, nga mao ang pundasyon niini nga proyekto"
+ },
+ "40a28018c31c": {
+  "en": "40a28018c31c",
+  "t": "#### Mga argument sa PS1 disc (matag launch)"
+ },
+ "439feb54907f": {
+  "en": "439feb54907f",
+  "t": "- `-ps1vneg`"
+ },
+ "43fcd64b5833": {
+  "en": "43fcd64b5833",
+  "t": "5. Kung gi-compile uban sa `DISC_STOP_AT_BOOT=1"
+ },
+ "449dee5852ac": {
+  "en": "449dee5852ac",
+  "t": "Dad-on sa RIPPS2 ang BIBLE isip mga signed boot file ug i-install kini gikan sa Settings (Boot Loader) niini, puli sa PS2BBL 1.2.0 nga dala niini karon. Modagan usab ang BIBLE isip ELF nga gisugdan sa laing loader (FMCB, OSDMenu, ang loader sa usa ka SD2PSX). Wala pay release sa BIBLE."
+ },
+ "4793c8125dc9": {
+  "en": "4793c8125dc9",
+  "t": "### eGSM (external Graphics Synthesize Mode)"
+ },
+ "4822d5ecd6f5": {
+  "en": "4822d5ecd6f5",
+  "t": "- Bag-o: ang page sa mga launch key. Pugngi ang L2 + R2 sa pag-boot aron mabasa ang launch path sa matag key, bisan unsa pa ang imong mga splash setting."
+ },
+ "4995cc5a4675": {
+  "en": "4995cc5a4675",
+  "t": "6. Ang nahibilin nga mga argument magpabilin sa han-ay ug ipasa sa gilansad nga app."
+ },
+ "4a75c7695a03": {
+  "en": "4a75c7695a03",
+  "t": "ikaw ang mosulti nako ;)"
+ },
+ "4b1b74371c50": {
+  "en": "4b1b74371c50",
+  "t": "- Gibalewala ang `-disc_stop` para sa mga `cdrom` launch entry."
+ },
+ "4bcc83d2703e": {
+  "en": "4bcc83d2703e",
+  "t": "**Giunsa kini paggamit sa RIPPS2**"
+ },
+ "4c5f14b856c2": {
+  "en": "4c5f14b856c2",
+  "t": "   - APA HDD boot: `hdd0:__sysconf:pfs:/PS2BBL/CONFIG.INI`"
+ },
+ "4ca733fed7d8": {
+  "en": "4ca733fed7d8",
+  "t": "- Gamita ang `cdrom` isip path sa launch entry."
+ },
+ "4cb76a5bb7c0": {
+  "en": "4cb76a5bb7c0",
+  "t": "- `-gsm=<v[:c]>`"
+ },
+ "4daebfa16bdc": {
+  "en": "4daebfa16bdc",
+  "t": "   - Sa PSX-DESR: `mc?:/SYS-CONF/PSXBBL.INI`"
+ },
+ "4e318690a5f7": {
+  "en": "4e318690a5f7",
+  "t": "- `mx4sio:/` (mas gusto), ug `massX:/` (daan)  __mga MX4SIO build__"
+ },
+ "502c67628795": {
+  "en": "502c67628795",
+  "t": "- Pugson sa selector ang `LOGO_DISPLAY = 3` samtang aktibo aron makita nimo ang logo ug hotkey UI."
+ },
+ "511c26550b7a": {
+  "en": "511c26550b7a",
+  "t": "- Ang `DISC_STOP = 1` mohunong sa optical disc human ma-load ang config kung adunay nakit-ang config file."
+ },
+ "514e9776a6b8": {
+  "en": "514e9776a6b8",
+  "t": "  - `2` PS2BBLE/PSXBBLE logo ug impormasyon sa console"
+ },
+ "5189562652cb": {
+  "en": "5189562652cb",
+  "t": "- Ang `-dev9=<mode>` motakda sa DEV9/HDD policy sa dili pa ilansad ang target ELF. Mga gisuportahang mode:"
+ },
+ "52a815bf5a23": {
+  "en": "52a815bf5a23",
+  "t": "    - Retrogem gameID, PS1 Video Negator, eGSM, ug PS2LOGO code gikan sa [OSDMenu](https://github.com/pcm720/OSDMenu)"
+ },
+ "53c15c59e52b": {
+  "en": "53c15c59e52b",
+  "t": "  - Ang PNG kinahanglan RGBA 8 Bit indexed, 255 ka kolor matag channel ug 256x64 ang resolution."
+ },
+ "5519f5e8f4ae": {
+  "en": "5519f5e8f4ae",
+  "t": "    Usa ka flexible nga BootLoader para sa PlayStation 2™ ug PSX-DESR"
+ },
+ "5933320f9ba5": {
+  "en": "5933320f9ba5",
+  "t": "Gamita ang mga linya nga `ARG_<BUTTON>_E? =` aron mopasa og argument sa ELF (tan-awa ang mga pananglitan sa INI)."
+ },
+ "5bb677ad2c61": {
+  "en": "5bb677ad2c61",
+  "t": "  - `3` Graphic sa hotkey nga adunay `NAME_BUTTON = <TITLE>` gikan sa config file"
+ },
+ "5d5f73d54d7f": {
+  "en": "5d5f73d54d7f",
+  "t": "## Nahibal-ang mga bug/isyu"
+ },
+ "5d73be2078e5": {
+  "en": "5d73be2078e5",
+  "t": "- Mga PS2 build para sa memory card / USB, MMCE, MX4SIO ug HDD. Wala gilakip ang eGSM stage 2."
+ },
+ "6071ff1f11ca": {
+  "en": "6071ff1f11ca",
+  "t": "### Retrogem visual game ID"
+ },
+ "61eb73b67bf7": {
+  "en": "61eb73b67bf7",
+  "t": "    - Mga opsyon sa video mode gikan sa [NHDDL](https://github.com/pcm720/nhddl)"
+ },
+ "641317004793": {
+  "en": "641317004793",
+  "t": "- Gikan kang saildot4k"
+ },
+ "641f6dbfad30": {
+  "en": "641f6dbfad30",
+  "t": "- Ang `-gsm=<v[:c]>` modagan sa target ELF pinaagi sa naka-embed nga eGSM (gibalewala para sa mga path nga `rom?:`)."
+ },
+ "6656cd8cf3ca": {
+  "en": "6656cd8cf3ca",
+  "t": "  - `START` mogawas sa selector ug mopadayon sa hotkey display"
+ },
+ "6682c393a791": {
+  "en": "6682c393a791",
+  "t": "  <a href=\"https://github.com/saildot4k/PlayStation2-Basic-BootLoader-Extended\">PS2BBL Extended</a> ·"
+ },
+ "675253f496d9": {
+  "en": "675253f496d9",
+  "t": "  - [@Berion](https://www.psx-place.com/members/berion.1431/) para sa mga logo, background ug hotkey graphics"
+ },
+ "69d4c3170060": {
+  "en": "69d4c3170060",
+  "t": "   - Fallback sa memory card sumala sa punto 3 sa ibabaw."
+ },
+ "6debe9f38567": {
+  "en": "6debe9f38567",
+  "t": "Pananglitan sa paglansad sa NHDDL sa video mode 480p ug pagpangita og mga iso sa mmce ug exfat hdd nga dili kinahanglan ang nhddl.yaml. Ang kaayohan mao nga walay nausik nga oras sa pag-load sa mga driver, pagpangita ug pag-load sa nhddl.yaml. Kini ang pinakapaspas nga paagi sa pag-boot sa NHDDL ug pagpakita sa ISO list."
+ },
+ "704784bb456b": {
+  "en": "704784bb456b",
+  "t": "- `2` = field flipping matang 2"
+ },
+ "70710f40217d": {
+  "en": "70710f40217d",
+  "t": "  - pahinumdom: sa mga build nga walay HDD, walay epekto kini nga opsyon."
+ },
+ "71858737f5c1": {
+  "en": "71858737f5c1",
+  "t": "#### Sumala sa build:  "
+ },
+ "7425333403ea": {
+  "en": "7425333403ea",
+  "t": "- Mga path nga `xfrom:/` __mga PSX DESR build__"
+ },
+ "767d07f95351": {
+  "en": "767d07f95351",
+  "t": "- `-nologo`"
+ },
+ "7bb989a3fb7e": {
+  "en": "7bb989a3fb7e",
+  "t": "<h1 align=\"center\">BIBLE</h1>"
+ },
+ "7d52c1b8a6a4": {
+  "en": "7d52c1b8a6a4",
+  "t": "- Ang `-gsm=<v[:c]>` modagan sa target ELF pinaagi sa naka-embed nga eGSM (gibalewala para sa mga path nga `rom?:`). Kinahanglan kini ang katapusang argument kung gamiton."
+ },
+ "7f48b942e063": {
+  "en": "7f48b942e063",
+  "t": "  - Release package (naa sa release root ang script):"
+ },
+ "81f7471dcefd": {
+  "en": "81f7471dcefd",
+  "t": "- walay sulod = wala (default)"
+ },
+ "84c6c36434d4": {
+  "en": "84c6c36434d4",
+  "t": "- Ang `-patinfo` mo-on sa pagdumala sa PATINFO para sa mga `:PATINFO` entry."
+ },
+ "85953d7c3ac5": {
+  "en": "85953d7c3ac5",
+  "t": "  - Gigamit ang eGSM sa gilansad nga target (ELF/disc), dili sa PS2BBL mismo.\n  Format sa eGSM (sama sa OSDMenu):"
+ },
+ "859e8018755b": {
+  "en": "859e8018755b",
+  "t": "  - `LEFT/RIGHT` motuyok sa mga mode: `AUTO`, `NTSC`, `PAL`, `480P`"
+ },
+ "85d3494a3c15": {
+  "en": "85d3494a3c15",
+  "t": "### LOGO_DISPLAY"
+ },
+ "87104d1e4715": {
+  "en": "87104d1e4715",
+  "t": "- Idugang ang `-nologo` sa mga argument sa entry aron direktang mag-boot sa PS2 disc (laktawan ang `rom0:PS2LOGO`)."
+ },
+ "8864c9dc9624": {
+  "en": "8864c9dc9624",
+  "t": "- `-gsm=fp2:1`"
+ },
+ "89f87574605b": {
+  "en": "89f87574605b",
+  "t": "Naka-host kini sa [github pages](https://israpps.github.io/PlayStation2-Basic-BootLoader/) apan uban sa mga dugang sa ubos:"
+ },
+ "8acd450b3e09": {
+  "en": "8acd450b3e09",
+  "t": "#### Mga argument sa PS2LOGO (PS2 disc ra)"
+ },
+ "8c1803695e4c": {
+  "en": "8c1803695e4c",
+  "t": "  - Ang `NIC` magpabilin nga naka-on ang DEV9/network, mo-unmount sa `pfs0:`, ug diha-diha dayon mopa-idle sa `hdd0:`/`hdd1:`."
+ },
+ "8ce3834f1354": {
+  "en": "8ce3834f1354",
+  "t": "4. Katapusang fallback sa PSX"
+ },
+ "8daca164d7be": {
+  "en": "8daca164d7be",
+  "t": "- Ang `DISC_STOP = 0` (o kung wala) magpabilin sa default nga kinaiya."
+ },
+ "9109da4b6d16": {
+  "en": "9109da4b6d16",
+  "t": "#### Pagkauna ug han-ay sa mga argument"
+ },
+ "942059e5f559": {
+  "en": "942059e5f559",
+  "t": "<p align=\"center\"><img src=\"assets/readme/ripps2-icon.png\" alt=\"RIPPS2\" width=\"48\" height=\"48\"><br><sub>Bahin ang BIBLE sa <a href=\"https://github.com/akilluminati47/RIPPS2\">RIPPS2</a>.</sub></p>"
+ },
+ "9422bbe6a402": {
+  "en": "9422bbe6a402",
+  "t": "- ~~`RUNKELF`~~ Ang PS2BBLE na karon ang modumala sa paglansad sa elf/kelf sa sulod niini nga dili na kinahanglan magtakda ang user og kelf launch action."
+ },
+ "986a0196fb5a": {
+  "en": "986a0196fb5a",
+  "t": "  <sub>Pugngi ang L2 + R2 sa pag-boot para sa page sa mga launch key, TRIANGLE + CROSS para sa page sa video mode; ang key nga gi-set sa <code>$CREDITS</code> magpakita sa credits.</sub>"
+ },
+ "999269fc568a": {
+  "en": "999269fc568a",
+  "t": "- Ang `-appid` mopugos sa visual game ID sa app bisan pa kung `APP_GAMEID = 0`."
+ },
+ "99dfbd99b669": {
+  "en": "99dfbd99b669",
+  "t": "I-convert ang PNG ngadto sa gipaabot nga raw file:"
+ },
+ "9a2ff94c7bee": {
+  "en": "9a2ff94c7bee",
+  "t": "- `-ps1fast`"
+ },
+ "9e14e0197f55": {
+  "en": "9e14e0197f55",
+  "t": "- Ang splash: ang PS2 logo sa tunga sa langit sa RIPPS2, nga ang mga button sa ilalom ug bisan unsang text sa ibabaw.\n  `BIBLE_GLYPHS` 0 wala, 1 ang mga face button (default), 2 ang tanang napulog-unom sa duha ka laray nga tig-walo.\n  `BIBLE_INFO` 1 nagpakita sa impormasyon sa console, orasan ug countdown (naka-off isip default).\n  Ang langit motugma sa imong RIPPS2 Color Theme: kung walay `BIBLE_COLOR`, basahon sa BIBLE ang langit nga gi-save sa RIPPS2 uban sa\n  mga setting niini, gikan sa RIPPS2 folder nga gisugdan sa AUTO entry niini (ang `BIBLE_COLOR` sa config ang modaog).\n  Parehas nga hitsura sa matag video mode. Ang mga page (video mode, credits, launch keys) hinay-hinay nga mogawas ibabaw sa gipalubog nga logo\n  nga gitipigan ang mga button, aron kalmado nga mabasa ang mga launch key."
+ },
+ "9f17d88941ea": {
+  "en": "9f17d88941ea",
+  "t": "- `fp2` = pugsa ang progressive scan (480p/576p)"
+ },
+ "9f61ad6cbb52": {
+  "en": "9f61ad6cbb52",
+  "t": "- walay sulod = ayaw pugsa (default)"
+ },
+ "a0525e7d534f": {
+  "en": "a0525e7d534f",
+  "t": "- Ang `-ps1vneg` modagan sa PS1DRV pinaagi sa PS1VModeNegator. Mapuslanon sa mga setup diin managlahi ang mode sa console ug sa disc (pananglitan pipila ka kaso sa MechaPwn/modchip)."
+ },
+ "a3a65a7af403": {
+  "en": "a3a65a7af403",
+  "t": "- Sulod gamit ang `TRIANGLE + CROSS` samtang nag-boot"
+ },
+ "a44babacaf8b": {
+  "en": "a44babacaf8b",
+  "t": "   - `xfrom:/PS2BBL/CONFIG.INI`"
+ },
+ "a6090e73dd04": {
+  "en": "a6090e73dd04",
+  "t": "### Mga launch argument sa CDROM"
+ },
+ "a63cb36e571e": {
+  "en": "a63cb36e571e",
+  "t": "- `1` = field flipping matang 1"
+ },
+ "aa77b29709a0": {
+  "en": "aa77b29709a0",
+  "t": "  - kung `BOOT2/BOOT/path=PATINFO`, i-load sa PS2BBL ang naka-embed nga ELF gikan sa partition attribute area ug gamiton ang internal nga `-la=E...` handoff."
+ },
+ "ad807f2f9ae8": {
+  "en": "ad807f2f9ae8",
+  "t": "- Ang `CDROM_DISABLE_GAMEID = 1` mo-off sa visual game ID para sa mga disc nga gilansad pinaagi sa `cdrom`."
+ },
+ "ad9f1afbaa28": {
+  "en": "ad9f1afbaa28",
+  "t": "- `-gsm=1080ix2`"
+ },
+ "ae898dca6d64": {
+  "en": "ae898dca6d64",
+  "t": "- Ang `-ps1smooth` mo-on sa pagpahamis sa texture."
+ },
+ "aed791467a10": {
+  "en": "aed791467a10",
+  "t": "Para sa `LK_*_E* = cdrom`, ang mga gisuportahang argument mao ang:"
+ },
+ "b2ddfe0e68bd": {
+  "en": "b2ddfe0e68bd",
+  "t": "Para sa mga PS2 disc, awtomatikong basahon ang eGSM gikan sa `OSDGSM.CNF` (walay kinahanglang INI path setting). Tan-awa [dinhi](https://github.com/pcm720/OSDMenu/blob/main/patcher/README.md#osdgsmcnf) ang format sa config file."
+ },
+ "b3ba04fd4da5": {
+  "en": "b3ba04fd4da5",
+  "t": "   - BDM boot: `usb:/PS2BBL/CONFIG.INI` / `mass:/PS2BBL/CONFIG.INI` / `ata:/PS2BBL/CONFIG.INI`"
+ },
+ "b471aa6e5908": {
+  "en": "b471aa6e5908",
+  "t": "- `-gsm=fp2`"
+ },
+ "b739b09f5b15": {
+  "en": "b739b09f5b15",
+  "t": "  - @uyjulian ug @fjtrujy sa kanunay nga pagtabang nako"
+ },
+ "b9a70d5fa7b3": {
+  "en": "b9a70d5fa7b3",
+  "t": "### Han-ay sa pagpangita sa config"
+ },
+ "bb5f8da78b41": {
+  "en": "bb5f8da78b41",
+  "t": "  - Ibutang ang gihimong `LOGO.BIN` tupad sa PS2BBL Extended. Kinahanglan kini `mc?:/BOOT/` kung naggamit ka og mga download gikan sa [PS2 Homebrew Store](https://ps2store.com)"
+ },
+ "bb72aacfa09f": {
+  "en": "bb72aacfa09f",
+  "t": "- `hdd0:partition:pfs:/<path to elf>` __mga HDD build__"
+ },
+ "bbfa9a74fbf2": {
+  "en": "bbfa9a74fbf2",
+  "t": "  - Basahon sa PS2BBL ang `SYSTEM.CNF` gikan sa partition attribute area (`PS2ICON3D`) ug gamiton ang `BOOT2/BOOT/path`, `arg*`, `skip_argv0`, ug `HDDUNITPOWER`."
+ },
+ "beaeeff57019": {
+  "en": "beaeeff57019",
+  "t": "- `ilink:/` (mga root sa BDM mass-storage) __wala pa maimplementar__"
+ },
+ "bf1858271ce3": {
+  "en": "bf1858271ce3",
+  "t": "#### Kaugalingong splash logo gikan sa CWD"
+ },
+ "bf621297607e": {
+  "en": "bf621297607e",
+  "t": "## Dokumentasyon"
+ },
+ "bf8021c1dc5a": {
+  "en": "bf8021c1dc5a",
+  "t": "<p align=\"center\"><sub>Ang tanan sa ubos mao ang orihinal nga README sa PS2BBL Extended, gihubad ug wala nay laing giusab.</sub></p>"
+ },
+ "c06e0a279296": {
+  "en": "c06e0a279296",
+  "t": "- `usb:/` (mas gusto), ug `mass:/` (daan)"
+ },
+ "c10219799837": {
+  "en": "c10219799837",
+  "t": "  <a href=\"LICENSE\">GPL-3.0</a>"
+ },
+ "c48fea10b14c": {
+  "en": "c48fea10b14c",
+  "t": "- `VIDEO_MODE = AUTO, NTSC, PAL, 480P` Gamiton ang default sa PS2 o pugson ang usa sa 3 ka laing mode."
+ },
+ "c545cdcece82": {
+  "en": "c545cdcece82",
+  "t": "Gamita ang `LOGO_DISPLAY = 3` aron ipakita ang mga ngalan sa hotkey. Ang mga ngalan gitakda sa `NAME_<BUTTON>`."
+ },
+ "c7ce0d2e1ff8": {
+  "en": "c7ce0d2e1ff8",
+  "t": "- Kung walay `-nologo`, padaganon sa PS2BBL ang disc pinaagi sa PS2LOGO ug i-patch kini aron kanunay gamiton ang region sa disc ug lusutan ang checksum check sa logo."
+ },
+ "c839d62b7d87": {
+  "en": "c839d62b7d87",
+  "t": "  - `SELECT` i-save ang napiling mode sa aktibong config file"
+ },
+ "c8c06c6a31a8": {
+  "en": "c8c06c6a31a8",
+  "t": "## Config ug mga argument"
+ },
+ "d22941defd02": {
+  "en": "d22941defd02",
+  "t": "Kini usa ka fork sa PS2BBL ni [El Isra](https://github.com/israpps/PlayStation2-Basic-BootLoader/)"
+ },
+ "d3848ab732aa": {
+  "en": "d3848ab732aa",
+  "t": "- `-ps1smooth`"
+ },
+ "d552d6dc7534": {
+  "en": "d552d6dc7534",
+  "t": "### Video Mode"
+ },
+ "d5c51f8e6ac2": {
+  "en": "d5c51f8e6ac2",
+  "t": "- Ang `-titleid=SLUS_123.45` moilis sa title ID sa app (hangtod 11 ka character)."
+ },
+ "da330e7a0139": {
+  "en": "da330e7a0139",
+  "t": "- `mc0:/`, `mc1:/`, `mc?:/`"
+ },
+ "da9818557f89": {
+  "en": "da9818557f89",
+  "t": "#### Pang-emerhensiya nga selector sa video mode"
+ },
+ "dbdd3c74a6e3": {
+  "en": "dbdd3c74a6e3",
+  "t": "   - MX4SIO boot: `mx4sio:/PS2BBL/CONFIG.INI`"
+ },
+ "ddfc333f97d7": {
+  "en": "ddfc333f97d7",
+  "t": "2. Gikan sa ubos pataas ang pag-parse ug mohunong sa unang dili-control nga arg (trailing nga kinaiya sama sa OSDMenu)."
+ },
+ "de02177eb37e": {
+  "en": "de02177eb37e",
+  "t": "Mga pananglitan sa eGSM ARG:"
+ },
+ "de664ca47abc": {
+  "en": "de664ca47abc",
+  "t": "- `-nogameid`"
+ },
+ "de782301e641": {
+  "en": "de782301e641",
+  "t": "  - @sp193 para sa [PS1 Video Negator](https://github.com/ps2homebrew/PS1VModeNeg)"
+ },
+ "dfbebe092d40": {
+  "en": "dfbebe092d40",
+  "t": "- `BIBLE_WIDESCREEN`: `AUTO` (default: ang Widescreen sa RIPPS2, kung dili ang 16:9 screen setting sa PS2), `ON` o\n  `OFF`. Sa 480i, 576i, 480p ug 576p, ang splash gidrowing para sa TV nga moinat sa hulagway ngadto sa 16:9, nga walay\n  pagkapiit. 16:9 na ang 720p ug 1080i."
+ },
+ "dfef928c9dd2": {
+  "en": "dfef928c9dd2",
+  "t": "- `c` = compatibility mode:"
+ },
+ "e17e9a226952": {
+  "en": "e17e9a226952",
+  "t": "- Ang `-disc_stop` mohunong sa disc human ma-load ang target ELF (mapuslanon matag entry kung walay `DISC_STOP_AT_BOOT` build)."
+ },
+ "e2f6ac3e8203": {
+  "en": "e2f6ac3e8203",
+  "t": "  <a href=\"https://github.com/israpps/PlayStation2-Basic-BootLoader\">PS2BBL</a> ·"
+ },
+ "e3b8cc6236ca": {
+  "en": "e3b8cc6236ca",
+  "t": "  - @nathanneurotic para sa 10path sa PS2BBLE, mga ideya ug pagdani"
+ },
+ "e6d271e7c0bd": {
+  "en": "e6d271e7c0bd",
+  "t": "Nahibal-an na karon sa pagpangita sa config ang boot family aron dili mag-load og dili kinahanglang mga driver sa pagsugod:"
+ },
+ "e6eb20871642": {
+  "en": "e6eb20871642",
+  "t": "  - kung `IOPRP=PATINFO` (o kaugalingong path), ipasa kini sa PS2BBL ngadto sa stage2 pinaagi sa internal nga `-la=I...` handoff."
+ },
+ "e948a4e2ffd1": {
+  "en": "e948a4e2ffd1",
+  "t": "Gisuportahan sa PS2BBL kining mga prefix sa launch/config path:"
+ },
+ "e95c77643cfe": {
+  "en": "e95c77643cfe",
+  "t": "- `mmce0:/`, `mmce1:/`, `mmce?:/` __mga MMCE build__"
+ },
+ "eae8f93205fd": {
+  "en": "eae8f93205fd",
+  "t": "  - `0` Walay logo ug impormasyon sa console"
+ },
+ "ed21c5ac66ff": {
+  "en": "ed21c5ac66ff",
+  "t": "- Walay paglukso pagsulod sa RIPPS2: sa pag-launch, mokupas ang logo ug mga button ug magpabilin ang langit sa screen, sa mode sa RIPPS2;\n  magsugod ang RIPPS2 sa parehas nga langit. Pugngi ang TRIANGLE + CROSS sa pag-boot para sa page sa video mode, nga kanunay moabli\n  sa kaugalingong interlaced mode sa console (ang dalan pabalik gikan sa 720p o 1080i sa composite cable)."
+ },
+ "ed675d1ac190": {
+  "en": "ed675d1ac190",
+  "t": "- DECKARD IE 75K ug mas bag-o: awtomatikong gigamit ang XPARAM.IRX kung kinahanglan para sa mga launch nga walay logo."
+ },
+ "f194a33a1232": {
+  "en": "f194a33a1232",
+  "t": "- `fp1` = pugsa ang progressive scan (240p/288p)"
+ },
+ "f49f3f803d4d": {
+  "en": "f49f3f803d4d",
+  "t": "### Mga prefix sa device path"
+ },
+ "fbd93fd380b1": {
+  "en": "fbd93fd380b1",
+  "t": "  - `1` Impormasyon sa console"
+ },
+ "fd03d61bc9f2": {
+  "en": "fd03d61bc9f2",
+  "t": "- Mahimong idugang ang `-disc_stop` sa matag launch entry aron mohunong ang disc human makit-an ang target ELF."
+ },
+ "fd5efe6c6f4c": {
+  "en": "fd5efe6c6f4c",
+  "t": "  - @pcm720 para sa"
+ },
+ "fdee3f98ecaa": {
+  "en": "fdee3f98ecaa",
+  "t": "- `1080ix1` = pugsa ang 1080i, gilapdon/gitas-on x1"
+ },
+ "fe658db8cc2f": {
+  "en": "fe658db8cc2f",
+  "t": "  - @asmblur, sa pag-awhag nako sa paghimo niini nga halimaw sa pinakabag-ong sdk"
+ },
+ "fec43ce445f9": {
+  "en": "fec43ce445f9",
+  "t": "Pananglitan sa paggamit:"
+ },
+ "ff7f439f5d79": {
+  "en": "ff7f439f5d79",
+  "t": "1. `CONFIG.INI` (CWD: Current Working Directory)"
+ },
+ "ffed62f66519": {
+  "en": "ffed62f66519",
+  "t": "    - Pananglitan:"
+ },
+ "fffd2a6caa3f": {
+  "en": "fffd2a6caa3f",
+  "t": "  - kung naa ang `-patinfo`, ang unang nahibilin nga argument moilis sa target nga `BOOT2/BOOT/path` sa CNF.\n  Para kini sa mga HDD build.  \n  Pananglitan sa PATINFO:  "
+ }
+}

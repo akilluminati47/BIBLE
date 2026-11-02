@@ -1,0 +1,666 @@
+{
+ "002e3896fc22": {
+  "en": "002e3896fc22",
+  "t": "   - Start z MMCE: `mmce?:/PS2BBL/CONFIG.INI`"
+ },
+ "009050688382": {
+  "en": "009050688382",
+  "t": "4. U spouštěcích cest `:PATINFO` PS2BBL zpracuje `SYSTEM.CNF` z atributu oddílu a připojí položky `arg*` z CNF za argumenty aplikace uživatele."
+ },
+ "075b75340cb8": {
+  "en": "075b75340cb8",
+  "t": "### Ovládání otáčení disku"
+ },
+ "08c4d5ce9f91": {
+  "en": "08c4d5ce9f91",
+  "t": "2. Při načtení ze zařízení:"
+ },
+ "0d2174dc83ca": {
+  "en": "0d2174dc83ca",
+  "t": "- `DISC_STOP_AT_BOOT=1` profil sestavení, který po načtení konfigurace vždy zastaví optický disk"
+ },
+ "0d2b0afd3f6c": {
+  "en": "0d2b0afd3f6c",
+  "t": "- `-ps1fast` zapne rychlou rychlost disku PS1."
+ },
+ "0f47fa9660dd": {
+  "en": "0f47fa9660dd",
+  "t": "5. Je-li nastaveno `-patinfo` a spouštěcí cesta obsahuje `:PATINFO`, první zbývající argument aplikace uživatele se stane cestou cílového ELF (přepíše spouštěcí cestu z CNF) a odebere se z argv aplikace. Pokud žádný argument nezbývá, spuštění se přeruší (stejně jako v OSDMenu) a `BOOT2/BOOT/path` z CNF se nepoužije."
+ },
+ "10e49ad3c8d0": {
+  "en": "10e49ad3c8d0",
+  "t": "  <a href=\"https://github.com/akilluminati47/RIPPS2\">RIPPS2</a> ·"
+ },
+ "138c6cc4b754": {
+  "en": "138c6cc4b754",
+  "t": "Pokud je v CWD (aktuálním pracovním adresáři) vlastní soubor loga (LOGO.BIN), nahradí vestavěné logo PS2BBLE/PSXBBLE."
+ },
+ "159f3f6b8e94": {
+  "en": "159f3f6b8e94",
+  "t": "3. Záloha na paměťové kartě:"
+ },
+ "1638bfe84685": {
+  "en": "1638bfe84685",
+  "t": "Upravte konfigurační soubor podle potřeby. K úpravám se doporučuje [R3Configurator](https://github.com/saildot4k/R3CONFIGURATOR). Cesty jsou už nastavené tak, aby odpovídaly souborům staženým z [PS2 Homebrew Store](https://ps2homebrewstore.com). Měli byste tedy upravit jen svou volbu Auto a nejlépe nastavit argumenty pro NHDDL podle zařízení, ze kterého načítáte ISO."
+ },
+ "164d82fd0dc4": {
+  "en": "164d82fd0dc4",
+  "t": "- `1080ix3` = vynutit 1080i, šířka/výška x3"
+ },
+ "1e9995e783fc": {
+  "en": "1e9995e783fc",
+  "t": "   - Na PS2: `mc?:/SYS-CONF/PS2BBL.INI`"
+ },
+ "1ec5c04ec3af": {
+  "en": "1ec5c04ec3af",
+  "t": "- `3` = prohození půlsnímků typ 3"
+ },
+ "200e77165cb3": {
+  "en": "200e77165cb3",
+  "t": "   - `cdrom0:/PS2BBL/CONFIG.INI`"
+ },
+ "20e55fa78502": {
+  "en": "20e55fa78502",
+  "t": "- `KEY_READ_WAIT_TIME = 0` je povoleno (minimum v upstreamu je 500 ms)."
+ },
+ "228b3fdf1eec": {
+  "en": "228b3fdf1eec",
+  "t": "  - když se vynechá, PS2BBL nevynucuje žádnou zásadu DEV9."
+ },
+ "24439e94a180": {
+  "en": "24439e94a180",
+  "t": "- `ata:/` zařízení BDM pro HDD s exFAT"
+ },
+ "25f56fc0dd9e": {
+  "en": "25f56fc0dd9e",
+  "t": "Platí pro každou spouštěcí položku `cdrom`, ne globálně."
+ },
+ "29a4c699928e": {
+  "en": "29a4c699928e",
+  "t": "- `v` = režim videa:"
+ },
+ "29c939657e98": {
+  "en": "29c939657e98",
+  "t": "  - @israpps za [PS2BBL](https://github.com/israpps/PlayStation2-Basic-BootLoader/)"
+ },
+ "2b406c409d68": {
+  "en": "2b406c409d68",
+  "t": "## Poděkování"
+ },
+ "2d1c0c3dc3a3": {
+  "en": "2d1c0c3dc3a3",
+  "t": "- Od [El Isra](https://israpps.github.io/) (vývojář PS2BBL): "
+ },
+ "2e1844667faa": {
+  "en": "2e1844667faa",
+  "t": "- Kombinace držené od zapnutí teď otevírají své stránky (TRIANGLE + CROSS se ztrácelo, když se ovladače ještě\n  spouštěly)."
+ },
+ "2e5eb51f690b": {
+  "en": "2e5eb51f690b",
+  "t": "- Ovládání:"
+ },
+ "2f9dde551617": {
+  "en": "2f9dde551617",
+  "t": "**Co tento fork mění**"
+ },
+ "33014f963b64": {
+  "en": "33014f963b64",
+  "t": "1. PS2BBL zpracuje a spotřebuje jen koncové řídicí argumenty zavaděče z `ARG_*`: `-appid`, `-titleid=`, `-dev9=`, `-patinfo`, `-disc_stop`, `-gsm=`."
+ },
+ "34f273d336d6": {
+  "en": "34f273d336d6",
+  "t": "BIBLE je zavaděč, který nastavuje RIPPS2: fork PS2BBL Extended od saildot4k."
+ },
+ "36e7bf643ef8": {
+  "en": "36e7bf643ef8",
+  "t": "### Argumenty aplikací"
+ },
+ "38dcd9eb7ded": {
+  "en": "38dcd9eb7ded",
+  "t": "- Nejdřív zadejte argumenty spouštěného elf a pak připojte požadované interní argumenty PS2BBL (viz níže). [NHDDL](https://github.com/pcm720/nhddl) je skvělý kandidát na argumenty, protože zrychlují jeho start."
+ },
+ "391adc91b06c": {
+  "en": "391adc91b06c",
+  "t": "- Globální klíč/hodnota: `DISC_STOP = 0/1`"
+ },
+ "3adb267042c1": {
+  "en": "3adb267042c1",
+  "t": "## Zastaralé/Odstraněné"
+ },
+ "3d92d62b98f7": {
+  "en": "3d92d62b98f7",
+  "t": "- Režimy videa: `VIDEO_MODE` bere také `576P`, `720P` a `1080I`, zbytek režimů RIPPS2. `AUTO` (výchozí)\n  startuje ve Video Mode RIPPS2, když najde jeho nastavení vedle položky AUTO, jinak v režimu konzole."
+ },
+ "3eba597b9c5f": {
+  "en": "3eba597b9c5f",
+  "t": "- `1080ix2` = vynutit 1080i, šířka/výška x2"
+ },
+ "3fef7c9294f4": {
+  "en": "3fef7c9294f4",
+  "t": "  <a href=\"https://github.com/akilluminati47/BIBLE/actions\">Sestavení</a> ·"
+ },
+ "4019cd997962": {
+  "en": "4019cd997962",
+  "t": "  - `NICHDD` nechá zapnuté DEV9 (síťový adaptér) i HDD."
+ },
+ "406206a51560": {
+  "en": "406206a51560",
+  "t": "- `APP_GAMEID = 1` zapne vizuální ID hry pro aplikace/homebrew, až 11 znaků z názvu souboru nebo z disku PS1/2"
+ },
+ "4088157bc12a": {
+  "en": "4088157bc12a",
+  "t": "  - @SP193 za knihovny pro inicializaci OSD, které jsou základem tohoto projektu"
+ },
+ "40a28018c31c": {
+  "en": "40a28018c31c",
+  "t": "#### Argumenty disků PS1 (pro každé spuštění)"
+ },
+ "439feb54907f": {
+  "en": "439feb54907f",
+  "t": "- `-ps1vneg`"
+ },
+ "43fcd64b5833": {
+  "en": "43fcd64b5833",
+  "t": "5. Při kompilaci s `DISC_STOP_AT_BOOT=1"
+ },
+ "449dee5852ac": {
+  "en": "449dee5852ac",
+  "t": "RIPPS2 bude BIBLE nosit jako podepsané spouštěcí soubory a instalovat ho ze svých Settings (Boot Loader) místo PS2BBL 1.2.0, který nosí dnes. BIBLE běží i jako ELF spuštěný jiným zavaděčem (FMCB, OSDMenu, zavaděč SD2PSX). Vydání BIBLE zatím není."
+ },
+ "4793c8125dc9": {
+  "en": "4793c8125dc9",
+  "t": "### eGSM (external Graphics Synthesize Mode)"
+ },
+ "4822d5ecd6f5": {
+  "en": "4822d5ecd6f5",
+  "t": "- Novinka: stránka spouštěcích kláves. Při startu podržte L2 + R2 a přečtete si spouštěcí cestu každé klávesy, ať je úvodní obrazovka nastavena jakkoli."
+ },
+ "4995cc5a4675": {
+  "en": "4995cc5a4675",
+  "t": "6. Zbývající argumenty si zachovají pořadí a předají se spuštěné aplikaci."
+ },
+ "4a75c7695a03": {
+  "en": "4a75c7695a03",
+  "t": "to mi řekněte vy ;)"
+ },
+ "4b1b74371c50": {
+  "en": "4b1b74371c50",
+  "t": "- `-disc_stop` se u spouštěcích položek `cdrom` ignoruje."
+ },
+ "4bcc83d2703e": {
+  "en": "4bcc83d2703e",
+  "t": "**Jak ho RIPPS2 používá**"
+ },
+ "4c5f14b856c2": {
+  "en": "4c5f14b856c2",
+  "t": "   - Start z APA HDD: `hdd0:__sysconf:pfs:/PS2BBL/CONFIG.INI`"
+ },
+ "4ca733fed7d8": {
+  "en": "4ca733fed7d8",
+  "t": "- Jako cestu spouštěcí položky použijte `cdrom`."
+ },
+ "4cb76a5bb7c0": {
+  "en": "4cb76a5bb7c0",
+  "t": "- `-gsm=<v[:c]>`"
+ },
+ "4daebfa16bdc": {
+  "en": "4daebfa16bdc",
+  "t": "   - Na PSX-DESR: `mc?:/SYS-CONF/PSXBBL.INI`"
+ },
+ "4e318690a5f7": {
+  "en": "4e318690a5f7",
+  "t": "- `mx4sio:/` (preferovaná) a `massX:/` (stará)  __sestavení MX4SIO__"
+ },
+ "502c67628795": {
+  "en": "502c67628795",
+  "t": "- Výběr vynutí `LOGO_DISPLAY = 3`, dokud je aktivní, abyste viděli logo a klávesy."
+ },
+ "511c26550b7a": {
+  "en": "511c26550b7a",
+  "t": "- `DISC_STOP = 1` zastaví optický disk po načtení konfigurace, pokud byl nalezen konfigurační soubor."
+ },
+ "514e9776a6b8": {
+  "en": "514e9776a6b8",
+  "t": "  - `2` Logo PS2BBLE/PSXBBLE a informace o konzoli"
+ },
+ "5189562652cb": {
+  "en": "5189562652cb",
+  "t": "- `-dev9=<mode>` nastaví zásadu DEV9/HDD před spuštěním cílového ELF. Podporované režimy:"
+ },
+ "52a815bf5a23": {
+  "en": "52a815bf5a23",
+  "t": "    - gameID Retrogem, PS1 Video Negator, eGSM a kód PS2LOGO z [OSDMenu](https://github.com/pcm720/OSDMenu)"
+ },
+ "53c15c59e52b": {
+  "en": "53c15c59e52b",
+  "t": "  - PNG má být RGBA, 8bitové indexované, 255 barev na kanál a v rozlišení 256x64."
+ },
+ "5519f5e8f4ae": {
+  "en": "5519f5e8f4ae",
+  "t": "    Pružný zavaděč pro PlayStation 2™ a PSX-DESR"
+ },
+ "5933320f9ba5": {
+  "en": "5933320f9ba5",
+  "t": "Řádky `ARG_<BUTTON>_E? =` předávají argumenty do ELF (viz příklady INI)."
+ },
+ "5bb677ad2c61": {
+  "en": "5bb677ad2c61",
+  "t": "  - `3` Grafika kláves s `NAME_BUTTON = <TITLE>` z konfiguračního souboru"
+ },
+ "5d5f73d54d7f": {
+  "en": "5d5f73d54d7f",
+  "t": "## Známé chyby/problémy"
+ },
+ "5d73be2078e5": {
+  "en": "5d73be2078e5",
+  "t": "- Sestavení pro PS2 pro paměťovou kartu / USB, MMCE, MX4SIO a HDD. Fáze 2 eGSM je vynechána."
+ },
+ "6071ff1f11ca": {
+  "en": "6071ff1f11ca",
+  "t": "### Vizuální ID hry od Retrogem"
+ },
+ "61eb73b67bf7": {
+  "en": "61eb73b67bf7",
+  "t": "    - volby režimu videa z [NHDDL](https://github.com/pcm720/nhddl)"
+ },
+ "641317004793": {
+  "en": "641317004793",
+  "t": "- Od saildot4k"
+ },
+ "641f6dbfad30": {
+  "en": "641f6dbfad30",
+  "t": "- `-gsm=<v[:c]>` spustí cílový ELF přes vestavěný eGSM (u cest `rom?:` se ignoruje)."
+ },
+ "6656cd8cf3ca": {
+  "en": "6656cd8cf3ca",
+  "t": "  - `START` ukončí výběr a pokračuje na zobrazení kláves"
+ },
+ "6682c393a791": {
+  "en": "6682c393a791",
+  "t": "  <a href=\"https://github.com/saildot4k/PlayStation2-Basic-BootLoader-Extended\">PS2BBL Extended</a> ·"
+ },
+ "675253f496d9": {
+  "en": "675253f496d9",
+  "t": "  - [@Berion](https://www.psx-place.com/members/berion.1431/) za loga, pozadí a grafiku kláves"
+ },
+ "69d4c3170060": {
+  "en": "69d4c3170060",
+  "t": "   - Záloha na paměťové kartě jako v bodě 3 výše."
+ },
+ "6debe9f38567": {
+  "en": "6debe9f38567",
+  "t": "Příklad spuštění NHDDL v režimu videa 480p s hledáním ISO na mmce a HDD s exFAT bez potřeby nhddl.yaml. Výhodou je, že se neztrácí čas načítáním ovladačů a hledáním a načítáním nhddl.yaml. Je to nejrychlejší způsob, jak spustit NHDDL a ukázat seznam ISO."
+ },
+ "704784bb456b": {
+  "en": "704784bb456b",
+  "t": "- `2` = prohození půlsnímků typ 2"
+ },
+ "70710f40217d": {
+  "en": "70710f40217d",
+  "t": "  - poznámka: u sestavení bez HDD nemá tato volba žádný účinek."
+ },
+ "71858737f5c1": {
+  "en": "71858737f5c1",
+  "t": "#### Podle sestavení:  "
+ },
+ "7425333403ea": {
+  "en": "7425333403ea",
+  "t": "- Cesty `xfrom:/` __sestavení PSX DESR__"
+ },
+ "767d07f95351": {
+  "en": "767d07f95351",
+  "t": "- `-nologo`"
+ },
+ "7bb989a3fb7e": {
+  "en": "7bb989a3fb7e",
+  "t": "<h1 align=\"center\">BIBLE</h1>"
+ },
+ "7d52c1b8a6a4": {
+  "en": "7d52c1b8a6a4",
+  "t": "- `-gsm=<v[:c]>` spustí cílový ELF přes vestavěný eGSM (u cest `rom?:` se ignoruje). Pokud se použije, musí být posledním argumentem."
+ },
+ "7f48b942e063": {
+  "en": "7f48b942e063",
+  "t": "  - Balíček vydání (skript je v kořeni vydání):"
+ },
+ "81f7471dcefd": {
+  "en": "81f7471dcefd",
+  "t": "- prázdné = žádný (výchozí)"
+ },
+ "84c6c36434d4": {
+  "en": "84c6c36434d4",
+  "t": "- `-patinfo` zapne zpracování PATINFO pro položky `:PATINFO`."
+ },
+ "85953d7c3ac5": {
+  "en": "85953d7c3ac5",
+  "t": "  - eGSM se použije na spuštěný cíl (ELF/disk), ne na samotný PS2BBL.\n  Formát eGSM (jako v OSDMenu):"
+ },
+ "859e8018755b": {
+  "en": "859e8018755b",
+  "t": "  - `LEFT/RIGHT` přepínají režimy: `AUTO`, `NTSC`, `PAL`, `480P`"
+ },
+ "85d3494a3c15": {
+  "en": "85d3494a3c15",
+  "t": "### LOGO_DISPLAY"
+ },
+ "87104d1e4715": {
+  "en": "87104d1e4715",
+  "t": "- Přidejte `-nologo` do argumentů položky, aby se disky PS2 spouštěly přímo (bez `rom0:PS2LOGO`)."
+ },
+ "8864c9dc9624": {
+  "en": "8864c9dc9624",
+  "t": "- `-gsm=fp2:1`"
+ },
+ "89f87574605b": {
+  "en": "89f87574605b",
+  "t": "Je na [github pages](https://israpps.github.io/PlayStation2-Basic-BootLoader/), ale s doplňky níže:"
+ },
+ "8acd450b3e09": {
+  "en": "8acd450b3e09",
+  "t": "#### Argumenty PS2LOGO (jen disky PS2)"
+ },
+ "8c1803695e4c": {
+  "en": "8c1803695e4c",
+  "t": "  - `NIC` nechá zapnuté DEV9/síť, odpojí `pfs0:` a hned uspí `hdd0:`/`hdd1:`."
+ },
+ "8ce3834f1354": {
+  "en": "8ce3834f1354",
+  "t": "4. Poslední záloha na PSX"
+ },
+ "8daca164d7be": {
+  "en": "8daca164d7be",
+  "t": "- `DISC_STOP = 0` (nebo vynecháno) ponechá výchozí chování."
+ },
+ "9109da4b6d16": {
+  "en": "9109da4b6d16",
+  "t": "#### Přednost a pořadí argumentů"
+ },
+ "942059e5f559": {
+  "en": "942059e5f559",
+  "t": "<p align=\"center\"><img src=\"assets/readme/ripps2-icon.png\" alt=\"RIPPS2\" width=\"48\" height=\"48\"><br><sub>BIBLE je součástí <a href=\"https://github.com/akilluminati47/RIPPS2\">RIPPS2</a>.</sub></p>"
+ },
+ "9422bbe6a402": {
+  "en": "9422bbe6a402",
+  "t": "- ~~`RUNKELF`~~ PS2BBLE teď spouští elf/kelf interně, aniž by uživatel musel definovat spouštěcí akci pro kelf."
+ },
+ "986a0196fb5a": {
+  "en": "986a0196fb5a",
+  "t": "  <sub>Při startu podržte L2 + R2 pro stránku spouštěcích kláves, TRIANGLE + CROSS pro stránku režimu videa; klávesa nastavená na <code>$CREDITS</code> zobrazí titulky.</sub>"
+ },
+ "999269fc568a": {
+  "en": "999269fc568a",
+  "t": "- `-appid` vynutí vizuální ID hry aplikace i při `APP_GAMEID = 0`."
+ },
+ "99dfbd99b669": {
+  "en": "99dfbd99b669",
+  "t": "Převeďte PNG na očekávaný surový soubor:"
+ },
+ "9a2ff94c7bee": {
+  "en": "9a2ff94c7bee",
+  "t": "- `-ps1fast`"
+ },
+ "9e14e0197f55": {
+  "en": "9e14e0197f55",
+  "t": "- Úvodní obrazovka: logo PS2 uprostřed oblohy RIPPS2, tlačítka pod ním a případný text nad ním.\n  `BIBLE_GLYPHS` 0 žádná, 1 přední tlačítka (výchozí), 2 všech šestnáct ve dvou řadách po osmi.\n  `BIBLE_INFO` 1 zobrazí informace o konzoli, hodiny a odpočet (ve výchozím stavu vypnuto).\n  Obloha odpovídá vašemu Color Theme z RIPPS2: bez `BIBLE_COLOR` čte BIBLE oblohu, kterou RIPPS2 ukládá se svým\n  nastavením, ze složky RIPPS2, kterou spouští jeho položka AUTO (`BIBLE_COLOR` v konfiguraci má přednost).\n  Stejný vzhled v každém režimu videa. Stránky (režim videa, titulky, spouštěcí klávesy) se prolnou přes ztlumené logo\n  s uklizenými tlačítky, takže se spouštěcí klávesy čtou v klidu."
+ },
+ "9f17d88941ea": {
+  "en": "9f17d88941ea",
+  "t": "- `fp2` = vynutit progresivní zobrazení (480p/576p)"
+ },
+ "9f61ad6cbb52": {
+  "en": "9f61ad6cbb52",
+  "t": "- prázdné = nevynucovat (výchozí)"
+ },
+ "a0525e7d534f": {
+  "en": "a0525e7d534f",
+  "t": "- `-ps1vneg` spustí PS1DRV přes PS1VModeNegator. Užitečné tam, kde se režim konzole a režim disku liší (například některé případy MechaPwn/modčipů)."
+ },
+ "a3a65a7af403": {
+  "en": "a3a65a7af403",
+  "t": "- Otevře se pomocí `TRIANGLE + CROSS` během startu"
+ },
+ "a44babacaf8b": {
+  "en": "a44babacaf8b",
+  "t": "   - `xfrom:/PS2BBL/CONFIG.INI`"
+ },
+ "a6090e73dd04": {
+  "en": "a6090e73dd04",
+  "t": "### Spouštěcí argumenty CDROM"
+ },
+ "a63cb36e571e": {
+  "en": "a63cb36e571e",
+  "t": "- `1` = prohození půlsnímků typ 1"
+ },
+ "aa77b29709a0": {
+  "en": "aa77b29709a0",
+  "t": "  - při `BOOT2/BOOT/path=PATINFO` PS2BBL načte vestavěný ELF z oblasti atributů oddílu a použije interní předání `-la=E...`."
+ },
+ "ad807f2f9ae8": {
+  "en": "ad807f2f9ae8",
+  "t": "- `CDROM_DISABLE_GAMEID = 1` vypne vizuální ID hry pro disky spuštěné přes `cdrom`."
+ },
+ "ad9f1afbaa28": {
+  "en": "ad9f1afbaa28",
+  "t": "- `-gsm=1080ix2`"
+ },
+ "ae898dca6d64": {
+  "en": "ae898dca6d64",
+  "t": "- `-ps1smooth` zapne vyhlazování textur."
+ },
+ "aed791467a10": {
+  "en": "aed791467a10",
+  "t": "Pro `LK_*_E* = cdrom` jsou podporovány tyto argumenty:"
+ },
+ "b2ddfe0e68bd": {
+  "en": "b2ddfe0e68bd",
+  "t": "U disků PS2 se eGSM čte automaticky z `OSDGSM.CNF` (v INI není potřeba žádná cesta). Formát konfiguračního souboru najdete [zde](https://github.com/pcm720/OSDMenu/blob/main/patcher/README.md#osdgsmcnf)."
+ },
+ "b3ba04fd4da5": {
+  "en": "b3ba04fd4da5",
+  "t": "   - Start z BDM: `usb:/PS2BBL/CONFIG.INI` / `mass:/PS2BBL/CONFIG.INI` / `ata:/PS2BBL/CONFIG.INI`"
+ },
+ "b471aa6e5908": {
+  "en": "b471aa6e5908",
+  "t": "- `-gsm=fp2`"
+ },
+ "b739b09f5b15": {
+  "en": "b739b09f5b15",
+  "t": "  - @uyjulian a @fjtrujy za to, že mi vždycky pomáhají"
+ },
+ "b9a70d5fa7b3": {
+  "en": "b9a70d5fa7b3",
+  "t": "### Pořadí hledání konfigurace"
+ },
+ "bb5f8da78b41": {
+  "en": "bb5f8da78b41",
+  "t": "  - Vytvořený `LOGO.BIN` dejte vedle PS2BBL Extended. Mělo by to být `mc?:/BOOT/`, pokud používáte soubory z [PS2 Homebrew Store](https://ps2store.com)"
+ },
+ "bb72aacfa09f": {
+  "en": "bb72aacfa09f",
+  "t": "- `hdd0:partition:pfs:/<path to elf>` __sestavení HDD__"
+ },
+ "bbfa9a74fbf2": {
+  "en": "bbfa9a74fbf2",
+  "t": "  - PS2BBL čte `SYSTEM.CNF` z oblasti atributů oddílu (`PS2ICON3D`) a použije `BOOT2/BOOT/path`, `arg*`, `skip_argv0` a `HDDUNITPOWER`."
+ },
+ "beaeeff57019": {
+  "en": "beaeeff57019",
+  "t": "- `ilink:/` (kořeny velkokapacitních úložišť BDM) __zatím neimplementováno__"
+ },
+ "bf1858271ce3": {
+  "en": "bf1858271ce3",
+  "t": "#### Vlastní úvodní logo z CWD"
+ },
+ "bf621297607e": {
+  "en": "bf621297607e",
+  "t": "## Dokumentace"
+ },
+ "bf8021c1dc5a": {
+  "en": "bf8021c1dc5a",
+  "t": "<p align=\"center\"><sub>Vše níže je původní README PS2BBL Extended, přeložené a jinak beze změn.</sub></p>"
+ },
+ "c06e0a279296": {
+  "en": "c06e0a279296",
+  "t": "- `usb:/` (preferovaná) a `mass:/` (stará)"
+ },
+ "c10219799837": {
+  "en": "c10219799837",
+  "t": "  <a href=\"LICENSE\">GPL-3.0</a>"
+ },
+ "c48fea10b14c": {
+  "en": "c48fea10b14c",
+  "t": "- `VIDEO_MODE = AUTO, NTSC, PAL, 480P` Použije výchozí režim PS2 nebo vynutí jeden z ostatních 3."
+ },
+ "c545cdcece82": {
+  "en": "c545cdcece82",
+  "t": "Použijte `LOGO_DISPLAY = 3` pro zobrazení názvů kláves. Názvy určuje `NAME_<BUTTON>`."
+ },
+ "c7ce0d2e1ff8": {
+  "en": "c7ce0d2e1ff8",
+  "t": "- Bez `-nologo` PS2BBL spustí disk přes PS2LOGO a upraví ho tak, aby vždy použil region disku a přeskočil kontrolu kontrolního součtu loga."
+ },
+ "c839d62b7d87": {
+  "en": "c839d62b7d87",
+  "t": "  - `SELECT` uloží vybraný režim do aktivního konfiguračního souboru"
+ },
+ "c8c06c6a31a8": {
+  "en": "c8c06c6a31a8",
+  "t": "## Konfigurace a argumenty"
+ },
+ "d22941defd02": {
+  "en": "d22941defd02",
+  "t": "Toto je fork PS2BBL od [El Isra](https://github.com/israpps/PlayStation2-Basic-BootLoader/)"
+ },
+ "d3848ab732aa": {
+  "en": "d3848ab732aa",
+  "t": "- `-ps1smooth`"
+ },
+ "d552d6dc7534": {
+  "en": "d552d6dc7534",
+  "t": "### Režim videa"
+ },
+ "d5c51f8e6ac2": {
+  "en": "d5c51f8e6ac2",
+  "t": "- `-titleid=SLUS_123.45` přepíše ID titulu aplikace (až 11 znaků)."
+ },
+ "da330e7a0139": {
+  "en": "da330e7a0139",
+  "t": "- `mc0:/`, `mc1:/`, `mc?:/`"
+ },
+ "da9818557f89": {
+  "en": "da9818557f89",
+  "t": "#### Nouzový výběr režimu videa"
+ },
+ "dbdd3c74a6e3": {
+  "en": "dbdd3c74a6e3",
+  "t": "   - Start z MX4SIO: `mx4sio:/PS2BBL/CONFIG.INI`"
+ },
+ "ddfc333f97d7": {
+  "en": "ddfc333f97d7",
+  "t": "2. Zpracování jde zdola nahoru a zastaví se u prvního argumentu, který není řídicí (koncové chování jako v OSDMenu)."
+ },
+ "de02177eb37e": {
+  "en": "de02177eb37e",
+  "t": "Příklady ARG pro eGSM:"
+ },
+ "de664ca47abc": {
+  "en": "de664ca47abc",
+  "t": "- `-nogameid`"
+ },
+ "de782301e641": {
+  "en": "de782301e641",
+  "t": "  - @sp193 za [PS1 Video Negator](https://github.com/ps2homebrew/PS1VModeNeg)"
+ },
+ "dfbebe092d40": {
+  "en": "dfbebe092d40",
+  "t": "- `BIBLE_WIDESCREEN`: `AUTO` (výchozí: Widescreen z RIPPS2, jinak nastavení obrazovky 16:9 v PS2), `ON` nebo\n  `OFF`. V 480i, 576i, 480p a 576p se úvodní obrazovka kreslí pro televizor, který obraz roztáhne na 16:9, bez\n  zmáčknutí. 720p a 1080i už jsou 16:9."
+ },
+ "dfef928c9dd2": {
+  "en": "dfef928c9dd2",
+  "t": "- `c` = režim kompatibility:"
+ },
+ "e17e9a226952": {
+  "en": "e17e9a226952",
+  "t": "- `-disc_stop` zastaví disk po načtení cílového ELF (užitečné pro položku bez sestavení `DISC_STOP_AT_BOOT`)."
+ },
+ "e2f6ac3e8203": {
+  "en": "e2f6ac3e8203",
+  "t": "  <a href=\"https://github.com/israpps/PlayStation2-Basic-BootLoader\">PS2BBL</a> ·"
+ },
+ "e3b8cc6236ca": {
+  "en": "e3b8cc6236ca",
+  "t": "  - @nathanneurotic za 10 cest PS2BBLE, nápady a přemlouvání"
+ },
+ "e6d271e7c0bd": {
+  "en": "e6d271e7c0bd",
+  "t": "Hledání konfigurace teď bere ohled na rodinu spouštění, aby se při startu nenačítaly zbytečné ovladače:"
+ },
+ "e6eb20871642": {
+  "en": "e6eb20871642",
+  "t": "  - při `IOPRP=PATINFO` (nebo vlastní cestě) ho PS2BBL předá fázi 2 interním předáním `-la=I...`."
+ },
+ "e948a4e2ffd1": {
+  "en": "e948a4e2ffd1",
+  "t": "PS2BBL podporuje tyto předpony spouštěcích a konfiguračních cest:"
+ },
+ "e95c77643cfe": {
+  "en": "e95c77643cfe",
+  "t": "- `mmce0:/`, `mmce1:/`, `mmce?:/` __sestavení MMCE__"
+ },
+ "eae8f93205fd": {
+  "en": "eae8f93205fd",
+  "t": "  - `0` Bez loga a informací o konzoli"
+ },
+ "ed21c5ac66ff": {
+  "en": "ed21c5ac66ff",
+  "t": "- Žádný skok při přechodu do RIPPS2: při spuštění logo a tlačítka zmizí a obloha zůstane na obrazovce v režimu RIPPS2;\n  RIPPS2 startuje na stejné obloze. Při startu podržte TRIANGLE + CROSS pro stránku režimu videa, která se vždy otevře\n  ve vlastním prokládaném režimu konzole (cesta zpět z 720p nebo 1080i na kompozitním kabelu)."
+ },
+ "ed675d1ac190": {
+  "en": "ed675d1ac190",
+  "t": "- DECKARD IE 75K a novější: XPARAM.IRX se při spouštění bez loga použije automaticky, když je potřeba."
+ },
+ "f194a33a1232": {
+  "en": "f194a33a1232",
+  "t": "- `fp1` = vynutit progresivní zobrazení (240p/288p)"
+ },
+ "f49f3f803d4d": {
+  "en": "f49f3f803d4d",
+  "t": "### Předpony cest zařízení"
+ },
+ "fbd93fd380b1": {
+  "en": "fbd93fd380b1",
+  "t": "  - `1` Informace o konzoli"
+ },
+ "fd03d61bc9f2": {
+  "en": "fd03d61bc9f2",
+  "t": "- `-disc_stop` lze přidat ke každé spouštěcí položce, aby se disk zastavil po nalezení cílového ELF."
+ },
+ "fd5efe6c6f4c": {
+  "en": "fd5efe6c6f4c",
+  "t": "  - @pcm720 za"
+ },
+ "fdee3f98ecaa": {
+  "en": "fdee3f98ecaa",
+  "t": "- `1080ix1` = vynutit 1080i, šířka/výška x1"
+ },
+ "fe658db8cc2f": {
+  "en": "fe658db8cc2f",
+  "t": "  - @asmblur za povzbuzení k vytvoření tohoto monstra na nejnovějším SDK"
+ },
+ "fec43ce445f9": {
+  "en": "fec43ce445f9",
+  "t": "Příklad použití:"
+ },
+ "ff7f439f5d79": {
+  "en": "ff7f439f5d79",
+  "t": "1. `CONFIG.INI` (CWD: aktuální pracovní adresář)"
+ },
+ "ffed62f66519": {
+  "en": "ffed62f66519",
+  "t": "    - Příklad:"
+ },
+ "fffd2a6caa3f": {
+  "en": "fffd2a6caa3f",
+  "t": "  - je-li přítomno `-patinfo`, první zbývající argument přepíše cíl `BOOT2/BOOT/path` z CNF.\n  To platí pro sestavení HDD.  \n  Příklad PATINFO:  "
+ }
+}

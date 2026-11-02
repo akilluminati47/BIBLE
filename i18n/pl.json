@@ -1,0 +1,666 @@
+{
+ "002e3896fc22": {
+  "en": "002e3896fc22",
+  "t": "   - Rozruch z MMCE: `mmce?:/PS2BBL/CONFIG.INI`"
+ },
+ "009050688382": {
+  "en": "009050688382",
+  "t": "4. Dla ścieżek `:PATINFO` PS2BBL analizuje `SYSTEM.CNF` z atrybutu partycji i dopisuje wpisy `arg*` z CNF po argumentach aplikacji użytkownika."
+ },
+ "075b75340cb8": {
+  "en": "075b75340cb8",
+  "t": "### Sterowanie obrotami dysku"
+ },
+ "08c4d5ce9f91": {
+  "en": "08c4d5ce9f91",
+  "t": "2. Przy wczytaniu z urządzenia:"
+ },
+ "0d2174dc83ca": {
+  "en": "0d2174dc83ca",
+  "t": "- `DISC_STOP_AT_BOOT=1` profil kompilacji, który zawsze zatrzymuje dysk optyczny po wczytaniu konfiguracji"
+ },
+ "0d2b0afd3f6c": {
+  "en": "0d2b0afd3f6c",
+  "t": "- `-ps1fast` włącza szybką prędkość dysku PS1."
+ },
+ "0f47fa9660dd": {
+  "en": "0f47fa9660dd",
+  "t": "5. Jeśli ustawiono `-patinfo`, a ścieżka zawiera `:PATINFO`, pierwszy pozostały argument użytkownika staje się ścieżką docelowego ELF (zastępuje ścieżkę rozruchu z CNF) i jest usuwany z argv aplikacji. Jeśli nie zostaje żaden argument, uruchamianie jest przerywane (jak w OSDMenu), a `BOOT2/BOOT/path` z CNF nie jest używane."
+ },
+ "10e49ad3c8d0": {
+  "en": "10e49ad3c8d0",
+  "t": "  <a href=\"https://github.com/akilluminati47/RIPPS2\">RIPPS2</a> ·"
+ },
+ "138c6cc4b754": {
+  "en": "138c6cc4b754",
+  "t": "Jeśli w CWD (bieżącym katalogu roboczym) znajduje się własny plik logo (LOGO.BIN), zastępuje on wbudowane logo PS2BBLE/PSXBBLE."
+ },
+ "159f3f6b8e94": {
+  "en": "159f3f6b8e94",
+  "t": "3. Zapas na karcie pamięci:"
+ },
+ "1638bfe84685": {
+  "en": "1638bfe84685",
+  "t": "Edytuj plik konfiguracyjny według potrzeb. Do edycji polecany jest [R3Configurator](https://github.com/saildot4k/R3CONFIGURATOR). Ścieżki są już ustawione zgodnie z plikami pobranymi z [PS2 Homebrew Store](https://ps2homebrewstore.com). Powinno więc wystarczyć zmienić wybór Auto i najlepiej ustawić argumenty NHDDL dla urządzenia, z którego wczytujesz pliki ISO."
+ },
+ "164d82fd0dc4": {
+  "en": "164d82fd0dc4",
+  "t": "- `1080ix3` = wymuś 1080i, szerokość/wysokość x3"
+ },
+ "1e9995e783fc": {
+  "en": "1e9995e783fc",
+  "t": "   - Na PS2: `mc?:/SYS-CONF/PS2BBL.INI`"
+ },
+ "1ec5c04ec3af": {
+  "en": "1ec5c04ec3af",
+  "t": "- `3` = zamiana pól typ 3"
+ },
+ "200e77165cb3": {
+  "en": "200e77165cb3",
+  "t": "   - `cdrom0:/PS2BBL/CONFIG.INI`"
+ },
+ "20e55fa78502": {
+  "en": "20e55fa78502",
+  "t": "- `KEY_READ_WAIT_TIME = 0` jest dozwolone (minimum w upstream to 500 ms)."
+ },
+ "228b3fdf1eec": {
+  "en": "228b3fdf1eec",
+  "t": "  - jeśli pominięte, PS2BBL nie wymusza żadnej polityki DEV9."
+ },
+ "24439e94a180": {
+  "en": "24439e94a180",
+  "t": "- `ata:/` urządzenie BDM dla dysku HDD exFAT"
+ },
+ "25f56fc0dd9e": {
+  "en": "25f56fc0dd9e",
+  "t": "Dotyczą każdego wpisu `cdrom`, a nie całości."
+ },
+ "29a4c699928e": {
+  "en": "29a4c699928e",
+  "t": "- `v` = tryb wideo:"
+ },
+ "29c939657e98": {
+  "en": "29c939657e98",
+  "t": "  - @israpps za [PS2BBL](https://github.com/israpps/PlayStation2-Basic-BootLoader/)"
+ },
+ "2b406c409d68": {
+  "en": "2b406c409d68",
+  "t": "## Twórcy i podziękowania"
+ },
+ "2d1c0c3dc3a3": {
+  "en": "2d1c0c3dc3a3",
+  "t": "- Od [El Isra](https://israpps.github.io/) (twórcy PS2BBL): "
+ },
+ "2e1844667faa": {
+  "en": "2e1844667faa",
+  "t": "- Kombinacje trzymane od włączenia otwierają teraz swoje strony (TRIANGLE + CROSS umykało, gdy pady jeszcze\n  się uruchamiały)."
+ },
+ "2e5eb51f690b": {
+  "en": "2e5eb51f690b",
+  "t": "- Sterowanie:"
+ },
+ "2f9dde551617": {
+  "en": "2f9dde551617",
+  "t": "**Co zmienia ten fork**"
+ },
+ "33014f963b64": {
+  "en": "33014f963b64",
+  "t": "1. PS2BBL analizuje i zużywa tylko końcowe argumenty sterujące loadera z `ARG_*`: `-appid`, `-titleid=`, `-dev9=`, `-patinfo`, `-disc_stop`, `-gsm=`."
+ },
+ "34f273d336d6": {
+  "en": "34f273d336d6",
+  "t": "BIBLE to boot loader, który instaluje RIPPS2: fork PS2BBL Extended autorstwa saildot4k."
+ },
+ "36e7bf643ef8": {
+  "en": "36e7bf643ef8",
+  "t": "### Argumenty aplikacji"
+ },
+ "38dcd9eb7ded": {
+  "en": "38dcd9eb7ded",
+  "t": "- Najpierw wpisz argumenty uruchamianego elf, a potem dopisz wybrane wewnętrzne argumenty PS2BBL (zobacz niżej). [NHDDL](https://github.com/pcm720/nhddl) świetnie nadaje się do argumentów, bo przyspieszają jego rozruch."
+ },
+ "391adc91b06c": {
+  "en": "391adc91b06c",
+  "t": "- Globalny klucz/wartość: `DISC_STOP = 0/1`"
+ },
+ "3adb267042c1": {
+  "en": "3adb267042c1",
+  "t": "## Przestarzałe/Usunięte"
+ },
+ "3d92d62b98f7": {
+  "en": "3d92d62b98f7",
+  "t": "- Tryby wideo: `VIDEO_MODE` przyjmuje też `576P`, `720P` i `1080I`, pozostałe tryby RIPPS2. `AUTO` (domyślnie)\n  startuje w Video Mode z RIPPS2, gdy jego ustawienia leżą obok wpisu AUTO, a w przeciwnym razie w trybie konsoli."
+ },
+ "3eba597b9c5f": {
+  "en": "3eba597b9c5f",
+  "t": "- `1080ix2` = wymuś 1080i, szerokość/wysokość x2"
+ },
+ "3fef7c9294f4": {
+  "en": "3fef7c9294f4",
+  "t": "  <a href=\"https://github.com/akilluminati47/BIBLE/actions\">Kompilacje</a> ·"
+ },
+ "4019cd997962": {
+  "en": "4019cd997962",
+  "t": "  - `NICHDD` utrzymuje włączone zarówno DEV9 (kartę sieciową), jak i HDD."
+ },
+ "406206a51560": {
+  "en": "406206a51560",
+  "t": "- `APP_GAMEID = 1` włącza wizualny identyfikator gry dla aplikacji/homebrew, do 11 znaków z nazwy pliku lub dysku PS1/2"
+ },
+ "4088157bc12a": {
+  "en": "4088157bc12a",
+  "t": "  - @SP193 za biblioteki inicjalizacji OSD, które są podstawą tego projektu"
+ },
+ "40a28018c31c": {
+  "en": "40a28018c31c",
+  "t": "#### Argumenty dysków PS1 (na uruchomienie)"
+ },
+ "439feb54907f": {
+  "en": "439feb54907f",
+  "t": "- `-ps1vneg`"
+ },
+ "43fcd64b5833": {
+  "en": "43fcd64b5833",
+  "t": "5. Po kompilacji z `DISC_STOP_AT_BOOT=1"
+ },
+ "449dee5852ac": {
+  "en": "449dee5852ac",
+  "t": "RIPPS2 będzie zawierać BIBLE jako podpisane pliki rozruchowe i instalować go ze swoich Settings (Boot Loader), w miejsce PS2BBL 1.2.0, który zawiera dziś. BIBLE działa też jako ELF uruchamiany przez inny loader (FMCB, OSDMenu, loader SD2PSX). Nie ma jeszcze wydania BIBLE."
+ },
+ "4793c8125dc9": {
+  "en": "4793c8125dc9",
+  "t": "### eGSM (external Graphics Synthesize Mode)"
+ },
+ "4822d5ecd6f5": {
+  "en": "4822d5ecd6f5",
+  "t": "- Nowość: strona klawiszy uruchamiania. Przytrzymaj L2 + R2 przy starcie, aby odczytać ścieżkę każdego klawisza, niezależnie od ustawień ekranu startowego."
+ },
+ "4995cc5a4675": {
+  "en": "4995cc5a4675",
+  "t": "6. Pozostałe argumenty zachowują kolejność i trafiają do uruchomionej aplikacji."
+ },
+ "4a75c7695a03": {
+  "en": "4a75c7695a03",
+  "t": "ty mi powiedz ;)"
+ },
+ "4b1b74371c50": {
+  "en": "4b1b74371c50",
+  "t": "- `-disc_stop` jest ignorowany dla wpisów `cdrom`."
+ },
+ "4bcc83d2703e": {
+  "en": "4bcc83d2703e",
+  "t": "**Jak RIPPS2 go używa**"
+ },
+ "4c5f14b856c2": {
+  "en": "4c5f14b856c2",
+  "t": "   - Rozruch z APA HDD: `hdd0:__sysconf:pfs:/PS2BBL/CONFIG.INI`"
+ },
+ "4ca733fed7d8": {
+  "en": "4ca733fed7d8",
+  "t": "- Użyj `cdrom` jako ścieżki wpisu."
+ },
+ "4cb76a5bb7c0": {
+  "en": "4cb76a5bb7c0",
+  "t": "- `-gsm=<v[:c]>`"
+ },
+ "4daebfa16bdc": {
+  "en": "4daebfa16bdc",
+  "t": "   - Na PSX-DESR: `mc?:/SYS-CONF/PSXBBL.INI`"
+ },
+ "4e318690a5f7": {
+  "en": "4e318690a5f7",
+  "t": "- `mx4sio:/` (zalecany) i `massX:/` (stary)  __kompilacje MX4SIO__"
+ },
+ "502c67628795": {
+  "en": "502c67628795",
+  "t": "- Wybór wymusza `LOGO_DISPLAY = 3`, gdy jest aktywny, żeby było widać logo i klawisze."
+ },
+ "511c26550b7a": {
+  "en": "511c26550b7a",
+  "t": "- `DISC_STOP = 1` zatrzymuje dysk optyczny po wczytaniu konfiguracji, gdy znaleziono plik konfiguracyjny."
+ },
+ "514e9776a6b8": {
+  "en": "514e9776a6b8",
+  "t": "  - `2` Logo PS2BBLE/PSXBBLE i informacje o konsoli"
+ },
+ "5189562652cb": {
+  "en": "5189562652cb",
+  "t": "- `-dev9=<mode>` ustawia politykę DEV9/HDD przed uruchomieniem docelowego ELF. Obsługiwane tryby:"
+ },
+ "52a815bf5a23": {
+  "en": "52a815bf5a23",
+  "t": "    - gameID Retrogem, PS1 Video Negator, eGSM i kod PS2LOGO z [OSDMenu](https://github.com/pcm720/OSDMenu)"
+ },
+ "53c15c59e52b": {
+  "en": "53c15c59e52b",
+  "t": "  - PNG powinien być w RGBA, 8 bitów indeksowany, 255 kolorów na kanał i w rozdzielczości 256x64."
+ },
+ "5519f5e8f4ae": {
+  "en": "5519f5e8f4ae",
+  "t": "    Elastyczny boot loader dla PlayStation 2™ i PSX-DESR"
+ },
+ "5933320f9ba5": {
+  "en": "5933320f9ba5",
+  "t": "Używaj linii `ARG_<BUTTON>_E? =`, aby przekazać argumenty do ELF (zobacz przykłady INI)."
+ },
+ "5bb677ad2c61": {
+  "en": "5bb677ad2c61",
+  "t": "  - `3` Grafika klawiszy z `NAME_BUTTON = <TITLE>` z pliku konfiguracyjnego"
+ },
+ "5d5f73d54d7f": {
+  "en": "5d5f73d54d7f",
+  "t": "## Znane błędy/problemy"
+ },
+ "5d73be2078e5": {
+  "en": "5d73be2078e5",
+  "t": "- Kompilacje PS2 na kartę pamięci / USB, MMCE, MX4SIO i HDD. Etap 2 eGSM jest pominięty."
+ },
+ "6071ff1f11ca": {
+  "en": "6071ff1f11ca",
+  "t": "### Wizualny identyfikator gry Retrogem"
+ },
+ "61eb73b67bf7": {
+  "en": "61eb73b67bf7",
+  "t": "    - opcje trybu wideo z [NHDDL](https://github.com/pcm720/nhddl)"
+ },
+ "641317004793": {
+  "en": "641317004793",
+  "t": "- Od saildot4k"
+ },
+ "641f6dbfad30": {
+  "en": "641f6dbfad30",
+  "t": "- `-gsm=<v[:c]>` uruchamia docelowy ELF przez wbudowany eGSM (ignorowane dla ścieżek `rom?:`)."
+ },
+ "6656cd8cf3ca": {
+  "en": "6656cd8cf3ca",
+  "t": "  - `START` zamyka wybór i przechodzi do ekranu klawiszy"
+ },
+ "6682c393a791": {
+  "en": "6682c393a791",
+  "t": "  <a href=\"https://github.com/saildot4k/PlayStation2-Basic-BootLoader-Extended\">PS2BBL Extended</a> ·"
+ },
+ "675253f496d9": {
+  "en": "675253f496d9",
+  "t": "  - [@Berion](https://www.psx-place.com/members/berion.1431/) za loga, tło i grafiki klawiszy"
+ },
+ "69d4c3170060": {
+  "en": "69d4c3170060",
+  "t": "   - Zapas na karcie pamięci jak w punkcie 3 powyżej."
+ },
+ "6debe9f38567": {
+  "en": "6debe9f38567",
+  "t": "Przykład uruchomienia NHDDL w trybie wideo 480p i szukania plików ISO na mmce i dysku HDD exFAT bez potrzeby nhddl.yaml. Zaleta: brak straty czasu na wczytywanie sterowników oraz szukanie i wczytywanie nhddl.yaml. To najszybszy sposób, by uruchomić NHDDL i pokazać listę ISO."
+ },
+ "704784bb456b": {
+  "en": "704784bb456b",
+  "t": "- `2` = zamiana pól typ 2"
+ },
+ "70710f40217d": {
+  "en": "70710f40217d",
+  "t": "  - uwaga: w kompilacjach bez HDD ta opcja nic nie robi."
+ },
+ "71858737f5c1": {
+  "en": "71858737f5c1",
+  "t": "#### Zależnie od kompilacji:  "
+ },
+ "7425333403ea": {
+  "en": "7425333403ea",
+  "t": "- Ścieżki `xfrom:/` __kompilacje PSX DESR__"
+ },
+ "767d07f95351": {
+  "en": "767d07f95351",
+  "t": "- `-nologo`"
+ },
+ "7bb989a3fb7e": {
+  "en": "7bb989a3fb7e",
+  "t": "<h1 align=\"center\">BIBLE</h1>"
+ },
+ "7d52c1b8a6a4": {
+  "en": "7d52c1b8a6a4",
+  "t": "- `-gsm=<v[:c]>` uruchamia docelowy ELF przez wbudowany eGSM (ignorowane dla ścieżek `rom?:`). Jeśli jest użyty, musi być ostatnim argumentem."
+ },
+ "7f48b942e063": {
+  "en": "7f48b942e063",
+  "t": "  - Paczka wydania (skrypt jest w katalogu głównym wydania):"
+ },
+ "81f7471dcefd": {
+  "en": "81f7471dcefd",
+  "t": "- puste = brak (domyślnie)"
+ },
+ "84c6c36434d4": {
+  "en": "84c6c36434d4",
+  "t": "- `-patinfo` włącza obsługę PATINFO dla wpisów `:PATINFO`."
+ },
+ "85953d7c3ac5": {
+  "en": "85953d7c3ac5",
+  "t": "  - eGSM dotyczy uruchomionego celu (ELF/dysku), a nie samego PS2BBL.\n  Format eGSM (w stylu OSDMenu):"
+ },
+ "859e8018755b": {
+  "en": "859e8018755b",
+  "t": "  - `LEFT/RIGHT` przełączają tryby: `AUTO`, `NTSC`, `PAL`, `480P`"
+ },
+ "85d3494a3c15": {
+  "en": "85d3494a3c15",
+  "t": "### LOGO_DISPLAY"
+ },
+ "87104d1e4715": {
+  "en": "87104d1e4715",
+  "t": "- Dodaj `-nologo` do argumentów wpisu, aby uruchamiać dyski PS2 bezpośrednio (z pominięciem `rom0:PS2LOGO`)."
+ },
+ "8864c9dc9624": {
+  "en": "8864c9dc9624",
+  "t": "- `-gsm=fp2:1`"
+ },
+ "89f87574605b": {
+  "en": "89f87574605b",
+  "t": "Jest na [github pages](https://israpps.github.io/PlayStation2-Basic-BootLoader/), ale z dodatkami poniżej:"
+ },
+ "8acd450b3e09": {
+  "en": "8acd450b3e09",
+  "t": "#### Argumenty PS2LOGO (tylko dyski PS2)"
+ },
+ "8c1803695e4c": {
+  "en": "8c1803695e4c",
+  "t": "  - `NIC` utrzymuje włączone DEV9/sieć, odmontowuje `pfs0:` i od razu usypia `hdd0:`/`hdd1:`."
+ },
+ "8ce3834f1354": {
+  "en": "8ce3834f1354",
+  "t": "4. Ostatni zapas na PSX"
+ },
+ "8daca164d7be": {
+  "en": "8daca164d7be",
+  "t": "- `DISC_STOP = 0` (lub pominięte) zachowuje domyślne działanie."
+ },
+ "9109da4b6d16": {
+  "en": "9109da4b6d16",
+  "t": "#### Pierwszeństwo i kolejność argumentów"
+ },
+ "942059e5f559": {
+  "en": "942059e5f559",
+  "t": "<p align=\"center\"><img src=\"assets/readme/ripps2-icon.png\" alt=\"RIPPS2\" width=\"48\" height=\"48\"><br><sub>BIBLE jest częścią <a href=\"https://github.com/akilluminati47/RIPPS2\">RIPPS2</a>.</sub></p>"
+ },
+ "9422bbe6a402": {
+  "en": "9422bbe6a402",
+  "t": "- ~~`RUNKELF`~~ PS2BBLE uruchamia teraz elf/kelf wewnętrznie, bez potrzeby definiowania przez użytkownika akcji uruchamiania kelf."
+ },
+ "986a0196fb5a": {
+  "en": "986a0196fb5a",
+  "t": "  <sub>Przytrzymaj L2 + R2 przy starcie, aby otworzyć stronę klawiszy uruchamiania, TRIANGLE + CROSS dla strony trybu wideo; klawisz ustawiony na <code>$CREDITS</code> pokazuje twórców.</sub>"
+ },
+ "999269fc568a": {
+  "en": "999269fc568a",
+  "t": "- `-appid` wymusza wizualny identyfikator gry aplikacji nawet przy `APP_GAMEID = 0`."
+ },
+ "99dfbd99b669": {
+  "en": "99dfbd99b669",
+  "t": "Przekonwertuj PNG na oczekiwany plik surowy:"
+ },
+ "9a2ff94c7bee": {
+  "en": "9a2ff94c7bee",
+  "t": "- `-ps1fast`"
+ },
+ "9e14e0197f55": {
+  "en": "9e14e0197f55",
+  "t": "- Ekran startowy: logo PS2 na środku nieba RIPPS2, z przyciskami pod nim i ewentualnym tekstem nad nim.\n  `BIBLE_GLYPHS` 0 brak, 1 przyciski czołowe (domyślnie), 2 wszystkie szesnaście w dwóch rzędach po osiem.\n  `BIBLE_INFO` 1 pokazuje informacje o konsoli, zegar i odliczanie (domyślnie wyłączone).\n  Niebo pasuje do twojego Color Theme z RIPPS2: bez `BIBLE_COLOR` BIBLE czyta niebo, które RIPPS2 zapisuje ze swoimi\n  ustawieniami, z folderu RIPPS2 uruchamianego przez jego wpis AUTO (`BIBLE_COLOR` w konfiguracji ma pierwszeństwo).\n  Ten sam wygląd w każdym trybie wideo. Strony (tryb wideo, twórcy, klawisze uruchamiania) pojawiają się na przyciemnionym logo\n  z odłożonymi przyciskami, więc klawisze uruchamiania czyta się spokojnie."
+ },
+ "9f17d88941ea": {
+  "en": "9f17d88941ea",
+  "t": "- `fp2` = wymuś skanowanie progresywne (480p/576p)"
+ },
+ "9f61ad6cbb52": {
+  "en": "9f61ad6cbb52",
+  "t": "- puste = bez wymuszania (domyślnie)"
+ },
+ "a0525e7d534f": {
+  "en": "a0525e7d534f",
+  "t": "- `-ps1vneg` uruchamia PS1DRV przez PS1VModeNegator. Przydatne tam, gdzie tryb konsoli i tryb dysku się różnią (na przykład w niektórych przypadkach MechaPwn/modchipów)."
+ },
+ "a3a65a7af403": {
+  "en": "a3a65a7af403",
+  "t": "- Otwiera się przez `TRIANGLE + CROSS` podczas rozruchu"
+ },
+ "a44babacaf8b": {
+  "en": "a44babacaf8b",
+  "t": "   - `xfrom:/PS2BBL/CONFIG.INI`"
+ },
+ "a6090e73dd04": {
+  "en": "a6090e73dd04",
+  "t": "### Argumenty uruchamiania CDROM"
+ },
+ "a63cb36e571e": {
+  "en": "a63cb36e571e",
+  "t": "- `1` = zamiana pól typ 1"
+ },
+ "aa77b29709a0": {
+  "en": "aa77b29709a0",
+  "t": "  - przy `BOOT2/BOOT/path=PATINFO` PS2BBL wczytuje wbudowany ELF z obszaru atrybutów partycji i używa wewnętrznego przekazania `-la=E...`."
+ },
+ "ad807f2f9ae8": {
+  "en": "ad807f2f9ae8",
+  "t": "- `CDROM_DISABLE_GAMEID = 1` wyłącza wizualny identyfikator gry dla dysków uruchamianych przez `cdrom`."
+ },
+ "ad9f1afbaa28": {
+  "en": "ad9f1afbaa28",
+  "t": "- `-gsm=1080ix2`"
+ },
+ "ae898dca6d64": {
+  "en": "ae898dca6d64",
+  "t": "- `-ps1smooth` włącza wygładzanie tekstur."
+ },
+ "aed791467a10": {
+  "en": "aed791467a10",
+  "t": "Dla `LK_*_E* = cdrom` obsługiwane argumenty to:"
+ },
+ "b2ddfe0e68bd": {
+  "en": "b2ddfe0e68bd",
+  "t": "Dla dysków PS2 eGSM jest czytany automatycznie z `OSDGSM.CNF` (bez ścieżki w INI). Format pliku konfiguracyjnego jest opisany [tutaj](https://github.com/pcm720/OSDMenu/blob/main/patcher/README.md#osdgsmcnf)."
+ },
+ "b3ba04fd4da5": {
+  "en": "b3ba04fd4da5",
+  "t": "   - Rozruch z BDM: `usb:/PS2BBL/CONFIG.INI` / `mass:/PS2BBL/CONFIG.INI` / `ata:/PS2BBL/CONFIG.INI`"
+ },
+ "b471aa6e5908": {
+  "en": "b471aa6e5908",
+  "t": "- `-gsm=fp2`"
+ },
+ "b739b09f5b15": {
+  "en": "b739b09f5b15",
+  "t": "  - @uyjulian i @fjtrujy za to, że zawsze mi pomagają"
+ },
+ "b9a70d5fa7b3": {
+  "en": "b9a70d5fa7b3",
+  "t": "### Kolejność szukania konfiguracji"
+ },
+ "bb5f8da78b41": {
+  "en": "bb5f8da78b41",
+  "t": "  - Umieść utworzony `LOGO.BIN` obok PS2BBL Extended. Powinno to być `mc?:/BOOT/`, jeśli używasz plików z [PS2 Homebrew Store](https://ps2store.com)"
+ },
+ "bb72aacfa09f": {
+  "en": "bb72aacfa09f",
+  "t": "- `hdd0:partition:pfs:/<path to elf>` __kompilacje HDD__"
+ },
+ "bbfa9a74fbf2": {
+  "en": "bbfa9a74fbf2",
+  "t": "  - PS2BBL czyta `SYSTEM.CNF` z obszaru atrybutów partycji (`PS2ICON3D`) i stosuje `BOOT2/BOOT/path`, `arg*`, `skip_argv0` oraz `HDDUNITPOWER`."
+ },
+ "beaeeff57019": {
+  "en": "beaeeff57019",
+  "t": "- `ilink:/` (katalogi główne pamięci masowej BDM) __jeszcze niezaimplementowane__"
+ },
+ "bf1858271ce3": {
+  "en": "bf1858271ce3",
+  "t": "#### Własne logo startowe z CWD"
+ },
+ "bf621297607e": {
+  "en": "bf621297607e",
+  "t": "## Dokumentacja"
+ },
+ "bf8021c1dc5a": {
+  "en": "bf8021c1dc5a",
+  "t": "<p align=\"center\"><sub>Wszystko poniżej to oryginalne README PS2BBL Extended, przetłumaczone i poza tym niezmienione.</sub></p>"
+ },
+ "c06e0a279296": {
+  "en": "c06e0a279296",
+  "t": "- `usb:/` (zalecany) i `mass:/` (stary)"
+ },
+ "c10219799837": {
+  "en": "c10219799837",
+  "t": "  <a href=\"LICENSE\">GPL-3.0</a>"
+ },
+ "c48fea10b14c": {
+  "en": "c48fea10b14c",
+  "t": "- `VIDEO_MODE = AUTO, NTSC, PAL, 480P` Używa domyślnego trybu PS2 albo wymusza jeden z 3 pozostałych."
+ },
+ "c545cdcece82": {
+  "en": "c545cdcece82",
+  "t": "Użyj `LOGO_DISPLAY = 3`, aby pokazywać nazwy klawiszy. Nazwy określa `NAME_<BUTTON>`."
+ },
+ "c7ce0d2e1ff8": {
+  "en": "c7ce0d2e1ff8",
+  "t": "- Bez `-nologo` PS2BBL uruchamia dysk przez PS2LOGO i łata go tak, by zawsze używał regionu dysku i pomijał sprawdzanie sumy kontrolnej logo."
+ },
+ "c839d62b7d87": {
+  "en": "c839d62b7d87",
+  "t": "  - `SELECT` zapisuje wybrany tryb w aktywnym pliku konfiguracyjnym"
+ },
+ "c8c06c6a31a8": {
+  "en": "c8c06c6a31a8",
+  "t": "## Konfiguracja i argumenty"
+ },
+ "d22941defd02": {
+  "en": "d22941defd02",
+  "t": "To fork PS2BBL autorstwa [El Isra](https://github.com/israpps/PlayStation2-Basic-BootLoader/)"
+ },
+ "d3848ab732aa": {
+  "en": "d3848ab732aa",
+  "t": "- `-ps1smooth`"
+ },
+ "d552d6dc7534": {
+  "en": "d552d6dc7534",
+  "t": "### Tryb wideo"
+ },
+ "d5c51f8e6ac2": {
+  "en": "d5c51f8e6ac2",
+  "t": "- `-titleid=SLUS_123.45` zastępuje identyfikator tytułu aplikacji (do 11 znaków)."
+ },
+ "da330e7a0139": {
+  "en": "da330e7a0139",
+  "t": "- `mc0:/`, `mc1:/`, `mc?:/`"
+ },
+ "da9818557f89": {
+  "en": "da9818557f89",
+  "t": "#### Awaryjny wybór trybu wideo"
+ },
+ "dbdd3c74a6e3": {
+  "en": "dbdd3c74a6e3",
+  "t": "   - Rozruch z MX4SIO: `mx4sio:/PS2BBL/CONFIG.INI`"
+ },
+ "ddfc333f97d7": {
+  "en": "ddfc333f97d7",
+  "t": "2. Analiza idzie od dołu do góry i zatrzymuje się na pierwszym argumencie, który nie jest sterujący (zachowanie końcowe jak w OSDMenu)."
+ },
+ "de02177eb37e": {
+  "en": "de02177eb37e",
+  "t": "Przykłady ARG eGSM:"
+ },
+ "de664ca47abc": {
+  "en": "de664ca47abc",
+  "t": "- `-nogameid`"
+ },
+ "de782301e641": {
+  "en": "de782301e641",
+  "t": "  - @sp193 za [PS1 Video Negator](https://github.com/ps2homebrew/PS1VModeNeg)"
+ },
+ "dfbebe092d40": {
+  "en": "dfbebe092d40",
+  "t": "- `BIBLE_WIDESCREEN`: `AUTO` (domyślnie: Widescreen z RIPPS2, a w przeciwnym razie ustawienie ekranu 16:9 w PS2), `ON` lub\n  `OFF`. W 480i, 576i, 480p i 576p ekran startowy jest rysowany dla telewizora, który rozciąga obraz do 16:9, bez\n  spłaszczenia. 720p i 1080i są już w 16:9."
+ },
+ "dfef928c9dd2": {
+  "en": "dfef928c9dd2",
+  "t": "- `c` = tryb zgodności:"
+ },
+ "e17e9a226952": {
+  "en": "e17e9a226952",
+  "t": "- `-disc_stop` zatrzymuje dysk po wczytaniu docelowego ELF (przydatne dla wpisu bez kompilacji `DISC_STOP_AT_BOOT`)."
+ },
+ "e2f6ac3e8203": {
+  "en": "e2f6ac3e8203",
+  "t": "  <a href=\"https://github.com/israpps/PlayStation2-Basic-BootLoader\">PS2BBL</a> ·"
+ },
+ "e3b8cc6236ca": {
+  "en": "e3b8cc6236ca",
+  "t": "  - @nathanneurotic za 10 ścieżek PS2BBLE, pomysły i namowy"
+ },
+ "e6d271e7c0bd": {
+  "en": "e6d271e7c0bd",
+  "t": "Szukanie konfiguracji uwzględnia teraz rodzinę rozruchu, aby nie wczytywać przy starcie zbędnych sterowników:"
+ },
+ "e6eb20871642": {
+  "en": "e6eb20871642",
+  "t": "  - przy `IOPRP=PATINFO` (lub własnej ścieżce) PS2BBL przekazuje go do etapu 2 przez wewnętrzne przekazanie `-la=I...`."
+ },
+ "e948a4e2ffd1": {
+  "en": "e948a4e2ffd1",
+  "t": "PS2BBL obsługuje te przedrostki ścieżek uruchamiania/konfiguracji:"
+ },
+ "e95c77643cfe": {
+  "en": "e95c77643cfe",
+  "t": "- `mmce0:/`, `mmce1:/`, `mmce?:/` __kompilacje MMCE__"
+ },
+ "eae8f93205fd": {
+  "en": "eae8f93205fd",
+  "t": "  - `0` Bez logo i informacji o konsoli"
+ },
+ "ed21c5ac66ff": {
+  "en": "ed21c5ac66ff",
+  "t": "- Bez przeskoku przy wejściu do RIPPS2: przy uruchomieniu logo i przyciski znikają, a niebo zostaje na ekranie w trybie RIPPS2;\n  RIPPS2 startuje na tym samym niebie. Przytrzymaj TRIANGLE + CROSS przy starcie dla strony trybu wideo, która zawsze otwiera się\n  we własnym trybie z przeplotem konsoli (droga powrotna z 720p lub 1080i na kablu kompozytowym)."
+ },
+ "ed675d1ac190": {
+  "en": "ed675d1ac190",
+  "t": "- DECKARD IE 75K i nowsze: XPARAM.IRX jest stosowany automatycznie, gdy jest potrzebny przy uruchamianiu bez logo."
+ },
+ "f194a33a1232": {
+  "en": "f194a33a1232",
+  "t": "- `fp1` = wymuś skanowanie progresywne (240p/288p)"
+ },
+ "f49f3f803d4d": {
+  "en": "f49f3f803d4d",
+  "t": "### Przedrostki ścieżek urządzeń"
+ },
+ "fbd93fd380b1": {
+  "en": "fbd93fd380b1",
+  "t": "  - `1` Informacje o konsoli"
+ },
+ "fd03d61bc9f2": {
+  "en": "fd03d61bc9f2",
+  "t": "- `-disc_stop` można dodać do każdego wpisu, aby zatrzymać dysk po znalezieniu docelowego ELF."
+ },
+ "fd5efe6c6f4c": {
+  "en": "fd5efe6c6f4c",
+  "t": "  - @pcm720 za"
+ },
+ "fdee3f98ecaa": {
+  "en": "fdee3f98ecaa",
+  "t": "- `1080ix1` = wymuś 1080i, szerokość/wysokość x1"
+ },
+ "fe658db8cc2f": {
+  "en": "fe658db8cc2f",
+  "t": "  - @asmblur za zachętę do zrobienia tego potwora na najnowszym SDK"
+ },
+ "fec43ce445f9": {
+  "en": "fec43ce445f9",
+  "t": "Przykład użycia:"
+ },
+ "ff7f439f5d79": {
+  "en": "ff7f439f5d79",
+  "t": "1. `CONFIG.INI` (CWD: bieżący katalog roboczy)"
+ },
+ "ffed62f66519": {
+  "en": "ffed62f66519",
+  "t": "    - Przykład:"
+ },
+ "fffd2a6caa3f": {
+  "en": "fffd2a6caa3f",
+  "t": "  - jeśli jest `-patinfo`, pierwszy pozostały argument zastępuje cel `BOOT2/BOOT/path` z CNF.\n  To dotyczy kompilacji HDD.  \n  Przykład PATINFO:  "
+ }
+}

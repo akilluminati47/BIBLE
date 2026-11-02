@@ -1,0 +1,666 @@
+{
+ "002e3896fc22": {
+  "en": "002e3896fc22",
+  "t": "   - MMCE-indítás: `mmce?:/PS2BBL/CONFIG.INI`"
+ },
+ "009050688382": {
+  "en": "009050688382",
+  "t": "4. `:PATINFO` indítási útvonalaknál a PS2BBL feldolgozza a partícióattribútum `SYSTEM.CNF` fájlját, és a felhasználó app-argumentumai után fűzi a CNF `arg*` bejegyzéseit."
+ },
+ "075b75340cb8": {
+  "en": "075b75340cb8",
+  "t": "### A lemez forgásának vezérlése"
+ },
+ "08c4d5ce9f91": {
+  "en": "08c4d5ce9f91",
+  "t": "2. Eszközről betöltve:"
+ },
+ "0d2174dc83ca": {
+  "en": "0d2174dc83ca",
+  "t": "- `DISC_STOP_AT_BOOT=1` fordítási profil, amely a konfiguráció betöltése után mindig leállítja az optikai lemezt"
+ },
+ "0d2b0afd3f6c": {
+  "en": "0d2b0afd3f6c",
+  "t": "- A `-ps1fast` bekapcsolja a gyors PS1 lemezsebességet."
+ },
+ "0f47fa9660dd": {
+  "en": "0f47fa9660dd",
+  "t": "5. Ha a `-patinfo` be van állítva, és az indítási útvonal tartalmazza a `:PATINFO` részt, a felhasználó első megmaradt app-argumentuma lesz a cél ELF útvonala (felülírja a CNF indítási útvonalát), és kikerül az app argv-jéből. Ha nem marad argumentum, az indítás megszakad (mint az OSDMenu-ben), és a CNF `BOOT2/BOOT/path` értéke nem kerül felhasználásra."
+ },
+ "10e49ad3c8d0": {
+  "en": "10e49ad3c8d0",
+  "t": "  <a href=\"https://github.com/akilluminati47/RIPPS2\">RIPPS2</a> ·"
+ },
+ "138c6cc4b754": {
+  "en": "138c6cc4b754",
+  "t": "Ha a CWD-ben (aktuális munkakönyvtárban) saját logófájl (LOGO.BIN) található, az lecseréli a beépített PS2BBLE/PSXBBLE logót."
+ },
+ "159f3f6b8e94": {
+  "en": "159f3f6b8e94",
+  "t": "3. Tartalék a memóriakártyán:"
+ },
+ "1638bfe84685": {
+  "en": "1638bfe84685",
+  "t": "Szerkeszd a konfigurációs fájlt igény szerint. A szerkesztéshez a [R3Configurator](https://github.com/saildot4k/R3CONFIGURATOR) ajánlott. Az útvonalak már úgy vannak beállítva, hogy illeszkedjenek a [PS2 Homebrew Store](https://ps2homebrewstore.com) letöltéseihez. Így elég csak az Auto választásodat szerkeszteni, és érdemes az NHDDL argumentumait annak az eszköznek megfelelően beállítani, amelyről az ISO-kat töltöd."
+ },
+ "164d82fd0dc4": {
+  "en": "164d82fd0dc4",
+  "t": "- `1080ix3` = 1080i kényszerítése, szélesség/magasság x3"
+ },
+ "1e9995e783fc": {
+  "en": "1e9995e783fc",
+  "t": "   - PS2-n: `mc?:/SYS-CONF/PS2BBL.INI`"
+ },
+ "1ec5c04ec3af": {
+  "en": "1ec5c04ec3af",
+  "t": "- `3` = félképcsere, 3-as típus"
+ },
+ "200e77165cb3": {
+  "en": "200e77165cb3",
+  "t": "   - `cdrom0:/PS2BBL/CONFIG.INI`"
+ },
+ "20e55fa78502": {
+  "en": "20e55fa78502",
+  "t": "- A `KEY_READ_WAIT_TIME = 0` megengedett (az upstream minimuma 500 ms)."
+ },
+ "228b3fdf1eec": {
+  "en": "228b3fdf1eec",
+  "t": "  - ha elhagyod, a PS2BBL nem kényszerít ki DEV9 szabályt."
+ },
+ "24439e94a180": {
+  "en": "24439e94a180",
+  "t": "- `ata:/` BDM eszköz exFAT HDD-hez"
+ },
+ "25f56fc0dd9e": {
+  "en": "25f56fc0dd9e",
+  "t": "Ezek a `cdrom` indítási bejegyzésekre egyenként érvényesek, nem globálisan."
+ },
+ "29a4c699928e": {
+  "en": "29a4c699928e",
+  "t": "- `v` = videómód:"
+ },
+ "29c939657e98": {
+  "en": "29c939657e98",
+  "t": "  - @israpps a [PS2BBL](https://github.com/israpps/PlayStation2-Basic-BootLoader/) miatt"
+ },
+ "2b406c409d68": {
+  "en": "2b406c409d68",
+  "t": "## Köszönet és elismerés"
+ },
+ "2d1c0c3dc3a3": {
+  "en": "2d1c0c3dc3a3",
+  "t": "- [El Isra](https://israpps.github.io/) (a PS2BBL fejlesztője) részéről: "
+ },
+ "2e1844667faa": {
+  "en": "2e1844667faa",
+  "t": "- A bekapcsolástól nyomva tartott kombinációk most megnyitják az oldalaikat (a TRIANGLE + CROSS elveszett, amíg a kontrollerek még\n  indultak)."
+ },
+ "2e5eb51f690b": {
+  "en": "2e5eb51f690b",
+  "t": "- Vezérlés:"
+ },
+ "2f9dde551617": {
+  "en": "2f9dde551617",
+  "t": "**Mit változtat ez a fork**"
+ },
+ "33014f963b64": {
+  "en": "33014f963b64",
+  "t": "1. A PS2BBL csak az `ARG_*` végén álló betöltővezérlő argumentumokat dolgozza fel és használja el: `-appid`, `-titleid=`, `-dev9=`, `-patinfo`, `-disc_stop`, `-gsm=`."
+ },
+ "34f273d336d6": {
+  "en": "34f273d336d6",
+  "t": "A BIBLE az a rendszerbetöltő, amelyet a RIPPS2 telepít: saildot4k PS2BBL Extended programjának forkja."
+ },
+ "36e7bf643ef8": {
+  "en": "36e7bf643ef8",
+  "t": "### Appok argumentumai"
+ },
+ "38dcd9eb7ded": {
+  "en": "38dcd9eb7ded",
+  "t": "- Először add meg az indított elf argumentumait, utána fűzd hozzá a kívánt belső PS2BBL argumentumokat (lásd lent). Az [NHDDL](https://github.com/pcm720/nhddl) remek jelölt az argumentumokra, mert gyorsítják az indulását."
+ },
+ "391adc91b06c": {
+  "en": "391adc91b06c",
+  "t": "- Globális kulcs/érték: `DISC_STOP = 0/1`"
+ },
+ "3adb267042c1": {
+  "en": "3adb267042c1",
+  "t": "## Elavult/Eltávolítva"
+ },
+ "3d92d62b98f7": {
+  "en": "3d92d62b98f7",
+  "t": "- Videómódok: a `VIDEO_MODE` elfogadja a `576P`, `720P` és `1080I` értéket is, a RIPPS2 többi módját. Az `AUTO` (alapértelmezés)\n  a RIPPS2 Video Mode beállításában indul, ha annak beállításai az AUTO bejegyzés mellett vannak, különben a konzol saját módjában."
+ },
+ "3eba597b9c5f": {
+  "en": "3eba597b9c5f",
+  "t": "- `1080ix2` = 1080i kényszerítése, szélesség/magasság x2"
+ },
+ "3fef7c9294f4": {
+  "en": "3fef7c9294f4",
+  "t": "  <a href=\"https://github.com/akilluminati47/BIBLE/actions\">Buildek</a> ·"
+ },
+ "4019cd997962": {
+  "en": "4019cd997962",
+  "t": "  - `NICHDD` bekapcsolva tartja a DEV9-et (hálózati adapter) és a HDD-t is."
+ },
+ "406206a51560": {
+  "en": "406206a51560",
+  "t": "- Az `APP_GAMEID = 1` bekapcsolja a vizuális játékazonosítót appokhoz/homebrew-hoz, legfeljebb 11 karakterrel a fájlnévből vagy a PS1/2 lemezről"
+ },
+ "4088157bc12a": {
+  "en": "4088157bc12a",
+  "t": "  - @SP193 az OSD inicializáló könyvtárakért, amelyekre ez a projekt épül"
+ },
+ "40a28018c31c": {
+  "en": "40a28018c31c",
+  "t": "#### PS1 lemezek argumentumai (indításonként)"
+ },
+ "439feb54907f": {
+  "en": "439feb54907f",
+  "t": "- `-ps1vneg`"
+ },
+ "43fcd64b5833": {
+  "en": "43fcd64b5833",
+  "t": "5. Ha `DISC_STOP_AT_BOOT=1 beállítással fordították"
+ },
+ "449dee5852ac": {
+  "en": "449dee5852ac",
+  "t": "A RIPPS2 aláírt indítófájlokként hozza majd a BIBLE-t, és a Settings (Boot Loader) menüjéből telepíti, a ma hozott PS2BBL 1.2.0 helyett. A BIBLE egy másik betöltő által indított ELF-ként is fut (FMCB, OSDMenu, egy SD2PSX betöltője). BIBLE kiadás még nincs."
+ },
+ "4793c8125dc9": {
+  "en": "4793c8125dc9",
+  "t": "### eGSM (external Graphics Synthesize Mode)"
+ },
+ "4822d5ecd6f5": {
+  "en": "4822d5ecd6f5",
+  "t": "- Új: az indítógombok oldala. Indításkor tartsd lenyomva az L2 + R2 gombot, hogy elolvasd minden gomb indítási útvonalát, bármi legyen is az indítóképernyő beállítása."
+ },
+ "4995cc5a4675": {
+  "en": "4995cc5a4675",
+  "t": "6. A megmaradt argumentumok megtartják a sorrendjüket, és az indított app kapja meg őket."
+ },
+ "4a75c7695a03": {
+  "en": "4a75c7695a03",
+  "t": "te mondd meg ;)"
+ },
+ "4b1b74371c50": {
+  "en": "4b1b74371c50",
+  "t": "- A `-disc_stop` a `cdrom` indítási bejegyzéseknél figyelmen kívül marad."
+ },
+ "4bcc83d2703e": {
+  "en": "4bcc83d2703e",
+  "t": "**Hogyan használja a RIPPS2**"
+ },
+ "4c5f14b856c2": {
+  "en": "4c5f14b856c2",
+  "t": "   - APA HDD-indítás: `hdd0:__sysconf:pfs:/PS2BBL/CONFIG.INI`"
+ },
+ "4ca733fed7d8": {
+  "en": "4ca733fed7d8",
+  "t": "- Az indítási bejegyzés útvonalaként használd a `cdrom` értéket."
+ },
+ "4cb76a5bb7c0": {
+  "en": "4cb76a5bb7c0",
+  "t": "- `-gsm=<v[:c]>`"
+ },
+ "4daebfa16bdc": {
+  "en": "4daebfa16bdc",
+  "t": "   - PSX-DESR-en: `mc?:/SYS-CONF/PSXBBL.INI`"
+ },
+ "4e318690a5f7": {
+  "en": "4e318690a5f7",
+  "t": "- `mx4sio:/` (ajánlott) és `massX:/` (régi)  __MX4SIO buildek__"
+ },
+ "502c67628795": {
+  "en": "502c67628795",
+  "t": "- Amíg aktív, a választó kikényszeríti a `LOGO_DISPLAY = 3` beállítást, hogy lásd a logót és a gombokat."
+ },
+ "511c26550b7a": {
+  "en": "511c26550b7a",
+  "t": "- A `DISC_STOP = 1` a konfiguráció betöltése után leállítja az optikai lemezt, ha talált konfigurációs fájlt."
+ },
+ "514e9776a6b8": {
+  "en": "514e9776a6b8",
+  "t": "  - `2` PS2BBLE/PSXBBLE logó és konzoladatok"
+ },
+ "5189562652cb": {
+  "en": "5189562652cb",
+  "t": "- A `-dev9=<mode>` a cél ELF indítása előtt beállítja a DEV9/HDD szabályt. Támogatott módok:"
+ },
+ "52a815bf5a23": {
+  "en": "52a815bf5a23",
+  "t": "    - a Retrogem gameID, a PS1 Video Negator, az eGSM és a PS2LOGO kód az [OSDMenu](https://github.com/pcm720/OSDMenu) programból"
+ },
+ "53c15c59e52b": {
+  "en": "53c15c59e52b",
+  "t": "  - A PNG legyen RGBA, 8 bites indexelt, csatornánként 255 szín, 256x64 felbontás."
+ },
+ "5519f5e8f4ae": {
+  "en": "5519f5e8f4ae",
+  "t": "    Rugalmas rendszerbetöltő PlayStation 2™-höz és PSX-DESR-hez"
+ },
+ "5933320f9ba5": {
+  "en": "5933320f9ba5",
+  "t": "Az `ARG_<BUTTON>_E? =` sorokkal adhatsz át argumentumokat egy ELF-nek (lásd az INI példákat)."
+ },
+ "5bb677ad2c61": {
+  "en": "5bb677ad2c61",
+  "t": "  - `3` Gombgrafika a konfigurációs fájlból vett `NAME_BUTTON = <TITLE>` értékekkel"
+ },
+ "5d5f73d54d7f": {
+  "en": "5d5f73d54d7f",
+  "t": "## Ismert hibák/problémák"
+ },
+ "5d73be2078e5": {
+  "en": "5d73be2078e5",
+  "t": "- PS2 buildek memóriakártyára / USB-re, MMCE-re, MX4SIO-ra és HDD-re. Az eGSM 2. szakasza kimarad."
+ },
+ "6071ff1f11ca": {
+  "en": "6071ff1f11ca",
+  "t": "### A Retrogem vizuális játékazonosítója"
+ },
+ "61eb73b67bf7": {
+  "en": "61eb73b67bf7",
+  "t": "    - a videómód beállításai az [NHDDL](https://github.com/pcm720/nhddl) programból"
+ },
+ "641317004793": {
+  "en": "641317004793",
+  "t": "- saildot4k részéről"
+ },
+ "641f6dbfad30": {
+  "en": "641f6dbfad30",
+  "t": "- A `-gsm=<v[:c]>` a beépített eGSM-en keresztül futtatja a cél ELF-et (`rom?:` útvonalaknál figyelmen kívül marad)."
+ },
+ "6656cd8cf3ca": {
+  "en": "6656cd8cf3ca",
+  "t": "  - `START` kilép a választóból, és továbblép a gombok kijelzésére"
+ },
+ "6682c393a791": {
+  "en": "6682c393a791",
+  "t": "  <a href=\"https://github.com/saildot4k/PlayStation2-Basic-BootLoader-Extended\">PS2BBL Extended</a> ·"
+ },
+ "675253f496d9": {
+  "en": "675253f496d9",
+  "t": "  - [@Berion](https://www.psx-place.com/members/berion.1431/) a logókért, a háttérért és a gombgrafikákért"
+ },
+ "69d4c3170060": {
+  "en": "69d4c3170060",
+  "t": "   - Tartalék a memóriakártyán a fenti 3. pont szerint."
+ },
+ "6debe9f38567": {
+  "en": "6debe9f38567",
+  "t": "Példa az NHDDL indítására 480p videómódban, amely nhddl.yaml nélkül keres ISO-kat mmce-n és exFAT HDD-n. Az előny, hogy nem megy el idő illesztőprogramok betöltésére, a nhddl.yaml keresésére és betöltésére. Ez a leggyorsabb módja az NHDDL indításának és az ISO lista megjelenítésének."
+ },
+ "704784bb456b": {
+  "en": "704784bb456b",
+  "t": "- `2` = félképcsere, 2-es típus"
+ },
+ "70710f40217d": {
+  "en": "70710f40217d",
+  "t": "  - megjegyzés: HDD nélküli buildeken ennek az opciónak nincs hatása."
+ },
+ "71858737f5c1": {
+  "en": "71858737f5c1",
+  "t": "#### Buildtől függően:  "
+ },
+ "7425333403ea": {
+  "en": "7425333403ea",
+  "t": "- `xfrom:/` útvonalak __PSX DESR buildek__"
+ },
+ "767d07f95351": {
+  "en": "767d07f95351",
+  "t": "- `-nologo`"
+ },
+ "7bb989a3fb7e": {
+  "en": "7bb989a3fb7e",
+  "t": "<h1 align=\"center\">BIBLE</h1>"
+ },
+ "7d52c1b8a6a4": {
+  "en": "7d52c1b8a6a4",
+  "t": "- A `-gsm=<v[:c]>` a beépített eGSM-en keresztül futtatja a cél ELF-et (`rom?:` útvonalaknál figyelmen kívül marad). Ha használod, ennek kell az utolsó argumentumnak lennie."
+ },
+ "7f48b942e063": {
+  "en": "7f48b942e063",
+  "t": "  - Kiadási csomag (a szkript a kiadás gyökerében van):"
+ },
+ "81f7471dcefd": {
+  "en": "81f7471dcefd",
+  "t": "- üres = nincs (alapértelmezés)"
+ },
+ "84c6c36434d4": {
+  "en": "84c6c36434d4",
+  "t": "- A `-patinfo` bekapcsolja a PATINFO kezelését a `:PATINFO` bejegyzésekhez."
+ },
+ "85953d7c3ac5": {
+  "en": "85953d7c3ac5",
+  "t": "  - Az eGSM az indított célra (ELF/lemez) vonatkozik, nem magára a PS2BBL-re.\n  Az eGSM formátuma (OSDMenu módra):"
+ },
+ "859e8018755b": {
+  "en": "859e8018755b",
+  "t": "  - `LEFT/RIGHT` lépteti a módokat: `AUTO`, `NTSC`, `PAL`, `480P`"
+ },
+ "85d3494a3c15": {
+  "en": "85d3494a3c15",
+  "t": "### LOGO_DISPLAY"
+ },
+ "87104d1e4715": {
+  "en": "87104d1e4715",
+  "t": "- Add hozzá a `-nologo` argumentumot a bejegyzéshez, hogy a PS2 lemezek közvetlenül induljanak (a `rom0:PS2LOGO` kihagyásával)."
+ },
+ "8864c9dc9624": {
+  "en": "8864c9dc9624",
+  "t": "- `-gsm=fp2:1`"
+ },
+ "89f87574605b": {
+  "en": "89f87574605b",
+  "t": "A [github pages](https://israpps.github.io/PlayStation2-Basic-BootLoader/) oldalon található, de az alábbi kiegészítésekkel:"
+ },
+ "8acd450b3e09": {
+  "en": "8acd450b3e09",
+  "t": "#### PS2LOGO argumentumok (csak PS2 lemezek)"
+ },
+ "8c1803695e4c": {
+  "en": "8c1803695e4c",
+  "t": "  - `NIC` bekapcsolva tartja a DEV9-et/hálózatot, leválasztja a `pfs0:` kötetet, és azonnal pihenőbe teszi a `hdd0:`/`hdd1:` lemezt."
+ },
+ "8ce3834f1354": {
+  "en": "8ce3834f1354",
+  "t": "4. Utolsó tartalék PSX-en"
+ },
+ "8daca164d7be": {
+  "en": "8daca164d7be",
+  "t": "- A `DISC_STOP = 0` (vagy elhagyva) megtartja az alapértelmezett viselkedést."
+ },
+ "9109da4b6d16": {
+  "en": "9109da4b6d16",
+  "t": "#### Az argumentumok elsőbbsége és sorrendje"
+ },
+ "942059e5f559": {
+  "en": "942059e5f559",
+  "t": "<p align=\"center\"><img src=\"assets/readme/ripps2-icon.png\" alt=\"RIPPS2\" width=\"48\" height=\"48\"><br><sub>A BIBLE a(z) <a href=\"https://github.com/akilluminati47/RIPPS2\">RIPPS2</a> része.</sub></p>"
+ },
+ "9422bbe6a402": {
+  "en": "9422bbe6a402",
+  "t": "- ~~`RUNKELF`~~ A PS2BBLE most belsőleg indítja az elf/kelf fájlokat, a felhasználónak nem kell kelf indítási műveletet megadnia."
+ },
+ "986a0196fb5a": {
+  "en": "986a0196fb5a",
+  "t": "  <sub>Indításkor tartsd lenyomva az L2 + R2 gombot az indítógombok oldalához, a TRIANGLE + CROSS gombot a videómód oldalához; a <code>$CREDITS</code> értékre állított gomb a stáblistát mutatja.</sub>"
+ },
+ "999269fc568a": {
+  "en": "999269fc568a",
+  "t": "- Az `-appid` kikényszeríti az app vizuális játékazonosítóját akkor is, ha `APP_GAMEID = 0`."
+ },
+ "99dfbd99b669": {
+  "en": "99dfbd99b669",
+  "t": "Alakíts át egy PNG-t a várt nyers fájllá:"
+ },
+ "9a2ff94c7bee": {
+  "en": "9a2ff94c7bee",
+  "t": "- `-ps1fast`"
+ },
+ "9e14e0197f55": {
+  "en": "9e14e0197f55",
+  "t": "- Az indítóképernyő: a PS2 logó a RIPPS2 egének közepén, alatta a gombok, felette bármilyen szöveg.\n  `BIBLE_GLYPHS` 0 semmi, 1 az előlapi gombok (alapértelmezés), 2 mind a tizenhat két nyolcas sorban.\n  `BIBLE_INFO` 1 megjeleníti a konzol adatait, az órát és a visszaszámlálást (alapból ki van kapcsolva).\n  Az ég a RIPPS2 Color Theme beállításodhoz igazodik: `BIBLE_COLOR` nélkül a BIBLE azt az eget olvassa be, amelyet a RIPPS2 a\n  beállításaival ment, abból a RIPPS2 mappából, amelyet az AUTO bejegyzése indít (a konfigurációban lévő `BIBLE_COLOR` erősebb).\n  Minden videómódban ugyanaz a kinézet. Az oldalak (videómód, stáblista, indítógombok) a halványított logó fölé úsznak be,\n  elpakolt gombokkal, így az indítógombok nyugodtan olvashatók."
+ },
+ "9f17d88941ea": {
+  "en": "9f17d88941ea",
+  "t": "- `fp2` = progresszív letapogatás kényszerítése (480p/576p)"
+ },
+ "9f61ad6cbb52": {
+  "en": "9f61ad6cbb52",
+  "t": "- üres = nincs kényszerítés (alapértelmezés)"
+ },
+ "a0525e7d534f": {
+  "en": "a0525e7d534f",
+  "t": "- A `-ps1vneg` a PS1VModeNegator-on keresztül futtatja a PS1DRV-t. Hasznos ott, ahol a konzol és a lemez módja eltér (például egyes MechaPwn/modchip esetekben)."
+ },
+ "a3a65a7af403": {
+  "en": "a3a65a7af403",
+  "t": "- Indítás közben a `TRIANGLE + CROSS` gombbal nyílik meg"
+ },
+ "a44babacaf8b": {
+  "en": "a44babacaf8b",
+  "t": "   - `xfrom:/PS2BBL/CONFIG.INI`"
+ },
+ "a6090e73dd04": {
+  "en": "a6090e73dd04",
+  "t": "### CDROM indítási argumentumok"
+ },
+ "a63cb36e571e": {
+  "en": "a63cb36e571e",
+  "t": "- `1` = félképcsere, 1-es típus"
+ },
+ "aa77b29709a0": {
+  "en": "aa77b29709a0",
+  "t": "  - ha `BOOT2/BOOT/path=PATINFO`, a PS2BBL a partíció attribútumterületéről tölti be a beágyazott ELF-et, és a belső `-la=E...` átadást használja."
+ },
+ "ad807f2f9ae8": {
+  "en": "ad807f2f9ae8",
+  "t": "- A `CDROM_DISABLE_GAMEID = 1` kikapcsolja a vizuális játékazonosítót a `cdrom` útján indított lemezeknél."
+ },
+ "ad9f1afbaa28": {
+  "en": "ad9f1afbaa28",
+  "t": "- `-gsm=1080ix2`"
+ },
+ "ae898dca6d64": {
+  "en": "ae898dca6d64",
+  "t": "- A `-ps1smooth` bekapcsolja a textúrasimítást."
+ },
+ "aed791467a10": {
+  "en": "aed791467a10",
+  "t": "A `LK_*_E* = cdrom` esetén támogatott argumentumok:"
+ },
+ "b2ddfe0e68bd": {
+  "en": "b2ddfe0e68bd",
+  "t": "PS2 lemezeknél az eGSM automatikusan az `OSDGSM.CNF` fájlból töltődik be (nem kell útvonal az INI-ben). A konfigurációs fájl formátumát lásd [itt](https://github.com/pcm720/OSDMenu/blob/main/patcher/README.md#osdgsmcnf)."
+ },
+ "b3ba04fd4da5": {
+  "en": "b3ba04fd4da5",
+  "t": "   - BDM-indítás: `usb:/PS2BBL/CONFIG.INI` / `mass:/PS2BBL/CONFIG.INI` / `ata:/PS2BBL/CONFIG.INI`"
+ },
+ "b471aa6e5908": {
+  "en": "b471aa6e5908",
+  "t": "- `-gsm=fp2`"
+ },
+ "b739b09f5b15": {
+  "en": "b739b09f5b15",
+  "t": "  - @uyjulian és @fjtrujy, mert mindig segítenek"
+ },
+ "b9a70d5fa7b3": {
+  "en": "b9a70d5fa7b3",
+  "t": "### A konfiguráció keresési sorrendje"
+ },
+ "bb5f8da78b41": {
+  "en": "bb5f8da78b41",
+  "t": "  - Tedd a létrehozott `LOGO.BIN` fájlt a PS2BBL Extended mellé. Ez `mc?:/BOOT/` legyen, ha a [PS2 Homebrew Store](https://ps2store.com) letöltéseit használod"
+ },
+ "bb72aacfa09f": {
+  "en": "bb72aacfa09f",
+  "t": "- `hdd0:partition:pfs:/<path to elf>` __HDD buildek__"
+ },
+ "bbfa9a74fbf2": {
+  "en": "bbfa9a74fbf2",
+  "t": "  - A PS2BBL a partíció attribútumterületéről (`PS2ICON3D`) olvassa a `SYSTEM.CNF` fájlt, és alkalmazza a `BOOT2/BOOT/path`, `arg*`, `skip_argv0` és `HDDUNITPOWER` értékeket."
+ },
+ "beaeeff57019": {
+  "en": "beaeeff57019",
+  "t": "- `ilink:/` (BDM háttértár-gyökerek) __még nincs megvalósítva__"
+ },
+ "bf1858271ce3": {
+  "en": "bf1858271ce3",
+  "t": "#### Saját indítólogó a CWD-ből"
+ },
+ "bf621297607e": {
+  "en": "bf621297607e",
+  "t": "## Dokumentáció"
+ },
+ "bf8021c1dc5a": {
+  "en": "bf8021c1dc5a",
+  "t": "<p align=\"center\"><sub>Minden, ami ezután jön, a PS2BBL Extended eredeti README-je, lefordítva és egyébként változatlanul.</sub></p>"
+ },
+ "c06e0a279296": {
+  "en": "c06e0a279296",
+  "t": "- `usb:/` (ajánlott) és `mass:/` (régi)"
+ },
+ "c10219799837": {
+  "en": "c10219799837",
+  "t": "  <a href=\"LICENSE\">GPL-3.0</a>"
+ },
+ "c48fea10b14c": {
+  "en": "c48fea10b14c",
+  "t": "- `VIDEO_MODE = AUTO, NTSC, PAL, 480P` A PS2 alapértelmezését használja, vagy kikényszeríti a másik 3 mód egyikét."
+ },
+ "c545cdcece82": {
+  "en": "c545cdcece82",
+  "t": "A gombok nevének megjelenítéséhez használd a `LOGO_DISPLAY = 3` beállítást. A neveket a `NAME_<BUTTON>` adja meg."
+ },
+ "c7ce0d2e1ff8": {
+  "en": "c7ce0d2e1ff8",
+  "t": "- `-nologo` nélkül a PS2BBL a PS2LOGO-n keresztül indítja a lemezt, és úgy foltozza, hogy mindig a lemez régióját használja és kikerülje a logó ellenőrzőösszegét."
+ },
+ "c839d62b7d87": {
+  "en": "c839d62b7d87",
+  "t": "  - `SELECT` elmenti a kiválasztott módot az aktív konfigurációs fájlba"
+ },
+ "c8c06c6a31a8": {
+  "en": "c8c06c6a31a8",
+  "t": "## Konfiguráció és argumentumok"
+ },
+ "d22941defd02": {
+  "en": "d22941defd02",
+  "t": "Ez [El Isra](https://github.com/israpps/PlayStation2-Basic-BootLoader/) PS2BBL programjának forkja"
+ },
+ "d3848ab732aa": {
+  "en": "d3848ab732aa",
+  "t": "- `-ps1smooth`"
+ },
+ "d552d6dc7534": {
+  "en": "d552d6dc7534",
+  "t": "### Videómód"
+ },
+ "d5c51f8e6ac2": {
+  "en": "d5c51f8e6ac2",
+  "t": "- A `-titleid=SLUS_123.45` felülírja az app címazonosítóját (legfeljebb 11 karakter)."
+ },
+ "da330e7a0139": {
+  "en": "da330e7a0139",
+  "t": "- `mc0:/`, `mc1:/`, `mc?:/`"
+ },
+ "da9818557f89": {
+  "en": "da9818557f89",
+  "t": "#### Vészhelyzeti videómód-választó"
+ },
+ "dbdd3c74a6e3": {
+  "en": "dbdd3c74a6e3",
+  "t": "   - MX4SIO-indítás: `mx4sio:/PS2BBL/CONFIG.INI`"
+ },
+ "ddfc333f97d7": {
+  "en": "ddfc333f97d7",
+  "t": "2. A feldolgozás alulról felfelé halad, és az első nem vezérlő argumentumnál megáll (záró viselkedés OSDMenu módra)."
+ },
+ "de02177eb37e": {
+  "en": "de02177eb37e",
+  "t": "eGSM ARG példák:"
+ },
+ "de664ca47abc": {
+  "en": "de664ca47abc",
+  "t": "- `-nogameid`"
+ },
+ "de782301e641": {
+  "en": "de782301e641",
+  "t": "  - @sp193 a [PS1 Video Negator](https://github.com/ps2homebrew/PS1VModeNeg) miatt"
+ },
+ "dfbebe092d40": {
+  "en": "dfbebe092d40",
+  "t": "- `BIBLE_WIDESCREEN`: `AUTO` (alapértelmezés: a RIPPS2 Widescreen beállítása, különben a PS2 16:9-es képernyőbeállítása), `ON` vagy\n  `OFF`. 480i, 576i, 480p és 576p módban az indítóképernyő olyan tévéhez készül, amely 16:9-re nyújtja a képet, lapítás\n  nélkül. A 720p és az 1080i már eleve 16:9."
+ },
+ "dfef928c9dd2": {
+  "en": "dfef928c9dd2",
+  "t": "- `c` = kompatibilitási mód:"
+ },
+ "e17e9a226952": {
+  "en": "e17e9a226952",
+  "t": "- A `-disc_stop` a cél ELF betöltése után leállítja a lemezt (bejegyzésenként hasznos `DISC_STOP_AT_BOOT` buildek nélkül)."
+ },
+ "e2f6ac3e8203": {
+  "en": "e2f6ac3e8203",
+  "t": "  <a href=\"https://github.com/israpps/PlayStation2-Basic-BootLoader\">PS2BBL</a> ·"
+ },
+ "e3b8cc6236ca": {
+  "en": "e3b8cc6236ca",
+  "t": "  - @nathanneurotic a PS2BBLE 10 útvonaláért, az ötletekért és a rábeszélésért"
+ },
+ "e6d271e7c0bd": {
+  "en": "e6d271e7c0bd",
+  "t": "A konfiguráció keresése most figyelembe veszi az indítási családot, hogy induláskor ne töltsön be fölösleges illesztőprogramokat:"
+ },
+ "e6eb20871642": {
+  "en": "e6eb20871642",
+  "t": "  - ha `IOPRP=PATINFO` (vagy saját útvonal), a PS2BBL a belső `-la=I...` átadással adja tovább a 2. szakasznak."
+ },
+ "e948a4e2ffd1": {
+  "en": "e948a4e2ffd1",
+  "t": "A PS2BBL ezeket az indítási/konfigurációs útvonal-előtagokat támogatja:"
+ },
+ "e95c77643cfe": {
+  "en": "e95c77643cfe",
+  "t": "- `mmce0:/`, `mmce1:/`, `mmce?:/` __MMCE buildek__"
+ },
+ "eae8f93205fd": {
+  "en": "eae8f93205fd",
+  "t": "  - `0` Se logó, se konzoladatok"
+ },
+ "ed21c5ac66ff": {
+  "en": "ed21c5ac66ff",
+  "t": "- Nincs ugrás a RIPPS2-be lépéskor: indításkor a logó és a gombok elhalványulnak, az ég pedig a képernyőn marad a RIPPS2 módjában;\n  a RIPPS2 ugyanezen az égen indul. Indításkor tartsd lenyomva a TRIANGLE + CROSS gombot a videómód oldalához, amely mindig\n  a konzol saját váltottsoros módjában nyílik meg (az út vissza 720p-ből vagy 1080i-ből kompozit kábelen)."
+ },
+ "ed675d1ac190": {
+  "en": "ed675d1ac190",
+  "t": "- DECKARD IE 75K és újabb: az XPARAM.IRX automatikusan alkalmazódik, ha a logó nélküli indításhoz szükséges."
+ },
+ "f194a33a1232": {
+  "en": "f194a33a1232",
+  "t": "- `fp1` = progresszív letapogatás kényszerítése (240p/288p)"
+ },
+ "f49f3f803d4d": {
+  "en": "f49f3f803d4d",
+  "t": "### Az eszközök útvonal-előtagjai"
+ },
+ "fbd93fd380b1": {
+  "en": "fbd93fd380b1",
+  "t": "  - `1` Konzoladatok"
+ },
+ "fd03d61bc9f2": {
+  "en": "fd03d61bc9f2",
+  "t": "- A `-disc_stop` minden indítási bejegyzéshez hozzáadható, hogy a lemez megálljon, amint megvan a cél ELF."
+ },
+ "fd5efe6c6f4c": {
+  "en": "fd5efe6c6f4c",
+  "t": "  - @pcm720:"
+ },
+ "fdee3f98ecaa": {
+  "en": "fdee3f98ecaa",
+  "t": "- `1080ix1` = 1080i kényszerítése, szélesség/magasság x1"
+ },
+ "fe658db8cc2f": {
+  "en": "fe658db8cc2f",
+  "t": "  - @asmblur, aki biztatott, hogy a legújabb SDK-n készítsem el ezt a szörnyet"
+ },
+ "fec43ce445f9": {
+  "en": "fec43ce445f9",
+  "t": "Használati példa:"
+ },
+ "ff7f439f5d79": {
+  "en": "ff7f439f5d79",
+  "t": "1. `CONFIG.INI` (CWD: aktuális munkakönyvtár)"
+ },
+ "ffed62f66519": {
+  "en": "ffed62f66519",
+  "t": "    - Példa:"
+ },
+ "fffd2a6caa3f": {
+  "en": "fffd2a6caa3f",
+  "t": "  - ha a `-patinfo` jelen van, az első megmaradt argumentum felülírja a CNF `BOOT2/BOOT/path` célját.\n  Ez a HDD buildekre vonatkozik.  \n  PATINFO példa:  "
+ }
+}

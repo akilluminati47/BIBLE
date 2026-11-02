@@ -1,0 +1,666 @@
+{
+ "002e3896fc22": {
+  "en": "002e3896fc22",
+  "t": "   - Nisje nga MMCE: `mmce?:/PS2BBL/CONFIG.INI`"
+ },
+ "009050688382": {
+  "en": "009050688382",
+  "t": "4. Për shtigjet e nisjes `:PATINFO`, PS2BBL analizon `SYSTEM.CNF` të atributit të ndarjes dhe shton hyrjet `arg*` të CNF pas argumenteve të aplikacionit të përdoruesit."
+ },
+ "075b75340cb8": {
+  "en": "075b75340cb8",
+  "t": "### Kontrolli i rrotullimit të diskut"
+ },
+ "08c4d5ce9f91": {
+  "en": "08c4d5ce9f91",
+  "t": "2. Kur ngarkohet nga një pajisje:"
+ },
+ "0d2174dc83ca": {
+  "en": "0d2174dc83ca",
+  "t": "- `DISC_STOP_AT_BOOT=1` profil ndërtimi që e ndalon gjithmonë diskun optik pas ngarkimit të konfigurimit"
+ },
+ "0d2b0afd3f6c": {
+  "en": "0d2b0afd3f6c",
+  "t": "- `-ps1fast` aktivizon shpejtësinë e shpejtë të diskut PS1."
+ },
+ "0f47fa9660dd": {
+  "en": "0f47fa9660dd",
+  "t": "5. Nëse `-patinfo` është vendosur dhe shtegu i nisjes përmban `:PATINFO`, argumenti i parë i mbetur i përdoruesit bëhet shtegu i ELF-it të synuar (zëvendëson shtegun e nisjes së CNF) dhe hiqet nga argv i aplikacionit. Nëse nuk mbetet asnjë argument, nisja anulohet (si në OSDMenu) dhe `BOOT2/BOOT/path` i CNF nuk përdoret."
+ },
+ "10e49ad3c8d0": {
+  "en": "10e49ad3c8d0",
+  "t": "  <a href=\"https://github.com/akilluminati47/RIPPS2\">RIPPS2</a> ·"
+ },
+ "138c6cc4b754": {
+  "en": "138c6cc4b754",
+  "t": "Nëse në CWD (dosjen aktuale të punës) gjendet një skedar logoje i vetë (LOGO.BIN), ai zëvendëson logon e integruar PS2BBLE/PSXBBLE."
+ },
+ "159f3f6b8e94": {
+  "en": "159f3f6b8e94",
+  "t": "3. Rezervë në kartën e memories:"
+ },
+ "1638bfe84685": {
+  "en": "1638bfe84685",
+  "t": "Ndrysho skedarin e konfigurimit sipas nevojës. Për ta ndryshuar rekomandohet [R3Configurator](https://github.com/saildot4k/R3CONFIGURATOR). Shtigjet janë vendosur tashmë që të përputhen me shkarkimet nga [PS2 Homebrew Store](https://ps2homebrewstore.com). Kështu duhet të ndryshosh vetëm zgjedhjen Auto dhe, më mirë, të vendosësh argumentet për NHDDL sipas pajisjes nga e cila ngarkon ISO-t."
+ },
+ "164d82fd0dc4": {
+  "en": "164d82fd0dc4",
+  "t": "- `1080ix3` = detyro 1080i, gjerësi/lartësi x3"
+ },
+ "1e9995e783fc": {
+  "en": "1e9995e783fc",
+  "t": "   - Në PS2: `mc?:/SYS-CONF/PS2BBL.INI`"
+ },
+ "1ec5c04ec3af": {
+  "en": "1ec5c04ec3af",
+  "t": "- `3` = përmbysje e fushave lloji 3"
+ },
+ "200e77165cb3": {
+  "en": "200e77165cb3",
+  "t": "   - `cdrom0:/PS2BBL/CONFIG.INI`"
+ },
+ "20e55fa78502": {
+  "en": "20e55fa78502",
+  "t": "- Lejohet `KEY_READ_WAIT_TIME = 0` (minimumi i upstream është 500 ms)."
+ },
+ "228b3fdf1eec": {
+  "en": "228b3fdf1eec",
+  "t": "  - nëse hiqet, PS2BBL nuk detyron asnjë politikë DEV9."
+ },
+ "24439e94a180": {
+  "en": "24439e94a180",
+  "t": "- `ata:/` pajisje BDM për HDD exFAT"
+ },
+ "25f56fc0dd9e": {
+  "en": "25f56fc0dd9e",
+  "t": "Vlejnë për çdo hyrje nisjeje `cdrom`, jo globalisht."
+ },
+ "29a4c699928e": {
+  "en": "29a4c699928e",
+  "t": "- `v` = mënyra video:"
+ },
+ "29c939657e98": {
+  "en": "29c939657e98",
+  "t": "  - @israpps për [PS2BBL](https://github.com/israpps/PlayStation2-Basic-BootLoader/)"
+ },
+ "2b406c409d68": {
+  "en": "2b406c409d68",
+  "t": "## Kreditet dhe falënderimet"
+ },
+ "2d1c0c3dc3a3": {
+  "en": "2d1c0c3dc3a3",
+  "t": "- Nga [El Isra](https://israpps.github.io/) (zhvilluesi i PS2BBL): "
+ },
+ "2e1844667faa": {
+  "en": "2e1844667faa",
+  "t": "- Kombinimet e mbajtura që nga ndezja tani hapin faqet e tyre (TRIANGLE + CROSS humbiste kur kontrollorët ende\n  po niseshin)."
+ },
+ "2e5eb51f690b": {
+  "en": "2e5eb51f690b",
+  "t": "- Kontrollet:"
+ },
+ "2f9dde551617": {
+  "en": "2f9dde551617",
+  "t": "**Çfarë ndryshon ky fork**"
+ },
+ "33014f963b64": {
+  "en": "33014f963b64",
+  "t": "1. PS2BBL analizon dhe konsumon vetëm argumentet e kontrollit të ngarkuesit në fund të `ARG_*`: `-appid`, `-titleid=`, `-dev9=`, `-patinfo`, `-disc_stop`, `-gsm=`."
+ },
+ "34f273d336d6": {
+  "en": "34f273d336d6",
+  "t": "BIBLE është ngarkuesi i nisjes që vendos RIPPS2: një fork i PS2BBL Extended të saildot4k."
+ },
+ "36e7bf643ef8": {
+  "en": "36e7bf643ef8",
+  "t": "### Argumentet e aplikacioneve"
+ },
+ "38dcd9eb7ded": {
+  "en": "38dcd9eb7ded",
+  "t": "- Vendos fillimisht argumentet e elf-it që niset dhe pastaj shto argumentet e brendshme të PS2BBL që dëshiron (shih më poshtë). [NHDDL](https://github.com/pcm720/nhddl) është kandidat i shkëlqyer për argumente, sepse ia përshpejtojnë nisjen."
+ },
+ "391adc91b06c": {
+  "en": "391adc91b06c",
+  "t": "- Çelës/vlerë globale: `DISC_STOP = 0/1`"
+ },
+ "3adb267042c1": {
+  "en": "3adb267042c1",
+  "t": "## E vjetruar/E hequr"
+ },
+ "3d92d62b98f7": {
+  "en": "3d92d62b98f7",
+  "t": "- Mënyrat video: `VIDEO_MODE` pranon edhe `576P`, `720P` dhe `1080I`, mënyrat e tjera të RIPPS2. `AUTO` (parazgjedhje)\n  nis në Video Mode të RIPPS2 kur cilësimet e tij janë pranë hyrjes AUTO, përndryshe në mënyrën e konsolës."
+ },
+ "3eba597b9c5f": {
+  "en": "3eba597b9c5f",
+  "t": "- `1080ix2` = detyro 1080i, gjerësi/lartësi x2"
+ },
+ "3fef7c9294f4": {
+  "en": "3fef7c9294f4",
+  "t": "  <a href=\"https://github.com/akilluminati47/BIBLE/actions\">Ndërtimet</a> ·"
+ },
+ "4019cd997962": {
+  "en": "4019cd997962",
+  "t": "  - `NICHDD` mban të ndezura si DEV9 (përshtatësin e rrjetit) ashtu edhe HDD-në."
+ },
+ "406206a51560": {
+  "en": "406206a51560",
+  "t": "- `APP_GAMEID = 1` aktivizon ID-në vizuale të lojës për aplikacione/homebrew, deri në 11 karaktere nga emri i skedarit ose disku PS1/2"
+ },
+ "4088157bc12a": {
+  "en": "4088157bc12a",
+  "t": "  - @SP193 për bibliotekat e inicializimit të OSD, që janë themeli i këtij projekti"
+ },
+ "40a28018c31c": {
+  "en": "40a28018c31c",
+  "t": "#### Argumentet e disqeve PS1 (për çdo nisje)"
+ },
+ "439feb54907f": {
+  "en": "439feb54907f",
+  "t": "- `-ps1vneg`"
+ },
+ "43fcd64b5833": {
+  "en": "43fcd64b5833",
+  "t": "5. Kur kompilohet me `DISC_STOP_AT_BOOT=1"
+ },
+ "449dee5852ac": {
+  "en": "449dee5852ac",
+  "t": "RIPPS2 do ta mbajë BIBLE si skedarë nisjeje të nënshkruar dhe do ta instalojë nga Settings (Boot Loader), në vend të PS2BBL 1.2.0 që mban sot. BIBLE punon edhe si ELF i nisur nga një ngarkues tjetër (FMCB, OSDMenu, ngarkuesi i një SD2PSX). Ende nuk ka botim të BIBLE."
+ },
+ "4793c8125dc9": {
+  "en": "4793c8125dc9",
+  "t": "### eGSM (external Graphics Synthesize Mode)"
+ },
+ "4822d5ecd6f5": {
+  "en": "4822d5ecd6f5",
+  "t": "- E re: faqja e tasteve të nisjes. Mbaj L2 + R2 gjatë ndezjes për të lexuar shtegun e nisjes së çdo tasti, cilatdo qofshin cilësimet e ekranit të hapjes."
+ },
+ "4995cc5a4675": {
+  "en": "4995cc5a4675",
+  "t": "6. Argumentet e mbetura ruajnë rendin dhe i kalohen aplikacionit të nisur."
+ },
+ "4a75c7695a03": {
+  "en": "4a75c7695a03",
+  "t": "më trego ti ;)"
+ },
+ "4b1b74371c50": {
+  "en": "4b1b74371c50",
+  "t": "- `-disc_stop` shpërfillet për hyrjet e nisjes `cdrom`."
+ },
+ "4bcc83d2703e": {
+  "en": "4bcc83d2703e",
+  "t": "**Si e përdor RIPPS2**"
+ },
+ "4c5f14b856c2": {
+  "en": "4c5f14b856c2",
+  "t": "   - Nisje nga APA HDD: `hdd0:__sysconf:pfs:/PS2BBL/CONFIG.INI`"
+ },
+ "4ca733fed7d8": {
+  "en": "4ca733fed7d8",
+  "t": "- Përdor `cdrom` si shteg të hyrjes së nisjes."
+ },
+ "4cb76a5bb7c0": {
+  "en": "4cb76a5bb7c0",
+  "t": "- `-gsm=<v[:c]>`"
+ },
+ "4daebfa16bdc": {
+  "en": "4daebfa16bdc",
+  "t": "   - Në PSX-DESR: `mc?:/SYS-CONF/PSXBBL.INI`"
+ },
+ "4e318690a5f7": {
+  "en": "4e318690a5f7",
+  "t": "- `mx4sio:/` (e preferuar) dhe `massX:/` (e vjetër)  __ndërtimet MX4SIO__"
+ },
+ "502c67628795": {
+  "en": "502c67628795",
+  "t": "- Zgjedhësi detyron `LOGO_DISPLAY = 3` sa është aktiv, që të shohësh logon dhe tastet."
+ },
+ "511c26550b7a": {
+  "en": "511c26550b7a",
+  "t": "- `DISC_STOP = 1` ndalon diskun optik pas ngarkimit të konfigurimit kur u gjet një skedar konfigurimi."
+ },
+ "514e9776a6b8": {
+  "en": "514e9776a6b8",
+  "t": "  - `2` Logoja PS2BBLE/PSXBBLE dhe informacioni i konsolës"
+ },
+ "5189562652cb": {
+  "en": "5189562652cb",
+  "t": "- `-dev9=<mode>` vendos politikën DEV9/HDD para nisjes së ELF-it të synuar. Mënyrat e mbështetura:"
+ },
+ "52a815bf5a23": {
+  "en": "52a815bf5a23",
+  "t": "    - gameID e Retrogem, PS1 Video Negator, eGSM dhe kodin PS2LOGO nga [OSDMenu](https://github.com/pcm720/OSDMenu)"
+ },
+ "53c15c59e52b": {
+  "en": "53c15c59e52b",
+  "t": "  - PNG duhet të jetë RGBA 8 bit i indeksuar, 255 ngjyra për kanal dhe rezolucion 256x64."
+ },
+ "5519f5e8f4ae": {
+  "en": "5519f5e8f4ae",
+  "t": "    Një ngarkues nisjeje fleksibël për PlayStation 2™ dhe PSX-DESR"
+ },
+ "5933320f9ba5": {
+  "en": "5933320f9ba5",
+  "t": "Përdor rreshtat `ARG_<BUTTON>_E? =` për t'i dhënë argumente një ELF-i (shih shembujt INI)."
+ },
+ "5bb677ad2c61": {
+  "en": "5bb677ad2c61",
+  "t": "  - `3` Grafika e tasteve me `NAME_BUTTON = <TITLE>` nga skedari i konfigurimit"
+ },
+ "5d5f73d54d7f": {
+  "en": "5d5f73d54d7f",
+  "t": "## Gabime/probleme të njohura"
+ },
+ "5d73be2078e5": {
+  "en": "5d73be2078e5",
+  "t": "- Ndërtime për PS2 për kartë memorieje / USB, MMCE, MX4SIO dhe HDD. Faza 2 e eGSM lihet jashtë."
+ },
+ "6071ff1f11ca": {
+  "en": "6071ff1f11ca",
+  "t": "### ID vizuale e lojës nga Retrogem"
+ },
+ "61eb73b67bf7": {
+  "en": "61eb73b67bf7",
+  "t": "    - opsionet e mënyrës video nga [NHDDL](https://github.com/pcm720/nhddl)"
+ },
+ "641317004793": {
+  "en": "641317004793",
+  "t": "- Nga saildot4k"
+ },
+ "641f6dbfad30": {
+  "en": "641f6dbfad30",
+  "t": "- `-gsm=<v[:c]>` nis ELF-in e synuar nëpërmjet eGSM të integruar (shpërfillet për shtigjet `rom?:`)."
+ },
+ "6656cd8cf3ca": {
+  "en": "6656cd8cf3ca",
+  "t": "  - `START` del nga zgjedhësi dhe vazhdon te shfaqja e tasteve"
+ },
+ "6682c393a791": {
+  "en": "6682c393a791",
+  "t": "  <a href=\"https://github.com/saildot4k/PlayStation2-Basic-BootLoader-Extended\">PS2BBL Extended</a> ·"
+ },
+ "675253f496d9": {
+  "en": "675253f496d9",
+  "t": "  - [@Berion](https://www.psx-place.com/members/berion.1431/) për logot, sfondin dhe grafikën e tasteve"
+ },
+ "69d4c3170060": {
+  "en": "69d4c3170060",
+  "t": "   - Rezervë në kartën e memories si në pikën 3 më sipër."
+ },
+ "6debe9f38567": {
+  "en": "6debe9f38567",
+  "t": "Shembull për të nisur NHDDL në mënyrën video 480p dhe për të kërkuar ISO në mmce dhe në një HDD exFAT pa pasur nevojë për nhddl.yaml. Përfitimi është se nuk humbet kohë me ngarkimin e drejtuesve, gjetjen dhe ngarkimin e nhddl.yaml. Kjo është mënyra më e shpejtë për të nisur NHDDL dhe për të shfaqur listën e ISO-ve."
+ },
+ "704784bb456b": {
+  "en": "704784bb456b",
+  "t": "- `2` = përmbysje e fushave lloji 2"
+ },
+ "70710f40217d": {
+  "en": "70710f40217d",
+  "t": "  - shënim: në ndërtimet pa HDD ky opsion nuk ka efekt."
+ },
+ "71858737f5c1": {
+  "en": "71858737f5c1",
+  "t": "#### Sipas ndërtimit:  "
+ },
+ "7425333403ea": {
+  "en": "7425333403ea",
+  "t": "- Shtigjet `xfrom:/` __ndërtimet PSX DESR__"
+ },
+ "767d07f95351": {
+  "en": "767d07f95351",
+  "t": "- `-nologo`"
+ },
+ "7bb989a3fb7e": {
+  "en": "7bb989a3fb7e",
+  "t": "<h1 align=\"center\">BIBLE</h1>"
+ },
+ "7d52c1b8a6a4": {
+  "en": "7d52c1b8a6a4",
+  "t": "- `-gsm=<v[:c]>` nis ELF-in e synuar nëpërmjet eGSM të integruar (shpërfillet për shtigjet `rom?:`). Nëse përdoret, duhet të jetë argumenti i fundit."
+ },
+ "7f48b942e063": {
+  "en": "7f48b942e063",
+  "t": "  - Paketa e botimit (skripti është në rrënjën e botimit):"
+ },
+ "81f7471dcefd": {
+  "en": "81f7471dcefd",
+  "t": "- bosh = asnjë (parazgjedhje)"
+ },
+ "84c6c36434d4": {
+  "en": "84c6c36434d4",
+  "t": "- `-patinfo` aktivizon trajtimin e PATINFO për hyrjet `:PATINFO`."
+ },
+ "85953d7c3ac5": {
+  "en": "85953d7c3ac5",
+  "t": "  - eGSM zbatohet te objektivi i nisur (ELF/disk), jo te vetë PS2BBL.\n  Formati i eGSM (si në OSDMenu):"
+ },
+ "859e8018755b": {
+  "en": "859e8018755b",
+  "t": "  - `LEFT/RIGHT` ndërrojnë mënyrat: `AUTO`, `NTSC`, `PAL`, `480P`"
+ },
+ "85d3494a3c15": {
+  "en": "85d3494a3c15",
+  "t": "### LOGO_DISPLAY"
+ },
+ "87104d1e4715": {
+  "en": "87104d1e4715",
+  "t": "- Shto `-nologo` te argumentet e hyrjes për t'i nisur disqet PS2 drejtpërdrejt (pa `rom0:PS2LOGO`)."
+ },
+ "8864c9dc9624": {
+  "en": "8864c9dc9624",
+  "t": "- `-gsm=fp2:1`"
+ },
+ "89f87574605b": {
+  "en": "89f87574605b",
+  "t": "Ndodhet në [github pages](https://israpps.github.io/PlayStation2-Basic-BootLoader/), por me shtesat më poshtë:"
+ },
+ "8acd450b3e09": {
+  "en": "8acd450b3e09",
+  "t": "#### Argumentet e PS2LOGO (vetëm disqe PS2)"
+ },
+ "8c1803695e4c": {
+  "en": "8c1803695e4c",
+  "t": "  - `NIC` mban të ndezur DEV9/rrjetin, çmonton `pfs0:` dhe vë menjëherë në pushim `hdd0:`/`hdd1:`."
+ },
+ "8ce3834f1354": {
+  "en": "8ce3834f1354",
+  "t": "4. Rezerva e fundit në PSX"
+ },
+ "8daca164d7be": {
+  "en": "8daca164d7be",
+  "t": "- `DISC_STOP = 0` (ose i hequr) ruan sjelljen e parazgjedhur."
+ },
+ "9109da4b6d16": {
+  "en": "9109da4b6d16",
+  "t": "#### Përparësia dhe rendi i argumenteve"
+ },
+ "942059e5f559": {
+  "en": "942059e5f559",
+  "t": "<p align=\"center\"><img src=\"assets/readme/ripps2-icon.png\" alt=\"RIPPS2\" width=\"48\" height=\"48\"><br><sub>BIBLE është pjesë e <a href=\"https://github.com/akilluminati47/RIPPS2\">RIPPS2</a>.</sub></p>"
+ },
+ "9422bbe6a402": {
+  "en": "9422bbe6a402",
+  "t": "- ~~`RUNKELF`~~ PS2BBLE tani i nis elf/kelf brenda vetes, pa pasur nevojë që përdoruesi të përcaktojë një veprim nisjeje kelf."
+ },
+ "986a0196fb5a": {
+  "en": "986a0196fb5a",
+  "t": "  <sub>Mbaj L2 + R2 gjatë ndezjes për faqen e tasteve të nisjes, TRIANGLE + CROSS për faqen e mënyrës video; një tast i vendosur në <code>$CREDITS</code> shfaq kreditet.</sub>"
+ },
+ "999269fc568a": {
+  "en": "999269fc568a",
+  "t": "- `-appid` detyron ID-në vizuale të lojës së aplikacionit edhe kur `APP_GAMEID = 0`."
+ },
+ "99dfbd99b669": {
+  "en": "99dfbd99b669",
+  "t": "Shndërro një PNG në skedarin e papërpunuar të pritur:"
+ },
+ "9a2ff94c7bee": {
+  "en": "9a2ff94c7bee",
+  "t": "- `-ps1fast`"
+ },
+ "9e14e0197f55": {
+  "en": "9e14e0197f55",
+  "t": "- Ekrani i hapjes: logoja e PS2 në mes të qiellit të RIPPS2, me butonat poshtë saj dhe çdo tekst sipër.\n  `BIBLE_GLYPHS` 0 asnjë, 1 butonat e përparmë (parazgjedhje), 2 të gjithë të gjashtëmbëdhjetë në dy rreshta me tetë.\n  `BIBLE_INFO` 1 shfaq informacionin e konsolës, orën dhe numërimin mbrapsht (i fikur si parazgjedhje).\n  Qielli ndjek Color Theme-n tënd të RIPPS2: pa `BIBLE_COLOR`, BIBLE lexon qiellin që RIPPS2 ruan me\n  cilësimet e veta, nga dosja RIPPS2 që nis hyrja e tij AUTO (`BIBLE_COLOR` në konfigurim ka përparësi).\n  E njëjta pamje në çdo mënyrë video. Faqet (mënyra video, kreditet, tastet e nisjes) shfaqen gradualisht mbi logon e zbehur\n  me butonat të mënjanuar, që tastet e nisjes të lexohen qetë."
+ },
+ "9f17d88941ea": {
+  "en": "9f17d88941ea",
+  "t": "- `fp2` = detyro skanimin progresiv (480p/576p)"
+ },
+ "9f61ad6cbb52": {
+  "en": "9f61ad6cbb52",
+  "t": "- bosh = mos detyro asgjë (parazgjedhje)"
+ },
+ "a0525e7d534f": {
+  "en": "a0525e7d534f",
+  "t": "- `-ps1vneg` nis PS1DRV nëpërmjet PS1VModeNegator. E dobishme kur mënyra e konsolës dhe ajo e diskut ndryshojnë (për shembull disa raste MechaPwn/modchip)."
+ },
+ "a3a65a7af403": {
+  "en": "a3a65a7af403",
+  "t": "- Hapet me `TRIANGLE + CROSS` gjatë nisjes"
+ },
+ "a44babacaf8b": {
+  "en": "a44babacaf8b",
+  "t": "   - `xfrom:/PS2BBL/CONFIG.INI`"
+ },
+ "a6090e73dd04": {
+  "en": "a6090e73dd04",
+  "t": "### Argumentet e nisjes për CDROM"
+ },
+ "a63cb36e571e": {
+  "en": "a63cb36e571e",
+  "t": "- `1` = përmbysje e fushave lloji 1"
+ },
+ "aa77b29709a0": {
+  "en": "aa77b29709a0",
+  "t": "  - nëse `BOOT2/BOOT/path=PATINFO`, PS2BBL ngarkon ELF-in e integruar nga zona e atributeve të ndarjes dhe përdor dorëzimin e brendshëm `-la=E...`."
+ },
+ "ad807f2f9ae8": {
+  "en": "ad807f2f9ae8",
+  "t": "- `CDROM_DISABLE_GAMEID = 1` çaktivizon ID-në vizuale të lojës për disqet e nisura nëpërmjet `cdrom`."
+ },
+ "ad9f1afbaa28": {
+  "en": "ad9f1afbaa28",
+  "t": "- `-gsm=1080ix2`"
+ },
+ "ae898dca6d64": {
+  "en": "ae898dca6d64",
+  "t": "- `-ps1smooth` aktivizon zbutjen e teksturave."
+ },
+ "aed791467a10": {
+  "en": "aed791467a10",
+  "t": "Për `LK_*_E* = cdrom`, argumentet e mbështetura janë:"
+ },
+ "b2ddfe0e68bd": {
+  "en": "b2ddfe0e68bd",
+  "t": "Për disqet PS2, eGSM lexohet automatikisht nga `OSDGSM.CNF` (nuk nevojitet shteg në INI). Shih [këtu](https://github.com/pcm720/OSDMenu/blob/main/patcher/README.md#osdgsmcnf) formatin e skedarit të konfigurimit."
+ },
+ "b3ba04fd4da5": {
+  "en": "b3ba04fd4da5",
+  "t": "   - Nisje nga BDM: `usb:/PS2BBL/CONFIG.INI` / `mass:/PS2BBL/CONFIG.INI` / `ata:/PS2BBL/CONFIG.INI`"
+ },
+ "b471aa6e5908": {
+  "en": "b471aa6e5908",
+  "t": "- `-gsm=fp2`"
+ },
+ "b739b09f5b15": {
+  "en": "b739b09f5b15",
+  "t": "  - @uyjulian dhe @fjtrujy që më ndihmojnë gjithmonë"
+ },
+ "b9a70d5fa7b3": {
+  "en": "b9a70d5fa7b3",
+  "t": "### Rendi i kërkimit të konfigurimit"
+ },
+ "bb5f8da78b41": {
+  "en": "bb5f8da78b41",
+  "t": "  - Vendos `LOGO.BIN` e krijuar pranë PS2BBL Extended. Duhet të jetë `mc?:/BOOT/` nëse përdor shkarkime nga [PS2 Homebrew Store](https://ps2store.com)"
+ },
+ "bb72aacfa09f": {
+  "en": "bb72aacfa09f",
+  "t": "- `hdd0:partition:pfs:/<path to elf>` __ndërtimet HDD__"
+ },
+ "bbfa9a74fbf2": {
+  "en": "bbfa9a74fbf2",
+  "t": "  - PS2BBL lexon `SYSTEM.CNF` nga zona e atributeve të ndarjes (`PS2ICON3D`) dhe zbaton `BOOT2/BOOT/path`, `arg*`, `skip_argv0` dhe `HDDUNITPOWER`."
+ },
+ "beaeeff57019": {
+  "en": "beaeeff57019",
+  "t": "- `ilink:/` (rrënjët e ruajtjes masive BDM) __ende e pazbatuar__"
+ },
+ "bf1858271ce3": {
+  "en": "bf1858271ce3",
+  "t": "#### Logo e vetë e hapjes nga CWD"
+ },
+ "bf621297607e": {
+  "en": "bf621297607e",
+  "t": "## Dokumentimi"
+ },
+ "bf8021c1dc5a": {
+  "en": "bf8021c1dc5a",
+  "t": "<p align=\"center\"><sub>Gjithçka më poshtë është README origjinal i PS2BBL Extended, i përkthyer dhe përndryshe i pandryshuar.</sub></p>"
+ },
+ "c06e0a279296": {
+  "en": "c06e0a279296",
+  "t": "- `usb:/` (e preferuar) dhe `mass:/` (e vjetër)"
+ },
+ "c10219799837": {
+  "en": "c10219799837",
+  "t": "  <a href=\"LICENSE\">GPL-3.0</a>"
+ },
+ "c48fea10b14c": {
+  "en": "c48fea10b14c",
+  "t": "- `VIDEO_MODE = AUTO, NTSC, PAL, 480P` Përdor parazgjedhjen e PS2 ose detyron një nga 3 mënyrat e tjera."
+ },
+ "c545cdcece82": {
+  "en": "c545cdcece82",
+  "t": "Përdor `LOGO_DISPLAY = 3` për të shfaqur emrat e tasteve. Emrat përcaktohen nga `NAME_<BUTTON>`."
+ },
+ "c7ce0d2e1ff8": {
+  "en": "c7ce0d2e1ff8",
+  "t": "- Pa `-nologo`, PS2BBL e nis diskun nëpërmjet PS2LOGO dhe e arnon që të përdorë gjithmonë rajonin e diskut dhe të anashkalojë kontrollin e checksum të logos."
+ },
+ "c839d62b7d87": {
+  "en": "c839d62b7d87",
+  "t": "  - `SELECT` ruan mënyrën e zgjedhur në skedarin aktiv të konfigurimit"
+ },
+ "c8c06c6a31a8": {
+  "en": "c8c06c6a31a8",
+  "t": "## Konfigurimi dhe argumentet"
+ },
+ "d22941defd02": {
+  "en": "d22941defd02",
+  "t": "Ky është një fork i PS2BBL nga [El Isra](https://github.com/israpps/PlayStation2-Basic-BootLoader/)"
+ },
+ "d3848ab732aa": {
+  "en": "d3848ab732aa",
+  "t": "- `-ps1smooth`"
+ },
+ "d552d6dc7534": {
+  "en": "d552d6dc7534",
+  "t": "### Mënyra video"
+ },
+ "d5c51f8e6ac2": {
+  "en": "d5c51f8e6ac2",
+  "t": "- `-titleid=SLUS_123.45` zëvendëson ID-në e titullit të aplikacionit (deri në 11 karaktere)."
+ },
+ "da330e7a0139": {
+  "en": "da330e7a0139",
+  "t": "- `mc0:/`, `mc1:/`, `mc?:/`"
+ },
+ "da9818557f89": {
+  "en": "da9818557f89",
+  "t": "#### Zgjedhësi emergjent i mënyrës video"
+ },
+ "dbdd3c74a6e3": {
+  "en": "dbdd3c74a6e3",
+  "t": "   - Nisje nga MX4SIO: `mx4sio:/PS2BBL/CONFIG.INI`"
+ },
+ "ddfc333f97d7": {
+  "en": "ddfc333f97d7",
+  "t": "2. Analiza shkon nga poshtë lart dhe ndalet te argumenti i parë që nuk është kontrolli (sjellje përfundimtare si në OSDMenu)."
+ },
+ "de02177eb37e": {
+  "en": "de02177eb37e",
+  "t": "Shembuj ARG për eGSM:"
+ },
+ "de664ca47abc": {
+  "en": "de664ca47abc",
+  "t": "- `-nogameid`"
+ },
+ "de782301e641": {
+  "en": "de782301e641",
+  "t": "  - @sp193 për [PS1 Video Negator](https://github.com/ps2homebrew/PS1VModeNeg)"
+ },
+ "dfbebe092d40": {
+  "en": "dfbebe092d40",
+  "t": "- `BIBLE_WIDESCREEN`: `AUTO` (parazgjedhje: Widescreen i RIPPS2, përndryshe cilësimi i ekranit 16:9 i PS2), `ON` ose\n  `OFF`. Në 480i, 576i, 480p dhe 576p ekrani i hapjes vizatohet për një televizor që e shtrin figurën në 16:9, pa\n  e shtypur. 720p dhe 1080i janë tashmë 16:9."
+ },
+ "dfef928c9dd2": {
+  "en": "dfef928c9dd2",
+  "t": "- `c` = mënyra e përputhshmërisë:"
+ },
+ "e17e9a226952": {
+  "en": "e17e9a226952",
+  "t": "- `-disc_stop` ndalon diskun pasi ngarkohet ELF-i i synuar (e dobishme për hyrje pa ndërtime `DISC_STOP_AT_BOOT`)."
+ },
+ "e2f6ac3e8203": {
+  "en": "e2f6ac3e8203",
+  "t": "  <a href=\"https://github.com/israpps/PlayStation2-Basic-BootLoader\">PS2BBL</a> ·"
+ },
+ "e3b8cc6236ca": {
+  "en": "e3b8cc6236ca",
+  "t": "  - @nathanneurotic për 10 shtigjet e PS2BBLE, idetë dhe bindjen"
+ },
+ "e6d271e7c0bd": {
+  "en": "e6d271e7c0bd",
+  "t": "Kërkimi i konfigurimit tani merr parasysh familjen e nisjes, që të mos ngarkohen drejtues të panevojshëm gjatë nisjes:"
+ },
+ "e6eb20871642": {
+  "en": "e6eb20871642",
+  "t": "  - nëse `IOPRP=PATINFO` (ose një shteg i vetë), PS2BBL ia kalon fazës 2 nëpërmjet dorëzimit të brendshëm `-la=I...`."
+ },
+ "e948a4e2ffd1": {
+  "en": "e948a4e2ffd1",
+  "t": "PS2BBL mbështet këto parashtesa shtigjesh nisjeje/konfigurimi:"
+ },
+ "e95c77643cfe": {
+  "en": "e95c77643cfe",
+  "t": "- `mmce0:/`, `mmce1:/`, `mmce?:/` __ndërtimet MMCE__"
+ },
+ "eae8f93205fd": {
+  "en": "eae8f93205fd",
+  "t": "  - `0` Pa logo dhe pa informacion konsole"
+ },
+ "ed21c5ac66ff": {
+  "en": "ed21c5ac66ff",
+  "t": "- Pa kërcim kur hyn në RIPPS2: gjatë nisjes logoja dhe butonat zbehen dhe qielli mbetet në ekran, në mënyrën e RIPPS2;\n  RIPPS2 nis mbi të njëjtin qiell. Mbaj TRIANGLE + CROSS gjatë ndezjes për faqen e mënyrës video, që hapet gjithmonë\n  në mënyrën e ndërthurur të vetë konsolës (rruga e kthimit nga 720p ose 1080i me kabllo kompozit)."
+ },
+ "ed675d1ac190": {
+  "en": "ed675d1ac190",
+  "t": "- DECKARD IE 75K e më të rinj: XPARAM.IRX zbatohet automatikisht kur nevojitet për nisjet pa logo."
+ },
+ "f194a33a1232": {
+  "en": "f194a33a1232",
+  "t": "- `fp1` = detyro skanimin progresiv (240p/288p)"
+ },
+ "f49f3f803d4d": {
+  "en": "f49f3f803d4d",
+  "t": "### Parashtesat e shtigjeve të pajisjeve"
+ },
+ "fbd93fd380b1": {
+  "en": "fbd93fd380b1",
+  "t": "  - `1` Informacioni i konsolës"
+ },
+ "fd03d61bc9f2": {
+  "en": "fd03d61bc9f2",
+  "t": "- `-disc_stop` mund t'i shtohet çdo hyrjeje nisjeje për ta ndalur diskun pasi të gjendet ELF-i i synuar."
+ },
+ "fd5efe6c6f4c": {
+  "en": "fd5efe6c6f4c",
+  "t": "  - @pcm720 për"
+ },
+ "fdee3f98ecaa": {
+  "en": "fdee3f98ecaa",
+  "t": "- `1080ix1` = detyro 1080i, gjerësi/lartësi x1"
+ },
+ "fe658db8cc2f": {
+  "en": "fe658db8cc2f",
+  "t": "  - @asmblur, që më nxiti ta bëj këtë përbindësh me SDK-në më të re"
+ },
+ "fec43ce445f9": {
+  "en": "fec43ce445f9",
+  "t": "Shembull përdorimi:"
+ },
+ "ff7f439f5d79": {
+  "en": "ff7f439f5d79",
+  "t": "1. `CONFIG.INI` (CWD: dosja aktuale e punës)"
+ },
+ "ffed62f66519": {
+  "en": "ffed62f66519",
+  "t": "    - Shembull:"
+ },
+ "fffd2a6caa3f": {
+  "en": "fffd2a6caa3f",
+  "t": "  - nëse `-patinfo` është i pranishëm, argumenti i parë i mbetur zëvendëson objektivin `BOOT2/BOOT/path` të CNF.\n  Kjo vlen për ndërtimet HDD.  \n  Shembull PATINFO:  "
+ }
+}

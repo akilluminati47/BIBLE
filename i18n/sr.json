@@ -1,0 +1,666 @@
+{
+ "002e3896fc22": {
+  "en": "002e3896fc22",
+  "t": "   - Pokretanje sa MMCE: `mmce?:/PS2BBL/CONFIG.INI`"
+ },
+ "009050688382": {
+  "en": "009050688382",
+  "t": "4. Za putanje `:PATINFO`, PS2BBL obrađuje `SYSTEM.CNF` iz atributa particije i dodaje unose `arg*` iz CNF-a posle korisnikovih argumenata aplikacije."
+ },
+ "075b75340cb8": {
+  "en": "075b75340cb8",
+  "t": "### Upravljanje okretanjem diska"
+ },
+ "08c4d5ce9f91": {
+  "en": "08c4d5ce9f91",
+  "t": "2. Pri učitavanju sa uređaja:"
+ },
+ "0d2174dc83ca": {
+  "en": "0d2174dc83ca",
+  "t": "- `DISC_STOP_AT_BOOT=1` profil izgradnje koji uvek zaustavlja optički disk posle učitavanja konfiguracije"
+ },
+ "0d2b0afd3f6c": {
+  "en": "0d2b0afd3f6c",
+  "t": "- `-ps1fast` uključuje brzu brzinu diska PS1."
+ },
+ "0f47fa9660dd": {
+  "en": "0f47fa9660dd",
+  "t": "5. Ako je podešen `-patinfo` i putanja sadrži `:PATINFO`, korisnikov prvi preostali argument aplikacije postaje putanja ciljnog ELF-a (zamenjuje putanju pokretanja iz CNF-a) i uklanja se iz argv aplikacije. Ako ne ostane nijedan argument, pokretanje se prekida (kao u OSDMenu), a `BOOT2/BOOT/path` iz CNF-a se ne koristi."
+ },
+ "10e49ad3c8d0": {
+  "en": "10e49ad3c8d0",
+  "t": "  <a href=\"https://github.com/akilluminati47/RIPPS2\">RIPPS2</a> ·"
+ },
+ "138c6cc4b754": {
+  "en": "138c6cc4b754",
+  "t": "Ako se u CWD-u (trenutnoj radnoj fascikli) nađe sopstvena datoteka loga (LOGO.BIN), ona zamenjuje ugrađeni logo PS2BBLE/PSXBBLE."
+ },
+ "159f3f6b8e94": {
+  "en": "159f3f6b8e94",
+  "t": "3. Rezerva na memorijskoj kartici:"
+ },
+ "1638bfe84685": {
+  "en": "1638bfe84685",
+  "t": "Uredite konfiguracionu datoteku po potrebi. Za uređivanje se preporučuje [R3Configurator](https://github.com/saildot4k/R3CONFIGURATOR). Putanje su već podešene da odgovaraju preuzimanjima iz [PS2 Homebrew Store](https://ps2homebrewstore.com). Trebalo bi da uredite samo svoj izbor Auto i najbolje podesite argumente za NHDDL prema uređaju sa kog učitavate ISO datoteke."
+ },
+ "164d82fd0dc4": {
+  "en": "164d82fd0dc4",
+  "t": "- `1080ix3` = nametni 1080i, širina/visina x3"
+ },
+ "1e9995e783fc": {
+  "en": "1e9995e783fc",
+  "t": "   - Na PS2: `mc?:/SYS-CONF/PS2BBL.INI`"
+ },
+ "1ec5c04ec3af": {
+  "en": "1ec5c04ec3af",
+  "t": "- `3` = zamena poluslika tip 3"
+ },
+ "200e77165cb3": {
+  "en": "200e77165cb3",
+  "t": "   - `cdrom0:/PS2BBL/CONFIG.INI`"
+ },
+ "20e55fa78502": {
+  "en": "20e55fa78502",
+  "t": "- `KEY_READ_WAIT_TIME = 0` je dozvoljen (minimum u upstreamu je 500 ms)."
+ },
+ "228b3fdf1eec": {
+  "en": "228b3fdf1eec",
+  "t": "  - ako je izostavljeno, PS2BBL ne nameće nikakvo pravilo DEV9."
+ },
+ "24439e94a180": {
+  "en": "24439e94a180",
+  "t": "- `ata:/` BDM uređaj za exFAT HDD"
+ },
+ "25f56fc0dd9e": {
+  "en": "25f56fc0dd9e",
+  "t": "Važe za svaki unos `cdrom`, a ne globalno."
+ },
+ "29a4c699928e": {
+  "en": "29a4c699928e",
+  "t": "- `v` = video režim:"
+ },
+ "29c939657e98": {
+  "en": "29c939657e98",
+  "t": "  - @israpps za [PS2BBL](https://github.com/israpps/PlayStation2-Basic-BootLoader/)"
+ },
+ "2b406c409d68": {
+  "en": "2b406c409d68",
+  "t": "## Zasluge i zahvalnice"
+ },
+ "2d1c0c3dc3a3": {
+  "en": "2d1c0c3dc3a3",
+  "t": "- Od [El Isra](https://israpps.github.io/) (programer PS2BBL-a): "
+ },
+ "2e1844667faa": {
+  "en": "2e1844667faa",
+  "t": "- Kombinacije držane od uključivanja sada otvaraju svoje stranice (TRIANGLE + CROSS se gubio dok su se kontroleri još\n  pokretali)."
+ },
+ "2e5eb51f690b": {
+  "en": "2e5eb51f690b",
+  "t": "- Upravljanje:"
+ },
+ "2f9dde551617": {
+  "en": "2f9dde551617",
+  "t": "**Šta ovaj fork menja**"
+ },
+ "33014f963b64": {
+  "en": "33014f963b64",
+  "t": "1. PS2BBL obrađuje i troši samo završne kontrolne argumente loadera iz `ARG_*`: `-appid`, `-titleid=`, `-dev9=`, `-patinfo`, `-disc_stop`, `-gsm=`."
+ },
+ "34f273d336d6": {
+  "en": "34f273d336d6",
+  "t": "BIBLE je boot loader koji podešava RIPPS2: fork PS2BBL Extended od saildot4k."
+ },
+ "36e7bf643ef8": {
+  "en": "36e7bf643ef8",
+  "t": "### Argumenti aplikacija"
+ },
+ "38dcd9eb7ded": {
+  "en": "38dcd9eb7ded",
+  "t": "- Prvo upišite argumente pokrenutog elf-a, pa zatim dodajte željene interne argumente PS2BBL-a (vidi ispod). [NHDDL](https://github.com/pcm720/nhddl) je odličan kandidat za argumente jer ubrzavaju njegovo pokretanje."
+ },
+ "391adc91b06c": {
+  "en": "391adc91b06c",
+  "t": "- Globalni ključ/vrednost: `DISC_STOP = 0/1`"
+ },
+ "3adb267042c1": {
+  "en": "3adb267042c1",
+  "t": "## Zastarelo/Uklonjeno"
+ },
+ "3d92d62b98f7": {
+  "en": "3d92d62b98f7",
+  "t": "- Video režimi: `VIDEO_MODE` prima i `576P`, `720P` i `1080I`, ostatak režima RIPPS2. `AUTO` (podrazumevano)\n  pokreće se u Video Mode od RIPPS2 kada su njegova podešavanja pored unosa AUTO, inače u režimu konzole."
+ },
+ "3eba597b9c5f": {
+  "en": "3eba597b9c5f",
+  "t": "- `1080ix2` = nametni 1080i, širina/visina x2"
+ },
+ "3fef7c9294f4": {
+  "en": "3fef7c9294f4",
+  "t": "  <a href=\"https://github.com/akilluminati47/BIBLE/actions\">Izgradnje</a> ·"
+ },
+ "4019cd997962": {
+  "en": "4019cd997962",
+  "t": "  - `NICHDD` drži uključenim i DEV9 (mrežni adapter) i HDD."
+ },
+ "406206a51560": {
+  "en": "406206a51560",
+  "t": "- `APP_GAMEID = 1` uključuje vizuelni ID igre za aplikacije/homebrew, do 11 znakova iz naziva datoteke ili sa diska PS1/2"
+ },
+ "4088157bc12a": {
+  "en": "4088157bc12a",
+  "t": "  - @SP193 za biblioteke za inicijalizaciju OSD-a, koje su temelj ovog projekta"
+ },
+ "40a28018c31c": {
+  "en": "40a28018c31c",
+  "t": "#### Argumenti za PS1 diskove (po pokretanju)"
+ },
+ "439feb54907f": {
+  "en": "439feb54907f",
+  "t": "- `-ps1vneg`"
+ },
+ "43fcd64b5833": {
+  "en": "43fcd64b5833",
+  "t": "5. Kada je izgrađeno sa `DISC_STOP_AT_BOOT=1"
+ },
+ "449dee5852ac": {
+  "en": "449dee5852ac",
+  "t": "RIPPS2 će nositi BIBLE kao potpisane datoteke za pokretanje i instalirati ga iz svojih Settings (Boot Loader), umesto PS2BBL 1.2.0 koji danas nosi. BIBLE radi i kao ELF koji pokreće drugi loader (FMCB, OSDMenu, loader SD2PSX-a). Izdanja BIBLE-a još nema."
+ },
+ "4793c8125dc9": {
+  "en": "4793c8125dc9",
+  "t": "### eGSM (external Graphics Synthesize Mode)"
+ },
+ "4822d5ecd6f5": {
+  "en": "4822d5ecd6f5",
+  "t": "- Novo: stranica tastera za pokretanje. Pri pokretanju držite L2 + R2 da pročitate putanju svakog tastera, bez obzira na podešavanja početnog ekrana."
+ },
+ "4995cc5a4675": {
+  "en": "4995cc5a4675",
+  "t": "6. Preostali argumenti zadržavaju redosled i predaju se pokrenutoj aplikaciji."
+ },
+ "4a75c7695a03": {
+  "en": "4a75c7695a03",
+  "t": "vi meni recite ;)"
+ },
+ "4b1b74371c50": {
+  "en": "4b1b74371c50",
+  "t": "- `-disc_stop` se zanemaruje za unose `cdrom`."
+ },
+ "4bcc83d2703e": {
+  "en": "4bcc83d2703e",
+  "t": "**Kako ga RIPPS2 koristi**"
+ },
+ "4c5f14b856c2": {
+  "en": "4c5f14b856c2",
+  "t": "   - Pokretanje sa APA HDD: `hdd0:__sysconf:pfs:/PS2BBL/CONFIG.INI`"
+ },
+ "4ca733fed7d8": {
+  "en": "4ca733fed7d8",
+  "t": "- Koristite `cdrom` kao putanju unosa."
+ },
+ "4cb76a5bb7c0": {
+  "en": "4cb76a5bb7c0",
+  "t": "- `-gsm=<v[:c]>`"
+ },
+ "4daebfa16bdc": {
+  "en": "4daebfa16bdc",
+  "t": "   - Na PSX-DESR: `mc?:/SYS-CONF/PSXBBL.INI`"
+ },
+ "4e318690a5f7": {
+  "en": "4e318690a5f7",
+  "t": "- `mx4sio:/` (preporučeno) i `massX:/` (staro)  __izgradnje MX4SIO__"
+ },
+ "502c67628795": {
+  "en": "502c67628795",
+  "t": "- Izbor nameće `LOGO_DISPLAY = 3` dok je aktivan, da vidite logo i tastere."
+ },
+ "511c26550b7a": {
+  "en": "511c26550b7a",
+  "t": "- `DISC_STOP = 1` zaustavlja optički disk posle učitavanja konfiguracije kada je pronađena konfiguraciona datoteka."
+ },
+ "514e9776a6b8": {
+  "en": "514e9776a6b8",
+  "t": "  - `2` Logo PS2BBLE/PSXBBLE i podaci o konzoli"
+ },
+ "5189562652cb": {
+  "en": "5189562652cb",
+  "t": "- `-dev9=<mode>` podešava pravilo DEV9/HDD pre pokretanja ciljnog ELF-a. Podržani režimi:"
+ },
+ "52a815bf5a23": {
+  "en": "52a815bf5a23",
+  "t": "    - Retrogem gameID, PS1 Video Negator, eGSM i kod PS2LOGO iz [OSDMenu](https://github.com/pcm720/OSDMenu)"
+ },
+ "53c15c59e52b": {
+  "en": "53c15c59e52b",
+  "t": "  - PNG treba da bude RGBA, 8-bitni indeksirani, 255 boja po kanalu i u rezoluciji 256x64."
+ },
+ "5519f5e8f4ae": {
+  "en": "5519f5e8f4ae",
+  "t": "    Fleksibilan boot loader za PlayStation 2™ i PSX-DESR"
+ },
+ "5933320f9ba5": {
+  "en": "5933320f9ba5",
+  "t": "Redovima `ARG_<BUTTON>_E? =` predajete argumente ELF-u (pogledajte INI primere)."
+ },
+ "5bb677ad2c61": {
+  "en": "5bb677ad2c61",
+  "t": "  - `3` Grafika tastera sa `NAME_BUTTON = <TITLE>` iz konfiguracione datoteke"
+ },
+ "5d5f73d54d7f": {
+  "en": "5d5f73d54d7f",
+  "t": "## Poznate greške/problemi"
+ },
+ "5d73be2078e5": {
+  "en": "5d73be2078e5",
+  "t": "- Izgradnje za PS2 za memorijsku karticu / USB, MMCE, MX4SIO i HDD. Faza 2 eGSM-a je izostavljena."
+ },
+ "6071ff1f11ca": {
+  "en": "6071ff1f11ca",
+  "t": "### Vizuelni ID igre od Retrogema"
+ },
+ "61eb73b67bf7": {
+  "en": "61eb73b67bf7",
+  "t": "    - opcije video režima iz [NHDDL](https://github.com/pcm720/nhddl)"
+ },
+ "641317004793": {
+  "en": "641317004793",
+  "t": "- Od saildot4k"
+ },
+ "641f6dbfad30": {
+  "en": "641f6dbfad30",
+  "t": "- `-gsm=<v[:c]>` pokreće ciljni ELF preko ugrađenog eGSM-a (zanemaruje se za putanje `rom?:`)."
+ },
+ "6656cd8cf3ca": {
+  "en": "6656cd8cf3ca",
+  "t": "  - `START` izlazi iz izbora i nastavlja na prikaz tastera"
+ },
+ "6682c393a791": {
+  "en": "6682c393a791",
+  "t": "  <a href=\"https://github.com/saildot4k/PlayStation2-Basic-BootLoader-Extended\">PS2BBL Extended</a> ·"
+ },
+ "675253f496d9": {
+  "en": "675253f496d9",
+  "t": "  - [@Berion](https://www.psx-place.com/members/berion.1431/) za logotipe, pozadinu i grafiku tastera"
+ },
+ "69d4c3170060": {
+  "en": "69d4c3170060",
+  "t": "   - Rezerva na memorijskoj kartici kao u tački 3 iznad."
+ },
+ "6debe9f38567": {
+  "en": "6debe9f38567",
+  "t": "Primer pokretanja NHDDL-a u video režimu 480p uz traženje ISO datoteka na mmce i exFAT HDD-u bez potrebe za nhddl.yaml. Prednost je što se ne gubi vreme na učitavanje drajvera i traženje i učitavanje nhddl.yaml. To je najbrži način da pokrenete NHDDL i prikažete spisak ISO datoteka."
+ },
+ "704784bb456b": {
+  "en": "704784bb456b",
+  "t": "- `2` = zamena poluslika tip 2"
+ },
+ "70710f40217d": {
+  "en": "70710f40217d",
+  "t": "  - napomena: u izgradnjama bez HDD-a ova opcija nema efekta."
+ },
+ "71858737f5c1": {
+  "en": "71858737f5c1",
+  "t": "#### Zavisno od izgradnje:  "
+ },
+ "7425333403ea": {
+  "en": "7425333403ea",
+  "t": "- Putanje `xfrom:/` __izgradnje PSX DESR__"
+ },
+ "767d07f95351": {
+  "en": "767d07f95351",
+  "t": "- `-nologo`"
+ },
+ "7bb989a3fb7e": {
+  "en": "7bb989a3fb7e",
+  "t": "<h1 align=\"center\">BIBLE</h1>"
+ },
+ "7d52c1b8a6a4": {
+  "en": "7d52c1b8a6a4",
+  "t": "- `-gsm=<v[:c]>` pokreće ciljni ELF preko ugrađenog eGSM-a (zanemaruje se za putanje `rom?:`). Ako se koristi, mora biti poslednji argument."
+ },
+ "7f48b942e063": {
+  "en": "7f48b942e063",
+  "t": "  - Paket izdanja (skripta je u korenu izdanja):"
+ },
+ "81f7471dcefd": {
+  "en": "81f7471dcefd",
+  "t": "- prazno = nijedan (podrazumevano)"
+ },
+ "84c6c36434d4": {
+  "en": "84c6c36434d4",
+  "t": "- `-patinfo` uključuje obradu PATINFO za unose `:PATINFO`."
+ },
+ "85953d7c3ac5": {
+  "en": "85953d7c3ac5",
+  "t": "  - eGSM se primenjuje na pokrenuti cilj (ELF/disk), a ne na sam PS2BBL.\n  Format eGSM-a (kao u OSDMenu):"
+ },
+ "859e8018755b": {
+  "en": "859e8018755b",
+  "t": "  - `LEFT/RIGHT` menjaju režime: `AUTO`, `NTSC`, `PAL`, `480P`"
+ },
+ "85d3494a3c15": {
+  "en": "85d3494a3c15",
+  "t": "### LOGO_DISPLAY"
+ },
+ "87104d1e4715": {
+  "en": "87104d1e4715",
+  "t": "- Dodajte `-nologo` argumentima unosa da se PS2 diskovi pokreću direktno (bez `rom0:PS2LOGO`)."
+ },
+ "8864c9dc9624": {
+  "en": "8864c9dc9624",
+  "t": "- `-gsm=fp2:1`"
+ },
+ "89f87574605b": {
+  "en": "89f87574605b",
+  "t": "Nalazi se na [github pages](https://israpps.github.io/PlayStation2-Basic-BootLoader/), ali sa dodacima ispod:"
+ },
+ "8acd450b3e09": {
+  "en": "8acd450b3e09",
+  "t": "#### Argumenti za PS2LOGO (samo PS2 diskovi)"
+ },
+ "8c1803695e4c": {
+  "en": "8c1803695e4c",
+  "t": "  - `NIC` drži DEV9/mrežu uključenim, demontira `pfs0:` i odmah uspavljuje `hdd0:`/`hdd1:`."
+ },
+ "8ce3834f1354": {
+  "en": "8ce3834f1354",
+  "t": "4. Poslednja rezerva na PSX-u"
+ },
+ "8daca164d7be": {
+  "en": "8daca164d7be",
+  "t": "- `DISC_STOP = 0` (ili izostavljeno) zadržava podrazumevano ponašanje."
+ },
+ "9109da4b6d16": {
+  "en": "9109da4b6d16",
+  "t": "#### Prednost i redosled argumenata"
+ },
+ "942059e5f559": {
+  "en": "942059e5f559",
+  "t": "<p align=\"center\"><img src=\"assets/readme/ripps2-icon.png\" alt=\"RIPPS2\" width=\"48\" height=\"48\"><br><sub>BIBLE je deo <a href=\"https://github.com/akilluminati47/RIPPS2\">RIPPS2</a>.</sub></p>"
+ },
+ "9422bbe6a402": {
+  "en": "9422bbe6a402",
+  "t": "- ~~`RUNKELF`~~ PS2BBLE sada interno pokreće elf/kelf, bez potrebe da korisnik definiše radnju pokretanja kelf."
+ },
+ "986a0196fb5a": {
+  "en": "986a0196fb5a",
+  "t": "  <sub>Pri pokretanju držite L2 + R2 za stranicu tastera za pokretanje, TRIANGLE + CROSS za stranicu video režima; taster podešen na <code>$CREDITS</code> prikazuje zasluge.</sub>"
+ },
+ "999269fc568a": {
+  "en": "999269fc568a",
+  "t": "- `-appid` nameće vizuelni ID igre aplikacije čak i uz `APP_GAMEID = 0`."
+ },
+ "99dfbd99b669": {
+  "en": "99dfbd99b669",
+  "t": "Pretvorite PNG u očekivanu sirovu datoteku:"
+ },
+ "9a2ff94c7bee": {
+  "en": "9a2ff94c7bee",
+  "t": "- `-ps1fast`"
+ },
+ "9e14e0197f55": {
+  "en": "9e14e0197f55",
+  "t": "- Početni ekran: PS2 logo u sredini neba RIPPS2, sa tasterima ispod i bilo kakvim tekstom iznad.\n  `BIBLE_GLYPHS` 0 nijedan, 1 prednji tasteri (podrazumevano), 2 svih šesnaest u dva reda po osam.\n  `BIBLE_INFO` 1 prikazuje podatke o konzoli, sat i odbrojavanje (podrazumevano isključeno).\n  Nebo prati vaš Color Theme iz RIPPS2: bez `BIBLE_COLOR`, BIBLE čita nebo koje RIPPS2 čuva sa svojim\n  podešavanjima, iz fascikle RIPPS2 koju pokreće njegov unos AUTO (`BIBLE_COLOR` u konfiguraciji ima prednost).\n  Isti izgled u svakom video režimu. Stranice (video režim, zasluge, tasteri za pokretanje) postepeno se pojavljuju preko zatamnjenog loga\n  sa sklonjenim tasterima, pa se tasteri za pokretanje čitaju na miru."
+ },
+ "9f17d88941ea": {
+  "en": "9f17d88941ea",
+  "t": "- `fp2` = nametni progresivno skeniranje (480p/576p)"
+ },
+ "9f61ad6cbb52": {
+  "en": "9f61ad6cbb52",
+  "t": "- prazno = ne nametati (podrazumevano)"
+ },
+ "a0525e7d534f": {
+  "en": "a0525e7d534f",
+  "t": "- `-ps1vneg` pokreće PS1DRV preko PS1VModeNegator. Korisno tamo gde se režim konzole i režim diska razlikuju (na primer neki slučajevi MechaPwn/modčipova)."
+ },
+ "a3a65a7af403": {
+  "en": "a3a65a7af403",
+  "t": "- Otvara se sa `TRIANGLE + CROSS` tokom pokretanja"
+ },
+ "a44babacaf8b": {
+  "en": "a44babacaf8b",
+  "t": "   - `xfrom:/PS2BBL/CONFIG.INI`"
+ },
+ "a6090e73dd04": {
+  "en": "a6090e73dd04",
+  "t": "### Argumenti pokretanja za CDROM"
+ },
+ "a63cb36e571e": {
+  "en": "a63cb36e571e",
+  "t": "- `1` = zamena poluslika tip 1"
+ },
+ "aa77b29709a0": {
+  "en": "aa77b29709a0",
+  "t": "  - ako je `BOOT2/BOOT/path=PATINFO`, PS2BBL učitava ugrađeni ELF iz oblasti atributa particije i koristi interno predavanje `-la=E...`."
+ },
+ "ad807f2f9ae8": {
+  "en": "ad807f2f9ae8",
+  "t": "- `CDROM_DISABLE_GAMEID = 1` isključuje vizuelni ID igre za diskove pokrenute preko `cdrom`."
+ },
+ "ad9f1afbaa28": {
+  "en": "ad9f1afbaa28",
+  "t": "- `-gsm=1080ix2`"
+ },
+ "ae898dca6d64": {
+  "en": "ae898dca6d64",
+  "t": "- `-ps1smooth` uključuje ublažavanje tekstura."
+ },
+ "aed791467a10": {
+  "en": "aed791467a10",
+  "t": "Za `LK_*_E* = cdrom` podržani su ovi argumenti:"
+ },
+ "b2ddfe0e68bd": {
+  "en": "b2ddfe0e68bd",
+  "t": "Za PS2 diskove eGSM se automatski čita iz `OSDGSM.CNF` (u INI-ju nije potrebna putanja). Format konfiguracione datoteke pogledajte [ovde](https://github.com/pcm720/OSDMenu/blob/main/patcher/README.md#osdgsmcnf)."
+ },
+ "b3ba04fd4da5": {
+  "en": "b3ba04fd4da5",
+  "t": "   - Pokretanje sa BDM: `usb:/PS2BBL/CONFIG.INI` / `mass:/PS2BBL/CONFIG.INI` / `ata:/PS2BBL/CONFIG.INI`"
+ },
+ "b471aa6e5908": {
+  "en": "b471aa6e5908",
+  "t": "- `-gsm=fp2`"
+ },
+ "b739b09f5b15": {
+  "en": "b739b09f5b15",
+  "t": "  - @uyjulian i @fjtrujy što mi uvek pomažu"
+ },
+ "b9a70d5fa7b3": {
+  "en": "b9a70d5fa7b3",
+  "t": "### Redosled traženja konfiguracije"
+ },
+ "bb5f8da78b41": {
+  "en": "bb5f8da78b41",
+  "t": "  - Napravljeni `LOGO.BIN` stavite pored PS2BBL Extended. To bi trebalo da bude `mc?:/BOOT/` ako koristite preuzimanja iz [PS2 Homebrew Store](https://ps2store.com)"
+ },
+ "bb72aacfa09f": {
+  "en": "bb72aacfa09f",
+  "t": "- `hdd0:partition:pfs:/<path to elf>` __izgradnje HDD__"
+ },
+ "bbfa9a74fbf2": {
+  "en": "bbfa9a74fbf2",
+  "t": "  - PS2BBL čita `SYSTEM.CNF` iz oblasti atributa particije (`PS2ICON3D`) i primenjuje `BOOT2/BOOT/path`, `arg*`, `skip_argv0` i `HDDUNITPOWER`."
+ },
+ "beaeeff57019": {
+  "en": "beaeeff57019",
+  "t": "- `ilink:/` (koreni BDM masovnog skladišta) __još nije implementirano__"
+ },
+ "bf1858271ce3": {
+  "en": "bf1858271ce3",
+  "t": "#### Sopstveni početni logo iz CWD-a"
+ },
+ "bf621297607e": {
+  "en": "bf621297607e",
+  "t": "## Dokumentacija"
+ },
+ "bf8021c1dc5a": {
+  "en": "bf8021c1dc5a",
+  "t": "<p align=\"center\"><sub>Sve ispod je izvorni README od PS2BBL Extended, preveden i inače nepromenjen.</sub></p>"
+ },
+ "c06e0a279296": {
+  "en": "c06e0a279296",
+  "t": "- `usb:/` (preporučeno) i `mass:/` (staro)"
+ },
+ "c10219799837": {
+  "en": "c10219799837",
+  "t": "  <a href=\"LICENSE\">GPL-3.0</a>"
+ },
+ "c48fea10b14c": {
+  "en": "c48fea10b14c",
+  "t": "- `VIDEO_MODE = AUTO, NTSC, PAL, 480P` Koristi podrazumevani režim PS2 ili nameće jedan od ostala 3."
+ },
+ "c545cdcece82": {
+  "en": "c545cdcece82",
+  "t": "Koristite `LOGO_DISPLAY = 3` za prikaz naziva tastera. Nazivi se određuju sa `NAME_<BUTTON>`."
+ },
+ "c7ce0d2e1ff8": {
+  "en": "c7ce0d2e1ff8",
+  "t": "- Bez `-nologo`, PS2BBL pokreće disk preko PS2LOGO i krpi ga da uvek koristi region diska i preskoči proveru kontrolnog zbira loga."
+ },
+ "c839d62b7d87": {
+  "en": "c839d62b7d87",
+  "t": "  - `SELECT` čuva izabrani režim u aktivnoj konfiguracionoj datoteci"
+ },
+ "c8c06c6a31a8": {
+  "en": "c8c06c6a31a8",
+  "t": "## Konfiguracija i argumenti"
+ },
+ "d22941defd02": {
+  "en": "d22941defd02",
+  "t": "Ovo je fork PS2BBL-a autora [El Isra](https://github.com/israpps/PlayStation2-Basic-BootLoader/)"
+ },
+ "d3848ab732aa": {
+  "en": "d3848ab732aa",
+  "t": "- `-ps1smooth`"
+ },
+ "d552d6dc7534": {
+  "en": "d552d6dc7534",
+  "t": "### Video režim"
+ },
+ "d5c51f8e6ac2": {
+  "en": "d5c51f8e6ac2",
+  "t": "- `-titleid=SLUS_123.45` zamenjuje ID naslova aplikacije (do 11 znakova)."
+ },
+ "da330e7a0139": {
+  "en": "da330e7a0139",
+  "t": "- `mc0:/`, `mc1:/`, `mc?:/`"
+ },
+ "da9818557f89": {
+  "en": "da9818557f89",
+  "t": "#### Hitni izbor video režima"
+ },
+ "dbdd3c74a6e3": {
+  "en": "dbdd3c74a6e3",
+  "t": "   - Pokretanje sa MX4SIO: `mx4sio:/PS2BBL/CONFIG.INI`"
+ },
+ "ddfc333f97d7": {
+  "en": "ddfc333f97d7",
+  "t": "2. Obrada ide odozdo nagore i staje na prvom argumentu koji nije kontrolni (završno ponašanje kao u OSDMenu)."
+ },
+ "de02177eb37e": {
+  "en": "de02177eb37e",
+  "t": "Primeri ARG-ova za eGSM:"
+ },
+ "de664ca47abc": {
+  "en": "de664ca47abc",
+  "t": "- `-nogameid`"
+ },
+ "de782301e641": {
+  "en": "de782301e641",
+  "t": "  - @sp193 za [PS1 Video Negator](https://github.com/ps2homebrew/PS1VModeNeg)"
+ },
+ "dfbebe092d40": {
+  "en": "dfbebe092d40",
+  "t": "- `BIBLE_WIDESCREEN`: `AUTO` (podrazumevano: Widescreen od RIPPS2, inače podešavanje ekrana 16:9 na PS2), `ON` ili\n  `OFF`. U 480i, 576i, 480p i 576p početni ekran se crta za televizor koji razvlači sliku na 16:9, bez\n  spljoštavanja. 720p i 1080i su već 16:9."
+ },
+ "dfef928c9dd2": {
+  "en": "dfef928c9dd2",
+  "t": "- `c` = režim kompatibilnosti:"
+ },
+ "e17e9a226952": {
+  "en": "e17e9a226952",
+  "t": "- `-disc_stop` zaustavlja disk posle učitavanja ciljnog ELF-a (korisno po unosu bez izgradnji `DISC_STOP_AT_BOOT`)."
+ },
+ "e2f6ac3e8203": {
+  "en": "e2f6ac3e8203",
+  "t": "  <a href=\"https://github.com/israpps/PlayStation2-Basic-BootLoader\">PS2BBL</a> ·"
+ },
+ "e3b8cc6236ca": {
+  "en": "e3b8cc6236ca",
+  "t": "  - @nathanneurotic za 10 putanja PS2BBLE-a, ideje i nagovaranje"
+ },
+ "e6d271e7c0bd": {
+  "en": "e6d271e7c0bd",
+  "t": "Traženje konfiguracije sada uzima u obzir porodicu pokretanja, da se pri pokretanju ne bi učitavali nepotrebni drajveri:"
+ },
+ "e6eb20871642": {
+  "en": "e6eb20871642",
+  "t": "  - ako je `IOPRP=PATINFO` (ili sopstvena putanja), PS2BBL ga predaje fazi 2 internim predavanjem `-la=I...`."
+ },
+ "e948a4e2ffd1": {
+  "en": "e948a4e2ffd1",
+  "t": "PS2BBL podržava ove prefikse putanja za pokretanje/konfiguraciju:"
+ },
+ "e95c77643cfe": {
+  "en": "e95c77643cfe",
+  "t": "- `mmce0:/`, `mmce1:/`, `mmce?:/` __izgradnje MMCE__"
+ },
+ "eae8f93205fd": {
+  "en": "eae8f93205fd",
+  "t": "  - `0` Bez loga i podataka o konzoli"
+ },
+ "ed21c5ac66ff": {
+  "en": "ed21c5ac66ff",
+  "t": "- Bez skoka pri ulasku u RIPPS2: pri pokretanju logo i tasteri nestaju, a nebo ostaje na ekranu u režimu RIPPS2;\n  RIPPS2 počinje na tom istom nebu. Pri pokretanju držite TRIANGLE + CROSS za stranicu video režima, koja se uvek otvara\n  u sopstvenom proplitanom režimu konzole (put nazad iz 720p ili 1080i na kompozitnom kablu)."
+ },
+ "ed675d1ac190": {
+  "en": "ed675d1ac190",
+  "t": "- DECKARD IE 75K i noviji: XPARAM.IRX se primenjuje automatski kada je potrebno za pokretanja bez loga."
+ },
+ "f194a33a1232": {
+  "en": "f194a33a1232",
+  "t": "- `fp1` = nametni progresivno skeniranje (240p/288p)"
+ },
+ "f49f3f803d4d": {
+  "en": "f49f3f803d4d",
+  "t": "### Prefiksi putanja uređaja"
+ },
+ "fbd93fd380b1": {
+  "en": "fbd93fd380b1",
+  "t": "  - `1` Podaci o konzoli"
+ },
+ "fd03d61bc9f2": {
+  "en": "fd03d61bc9f2",
+  "t": "- `-disc_stop` može da se doda svakom unosu za pokretanje da se disk zaustavi kada se pronađe ciljni ELF."
+ },
+ "fd5efe6c6f4c": {
+  "en": "fd5efe6c6f4c",
+  "t": "  - @pcm720 za"
+ },
+ "fdee3f98ecaa": {
+  "en": "fdee3f98ecaa",
+  "t": "- `1080ix1` = nametni 1080i, širina/visina x1"
+ },
+ "fe658db8cc2f": {
+  "en": "fe658db8cc2f",
+  "t": "  - @asmblur, što me je podstakao da napravim ovo čudovište na najnovijem SDK-u"
+ },
+ "fec43ce445f9": {
+  "en": "fec43ce445f9",
+  "t": "Primer upotrebe:"
+ },
+ "ff7f439f5d79": {
+  "en": "ff7f439f5d79",
+  "t": "1. `CONFIG.INI` (CWD: trenutna radna fascikla)"
+ },
+ "ffed62f66519": {
+  "en": "ffed62f66519",
+  "t": "    - Primer:"
+ },
+ "fffd2a6caa3f": {
+  "en": "fffd2a6caa3f",
+  "t": "  - ako je prisutan `-patinfo`, prvi preostali argument zamenjuje cilj `BOOT2/BOOT/path` iz CNF-a.\n  Ovo je za izgradnje HDD.  \n  Primer PATINFO:  "
+ }
+}

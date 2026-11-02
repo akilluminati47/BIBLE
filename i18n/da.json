@@ -1,0 +1,666 @@
+{
+ "002e3896fc22": {
+  "en": "002e3896fc22",
+  "t": "   - MMCE-opstart: `mmce?:/PS2BBL/CONFIG.INI`"
+ },
+ "009050688382": {
+  "en": "009050688382",
+  "t": "4. For `:PATINFO`-startstier læser PS2BBL partitionsattributtens `SYSTEM.CNF` og tilføjer CNF'ens `arg*`-poster efter brugerens app-argumenter."
+ },
+ "075b75340cb8": {
+  "en": "075b75340cb8",
+  "t": "### Styring af diskens rotation"
+ },
+ "08c4d5ce9f91": {
+  "en": "08c4d5ce9f91",
+  "t": "2. Ved indlæsning fra en enhed:"
+ },
+ "0d2174dc83ca": {
+  "en": "0d2174dc83ca",
+  "t": "- `DISC_STOP_AT_BOOT=1` buildprofil, der altid stopper den optiske disk efter indlæsning af konfigurationen"
+ },
+ "0d2b0afd3f6c": {
+  "en": "0d2b0afd3f6c",
+  "t": "- `-ps1fast` slår hurtig diskhastighed til for PS1."
+ },
+ "0f47fa9660dd": {
+  "en": "0f47fa9660dd",
+  "t": "5. Hvis `-patinfo` er sat, og startstien indeholder `:PATINFO`, bliver brugerens første resterende app-argument mål-ELF'ens sti (det overskriver CNF'ens opstartssti) og fjernes fra appens argv. Er der intet argument tilbage, afbrydes starten (som i OSDMenu), og CNF'ens `BOOT2/BOOT/path` bruges ikke."
+ },
+ "10e49ad3c8d0": {
+  "en": "10e49ad3c8d0",
+  "t": "  <a href=\"https://github.com/akilluminati47/RIPPS2\">RIPPS2</a> ·"
+ },
+ "138c6cc4b754": {
+  "en": "138c6cc4b754",
+  "t": "Findes der en egen logofil (LOGO.BIN) i CWD (nuværende arbejdsmappe), erstatter den det indbyggede PS2BBLE/PSXBBLE-logo."
+ },
+ "159f3f6b8e94": {
+  "en": "159f3f6b8e94",
+  "t": "3. Reserve på memory card:"
+ },
+ "1638bfe84685": {
+  "en": "1638bfe84685",
+  "t": "Ret konfigurationsfilen efter behov. Til at rette den anbefales [R3Configurator](https://github.com/saildot4k/R3CONFIGURATOR). Stierne er allerede sat op til at passe med downloads fra [PS2 Homebrew Store](https://ps2homebrewstore.com). Du burde derfor kun skulle rette dit Auto-valg og helst sætte argumenter for NHDDL efter den enhed, du indlæser ISO'er fra."
+ },
+ "164d82fd0dc4": {
+  "en": "164d82fd0dc4",
+  "t": "- `1080ix3` = tving 1080i, bredde/højde x3"
+ },
+ "1e9995e783fc": {
+  "en": "1e9995e783fc",
+  "t": "   - På PS2: `mc?:/SYS-CONF/PS2BBL.INI`"
+ },
+ "1ec5c04ec3af": {
+  "en": "1ec5c04ec3af",
+  "t": "- `3` = feltvending type 3"
+ },
+ "200e77165cb3": {
+  "en": "200e77165cb3",
+  "t": "   - `cdrom0:/PS2BBL/CONFIG.INI`"
+ },
+ "20e55fa78502": {
+  "en": "20e55fa78502",
+  "t": "- `KEY_READ_WAIT_TIME = 0` er tilladt (upstreams minimum er 500 ms)."
+ },
+ "228b3fdf1eec": {
+  "en": "228b3fdf1eec",
+  "t": "  - hvis udeladt, tvinger PS2BBL ingen DEV9-politik."
+ },
+ "24439e94a180": {
+  "en": "24439e94a180",
+  "t": "- `ata:/` BDM-enhed til exFAT-HDD"
+ },
+ "25f56fc0dd9e": {
+  "en": "25f56fc0dd9e",
+  "t": "De gælder pr. `cdrom`-startpost, ikke globalt."
+ },
+ "29a4c699928e": {
+  "en": "29a4c699928e",
+  "t": "- `v` = videotilstand:"
+ },
+ "29c939657e98": {
+  "en": "29c939657e98",
+  "t": "  - @israpps for [PS2BBL](https://github.com/israpps/PlayStation2-Basic-BootLoader/)"
+ },
+ "2b406c409d68": {
+  "en": "2b406c409d68",
+  "t": "## Krediteringer og tak"
+ },
+ "2d1c0c3dc3a3": {
+  "en": "2d1c0c3dc3a3",
+  "t": "- Fra [El Isra](https://israpps.github.io/) (udvikler af PS2BBL): "
+ },
+ "2e1844667faa": {
+  "en": "2e1844667faa",
+  "t": "- Kombinationer holdt fra tænding åbner nu deres sider (TRIANGLE + CROSS blev misset, mens controllerne stadig\n  startede op)."
+ },
+ "2e5eb51f690b": {
+  "en": "2e5eb51f690b",
+  "t": "- Betjening:"
+ },
+ "2f9dde551617": {
+  "en": "2f9dde551617",
+  "t": "**Hvad denne fork ændrer**"
+ },
+ "33014f963b64": {
+  "en": "33014f963b64",
+  "t": "1. PS2BBL læser og forbruger kun loaderens styreargumenter i slutningen af `ARG_*`: `-appid`, `-titleid=`, `-dev9=`, `-patinfo`, `-disc_stop`, `-gsm=`."
+ },
+ "34f273d336d6": {
+  "en": "34f273d336d6",
+  "t": "BIBLE er den bootloader, som RIPPS2 sætter op: en fork af saildot4ks PS2BBL Extended."
+ },
+ "36e7bf643ef8": {
+  "en": "36e7bf643ef8",
+  "t": "### App-argumenter"
+ },
+ "38dcd9eb7ded": {
+  "en": "38dcd9eb7ded",
+  "t": "- Sæt først den startede elf's argumenter og tilføj derefter de ønskede interne PS2BBL-argumenter (se nedenfor). [NHDDL](https://github.com/pcm720/nhddl) er en god kandidat til argumenter, da de gør opstarten af NHDDL hurtigere."
+ },
+ "391adc91b06c": {
+  "en": "391adc91b06c",
+  "t": "- Global nøgle/værdi: `DISC_STOP = 0/1`"
+ },
+ "3adb267042c1": {
+  "en": "3adb267042c1",
+  "t": "## Forældet/Fjernet"
+ },
+ "3d92d62b98f7": {
+  "en": "3d92d62b98f7",
+  "t": "- Videotilstande: `VIDEO_MODE` tager også `576P`, `720P` og `1080I`, resten af RIPPS2's. `AUTO` (standard)\n  starter i RIPPS2's Video Mode, når dens indstillinger ligger ved siden af AUTO-posten, ellers i konsollens egen."
+ },
+ "3eba597b9c5f": {
+  "en": "3eba597b9c5f",
+  "t": "- `1080ix2` = tving 1080i, bredde/højde x2"
+ },
+ "3fef7c9294f4": {
+  "en": "3fef7c9294f4",
+  "t": "  <a href=\"https://github.com/akilluminati47/BIBLE/actions\">Builds</a> ·"
+ },
+ "4019cd997962": {
+  "en": "4019cd997962",
+  "t": "  - `NICHDD` holder både DEV9 (netværksadapter) og HDD tændt."
+ },
+ "406206a51560": {
+  "en": "406206a51560",
+  "t": "- `APP_GAMEID = 1` slår visuelt spil-ID til for apps/homebrew, op til 11 tegn fra filnavnet eller PS1/2-disken"
+ },
+ "4088157bc12a": {
+  "en": "4088157bc12a",
+  "t": "  - @SP193 for OSD-initialiseringsbibliotekerne, som er grundlaget for dette projekt"
+ },
+ "40a28018c31c": {
+  "en": "40a28018c31c",
+  "t": "#### Argumenter til PS1-diske (pr. start)"
+ },
+ "439feb54907f": {
+  "en": "439feb54907f",
+  "t": "- `-ps1vneg`"
+ },
+ "43fcd64b5833": {
+  "en": "43fcd64b5833",
+  "t": "5. Når der er kompileret med `DISC_STOP_AT_BOOT=1"
+ },
+ "449dee5852ac": {
+  "en": "449dee5852ac",
+  "t": "RIPPS2 kommer til at medbringe BIBLE som signerede opstartsfiler og installere den fra sine Settings (Boot Loader) i stedet for den PS2BBL 1.2.0, den medbringer i dag. BIBLE kører også som en ELF startet af en anden loader (FMCB, OSDMenu, en SD2PSX-loader). Der er endnu ingen BIBLE-udgivelse."
+ },
+ "4793c8125dc9": {
+  "en": "4793c8125dc9",
+  "t": "### eGSM (external Graphics Synthesize Mode)"
+ },
+ "4822d5ecd6f5": {
+  "en": "4822d5ecd6f5",
+  "t": "- Nyt: siden med starttaster. Hold L2 + R2 ved opstart for at læse hver tasts startsti, uanset dine indstillinger for startskærmen."
+ },
+ "4995cc5a4675": {
+  "en": "4995cc5a4675",
+  "t": "6. De resterende argumenter beholder deres rækkefølge og gives videre til den startede app."
+ },
+ "4a75c7695a03": {
+  "en": "4a75c7695a03",
+  "t": "det må du fortælle mig ;)"
+ },
+ "4b1b74371c50": {
+  "en": "4b1b74371c50",
+  "t": "- `-disc_stop` ignoreres for `cdrom`-startposter."
+ },
+ "4bcc83d2703e": {
+  "en": "4bcc83d2703e",
+  "t": "**Sådan bruger RIPPS2 den**"
+ },
+ "4c5f14b856c2": {
+  "en": "4c5f14b856c2",
+  "t": "   - APA HDD-opstart: `hdd0:__sysconf:pfs:/PS2BBL/CONFIG.INI`"
+ },
+ "4ca733fed7d8": {
+  "en": "4ca733fed7d8",
+  "t": "- Brug `cdrom` som startpostens sti."
+ },
+ "4cb76a5bb7c0": {
+  "en": "4cb76a5bb7c0",
+  "t": "- `-gsm=<v[:c]>`"
+ },
+ "4daebfa16bdc": {
+  "en": "4daebfa16bdc",
+  "t": "   - På PSX-DESR: `mc?:/SYS-CONF/PSXBBL.INI`"
+ },
+ "4e318690a5f7": {
+  "en": "4e318690a5f7",
+  "t": "- `mx4sio:/` (foretrukket) og `massX:/` (gammel)  __MX4SIO-builds__"
+ },
+ "502c67628795": {
+  "en": "502c67628795",
+  "t": "- Vælgeren tvinger `LOGO_DISPLAY = 3`, mens den er aktiv, så du kan se logoet og tasterne."
+ },
+ "511c26550b7a": {
+  "en": "511c26550b7a",
+  "t": "- `DISC_STOP = 1` stopper den optiske disk efter indlæsning af konfigurationen, når der blev fundet en konfigurationsfil."
+ },
+ "514e9776a6b8": {
+  "en": "514e9776a6b8",
+  "t": "  - `2` PS2BBLE/PSXBBLE-logo og konsolinfo"
+ },
+ "5189562652cb": {
+  "en": "5189562652cb",
+  "t": "- `-dev9=<mode>` sætter DEV9/HDD-politikken, før mål-ELF'en startes. Understøttede tilstande:"
+ },
+ "52a815bf5a23": {
+  "en": "52a815bf5a23",
+  "t": "    - Retrogem gameID, PS1 Video Negator, eGSM og PS2LOGO-koden fra [OSDMenu](https://github.com/pcm720/OSDMenu)"
+ },
+ "53c15c59e52b": {
+  "en": "53c15c59e52b",
+  "t": "  - PNG'en skal være RGBA 8 bit indekseret, 255 farver pr. kanal og 256x64 i opløsning."
+ },
+ "5519f5e8f4ae": {
+  "en": "5519f5e8f4ae",
+  "t": "    En fleksibel bootloader til PlayStation 2™ og PSX-DESR"
+ },
+ "5933320f9ba5": {
+  "en": "5933320f9ba5",
+  "t": "Brug linjer `ARG_<BUTTON>_E? =` til at give argumenter til en ELF (se INI-eksemplerne)."
+ },
+ "5bb677ad2c61": {
+  "en": "5bb677ad2c61",
+  "t": "  - `3` Tastegrafik med `NAME_BUTTON = <TITLE>` fra konfigurationsfilen"
+ },
+ "5d5f73d54d7f": {
+  "en": "5d5f73d54d7f",
+  "t": "## Kendte fejl/problemer"
+ },
+ "5d73be2078e5": {
+  "en": "5d73be2078e5",
+  "t": "- PS2-builds til memory card / USB, MMCE, MX4SIO og HDD. eGSM trin 2 er udeladt."
+ },
+ "6071ff1f11ca": {
+  "en": "6071ff1f11ca",
+  "t": "### Visuelt spil-ID fra Retrogem"
+ },
+ "61eb73b67bf7": {
+  "en": "61eb73b67bf7",
+  "t": "    - videotilstandsindstillingerne fra [NHDDL](https://github.com/pcm720/nhddl)"
+ },
+ "641317004793": {
+  "en": "641317004793",
+  "t": "- Fra saildot4k"
+ },
+ "641f6dbfad30": {
+  "en": "641f6dbfad30",
+  "t": "- `-gsm=<v[:c]>` kører mål-ELF'en via den indbyggede eGSM (ignoreres for `rom?:`-stier)."
+ },
+ "6656cd8cf3ca": {
+  "en": "6656cd8cf3ca",
+  "t": "  - `START` forlader vælgeren og fortsætter til tastevisningen"
+ },
+ "6682c393a791": {
+  "en": "6682c393a791",
+  "t": "  <a href=\"https://github.com/saildot4k/PlayStation2-Basic-BootLoader-Extended\">PS2BBL Extended</a> ·"
+ },
+ "675253f496d9": {
+  "en": "675253f496d9",
+  "t": "  - [@Berion](https://www.psx-place.com/members/berion.1431/) for logoer, baggrund og tastegrafik"
+ },
+ "69d4c3170060": {
+  "en": "69d4c3170060",
+  "t": "   - Reserve på memory card som i punkt 3 ovenfor."
+ },
+ "6debe9f38567": {
+  "en": "6debe9f38567",
+  "t": "Eksempel på at starte NHDDL i videotilstand 480p og lede efter ISO'er på mmce og en exFAT-HDD uden at behøve nhddl.yaml. Fordelen er, at der ikke spildes tid på at indlæse drivere og finde og indlæse nhddl.yaml. Det er den hurtigste måde at starte NHDDL og vise ISO-listen på."
+ },
+ "704784bb456b": {
+  "en": "704784bb456b",
+  "t": "- `2` = feltvending type 2"
+ },
+ "70710f40217d": {
+  "en": "70710f40217d",
+  "t": "  - bemærk: på builds uden HDD har denne indstilling ingen virkning."
+ },
+ "71858737f5c1": {
+  "en": "71858737f5c1",
+  "t": "#### Afhængigt af build:  "
+ },
+ "7425333403ea": {
+  "en": "7425333403ea",
+  "t": "- `xfrom:/`-stier __PSX DESR-builds__"
+ },
+ "767d07f95351": {
+  "en": "767d07f95351",
+  "t": "- `-nologo`"
+ },
+ "7bb989a3fb7e": {
+  "en": "7bb989a3fb7e",
+  "t": "<h1 align=\"center\">BIBLE</h1>"
+ },
+ "7d52c1b8a6a4": {
+  "en": "7d52c1b8a6a4",
+  "t": "- `-gsm=<v[:c]>` kører mål-ELF'en via den indbyggede eGSM (ignoreres for `rom?:`-stier). Hvis den bruges, skal den være det sidste argument."
+ },
+ "7f48b942e063": {
+  "en": "7f48b942e063",
+  "t": "  - Udgivelsespakke (scriptet ligger i udgivelsens rod):"
+ },
+ "81f7471dcefd": {
+  "en": "81f7471dcefd",
+  "t": "- tom = ingen (standard)"
+ },
+ "84c6c36434d4": {
+  "en": "84c6c36434d4",
+  "t": "- `-patinfo` slår håndtering af PATINFO til for `:PATINFO`-poster."
+ },
+ "85953d7c3ac5": {
+  "en": "85953d7c3ac5",
+  "t": "  - eGSM anvendes på det startede mål (ELF/disk), ikke på PS2BBL selv.\n  eGSM-format (som i OSDMenu):"
+ },
+ "859e8018755b": {
+  "en": "859e8018755b",
+  "t": "  - `LEFT/RIGHT` skifter tilstand: `AUTO`, `NTSC`, `PAL`, `480P`"
+ },
+ "85d3494a3c15": {
+  "en": "85d3494a3c15",
+  "t": "### LOGO_DISPLAY"
+ },
+ "87104d1e4715": {
+  "en": "87104d1e4715",
+  "t": "- Tilføj `-nologo` til postens argumenter for at starte PS2-diske direkte (uden `rom0:PS2LOGO`)."
+ },
+ "8864c9dc9624": {
+  "en": "8864c9dc9624",
+  "t": "- `-gsm=fp2:1`"
+ },
+ "89f87574605b": {
+  "en": "89f87574605b",
+  "t": "Den ligger på [github pages](https://israpps.github.io/PlayStation2-Basic-BootLoader/), men med tilføjelserne herunder:"
+ },
+ "8acd450b3e09": {
+  "en": "8acd450b3e09",
+  "t": "#### PS2LOGO-argumenter (kun PS2-diske)"
+ },
+ "8c1803695e4c": {
+  "en": "8c1803695e4c",
+  "t": "  - `NIC` holder DEV9/netværk tændt, afmonterer `pfs0:` og sætter `hdd0:`/`hdd1:` i dvale med det samme."
+ },
+ "8ce3834f1354": {
+  "en": "8ce3834f1354",
+  "t": "4. Sidste reserve på PSX"
+ },
+ "8daca164d7be": {
+  "en": "8daca164d7be",
+  "t": "- `DISC_STOP = 0` (eller udeladt) beholder standardopførslen."
+ },
+ "9109da4b6d16": {
+  "en": "9109da4b6d16",
+  "t": "#### Argumenternes forrang og rækkefølge"
+ },
+ "942059e5f559": {
+  "en": "942059e5f559",
+  "t": "<p align=\"center\"><img src=\"assets/readme/ripps2-icon.png\" alt=\"RIPPS2\" width=\"48\" height=\"48\"><br><sub>BIBLE er en del af <a href=\"https://github.com/akilluminati47/RIPPS2\">RIPPS2</a>.</sub></p>"
+ },
+ "9422bbe6a402": {
+  "en": "9422bbe6a402",
+  "t": "- ~~`RUNKELF`~~ PS2BBLE starter nu elf/kelf internt, uden at brugeren skal definere en kelf-starthandling."
+ },
+ "986a0196fb5a": {
+  "en": "986a0196fb5a",
+  "t": "  <sub>Hold L2 + R2 ved opstart for siden med starttaster, TRIANGLE + CROSS for siden med videotilstand; en tast sat til <code>$CREDITS</code> viser krediteringerne.</sub>"
+ },
+ "999269fc568a": {
+  "en": "999269fc568a",
+  "t": "- `-appid` tvinger appens visuelle spil-ID, selv med `APP_GAMEID = 0`."
+ },
+ "99dfbd99b669": {
+  "en": "99dfbd99b669",
+  "t": "Konvertér en PNG til den forventede rå fil:"
+ },
+ "9a2ff94c7bee": {
+  "en": "9a2ff94c7bee",
+  "t": "- `-ps1fast`"
+ },
+ "9e14e0197f55": {
+  "en": "9e14e0197f55",
+  "t": "- Startskærmen: PS2-logoet centreret på RIPPS2's himmel, med knapperne under og eventuel tekst over.\n  `BIBLE_GLYPHS` 0 ingen, 1 frontknapperne (standard), 2 alle seksten i to rækker á otte.\n  `BIBLE_INFO` 1 viser konsolinfo, ur og nedtælling (slået fra som standard).\n  Himlen følger dit RIPPS2 Color Theme: uden `BIBLE_COLOR` læser BIBLE den himmel, RIPPS2 gemmer med sine\n  indstillinger, fra den RIPPS2-mappe, som dens AUTO-post starter (`BIBLE_COLOR` i konfigurationen vinder).\n  Det samme udseende i hver videotilstand. Sider (videotilstand, krediteringer, starttaster) toner frem over det dæmpede logo\n  med knapperne lagt væk, så starttasterne kan læses i ro."
+ },
+ "9f17d88941ea": {
+  "en": "9f17d88941ea",
+  "t": "- `fp2` = tving progressiv skanning (480p/576p)"
+ },
+ "9f61ad6cbb52": {
+  "en": "9f61ad6cbb52",
+  "t": "- tom = tving intet (standard)"
+ },
+ "a0525e7d534f": {
+  "en": "a0525e7d534f",
+  "t": "- `-ps1vneg` kører PS1DRV via PS1VModeNegator. Nyttigt på opsætninger, hvor konsollens og diskens tilstand er forskellige (for eksempel visse MechaPwn/modchip-tilfælde)."
+ },
+ "a3a65a7af403": {
+  "en": "a3a65a7af403",
+  "t": "- Åbnes med `TRIANGLE + CROSS` under opstart"
+ },
+ "a44babacaf8b": {
+  "en": "a44babacaf8b",
+  "t": "   - `xfrom:/PS2BBL/CONFIG.INI`"
+ },
+ "a6090e73dd04": {
+  "en": "a6090e73dd04",
+  "t": "### Startargumenter for CDROM"
+ },
+ "a63cb36e571e": {
+  "en": "a63cb36e571e",
+  "t": "- `1` = feltvending type 1"
+ },
+ "aa77b29709a0": {
+  "en": "aa77b29709a0",
+  "t": "  - ved `BOOT2/BOOT/path=PATINFO` indlæser PS2BBL den indbyggede ELF fra partitionens attributområde og bruger den interne overdragelse `-la=E...`."
+ },
+ "ad807f2f9ae8": {
+  "en": "ad807f2f9ae8",
+  "t": "- `CDROM_DISABLE_GAMEID = 1` slår visuelt spil-ID fra for diske startet via `cdrom`."
+ },
+ "ad9f1afbaa28": {
+  "en": "ad9f1afbaa28",
+  "t": "- `-gsm=1080ix2`"
+ },
+ "ae898dca6d64": {
+  "en": "ae898dca6d64",
+  "t": "- `-ps1smooth` slår teksturudglatning til."
+ },
+ "aed791467a10": {
+  "en": "aed791467a10",
+  "t": "For `LK_*_E* = cdrom` understøttes disse argumenter:"
+ },
+ "b2ddfe0e68bd": {
+  "en": "b2ddfe0e68bd",
+  "t": "For PS2-diske læses eGSM automatisk fra `OSDGSM.CNF` (ingen sti i INI'en nødvendig). Se [her](https://github.com/pcm720/OSDMenu/blob/main/patcher/README.md#osdgsmcnf) for konfigurationsfilens format."
+ },
+ "b3ba04fd4da5": {
+  "en": "b3ba04fd4da5",
+  "t": "   - BDM-opstart: `usb:/PS2BBL/CONFIG.INI` / `mass:/PS2BBL/CONFIG.INI` / `ata:/PS2BBL/CONFIG.INI`"
+ },
+ "b471aa6e5908": {
+  "en": "b471aa6e5908",
+  "t": "- `-gsm=fp2`"
+ },
+ "b739b09f5b15": {
+  "en": "b739b09f5b15",
+  "t": "  - @uyjulian og @fjtrujy, fordi de altid hjælper mig"
+ },
+ "b9a70d5fa7b3": {
+  "en": "b9a70d5fa7b3",
+  "t": "### Søgerækkefølge for konfigurationen"
+ },
+ "bb5f8da78b41": {
+  "en": "bb5f8da78b41",
+  "t": "  - Læg den oprettede `LOGO.BIN` ved siden af PS2BBL Extended. Det bør være `mc?:/BOOT/`, hvis du bruger downloads fra [PS2 Homebrew Store](https://ps2store.com)"
+ },
+ "bb72aacfa09f": {
+  "en": "bb72aacfa09f",
+  "t": "- `hdd0:partition:pfs:/<path to elf>` __HDD-builds__"
+ },
+ "bbfa9a74fbf2": {
+  "en": "bbfa9a74fbf2",
+  "t": "  - PS2BBL læser `SYSTEM.CNF` fra partitionens attributområde (`PS2ICON3D`) og anvender `BOOT2/BOOT/path`, `arg*`, `skip_argv0` og `HDDUNITPOWER`."
+ },
+ "beaeeff57019": {
+  "en": "beaeeff57019",
+  "t": "- `ilink:/` (BDM-masselagerrødder) __endnu ikke implementeret__"
+ },
+ "bf1858271ce3": {
+  "en": "bf1858271ce3",
+  "t": "#### Eget startlogo fra CWD"
+ },
+ "bf621297607e": {
+  "en": "bf621297607e",
+  "t": "## Dokumentation"
+ },
+ "bf8021c1dc5a": {
+  "en": "bf8021c1dc5a",
+  "t": "<p align=\"center\"><sub>Alt herunder er den oprindelige README fra PS2BBL Extended, oversat og ellers uændret.</sub></p>"
+ },
+ "c06e0a279296": {
+  "en": "c06e0a279296",
+  "t": "- `usb:/` (foretrukket) og `mass:/` (gammel)"
+ },
+ "c10219799837": {
+  "en": "c10219799837",
+  "t": "  <a href=\"LICENSE\">GPL-3.0</a>"
+ },
+ "c48fea10b14c": {
+  "en": "c48fea10b14c",
+  "t": "- `VIDEO_MODE = AUTO, NTSC, PAL, 480P` Bruger PS2'ens standard eller tvinger en af de andre 3 tilstande."
+ },
+ "c545cdcece82": {
+  "en": "c545cdcece82",
+  "t": "Brug `LOGO_DISPLAY = 3` til at vise tasternes navne. Navnene sættes med `NAME_<BUTTON>`."
+ },
+ "c7ce0d2e1ff8": {
+  "en": "c7ce0d2e1ff8",
+  "t": "- Uden `-nologo` starter PS2BBL disken via PS2LOGO og patcher det til altid at bruge diskens region og springe logoets checksumtjek over."
+ },
+ "c839d62b7d87": {
+  "en": "c839d62b7d87",
+  "t": "  - `SELECT` gemmer den valgte tilstand i den aktive konfigurationsfil"
+ },
+ "c8c06c6a31a8": {
+  "en": "c8c06c6a31a8",
+  "t": "## Konfiguration og argumenter"
+ },
+ "d22941defd02": {
+  "en": "d22941defd02",
+  "t": "Dette er en fork af PS2BBL af [El Isra](https://github.com/israpps/PlayStation2-Basic-BootLoader/)"
+ },
+ "d3848ab732aa": {
+  "en": "d3848ab732aa",
+  "t": "- `-ps1smooth`"
+ },
+ "d552d6dc7534": {
+  "en": "d552d6dc7534",
+  "t": "### Videotilstand"
+ },
+ "d5c51f8e6ac2": {
+  "en": "d5c51f8e6ac2",
+  "t": "- `-titleid=SLUS_123.45` overskriver appens titel-ID (op til 11 tegn)."
+ },
+ "da330e7a0139": {
+  "en": "da330e7a0139",
+  "t": "- `mc0:/`, `mc1:/`, `mc?:/`"
+ },
+ "da9818557f89": {
+  "en": "da9818557f89",
+  "t": "#### Nødvælger til videotilstand"
+ },
+ "dbdd3c74a6e3": {
+  "en": "dbdd3c74a6e3",
+  "t": "   - MX4SIO-opstart: `mx4sio:/PS2BBL/CONFIG.INI`"
+ },
+ "ddfc333f97d7": {
+  "en": "ddfc333f97d7",
+  "t": "2. Der læses nedefra og op, og det stopper ved det første argument, der ikke er et styreargument (slutopførsel som i OSDMenu)."
+ },
+ "de02177eb37e": {
+  "en": "de02177eb37e",
+  "t": "Eksempler på eGSM-ARG:"
+ },
+ "de664ca47abc": {
+  "en": "de664ca47abc",
+  "t": "- `-nogameid`"
+ },
+ "de782301e641": {
+  "en": "de782301e641",
+  "t": "  - @sp193 for [PS1 Video Negator](https://github.com/ps2homebrew/PS1VModeNeg)"
+ },
+ "dfbebe092d40": {
+  "en": "dfbebe092d40",
+  "t": "- `BIBLE_WIDESCREEN`: `AUTO` (standard: RIPPS2's Widescreen, ellers PS2'ens 16:9-skærmindstilling), `ON` eller\n  `OFF`. I 480i, 576i, 480p og 576p tegnes startskærmen til et tv, der strækker billedet til 16:9, uden\n  at mase det. 720p og 1080i er allerede 16:9."
+ },
+ "dfef928c9dd2": {
+  "en": "dfef928c9dd2",
+  "t": "- `c` = kompatibilitetstilstand:"
+ },
+ "e17e9a226952": {
+  "en": "e17e9a226952",
+  "t": "- `-disc_stop` stopper disken, efter at mål-ELF'en er indlæst (nyttigt pr. post uden `DISC_STOP_AT_BOOT`-builds)."
+ },
+ "e2f6ac3e8203": {
+  "en": "e2f6ac3e8203",
+  "t": "  <a href=\"https://github.com/israpps/PlayStation2-Basic-BootLoader\">PS2BBL</a> ·"
+ },
+ "e3b8cc6236ca": {
+  "en": "e3b8cc6236ca",
+  "t": "  - @nathanneurotic for PS2BBLE's 10 stier, idéer og overtalelse"
+ },
+ "e6d271e7c0bd": {
+  "en": "e6d271e7c0bd",
+  "t": "Søgningen efter konfigurationen tager nu højde for opstartsfamilien, så der ikke indlæses unødvendige drivere ved start:"
+ },
+ "e6eb20871642": {
+  "en": "e6eb20871642",
+  "t": "  - ved `IOPRP=PATINFO` (eller en egen sti) giver PS2BBL den videre til trin 2 via den interne overdragelse `-la=I...`."
+ },
+ "e948a4e2ffd1": {
+  "en": "e948a4e2ffd1",
+  "t": "PS2BBL understøtter disse præfikser til start- og konfigurationsstier:"
+ },
+ "e95c77643cfe": {
+  "en": "e95c77643cfe",
+  "t": "- `mmce0:/`, `mmce1:/`, `mmce?:/` __MMCE-builds__"
+ },
+ "eae8f93205fd": {
+  "en": "eae8f93205fd",
+  "t": "  - `0` Hverken logo eller konsolinfo"
+ },
+ "ed21c5ac66ff": {
+  "en": "ed21c5ac66ff",
+  "t": "- Intet hop ind i RIPPS2: ved start toner logo og knapper ud, og himlen bliver på skærmen i RIPPS2's tilstand;\n  RIPPS2 starter på den samme himmel. Hold TRIANGLE + CROSS ved opstart for siden med videotilstand, som altid åbner i\n  konsollens egen interlaced-tilstand (vejen tilbage fra 720p eller 1080i på et kompositkabel)."
+ },
+ "ed675d1ac190": {
+  "en": "ed675d1ac190",
+  "t": "- DECKARD IE 75K og nyere: XPARAM.IRX anvendes automatisk, når det er nødvendigt ved start uden logo."
+ },
+ "f194a33a1232": {
+  "en": "f194a33a1232",
+  "t": "- `fp1` = tving progressiv skanning (240p/288p)"
+ },
+ "f49f3f803d4d": {
+  "en": "f49f3f803d4d",
+  "t": "### Stipræfikser for enheder"
+ },
+ "fbd93fd380b1": {
+  "en": "fbd93fd380b1",
+  "t": "  - `1` Konsolinfo"
+ },
+ "fd03d61bc9f2": {
+  "en": "fd03d61bc9f2",
+  "t": "- `-disc_stop` kan tilføjes pr. startpost for at stoppe disken, når mål-ELF'en er fundet."
+ },
+ "fd5efe6c6f4c": {
+  "en": "fd5efe6c6f4c",
+  "t": "  - @pcm720 for"
+ },
+ "fdee3f98ecaa": {
+  "en": "fdee3f98ecaa",
+  "t": "- `1080ix1` = tving 1080i, bredde/højde x1"
+ },
+ "fe658db8cc2f": {
+  "en": "fe658db8cc2f",
+  "t": "  - @asmblur, for at opmuntre mig til at lave dette monster på den nyeste SDK"
+ },
+ "fec43ce445f9": {
+  "en": "fec43ce445f9",
+  "t": "Brugseksempel:"
+ },
+ "ff7f439f5d79": {
+  "en": "ff7f439f5d79",
+  "t": "1. `CONFIG.INI` (CWD: nuværende arbejdsmappe)"
+ },
+ "ffed62f66519": {
+  "en": "ffed62f66519",
+  "t": "    - Eksempel:"
+ },
+ "fffd2a6caa3f": {
+  "en": "fffd2a6caa3f",
+  "t": "  - hvis `-patinfo` er til stede, overskriver det første resterende argument CNF-målet `BOOT2/BOOT/path`.\n  Dette gælder HDD-builds.  \n  PATINFO-eksempel:  "
+ }
+}

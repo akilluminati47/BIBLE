@@ -1,0 +1,666 @@
+{
+ "002e3896fc22": {
+  "en": "002e3896fc22",
+  "t": "   - Khởi động MMCE: `mmce?:/PS2BBL/CONFIG.INI`"
+ },
+ "009050688382": {
+  "en": "009050688382",
+  "t": "4. Với đường dẫn khởi chạy `:PATINFO`, PS2BBL phân tích `SYSTEM.CNF` trong thuộc tính phân vùng và nối các mục `arg*` của CNF sau đối số ứng dụng của người dùng."
+ },
+ "075b75340cb8": {
+  "en": "075b75340cb8",
+  "t": "### Điều khiển quay đĩa"
+ },
+ "08c4d5ce9f91": {
+  "en": "08c4d5ce9f91",
+  "t": "2. Khi nạp từ thiết bị:"
+ },
+ "0d2174dc83ca": {
+  "en": "0d2174dc83ca",
+  "t": "- `DISC_STOP_AT_BOOT=1` cấu hình biên dịch luôn dừng đĩa quang sau khi nạp cấu hình"
+ },
+ "0d2b0afd3f6c": {
+  "en": "0d2b0afd3f6c",
+  "t": "- `-ps1fast` bật tốc độ đọc đĩa PS1 nhanh."
+ },
+ "0f47fa9660dd": {
+  "en": "0f47fa9660dd",
+  "t": "5. Nếu đặt `-patinfo` và đường dẫn khởi chạy có `:PATINFO`, đối số ứng dụng đầu tiên còn lại của người dùng trở thành đường dẫn ELF đích (thay đường dẫn khởi động của CNF) và bị gỡ khỏi argv của ứng dụng. Nếu không còn đối số nào, việc khởi chạy bị hủy (giống OSDMenu) và `BOOT2/BOOT/path` của CNF không được dùng."
+ },
+ "10e49ad3c8d0": {
+  "en": "10e49ad3c8d0",
+  "t": "  <a href=\"https://github.com/akilluminati47/RIPPS2\">RIPPS2</a> ·"
+ },
+ "138c6cc4b754": {
+  "en": "138c6cc4b754",
+  "t": "Nếu tìm thấy file logo riêng (LOGO.BIN) trong CWD (thư mục làm việc hiện tại), nó sẽ thay logo PS2BBLE/PSXBBLE có sẵn."
+ },
+ "159f3f6b8e94": {
+  "en": "159f3f6b8e94",
+  "t": "3. Dự phòng trên thẻ nhớ:"
+ },
+ "1638bfe84685": {
+  "en": "1638bfe84685",
+  "t": "Sửa file cấu hình khi cần. Nên dùng [R3Configurator](https://github.com/saildot4k/R3CONFIGURATOR) để sửa file cấu hình. Các đường dẫn đã được đặt sẵn khớp với bản tải từ [PS2 Homebrew Store](https://ps2homebrewstore.com). Nghĩa là bạn chỉ cần sửa lựa chọn Auto và tốt nhất là đặt đối số cho NHDDL theo thiết bị bạn nạp ISO."
+ },
+ "164d82fd0dc4": {
+  "en": "164d82fd0dc4",
+  "t": "- `1080ix3` = ép 1080i, rộng/cao x3"
+ },
+ "1e9995e783fc": {
+  "en": "1e9995e783fc",
+  "t": "   - Trên PS2: `mc?:/SYS-CONF/PS2BBL.INI`"
+ },
+ "1ec5c04ec3af": {
+  "en": "1ec5c04ec3af",
+  "t": "- `3` = lật trường kiểu 3"
+ },
+ "200e77165cb3": {
+  "en": "200e77165cb3",
+  "t": "   - `cdrom0:/PS2BBL/CONFIG.INI`"
+ },
+ "20e55fa78502": {
+  "en": "20e55fa78502",
+  "t": "- Cho phép `KEY_READ_WAIT_TIME = 0` (mức tối thiểu của upstream là 500 ms)."
+ },
+ "228b3fdf1eec": {
+  "en": "228b3fdf1eec",
+  "t": "  - nếu bỏ trống, PS2BBL không ép chính sách DEV9 nào."
+ },
+ "24439e94a180": {
+  "en": "24439e94a180",
+  "t": "- `ata:/` thiết bị BDM cho HDD exFAT"
+ },
+ "25f56fc0dd9e": {
+  "en": "25f56fc0dd9e",
+  "t": "Các đối số này áp dụng cho từng mục khởi chạy `cdrom`, không phải toàn cục."
+ },
+ "29a4c699928e": {
+  "en": "29a4c699928e",
+  "t": "- `v` = chế độ video:"
+ },
+ "29c939657e98": {
+  "en": "29c939657e98",
+  "t": "  - @israpps cho [PS2BBL](https://github.com/israpps/PlayStation2-Basic-BootLoader/)"
+ },
+ "2b406c409d68": {
+  "en": "2b406c409d68",
+  "t": "## Ghi công và cảm ơn"
+ },
+ "2d1c0c3dc3a3": {
+  "en": "2d1c0c3dc3a3",
+  "t": "- Từ [El Isra](https://israpps.github.io/) (nhà phát triển PS2BBL): "
+ },
+ "2e1844667faa": {
+  "en": "2e1844667faa",
+  "t": "- Tổ hợp phím giữ từ lúc bật máy giờ mở được trang của chúng (trước đây TRIANGLE + CROSS bị bỏ lỡ khi tay cầm vẫn\n  đang khởi động)."
+ },
+ "2e5eb51f690b": {
+  "en": "2e5eb51f690b",
+  "t": "- Điều khiển:"
+ },
+ "2f9dde551617": {
+  "en": "2f9dde551617",
+  "t": "**Bản fork này thay đổi gì**"
+ },
+ "33014f963b64": {
+  "en": "33014f963b64",
+  "t": "1. PS2BBL chỉ phân tích và lấy đi các đối số điều khiển trình nạp ở cuối `ARG_*`: `-appid`, `-titleid=`, `-dev9=`, `-patinfo`, `-disc_stop`, `-gsm=`."
+ },
+ "34f273d336d6": {
+  "en": "34f273d336d6",
+  "t": "BIBLE là trình khởi động mà RIPPS2 cài đặt: một bản fork của PS2BBL Extended do saildot4k làm."
+ },
+ "36e7bf643ef8": {
+  "en": "36e7bf643ef8",
+  "t": "### Đối số ứng dụng"
+ },
+ "38dcd9eb7ded": {
+  "en": "38dcd9eb7ded",
+  "t": "- Đặt đối số của elf được khởi chạy trước, sau đó thêm các đối số nội bộ của PS2BBL mà bạn muốn (xem bên dưới). [NHDDL](https://github.com/pcm720/nhddl) rất hợp để dùng đối số, vì chúng giúp NHDDL khởi động nhanh hơn."
+ },
+ "391adc91b06c": {
+  "en": "391adc91b06c",
+  "t": "- Khóa/giá trị chung: `DISC_STOP = 0/1`"
+ },
+ "3adb267042c1": {
+  "en": "3adb267042c1",
+  "t": "## Đã lỗi thời/Đã gỡ bỏ"
+ },
+ "3d92d62b98f7": {
+  "en": "3d92d62b98f7",
+  "t": "- Chế độ video: `VIDEO_MODE` nhận cả `576P`, `720P` và `1080I`, tức các chế độ còn lại của RIPPS2. `AUTO` (mặc định)\n  khởi động trong Video Mode của RIPPS2 khi tìm thấy cài đặt của nó cạnh mục AUTO, nếu không thì theo chế độ của máy."
+ },
+ "3eba597b9c5f": {
+  "en": "3eba597b9c5f",
+  "t": "- `1080ix2` = ép 1080i, rộng/cao x2"
+ },
+ "3fef7c9294f4": {
+  "en": "3fef7c9294f4",
+  "t": "  <a href=\"https://github.com/akilluminati47/BIBLE/actions\">Bản build</a> ·"
+ },
+ "4019cd997962": {
+  "en": "4019cd997962",
+  "t": "  - `NICHDD` giữ cả DEV9 (bộ chuyển mạng) và HDD đều bật."
+ },
+ "406206a51560": {
+  "en": "406206a51560",
+  "t": "- `APP_GAMEID = 1` bật ID game trực quan cho ứng dụng/homebrew, tối đa 11 ký tự lấy từ tên file hoặc đĩa PS1/2"
+ },
+ "4088157bc12a": {
+  "en": "4088157bc12a",
+  "t": "  - @SP193 cho các thư viện khởi tạo OSD, nền móng của dự án này"
+ },
+ "40a28018c31c": {
+  "en": "40a28018c31c",
+  "t": "#### Đối số đĩa PS1 (mỗi lần khởi chạy)"
+ },
+ "439feb54907f": {
+  "en": "439feb54907f",
+  "t": "- `-ps1vneg`"
+ },
+ "43fcd64b5833": {
+  "en": "43fcd64b5833",
+  "t": "5. Khi biên dịch với `DISC_STOP_AT_BOOT=1"
+ },
+ "449dee5852ac": {
+  "en": "449dee5852ac",
+  "t": "RIPPS2 sẽ mang BIBLE dưới dạng các file khởi động đã ký và cài nó từ Settings (Boot Loader), thay cho PS2BBL 1.2.0 mà nó mang hiện nay. BIBLE cũng chạy như một ELF được trình nạp khác khởi chạy (FMCB, OSDMenu, trình nạp của SD2PSX). Hiện chưa có bản phát hành BIBLE."
+ },
+ "4793c8125dc9": {
+  "en": "4793c8125dc9",
+  "t": "### eGSM (external Graphics Synthesize Mode)"
+ },
+ "4822d5ecd6f5": {
+  "en": "4822d5ecd6f5",
+  "t": "- Mới: trang phím khởi chạy. Giữ L2 + R2 khi khởi động để đọc đường dẫn khởi chạy của từng phím, bất kể cài đặt màn hình khởi động."
+ },
+ "4995cc5a4675": {
+  "en": "4995cc5a4675",
+  "t": "6. Các đối số còn lại giữ nguyên thứ tự và được truyền cho ứng dụng được khởi chạy."
+ },
+ "4a75c7695a03": {
+  "en": "4a75c7695a03",
+  "t": "bạn nói cho tôi đi ;)"
+ },
+ "4b1b74371c50": {
+  "en": "4b1b74371c50",
+  "t": "- `-disc_stop` bị bỏ qua với các mục khởi chạy `cdrom`."
+ },
+ "4bcc83d2703e": {
+  "en": "4bcc83d2703e",
+  "t": "**RIPPS2 dùng nó thế nào**"
+ },
+ "4c5f14b856c2": {
+  "en": "4c5f14b856c2",
+  "t": "   - Khởi động APA HDD: `hdd0:__sysconf:pfs:/PS2BBL/CONFIG.INI`"
+ },
+ "4ca733fed7d8": {
+  "en": "4ca733fed7d8",
+  "t": "- Dùng `cdrom` làm đường dẫn mục khởi chạy."
+ },
+ "4cb76a5bb7c0": {
+  "en": "4cb76a5bb7c0",
+  "t": "- `-gsm=<v[:c]>`"
+ },
+ "4daebfa16bdc": {
+  "en": "4daebfa16bdc",
+  "t": "   - Trên PSX-DESR: `mc?:/SYS-CONF/PSXBBL.INI`"
+ },
+ "4e318690a5f7": {
+  "en": "4e318690a5f7",
+  "t": "- `mx4sio:/` (nên dùng) và `massX:/` (cũ)  __bản build MX4SIO__"
+ },
+ "502c67628795": {
+  "en": "502c67628795",
+  "t": "- Bộ chọn ép `LOGO_DISPLAY = 3` khi đang bật để bạn thấy logo và giao diện phím."
+ },
+ "511c26550b7a": {
+  "en": "511c26550b7a",
+  "t": "- `DISC_STOP = 1` dừng đĩa quang sau khi nạp cấu hình nếu tìm thấy file cấu hình."
+ },
+ "514e9776a6b8": {
+  "en": "514e9776a6b8",
+  "t": "  - `2` Logo PS2BBLE/PSXBBLE và thông tin máy"
+ },
+ "5189562652cb": {
+  "en": "5189562652cb",
+  "t": "- `-dev9=<mode>` đặt chính sách DEV9/HDD trước khi khởi chạy ELF đích. Các chế độ được hỗ trợ:"
+ },
+ "52a815bf5a23": {
+  "en": "52a815bf5a23",
+  "t": "    - gameID của Retrogem, PS1 Video Negator, eGSM và mã PS2LOGO từ [OSDMenu](https://github.com/pcm720/OSDMenu)"
+ },
+ "53c15c59e52b": {
+  "en": "53c15c59e52b",
+  "t": "  - PNG phải là RGBA 8 bit có bảng màu, 255 màu mỗi kênh và độ phân giải 256x64."
+ },
+ "5519f5e8f4ae": {
+  "en": "5519f5e8f4ae",
+  "t": "    Một trình khởi động linh hoạt cho PlayStation 2™ và PSX-DESR"
+ },
+ "5933320f9ba5": {
+  "en": "5933320f9ba5",
+  "t": "Dùng các dòng `ARG_<BUTTON>_E? =` để truyền đối số cho ELF (xem ví dụ INI)."
+ },
+ "5bb677ad2c61": {
+  "en": "5bb677ad2c61",
+  "t": "  - `3` Đồ họa phím với `NAME_BUTTON = <TITLE>` lấy từ file cấu hình"
+ },
+ "5d5f73d54d7f": {
+  "en": "5d5f73d54d7f",
+  "t": "## Lỗi/vấn đề đã biết"
+ },
+ "5d73be2078e5": {
+  "en": "5d73be2078e5",
+  "t": "- Bản build PS2 cho thẻ nhớ / USB, MMCE, MX4SIO và HDD. Giai đoạn 2 của eGSM bị bỏ ra."
+ },
+ "6071ff1f11ca": {
+  "en": "6071ff1f11ca",
+  "t": "### ID game trực quan của Retrogem"
+ },
+ "61eb73b67bf7": {
+  "en": "61eb73b67bf7",
+  "t": "    - các tùy chọn chế độ video từ [NHDDL](https://github.com/pcm720/nhddl)"
+ },
+ "641317004793": {
+  "en": "641317004793",
+  "t": "- Từ saildot4k"
+ },
+ "641f6dbfad30": {
+  "en": "641f6dbfad30",
+  "t": "- `-gsm=<v[:c]>` chạy ELF đích qua eGSM có sẵn (bị bỏ qua với đường dẫn `rom?:`)."
+ },
+ "6656cd8cf3ca": {
+  "en": "6656cd8cf3ca",
+  "t": "  - `START` thoát bộ chọn và tiếp tục tới màn hình phím"
+ },
+ "6682c393a791": {
+  "en": "6682c393a791",
+  "t": "  <a href=\"https://github.com/saildot4k/PlayStation2-Basic-BootLoader-Extended\">PS2BBL Extended</a> ·"
+ },
+ "675253f496d9": {
+  "en": "675253f496d9",
+  "t": "  - [@Berion](https://www.psx-place.com/members/berion.1431/) cho logo, nền và đồ họa phím"
+ },
+ "69d4c3170060": {
+  "en": "69d4c3170060",
+  "t": "   - Dự phòng trên thẻ nhớ như ở mục 3 bên trên."
+ },
+ "6debe9f38567": {
+  "en": "6debe9f38567",
+  "t": "Ví dụ khởi chạy NHDDL ở chế độ video 480p và tìm ISO trên mmce và HDD exfat mà không cần nhddl.yaml. Lợi ích là không mất thời gian nạp driver, tìm và nạp nhddl.yaml. Đây là cách nhanh nhất để khởi động NHDDL và hiện danh sách ISO."
+ },
+ "704784bb456b": {
+  "en": "704784bb456b",
+  "t": "- `2` = lật trường kiểu 2"
+ },
+ "70710f40217d": {
+  "en": "70710f40217d",
+  "t": "  - lưu ý: trên bản build không có HDD tùy chọn này không có tác dụng."
+ },
+ "71858737f5c1": {
+  "en": "71858737f5c1",
+  "t": "#### Tùy bản build:  "
+ },
+ "7425333403ea": {
+  "en": "7425333403ea",
+  "t": "- Đường dẫn `xfrom:/` __bản build PSX DESR__"
+ },
+ "767d07f95351": {
+  "en": "767d07f95351",
+  "t": "- `-nologo`"
+ },
+ "7bb989a3fb7e": {
+  "en": "7bb989a3fb7e",
+  "t": "<h1 align=\"center\">BIBLE</h1>"
+ },
+ "7d52c1b8a6a4": {
+  "en": "7d52c1b8a6a4",
+  "t": "- `-gsm=<v[:c]>` chạy ELF đích qua eGSM có sẵn (bị bỏ qua với đường dẫn `rom?:`). Nếu dùng, nó phải là đối số cuối cùng."
+ },
+ "7f48b942e063": {
+  "en": "7f48b942e063",
+  "t": "  - Gói phát hành (script nằm ở gốc gói phát hành):"
+ },
+ "81f7471dcefd": {
+  "en": "81f7471dcefd",
+  "t": "- trống = không có (mặc định)"
+ },
+ "84c6c36434d4": {
+  "en": "84c6c36434d4",
+  "t": "- `-patinfo` bật xử lý PATINFO cho các mục `:PATINFO`."
+ },
+ "85953d7c3ac5": {
+  "en": "85953d7c3ac5",
+  "t": "  - eGSM được áp dụng cho đích được khởi chạy (ELF/đĩa), không phải cho chính PS2BBL.\n  Định dạng eGSM (kiểu OSDMenu):"
+ },
+ "859e8018755b": {
+  "en": "859e8018755b",
+  "t": "  - `LEFT/RIGHT` chuyển chế độ: `AUTO`, `NTSC`, `PAL`, `480P`"
+ },
+ "85d3494a3c15": {
+  "en": "85d3494a3c15",
+  "t": "### LOGO_DISPLAY"
+ },
+ "87104d1e4715": {
+  "en": "87104d1e4715",
+  "t": "- Thêm `-nologo` vào đối số của mục để khởi động đĩa PS2 trực tiếp (bỏ qua `rom0:PS2LOGO`)."
+ },
+ "8864c9dc9624": {
+  "en": "8864c9dc9624",
+  "t": "- `-gsm=fp2:1`"
+ },
+ "89f87574605b": {
+  "en": "89f87574605b",
+  "t": "Tài liệu nằm trên [github pages](https://israpps.github.io/PlayStation2-Basic-BootLoader/) nhưng có thêm các phần bên dưới:"
+ },
+ "8acd450b3e09": {
+  "en": "8acd450b3e09",
+  "t": "#### Đối số PS2LOGO (chỉ đĩa PS2)"
+ },
+ "8c1803695e4c": {
+  "en": "8c1803695e4c",
+  "t": "  - `NIC` giữ DEV9/mạng bật, gỡ `pfs0:` và cho `hdd0:`/`hdd1:` nghỉ ngay lập tức."
+ },
+ "8ce3834f1354": {
+  "en": "8ce3834f1354",
+  "t": "4. Dự phòng cuối cùng trên PSX"
+ },
+ "8daca164d7be": {
+  "en": "8daca164d7be",
+  "t": "- `DISC_STOP = 0` (hoặc bỏ trống) giữ hành vi mặc định."
+ },
+ "9109da4b6d16": {
+  "en": "9109da4b6d16",
+  "t": "#### Thứ tự ưu tiên của đối số"
+ },
+ "942059e5f559": {
+  "en": "942059e5f559",
+  "t": "<p align=\"center\"><img src=\"assets/readme/ripps2-icon.png\" alt=\"RIPPS2\" width=\"48\" height=\"48\"><br><sub>BIBLE là một phần của <a href=\"https://github.com/akilluminati47/RIPPS2\">RIPPS2</a>.</sub></p>"
+ },
+ "9422bbe6a402": {
+  "en": "9422bbe6a402",
+  "t": "- ~~`RUNKELF`~~ PS2BBLE giờ tự xử lý việc khởi chạy elf/kelf bên trong, người dùng không cần định nghĩa thao tác khởi chạy kelf."
+ },
+ "986a0196fb5a": {
+  "en": "986a0196fb5a",
+  "t": "  <sub>Giữ L2 + R2 khi khởi động để mở trang phím khởi chạy, TRIANGLE + CROSS để mở trang chế độ video; phím đặt thành <code>$CREDITS</code> sẽ hiện danh sách ghi công.</sub>"
+ },
+ "999269fc568a": {
+  "en": "999269fc568a",
+  "t": "- `-appid` ép ID game trực quan của ứng dụng ngay cả khi `APP_GAMEID = 0`."
+ },
+ "99dfbd99b669": {
+  "en": "99dfbd99b669",
+  "t": "Chuyển một PNG thành file thô như yêu cầu:"
+ },
+ "9a2ff94c7bee": {
+  "en": "9a2ff94c7bee",
+  "t": "- `-ps1fast`"
+ },
+ "9e14e0197f55": {
+  "en": "9e14e0197f55",
+  "t": "- Màn hình khởi động: logo PS2 ở giữa bầu trời của RIPPS2, các nút ở dưới và chữ (nếu có) ở trên.\n  `BIBLE_GLYPHS` 0 không có, 1 các nút mặt trước (mặc định), 2 cả mười sáu nút thành hai hàng tám.\n  `BIBLE_INFO` 1 hiện thông tin máy, đồng hồ và đếm ngược (mặc định tắt).\n  Bầu trời theo Color Theme của RIPPS2: khi không có `BIBLE_COLOR`, BIBLE đọc bầu trời mà RIPPS2 lưu cùng\n  cài đặt của nó, từ thư mục RIPPS2 mà mục AUTO khởi chạy (`BIBLE_COLOR` trong cấu hình được ưu tiên).\n  Cùng một giao diện ở mọi chế độ video. Các trang (chế độ video, ghi công, phím khởi chạy) hiện dần trên logo đã làm tối\n  với các nút được cất đi, để đọc phím khởi chạy cho thong thả."
+ },
+ "9f17d88941ea": {
+  "en": "9f17d88941ea",
+  "t": "- `fp2` = ép quét liên tục (480p/576p)"
+ },
+ "9f61ad6cbb52": {
+  "en": "9f61ad6cbb52",
+  "t": "- trống = không ép (mặc định)"
+ },
+ "a0525e7d534f": {
+  "en": "a0525e7d534f",
+  "t": "- `-ps1vneg` chạy PS1DRV qua PS1VModeNegator. Hữu ích khi chế độ của máy và của đĩa khác nhau (ví dụ một số trường hợp MechaPwn/chip mod)."
+ },
+ "a3a65a7af403": {
+  "en": "a3a65a7af403",
+  "t": "- Vào bằng `TRIANGLE + CROSS` trong lúc khởi động"
+ },
+ "a44babacaf8b": {
+  "en": "a44babacaf8b",
+  "t": "   - `xfrom:/PS2BBL/CONFIG.INI`"
+ },
+ "a6090e73dd04": {
+  "en": "a6090e73dd04",
+  "t": "### Đối số khởi chạy CDROM"
+ },
+ "a63cb36e571e": {
+  "en": "a63cb36e571e",
+  "t": "- `1` = lật trường kiểu 1"
+ },
+ "aa77b29709a0": {
+  "en": "aa77b29709a0",
+  "t": "  - nếu `BOOT2/BOOT/path=PATINFO`, PS2BBL nạp ELF nhúng từ vùng thuộc tính của phân vùng và dùng chuyển giao nội bộ `-la=E...`."
+ },
+ "ad807f2f9ae8": {
+  "en": "ad807f2f9ae8",
+  "t": "- `CDROM_DISABLE_GAMEID = 1` tắt ID game trực quan cho đĩa khởi chạy qua `cdrom`."
+ },
+ "ad9f1afbaa28": {
+  "en": "ad9f1afbaa28",
+  "t": "- `-gsm=1080ix2`"
+ },
+ "ae898dca6d64": {
+  "en": "ae898dca6d64",
+  "t": "- `-ps1smooth` bật làm mịn texture."
+ },
+ "aed791467a10": {
+  "en": "aed791467a10",
+  "t": "Với `LK_*_E* = cdrom`, các đối số được hỗ trợ là:"
+ },
+ "b2ddfe0e68bd": {
+  "en": "b2ddfe0e68bd",
+  "t": "Với đĩa PS2, eGSM được đọc tự động từ `OSDGSM.CNF` (không cần đặt đường dẫn trong INI). Xem [tại đây](https://github.com/pcm720/OSDMenu/blob/main/patcher/README.md#osdgsmcnf) để biết định dạng file cấu hình."
+ },
+ "b3ba04fd4da5": {
+  "en": "b3ba04fd4da5",
+  "t": "   - Khởi động BDM: `usb:/PS2BBL/CONFIG.INI` / `mass:/PS2BBL/CONFIG.INI` / `ata:/PS2BBL/CONFIG.INI`"
+ },
+ "b471aa6e5908": {
+  "en": "b471aa6e5908",
+  "t": "- `-gsm=fp2`"
+ },
+ "b739b09f5b15": {
+  "en": "b739b09f5b15",
+  "t": "  - @uyjulian và @fjtrujy vì luôn giúp đỡ tôi"
+ },
+ "b9a70d5fa7b3": {
+  "en": "b9a70d5fa7b3",
+  "t": "### Thứ tự tìm file cấu hình"
+ },
+ "bb5f8da78b41": {
+  "en": "bb5f8da78b41",
+  "t": "  - Đặt `LOGO.BIN` vừa tạo cạnh PS2BBL Extended. Đó nên là `mc?:/BOOT/` nếu bạn dùng bản tải từ [PS2 Homebrew Store](https://ps2store.com)"
+ },
+ "bb72aacfa09f": {
+  "en": "bb72aacfa09f",
+  "t": "- `hdd0:partition:pfs:/<path to elf>` __bản build HDD__"
+ },
+ "bbfa9a74fbf2": {
+  "en": "bbfa9a74fbf2",
+  "t": "  - PS2BBL đọc `SYSTEM.CNF` từ vùng thuộc tính của phân vùng (`PS2ICON3D`) và áp dụng `BOOT2/BOOT/path`, `arg*`, `skip_argv0` và `HDDUNITPOWER`."
+ },
+ "beaeeff57019": {
+  "en": "beaeeff57019",
+  "t": "- `ilink:/` (gốc lưu trữ lớn BDM) __chưa được hiện thực__"
+ },
+ "bf1858271ce3": {
+  "en": "bf1858271ce3",
+  "t": "#### Logo khởi động riêng từ CWD"
+ },
+ "bf621297607e": {
+  "en": "bf621297607e",
+  "t": "## Tài liệu"
+ },
+ "bf8021c1dc5a": {
+  "en": "bf8021c1dc5a",
+  "t": "<p align=\"center\"><sub>Mọi thứ bên dưới là README gốc của PS2BBL Extended, được dịch và không thay đổi gì khác.</sub></p>"
+ },
+ "c06e0a279296": {
+  "en": "c06e0a279296",
+  "t": "- `usb:/` (nên dùng) và `mass:/` (cũ)"
+ },
+ "c10219799837": {
+  "en": "c10219799837",
+  "t": "  <a href=\"LICENSE\">GPL-3.0</a>"
+ },
+ "c48fea10b14c": {
+  "en": "c48fea10b14c",
+  "t": "- `VIDEO_MODE = AUTO, NTSC, PAL, 480P` Dùng mặc định của PS2 hoặc ép một trong 3 chế độ còn lại."
+ },
+ "c545cdcece82": {
+  "en": "c545cdcece82",
+  "t": "Dùng `LOGO_DISPLAY = 3` để hiện tên phím. Tên được đặt bằng `NAME_<BUTTON>`."
+ },
+ "c7ce0d2e1ff8": {
+  "en": "c7ce0d2e1ff8",
+  "t": "- Khi không có `-nologo`, PS2BBL chạy đĩa qua PS2LOGO và vá nó để luôn dùng vùng của đĩa và bỏ qua kiểm tra checksum logo."
+ },
+ "c839d62b7d87": {
+  "en": "c839d62b7d87",
+  "t": "  - `SELECT` lưu chế độ đang chọn vào file cấu hình đang dùng"
+ },
+ "c8c06c6a31a8": {
+  "en": "c8c06c6a31a8",
+  "t": "## Cấu hình và đối số"
+ },
+ "d22941defd02": {
+  "en": "d22941defd02",
+  "t": "Đây là bản fork của PS2BBL do [El Isra](https://github.com/israpps/PlayStation2-Basic-BootLoader/) làm"
+ },
+ "d3848ab732aa": {
+  "en": "d3848ab732aa",
+  "t": "- `-ps1smooth`"
+ },
+ "d552d6dc7534": {
+  "en": "d552d6dc7534",
+  "t": "### Chế độ video"
+ },
+ "d5c51f8e6ac2": {
+  "en": "d5c51f8e6ac2",
+  "t": "- `-titleid=SLUS_123.45` thay ID tiêu đề của ứng dụng (tối đa 11 ký tự)."
+ },
+ "da330e7a0139": {
+  "en": "da330e7a0139",
+  "t": "- `mc0:/`, `mc1:/`, `mc?:/`"
+ },
+ "da9818557f89": {
+  "en": "da9818557f89",
+  "t": "#### Bộ chọn chế độ video khẩn cấp"
+ },
+ "dbdd3c74a6e3": {
+  "en": "dbdd3c74a6e3",
+  "t": "   - Khởi động MX4SIO: `mx4sio:/PS2BBL/CONFIG.INI`"
+ },
+ "ddfc333f97d7": {
+  "en": "ddfc333f97d7",
+  "t": "2. Việc phân tích đi từ dưới lên và dừng ở đối số đầu tiên không phải đối số điều khiển (hành vi cuối kiểu OSDMenu)."
+ },
+ "de02177eb37e": {
+  "en": "de02177eb37e",
+  "t": "Ví dụ ARG của eGSM:"
+ },
+ "de664ca47abc": {
+  "en": "de664ca47abc",
+  "t": "- `-nogameid`"
+ },
+ "de782301e641": {
+  "en": "de782301e641",
+  "t": "  - @sp193 cho [PS1 Video Negator](https://github.com/ps2homebrew/PS1VModeNeg)"
+ },
+ "dfbebe092d40": {
+  "en": "dfbebe092d40",
+  "t": "- `BIBLE_WIDESCREEN`: `AUTO` (mặc định: Widescreen của RIPPS2, nếu không thì cài đặt màn hình 16:9 của PS2), `ON` hoặc\n  `OFF`. Ở 480i, 576i, 480p và 576p, màn hình khởi động được vẽ cho TV kéo giãn hình ra 16:9, không\n  bị bẹp. 720p và 1080i vốn đã là 16:9."
+ },
+ "dfef928c9dd2": {
+  "en": "dfef928c9dd2",
+  "t": "- `c` = chế độ tương thích:"
+ },
+ "e17e9a226952": {
+  "en": "e17e9a226952",
+  "t": "- `-disc_stop` dừng đĩa sau khi ELF đích được nạp (hữu ích cho từng mục khi không dùng bản build `DISC_STOP_AT_BOOT`)."
+ },
+ "e2f6ac3e8203": {
+  "en": "e2f6ac3e8203",
+  "t": "  <a href=\"https://github.com/israpps/PlayStation2-Basic-BootLoader\">PS2BBL</a> ·"
+ },
+ "e3b8cc6236ca": {
+  "en": "e3b8cc6236ca",
+  "t": "  - @nathanneurotic cho 10 đường dẫn của PS2BBLE, ý tưởng và sự thuyết phục"
+ },
+ "e6d271e7c0bd": {
+  "en": "e6d271e7c0bd",
+  "t": "Việc tìm cấu hình giờ đã nhận biết kiểu khởi động để tránh nạp driver không cần thiết lúc khởi động:"
+ },
+ "e6eb20871642": {
+  "en": "e6eb20871642",
+  "t": "  - nếu `IOPRP=PATINFO` (hoặc đường dẫn riêng), PS2BBL chuyển nó cho giai đoạn 2 qua chuyển giao nội bộ `-la=I...`."
+ },
+ "e948a4e2ffd1": {
+  "en": "e948a4e2ffd1",
+  "t": "PS2BBL hỗ trợ các tiền tố đường dẫn khởi chạy/cấu hình sau:"
+ },
+ "e95c77643cfe": {
+  "en": "e95c77643cfe",
+  "t": "- `mmce0:/`, `mmce1:/`, `mmce?:/` __bản build MMCE__"
+ },
+ "eae8f93205fd": {
+  "en": "eae8f93205fd",
+  "t": "  - `0` Không có logo và thông tin máy"
+ },
+ "ed21c5ac66ff": {
+  "en": "ed21c5ac66ff",
+  "t": "- Không giật khi vào RIPPS2: khi khởi chạy, logo và các nút mờ đi còn bầu trời vẫn ở trên màn hình, trong chế độ của RIPPS2;\n  RIPPS2 bắt đầu trên chính bầu trời đó. Giữ TRIANGLE + CROSS khi khởi động để mở trang chế độ video, trang này luôn mở\n  ở chế độ xen kẽ của chính máy (đường quay lại từ 720p hoặc 1080i trên dây composite)."
+ },
+ "ed675d1ac190": {
+  "en": "ed675d1ac190",
+  "t": "- DECKARD IE 75K trở về sau: XPARAM.IRX được áp dụng tự động khi cần cho các lần khởi chạy không logo."
+ },
+ "f194a33a1232": {
+  "en": "f194a33a1232",
+  "t": "- `fp1` = ép quét liên tục (240p/288p)"
+ },
+ "f49f3f803d4d": {
+  "en": "f49f3f803d4d",
+  "t": "### Tiền tố đường dẫn thiết bị"
+ },
+ "fbd93fd380b1": {
+  "en": "fbd93fd380b1",
+  "t": "  - `1` Thông tin máy"
+ },
+ "fd03d61bc9f2": {
+  "en": "fd03d61bc9f2",
+  "t": "- Có thể thêm `-disc_stop` vào từng mục khởi chạy để dừng đĩa sau khi tìm thấy ELF đích."
+ },
+ "fd5efe6c6f4c": {
+  "en": "fd5efe6c6f4c",
+  "t": "  - @pcm720 cho"
+ },
+ "fdee3f98ecaa": {
+  "en": "fdee3f98ecaa",
+  "t": "- `1080ix1` = ép 1080i, rộng/cao x1"
+ },
+ "fe658db8cc2f": {
+  "en": "fe658db8cc2f",
+  "t": "  - @asmblur, vì đã động viên tôi làm con quái vật này trên SDK mới nhất"
+ },
+ "fec43ce445f9": {
+  "en": "fec43ce445f9",
+  "t": "Ví dụ sử dụng:"
+ },
+ "ff7f439f5d79": {
+  "en": "ff7f439f5d79",
+  "t": "1. `CONFIG.INI` (CWD: thư mục làm việc hiện tại)"
+ },
+ "ffed62f66519": {
+  "en": "ffed62f66519",
+  "t": "    - Ví dụ:"
+ },
+ "fffd2a6caa3f": {
+  "en": "fffd2a6caa3f",
+  "t": "  - nếu có `-patinfo`, đối số đầu tiên còn lại sẽ thay đích `BOOT2/BOOT/path` của CNF.\n  Phần này dành cho bản build HDD.  \n  Ví dụ PATINFO:  "
+ }
+}

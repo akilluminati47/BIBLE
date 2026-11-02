@@ -1,0 +1,666 @@
+{
+ "002e3896fc22": {
+  "en": "002e3896fc22",
+  "t": "   - Boot MMCE: `mmce?:/PS2BBL/CONFIG.INI`"
+ },
+ "009050688382": {
+  "en": "009050688382",
+  "t": "4. Untuk jalur peluncuran `:PATINFO`, PS2BBL mengurai `SYSTEM.CNF` dari atribut partisi dan menambahkan entri `arg*` CNF setelah argumen aplikasi pengguna."
+ },
+ "075b75340cb8": {
+  "en": "075b75340cb8",
+  "t": "### Kendali putaran disk"
+ },
+ "08c4d5ce9f91": {
+  "en": "08c4d5ce9f91",
+  "t": "2. Saat dimuat dari perangkat:"
+ },
+ "0d2174dc83ca": {
+  "en": "0d2174dc83ca",
+  "t": "- `DISC_STOP_AT_BOOT=1` profil kompilasi yang selalu menghentikan disk optik setelah konfigurasi dimuat"
+ },
+ "0d2b0afd3f6c": {
+  "en": "0d2b0afd3f6c",
+  "t": "- `-ps1fast` menyalakan kecepatan disk PS1 cepat."
+ },
+ "0f47fa9660dd": {
+  "en": "0f47fa9660dd",
+  "t": "5. Jika `-patinfo` diatur dan jalur peluncuran memuat `:PATINFO`, argumen aplikasi pengguna pertama yang tersisa menjadi jalur ELF tujuan (menggantikan jalur boot CNF) dan dihapus dari argv aplikasi. Jika tidak ada argumen tersisa, peluncuran dibatalkan (sama seperti OSDMenu), dan `BOOT2/BOOT/path` CNF tidak dipakai."
+ },
+ "10e49ad3c8d0": {
+  "en": "10e49ad3c8d0",
+  "t": "  <a href=\"https://github.com/akilluminati47/RIPPS2\">RIPPS2</a> ·"
+ },
+ "138c6cc4b754": {
+  "en": "138c6cc4b754",
+  "t": "Jika file logo kustom (LOGO.BIN) ditemukan di CWD (direktori kerja saat ini), file itu menggantikan logo PS2BBLE/PSXBBLE bawaan."
+ },
+ "159f3f6b8e94": {
+  "en": "159f3f6b8e94",
+  "t": "3. Cadangan di kartu memori:"
+ },
+ "1638bfe84685": {
+  "en": "1638bfe84685",
+  "t": "Sunting file konfigurasi sesuai kebutuhan. Disarankan [R3Configurator](https://github.com/saildot4k/R3CONFIGURATOR) untuk menyuntingnya. Jalur sudah diatur agar cocok dengan unduhan dari [PS2 Homebrew Store](https://ps2homebrewstore.com). Jadi Anda cukup menyunting pilihan Auto dan sebaiknya mengatur argumen NHDDL sesuai perangkat tempat Anda memuat ISO."
+ },
+ "164d82fd0dc4": {
+  "en": "164d82fd0dc4",
+  "t": "- `1080ix3` = paksa 1080i, lebar/tinggi x3"
+ },
+ "1e9995e783fc": {
+  "en": "1e9995e783fc",
+  "t": "   - Di PS2: `mc?:/SYS-CONF/PS2BBL.INI`"
+ },
+ "1ec5c04ec3af": {
+  "en": "1ec5c04ec3af",
+  "t": "- `3` = pembalikan field tipe 3"
+ },
+ "200e77165cb3": {
+  "en": "200e77165cb3",
+  "t": "   - `cdrom0:/PS2BBL/CONFIG.INI`"
+ },
+ "20e55fa78502": {
+  "en": "20e55fa78502",
+  "t": "- `KEY_READ_WAIT_TIME = 0` diizinkan (batas bawah upstream adalah 500 ms)."
+ },
+ "228b3fdf1eec": {
+  "en": "228b3fdf1eec",
+  "t": "  - jika dihilangkan, PS2BBL tidak memaksakan kebijakan DEV9."
+ },
+ "24439e94a180": {
+  "en": "24439e94a180",
+  "t": "- `ata:/` perangkat BDM HDD exFAT"
+ },
+ "25f56fc0dd9e": {
+  "en": "25f56fc0dd9e",
+  "t": "Ini berlaku per entri peluncuran `cdrom`, bukan secara global."
+ },
+ "29a4c699928e": {
+  "en": "29a4c699928e",
+  "t": "- `v` = mode video:"
+ },
+ "29c939657e98": {
+  "en": "29c939657e98",
+  "t": "  - @israpps untuk [PS2BBL](https://github.com/israpps/PlayStation2-Basic-BootLoader/)"
+ },
+ "2b406c409d68": {
+  "en": "2b406c409d68",
+  "t": "## Kredit & Terima Kasih"
+ },
+ "2d1c0c3dc3a3": {
+  "en": "2d1c0c3dc3a3",
+  "t": "- Dari [El Isra](https://israpps.github.io/) (Pengembang PS2BBL): "
+ },
+ "2e1844667faa": {
+  "en": "2e1844667faa",
+  "t": "- Kombinasi yang ditahan sejak dinyalakan kini membuka halamannya (TRIANGLE + CROSS dulu terlewat saat controller masih\n  menyala)."
+ },
+ "2e5eb51f690b": {
+  "en": "2e5eb51f690b",
+  "t": "- Kontrol:"
+ },
+ "2f9dde551617": {
+  "en": "2f9dde551617",
+  "t": "**Apa yang diubah fork ini**"
+ },
+ "33014f963b64": {
+  "en": "33014f963b64",
+  "t": "1. PS2BBL mengurai dan memakai hanya argumen kendali loader di akhir `ARG_*`: `-appid`, `-titleid=`, `-dev9=`, `-patinfo`, `-disc_stop`, `-gsm=`."
+ },
+ "34f273d336d6": {
+  "en": "34f273d336d6",
+  "t": "BIBLE adalah boot loader yang dipasang RIPPS2: fork dari PS2BBL Extended milik saildot4k."
+ },
+ "36e7bf643ef8": {
+  "en": "36e7bf643ef8",
+  "t": "### Argumen aplikasi"
+ },
+ "38dcd9eb7ded": {
+  "en": "38dcd9eb7ded",
+  "t": "- Masukkan dulu argumen elf yang diluncurkan, lalu tambahkan argumen internal PS2BBL yang diinginkan (lihat di bawah). [NHDDL](https://github.com/pcm720/nhddl) adalah kandidat bagus untuk argumen, karena argumen mempercepat boot NHDDL."
+ },
+ "391adc91b06c": {
+  "en": "391adc91b06c",
+  "t": "- Kunci/nilai global: `DISC_STOP = 0/1`"
+ },
+ "3adb267042c1": {
+  "en": "3adb267042c1",
+  "t": "## Usang/Dihapus"
+ },
+ "3d92d62b98f7": {
+  "en": "3d92d62b98f7",
+  "t": "- Mode video: `VIDEO_MODE` juga menerima `576P`, `720P`, dan `1080I`, sisa mode milik RIPPS2. `AUTO` (bawaan)\n  mulai di Video Mode RIPPS2 bila pengaturannya ada di samping entri AUTO, jika tidak di mode konsol itu sendiri."
+ },
+ "3eba597b9c5f": {
+  "en": "3eba597b9c5f",
+  "t": "- `1080ix2` = paksa 1080i, lebar/tinggi x2"
+ },
+ "3fef7c9294f4": {
+  "en": "3fef7c9294f4",
+  "t": "  <a href=\"https://github.com/akilluminati47/BIBLE/actions\">Build</a> ·"
+ },
+ "4019cd997962": {
+  "en": "4019cd997962",
+  "t": "  - `NICHDD` menjaga DEV9 (adaptor jaringan) dan HDD tetap menyala."
+ },
+ "406206a51560": {
+  "en": "406206a51560",
+  "t": "- `APP_GAMEID = 1` menyalakan ID game visual untuk aplikasi/homebrew, hingga 11 karakter dari nama file atau disk PS1/2"
+ },
+ "4088157bc12a": {
+  "en": "4088157bc12a",
+  "t": "  - @SP193 untuk pustaka inisialisasi OSD, yang menjadi fondasi proyek ini"
+ },
+ "40a28018c31c": {
+  "en": "40a28018c31c",
+  "t": "#### Argumen disk PS1 (per peluncuran)"
+ },
+ "439feb54907f": {
+  "en": "439feb54907f",
+  "t": "- `-ps1vneg`"
+ },
+ "43fcd64b5833": {
+  "en": "43fcd64b5833",
+  "t": "5. Bila dikompilasi dengan `DISC_STOP_AT_BOOT=1"
+ },
+ "449dee5852ac": {
+  "en": "449dee5852ac",
+  "t": "RIPPS2 akan membawa BIBLE sebagai file boot yang ditandatangani dan memasangnya dari Settings (Boot Loader), menggantikan PS2BBL 1.2.0 yang dibawanya saat ini. BIBLE juga berjalan sebagai ELF yang dijalankan loader lain (FMCB, OSDMenu, loader milik SD2PSX). Belum ada rilis BIBLE."
+ },
+ "4793c8125dc9": {
+  "en": "4793c8125dc9",
+  "t": "### eGSM (external Graphics Synthesize Mode)"
+ },
+ "4822d5ecd6f5": {
+  "en": "4822d5ecd6f5",
+  "t": "- Baru: halaman tombol peluncuran. Tahan L2 + R2 saat menyala untuk membaca jalur peluncuran setiap tombol, apa pun pengaturan layar pembuka Anda."
+ },
+ "4995cc5a4675": {
+  "en": "4995cc5a4675",
+  "t": "6. Argumen yang tersisa mempertahankan urutan dan diteruskan ke aplikasi yang diluncurkan."
+ },
+ "4a75c7695a03": {
+  "en": "4a75c7695a03",
+  "t": "Anda yang beri tahu saya ;)"
+ },
+ "4b1b74371c50": {
+  "en": "4b1b74371c50",
+  "t": "- `-disc_stop` diabaikan untuk entri peluncuran `cdrom`."
+ },
+ "4bcc83d2703e": {
+  "en": "4bcc83d2703e",
+  "t": "**Cara RIPPS2 memakainya**"
+ },
+ "4c5f14b856c2": {
+  "en": "4c5f14b856c2",
+  "t": "   - Boot APA HDD: `hdd0:__sysconf:pfs:/PS2BBL/CONFIG.INI`"
+ },
+ "4ca733fed7d8": {
+  "en": "4ca733fed7d8",
+  "t": "- Gunakan `cdrom` sebagai jalur entri peluncuran."
+ },
+ "4cb76a5bb7c0": {
+  "en": "4cb76a5bb7c0",
+  "t": "- `-gsm=<v[:c]>`"
+ },
+ "4daebfa16bdc": {
+  "en": "4daebfa16bdc",
+  "t": "   - Di PSX-DESR: `mc?:/SYS-CONF/PSXBBL.INI`"
+ },
+ "4e318690a5f7": {
+  "en": "4e318690a5f7",
+  "t": "- `mx4sio:/` (disarankan), dan `massX:/` (lama)  __build MX4SIO__"
+ },
+ "502c67628795": {
+  "en": "502c67628795",
+  "t": "- Pemilih memaksa `LOGO_DISPLAY = 3` selama aktif agar Anda bisa melihat konteks logo/tombol."
+ },
+ "511c26550b7a": {
+  "en": "511c26550b7a",
+  "t": "- `DISC_STOP = 1` menghentikan disk optik setelah konfigurasi dimuat bila file konfigurasi ditemukan."
+ },
+ "514e9776a6b8": {
+  "en": "514e9776a6b8",
+  "t": "  - `2` Logo PS2BBLE/PSXBBLE dan info konsol"
+ },
+ "5189562652cb": {
+  "en": "5189562652cb",
+  "t": "- `-dev9=<mode>` mengatur kebijakan DEV9/HDD sebelum meluncurkan ELF tujuan. Mode yang didukung:"
+ },
+ "52a815bf5a23": {
+  "en": "52a815bf5a23",
+  "t": "    - gameID Retrogem, PS1 Video Negator, eGSM, dan kode PS2LOGO dari [OSDMenu](https://github.com/pcm720/OSDMenu)"
+ },
+ "53c15c59e52b": {
+  "en": "53c15c59e52b",
+  "t": "  - PNG harus RGBA 8 bit berindeks, 255 warna per kanal, dan resolusi 256x64."
+ },
+ "5519f5e8f4ae": {
+  "en": "5519f5e8f4ae",
+  "t": "    Boot loader fleksibel untuk PlayStation 2™ dan PSX-DESR"
+ },
+ "5933320f9ba5": {
+  "en": "5933320f9ba5",
+  "t": "Gunakan baris `ARG_<BUTTON>_E? =` untuk memberi argumen ke ELF (lihat contoh INI)."
+ },
+ "5bb677ad2c61": {
+  "en": "5bb677ad2c61",
+  "t": "  - `3` Grafik tombol dengan `NAME_BUTTON = <TITLE>` dari file konfigurasi"
+ },
+ "5d5f73d54d7f": {
+  "en": "5d5f73d54d7f",
+  "t": "## Bug/masalah yang diketahui"
+ },
+ "5d73be2078e5": {
+  "en": "5d73be2078e5",
+  "t": "- Build PS2 untuk kartu memori / USB, MMCE, MX4SIO, dan HDD. eGSM tahap 2 tidak disertakan."
+ },
+ "6071ff1f11ca": {
+  "en": "6071ff1f11ca",
+  "t": "### ID game visual Retrogem"
+ },
+ "61eb73b67bf7": {
+  "en": "61eb73b67bf7",
+  "t": "    - Opsi mode video dari [NHDDL](https://github.com/pcm720/nhddl)"
+ },
+ "641317004793": {
+  "en": "641317004793",
+  "t": "- Dari saildot4k"
+ },
+ "641f6dbfad30": {
+  "en": "641f6dbfad30",
+  "t": "- `-gsm=<v[:c]>` menjalankan ELF tujuan lewat eGSM bawaan (diabaikan untuk jalur `rom?:`)."
+ },
+ "6656cd8cf3ca": {
+  "en": "6656cd8cf3ca",
+  "t": "  - `START` keluar dari pemilih dan lanjut ke tampilan tombol"
+ },
+ "6682c393a791": {
+  "en": "6682c393a791",
+  "t": "  <a href=\"https://github.com/saildot4k/PlayStation2-Basic-BootLoader-Extended\">PS2BBL Extended</a> ·"
+ },
+ "675253f496d9": {
+  "en": "675253f496d9",
+  "t": "  - [@Berion](https://www.psx-place.com/members/berion.1431/) untuk logo, latar, dan grafik tombol"
+ },
+ "69d4c3170060": {
+  "en": "69d4c3170060",
+  "t": "   - Cadangan di kartu memori seperti poin 3 di atas."
+ },
+ "6debe9f38567": {
+  "en": "6debe9f38567",
+  "t": "Contoh meluncurkan NHDDL dengan mode video 480p dan mencari ISO di mmce dan HDD exfat tanpa perlu nhddl.yaml. Keuntungannya tidak ada waktu terbuang untuk memuat driver, mencari dan memuat nhddl.yaml. Ini cara tercepat untuk mem-boot NHDDL dan menampilkan daftar ISO."
+ },
+ "704784bb456b": {
+  "en": "704784bb456b",
+  "t": "- `2` = pembalikan field tipe 2"
+ },
+ "70710f40217d": {
+  "en": "70710f40217d",
+  "t": "  - catatan: pada build tanpa HDD opsi ini tidak berpengaruh."
+ },
+ "71858737f5c1": {
+  "en": "71858737f5c1",
+  "t": "#### Khusus build:  "
+ },
+ "7425333403ea": {
+  "en": "7425333403ea",
+  "t": "- Jalur `xfrom:/` __build PSX DESR__"
+ },
+ "767d07f95351": {
+  "en": "767d07f95351",
+  "t": "- `-nologo`"
+ },
+ "7bb989a3fb7e": {
+  "en": "7bb989a3fb7e",
+  "t": "<h1 align=\"center\">BIBLE</h1>"
+ },
+ "7d52c1b8a6a4": {
+  "en": "7d52c1b8a6a4",
+  "t": "- `-gsm=<v[:c]>` menjalankan ELF tujuan lewat eGSM bawaan (diabaikan untuk jalur `rom?:`). Jika dipakai, ini harus menjadi argumen terakhir."
+ },
+ "7f48b942e063": {
+  "en": "7f48b942e063",
+  "t": "  - Paket rilis (skrip ada di akar rilis):"
+ },
+ "81f7471dcefd": {
+  "en": "81f7471dcefd",
+  "t": "- kosong = tidak ada (bawaan)"
+ },
+ "84c6c36434d4": {
+  "en": "84c6c36434d4",
+  "t": "- `-patinfo` menyalakan penanganan PATINFO untuk entri `:PATINFO`."
+ },
+ "85953d7c3ac5": {
+  "en": "85953d7c3ac5",
+  "t": "  - eGSM diterapkan pada target yang diluncurkan (ELF/disk), bukan pada PS2BBL itu sendiri.\n  Format eGSM (ala OSDMenu):"
+ },
+ "859e8018755b": {
+  "en": "859e8018755b",
+  "t": "  - `LEFT/RIGHT` mengganti mode: `AUTO`, `NTSC`, `PAL`, `480P`"
+ },
+ "85d3494a3c15": {
+  "en": "85d3494a3c15",
+  "t": "### LOGO_DISPLAY"
+ },
+ "87104d1e4715": {
+  "en": "87104d1e4715",
+  "t": "- Tambahkan `-nologo` ke argumen entri untuk mem-boot disk PS2 langsung (melewati `rom0:PS2LOGO`)."
+ },
+ "8864c9dc9624": {
+  "en": "8864c9dc9624",
+  "t": "- `-gsm=fp2:1`"
+ },
+ "89f87574605b": {
+  "en": "89f87574605b",
+  "t": "Dihosting di [github pages](https://israpps.github.io/PlayStation2-Basic-BootLoader/) tetapi dengan tambahan di bawah:"
+ },
+ "8acd450b3e09": {
+  "en": "8acd450b3e09",
+  "t": "#### Argumen PS2LOGO (hanya disk PS2)"
+ },
+ "8c1803695e4c": {
+  "en": "8c1803695e4c",
+  "t": "  - `NIC` menjaga DEV9/jaringan menyala, melepas `pfs0:`, dan langsung membuat `hdd0:`/`hdd1:` diam."
+ },
+ "8ce3834f1354": {
+  "en": "8ce3834f1354",
+  "t": "4. Cadangan terakhir di PSX"
+ },
+ "8daca164d7be": {
+  "en": "8daca164d7be",
+  "t": "- `DISC_STOP = 0` (atau dihilangkan) mempertahankan perilaku bawaan."
+ },
+ "9109da4b6d16": {
+  "en": "9109da4b6d16",
+  "t": "#### Prioritas dan urutan argumen"
+ },
+ "942059e5f559": {
+  "en": "942059e5f559",
+  "t": "<p align=\"center\"><img src=\"assets/readme/ripps2-icon.png\" alt=\"RIPPS2\" width=\"48\" height=\"48\"><br><sub>BIBLE adalah bagian dari <a href=\"https://github.com/akilluminati47/RIPPS2\">RIPPS2</a>.</sub></p>"
+ },
+ "9422bbe6a402": {
+  "en": "9422bbe6a402",
+  "t": "- ~~`RUNKELF`~~ PS2BBLE kini menangani peluncuran elf/kelf secara internal tanpa pengguna perlu mendefinisikan aksi peluncuran kelf."
+ },
+ "986a0196fb5a": {
+  "en": "986a0196fb5a",
+  "t": "  <sub>Tahan L2 + R2 saat menyala untuk halaman tombol peluncuran, TRIANGLE + CROSS untuk halaman mode video; tombol yang diatur ke <code>$CREDITS</code> menampilkan kredit.</sub>"
+ },
+ "999269fc568a": {
+  "en": "999269fc568a",
+  "t": "- `-appid` memaksa ID game visual aplikasi meski `APP_GAMEID = 0`."
+ },
+ "99dfbd99b669": {
+  "en": "99dfbd99b669",
+  "t": "Ubah PNG menjadi file mentah yang diharapkan:"
+ },
+ "9a2ff94c7bee": {
+  "en": "9a2ff94c7bee",
+  "t": "- `-ps1fast`"
+ },
+ "9e14e0197f55": {
+  "en": "9e14e0197f55",
+  "t": "- Layar pembuka: logo PS2 di tengah langit RIPPS2, dengan tombol di bawahnya dan teks apa pun di atasnya.\n  `BIBLE_GLYPHS` 0 tidak ada, 1 tombol muka (bawaan), 2 keenam belas tombol dalam dua baris berisi delapan.\n  `BIBLE_INFO` 1 menampilkan info konsol, jam, dan hitung mundur (mati secara bawaan).\n  Langitnya mengikuti Color Theme RIPPS2 Anda: tanpa `BIBLE_COLOR`, BIBLE membaca langit yang disimpan RIPPS2 bersama\n  pengaturannya, dari folder RIPPS2 yang dijalankan entri AUTO-nya (`BIBLE_COLOR` di konfigurasi lebih diutamakan).\n  Tampilan yang sama di setiap mode video. Halaman (mode video, kredit, tombol peluncuran) muncul perlahan di atas logo yang diredupkan\n  dengan tombol disingkirkan, agar tombol peluncuran bisa dibaca dengan tenang."
+ },
+ "9f17d88941ea": {
+  "en": "9f17d88941ea",
+  "t": "- `fp2` = paksa pemindaian progresif (480p/576p)"
+ },
+ "9f61ad6cbb52": {
+  "en": "9f61ad6cbb52",
+  "t": "- kosong = tidak dipaksa (bawaan)"
+ },
+ "a0525e7d534f": {
+  "en": "a0525e7d534f",
+  "t": "- `-ps1vneg` menjalankan PS1DRV lewat PS1VModeNegator. Berguna pada perangkat yang mode konsol dan mode disk-nya berbeda (misalnya beberapa kasus MechaPwn/modchip)."
+ },
+ "a3a65a7af403": {
+  "en": "a3a65a7af403",
+  "t": "- Masuk dengan `TRIANGLE + CROSS` saat boot"
+ },
+ "a44babacaf8b": {
+  "en": "a44babacaf8b",
+  "t": "   - `xfrom:/PS2BBL/CONFIG.INI`"
+ },
+ "a6090e73dd04": {
+  "en": "a6090e73dd04",
+  "t": "### Argumen peluncuran CDROM"
+ },
+ "a63cb36e571e": {
+  "en": "a63cb36e571e",
+  "t": "- `1` = pembalikan field tipe 1"
+ },
+ "aa77b29709a0": {
+  "en": "aa77b29709a0",
+  "t": "  - jika `BOOT2/BOOT/path=PATINFO`, PS2BBL memuat ELF tertanam dari area atribut partisi dan memakai serah terima internal `-la=E...`."
+ },
+ "ad807f2f9ae8": {
+  "en": "ad807f2f9ae8",
+  "t": "- `CDROM_DISABLE_GAMEID = 1` mematikan ID game visual untuk disk yang diluncurkan lewat `cdrom`."
+ },
+ "ad9f1afbaa28": {
+  "en": "ad9f1afbaa28",
+  "t": "- `-gsm=1080ix2`"
+ },
+ "ae898dca6d64": {
+  "en": "ae898dca6d64",
+  "t": "- `-ps1smooth` menyalakan penghalusan tekstur."
+ },
+ "aed791467a10": {
+  "en": "aed791467a10",
+  "t": "Untuk `LK_*_E* = cdrom`, argumen yang didukung adalah:"
+ },
+ "b2ddfe0e68bd": {
+  "en": "b2ddfe0e68bd",
+  "t": "Untuk disk PS2, eGSM dibaca otomatis dari `OSDGSM.CNF` (tidak perlu pengaturan jalur di INI). Lihat [di sini](https://github.com/pcm720/OSDMenu/blob/main/patcher/README.md#osdgsmcnf) untuk format file konfigurasi."
+ },
+ "b3ba04fd4da5": {
+  "en": "b3ba04fd4da5",
+  "t": "   - Boot BDM: `usb:/PS2BBL/CONFIG.INI` / `mass:/PS2BBL/CONFIG.INI` / `ata:/PS2BBL/CONFIG.INI`"
+ },
+ "b471aa6e5908": {
+  "en": "b471aa6e5908",
+  "t": "- `-gsm=fp2`"
+ },
+ "b739b09f5b15": {
+  "en": "b739b09f5b15",
+  "t": "  - @uyjulian dan @fjtrujy karena selalu membantu saya"
+ },
+ "b9a70d5fa7b3": {
+  "en": "b9a70d5fa7b3",
+  "t": "### Urutan pencarian konfigurasi"
+ },
+ "bb5f8da78b41": {
+  "en": "bb5f8da78b41",
+  "t": "  - Letakkan `LOGO.BIN` yang dibuat di samping PS2BBL Extended. Seharusnya `mc?:/BOOT/` jika memakai unduhan dari [PS2 Homebrew Store](https://ps2store.com)"
+ },
+ "bb72aacfa09f": {
+  "en": "bb72aacfa09f",
+  "t": "- `hdd0:partition:pfs:/<path to elf>` __build HDD__"
+ },
+ "bbfa9a74fbf2": {
+  "en": "bbfa9a74fbf2",
+  "t": "  - PS2BBL membaca `SYSTEM.CNF` dari area atribut partisi (`PS2ICON3D`) dan menerapkan `BOOT2/BOOT/path`, `arg*`, `skip_argv0`, serta `HDDUNITPOWER`."
+ },
+ "beaeeff57019": {
+  "en": "beaeeff57019",
+  "t": "- `ilink:/` (akar penyimpanan massal BDM) __belum diterapkan__"
+ },
+ "bf1858271ce3": {
+  "en": "bf1858271ce3",
+  "t": "#### Logo pembuka kustom dari CWD"
+ },
+ "bf621297607e": {
+  "en": "bf621297607e",
+  "t": "## Dokumentasi"
+ },
+ "bf8021c1dc5a": {
+  "en": "bf8021c1dc5a",
+  "t": "<p align=\"center\"><sub>Semua di bawah ini adalah README asli PS2BBL Extended, diterjemahkan tanpa perubahan lain.</sub></p>"
+ },
+ "c06e0a279296": {
+  "en": "c06e0a279296",
+  "t": "- `usb:/` (disarankan), dan `mass:/` (lama)"
+ },
+ "c10219799837": {
+  "en": "c10219799837",
+  "t": "  <a href=\"LICENSE\">GPL-3.0</a>"
+ },
+ "c48fea10b14c": {
+  "en": "c48fea10b14c",
+  "t": "- `VIDEO_MODE = AUTO, NTSC, PAL, 480P` Memakai bawaan PS2 atau memaksa salah satu dari 3 mode lainnya."
+ },
+ "c545cdcece82": {
+  "en": "c545cdcece82",
+  "t": "Gunakan `LOGO_DISPLAY = 3` untuk menampilkan nama tombol. Nama diatur oleh `NAME_<BUTTON>`."
+ },
+ "c7ce0d2e1ff8": {
+  "en": "c7ce0d2e1ff8",
+  "t": "- Tanpa `-nologo`, PS2BBL menjalankan disk lewat PS2LOGO dan menambalnya agar selalu memakai region disk dan melewati pemeriksaan checksum logo."
+ },
+ "c839d62b7d87": {
+  "en": "c839d62b7d87",
+  "t": "  - `SELECT` menyimpan mode yang dipilih ke file konfigurasi aktif"
+ },
+ "c8c06c6a31a8": {
+  "en": "c8c06c6a31a8",
+  "t": "## Konfigurasi dan argumen"
+ },
+ "d22941defd02": {
+  "en": "d22941defd02",
+  "t": "Ini adalah fork dari PS2BBL oleh [El Isra](https://github.com/israpps/PlayStation2-Basic-BootLoader/)"
+ },
+ "d3848ab732aa": {
+  "en": "d3848ab732aa",
+  "t": "- `-ps1smooth`"
+ },
+ "d552d6dc7534": {
+  "en": "d552d6dc7534",
+  "t": "### Mode Video"
+ },
+ "d5c51f8e6ac2": {
+  "en": "d5c51f8e6ac2",
+  "t": "- `-titleid=SLUS_123.45` mengganti ID judul aplikasi (hingga 11 karakter)."
+ },
+ "da330e7a0139": {
+  "en": "da330e7a0139",
+  "t": "- `mc0:/`, `mc1:/`, `mc?:/`"
+ },
+ "da9818557f89": {
+  "en": "da9818557f89",
+  "t": "#### Pemilih mode video darurat"
+ },
+ "dbdd3c74a6e3": {
+  "en": "dbdd3c74a6e3",
+  "t": "   - Boot MX4SIO: `mx4sio:/PS2BBL/CONFIG.INI`"
+ },
+ "ddfc333f97d7": {
+  "en": "ddfc333f97d7",
+  "t": "2. Penguraian berjalan dari bawah ke atas dan berhenti di argumen pertama yang bukan kendali (perilaku akhir ala OSDMenu)."
+ },
+ "de02177eb37e": {
+  "en": "de02177eb37e",
+  "t": "Contoh ARG eGSM:"
+ },
+ "de664ca47abc": {
+  "en": "de664ca47abc",
+  "t": "- `-nogameid`"
+ },
+ "de782301e641": {
+  "en": "de782301e641",
+  "t": "  - @sp193 untuk [PS1 Video Negator](https://github.com/ps2homebrew/PS1VModeNeg)"
+ },
+ "dfbebe092d40": {
+  "en": "dfbebe092d40",
+  "t": "- `BIBLE_WIDESCREEN`: `AUTO` (bawaan: Widescreen RIPPS2, jika tidak pengaturan layar 16:9 PS2), `ON` atau\n  `OFF`. Di 480i, 576i, 480p, dan 576p layar pembuka digambar untuk TV yang meregangkan gambar ke 16:9, tanpa\n  gepeng. 720p dan 1080i sudah 16:9."
+ },
+ "dfef928c9dd2": {
+  "en": "dfef928c9dd2",
+  "t": "- `c` = mode kompatibilitas:"
+ },
+ "e17e9a226952": {
+  "en": "e17e9a226952",
+  "t": "- `-disc_stop` menghentikan disk setelah ELF tujuan dimuat (berguna per entri tanpa build `DISC_STOP_AT_BOOT`)."
+ },
+ "e2f6ac3e8203": {
+  "en": "e2f6ac3e8203",
+  "t": "  <a href=\"https://github.com/israpps/PlayStation2-Basic-BootLoader\">PS2BBL</a> ·"
+ },
+ "e3b8cc6236ca": {
+  "en": "e3b8cc6236ca",
+  "t": "  - @nathanneurotic untuk 10 jalur PS2BBLE, ide, dan bujukan"
+ },
+ "e6d271e7c0bd": {
+  "en": "e6d271e7c0bd",
+  "t": "Pencarian konfigurasi kini mengenali keluarga boot agar tidak memuat driver yang tidak perlu saat mulai:"
+ },
+ "e6eb20871642": {
+  "en": "e6eb20871642",
+  "t": "  - jika `IOPRP=PATINFO` (atau jalur kustom), PS2BBL meneruskannya ke tahap 2 lewat serah terima internal `-la=I...`."
+ },
+ "e948a4e2ffd1": {
+  "en": "e948a4e2ffd1",
+  "t": "PS2BBL mendukung awalan jalur peluncuran/konfigurasi berikut:"
+ },
+ "e95c77643cfe": {
+  "en": "e95c77643cfe",
+  "t": "- `mmce0:/`, `mmce1:/`, `mmce?:/` __build MMCE__"
+ },
+ "eae8f93205fd": {
+  "en": "eae8f93205fd",
+  "t": "  - `0` Tanpa logo dan info konsol"
+ },
+ "ed21c5ac66ff": {
+  "en": "ed21c5ac66ff",
+  "t": "- Tidak ada lompatan saat masuk ke RIPPS2: saat peluncuran, logo dan tombol memudar dan langit tetap di layar, dalam mode RIPPS2;\n  RIPPS2 mulai di langit yang sama. Tahan TRIANGLE + CROSS saat menyala untuk halaman mode video, yang selalu terbuka di\n  mode interlaced konsol itu sendiri (jalan kembali dari 720p atau 1080i pada kabel komposit)."
+ },
+ "ed675d1ac190": {
+  "en": "ed675d1ac190",
+  "t": "- DECKARD IE 75K dan sesudahnya: XPARAM.IRX diterapkan otomatis bila dibutuhkan untuk peluncuran tanpa logo."
+ },
+ "f194a33a1232": {
+  "en": "f194a33a1232",
+  "t": "- `fp1` = paksa pemindaian progresif (240p/288p)"
+ },
+ "f49f3f803d4d": {
+  "en": "f49f3f803d4d",
+  "t": "### Awalan jalur perangkat"
+ },
+ "fbd93fd380b1": {
+  "en": "fbd93fd380b1",
+  "t": "  - `1` Info konsol"
+ },
+ "fd03d61bc9f2": {
+  "en": "fd03d61bc9f2",
+  "t": "- `-disc_stop` bisa ditambahkan per entri peluncuran untuk menghentikan disk setelah ELF tujuan ditemukan."
+ },
+ "fd5efe6c6f4c": {
+  "en": "fd5efe6c6f4c",
+  "t": "  - @pcm720 untuk"
+ },
+ "fdee3f98ecaa": {
+  "en": "fdee3f98ecaa",
+  "t": "- `1080ix1` = paksa 1080i, lebar/tinggi x1"
+ },
+ "fe658db8cc2f": {
+  "en": "fe658db8cc2f",
+  "t": "  - @asmblur, karena mendorong saya membuat monster ini di SDK terbaru"
+ },
+ "fec43ce445f9": {
+  "en": "fec43ce445f9",
+  "t": "Contoh penggunaan:"
+ },
+ "ff7f439f5d79": {
+  "en": "ff7f439f5d79",
+  "t": "1. `CONFIG.INI` (CWD: direktori kerja saat ini)"
+ },
+ "ffed62f66519": {
+  "en": "ffed62f66519",
+  "t": "    - Contoh:"
+ },
+ "fffd2a6caa3f": {
+  "en": "fffd2a6caa3f",
+  "t": "  - jika `-patinfo` ada, argumen pertama yang tersisa menggantikan target `BOOT2/BOOT/path` milik CNF.\n  Ini untuk build HDD.  \n  Contoh PATINFO:  "
+ }
+}
