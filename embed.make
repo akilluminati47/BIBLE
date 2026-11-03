@@ -95,7 +95,7 @@ $(EE_ASM_DIR)ps1vn_elf.c: $(PS1VN_ELF) | $(EE_ASM_DIR)
 	$(BIN2S) $< $@ ps1vn_elf
 endif
 
-ifeq ($(EGSM_BUILD), 1)
+ifeq ($(STAGE2_EMBED), 1)
 PS2_STAGE2_DIR := src/ps2_stage2_loader
 PS2_STAGE2_ELF := $(PS2_STAGE2_DIR)/ps2_stage2_loader.elf
 

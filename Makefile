@@ -254,6 +254,23 @@ ifeq ($(FILEXIO_NEED), 1)
   EE_OBJS += filexio_irx.o iomanx_irx.o
 endif
 
+# BIBLE: without eGSM, the stage 2 loader (built with its eGSM stub) is still embedded where fileXio is up (the MMCE,
+# MX4SIO and HDD builds; the stage 2 loader's DEV9 shutdown needs it), for one launch only: RIPPS2 carrying the boot
+# sound BIBLE read for it, which ps2sdk's own ELF loader would wipe (docs/boot-sound-handoff.md).
+# BOOTSND_STAGE2=0 leaves it out.
+BOOTSND_STAGE2 ?= 1
+STAGE2_EMBED := $(strip $(EGSM_BUILD))
+ifeq ($(strip $(EGSM_BUILD)), 0)
+  ifeq ($(strip $(BOOTSND_STAGE2)), 1)
+    ifeq ($(strip $(FILEXIO_NEED)), 1)
+      $(info --- embedding the stage 2 loader (no eGSM) for RIPPS2's boot sound hand-off)
+      EE_CFLAGS += -DBOOTSND_STAGE2=1
+      EE_OBJS += ps2_stage2_loader_elf.o
+      STAGE2_EMBED := 1
+    endif
+  endif
+endif
+
 ifeq ($(DUMMY_TIMEZONE), 1)
   EE_CFLAGS += -DDUMMY_TIMEZONE
 endif

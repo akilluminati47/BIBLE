@@ -878,7 +878,7 @@ static void apply_dev9_policy(int dev9_mode)
 #endif
 }
 
-#if EGSM_BUILD
+#if EGSM_BUILD || BOOTSND_STAGE2 // BIBLE: a build without eGSM embeds it for RIPPS2's boot sound (see RunLoaderElf)
 extern unsigned char ps2_stage2_loader_elf[];
 extern unsigned int size_ps2_stage2_loader_elf;
 
@@ -1057,9 +1057,12 @@ static int RunLoaderElfViaStage2(const char *launch_filename,
     }
 
     i = (int)strlen(loader_args);
-    // BIBLE: 'K' first, so its "mem:" argument is the one nearest "-la=" (each flag takes the next one down)
-    if (use_keep)
+    // BIBLE: 'K' first, so its "mem:" argument is the one nearest "-la=" (each flag takes the next one down); and the
+    // IOP reset after the load that ps2sdk's own loader does for every launch, so RIPPS2 starts as it always has
+    if (use_keep) {
         loader_args[i++] = 'K';
+        loader_args[i++] = 'R';
+    }
     if (use_gsm)
         loader_args[i++] = 'G';
     if (use_ioprp)
@@ -1480,6 +1483,30 @@ void RunLoaderElf(const char *filename, const char *party, int argc, char *argv[
     GameIDClearVideoBuffers();
 
     launch_is_rom = path_is_rom_binary(intent.launch_filename);
+
+#if BOOTSND_STAGE2 && !EGSM_BUILD
+    // BIBLE: ps2sdk's own loader (LoadELFFromFile, below) wipes all user memory before it loads, the boot sound with
+    // it: RIPPS2 carrying one starts through BIBLE's stage 2 loader instead, which keeps it ('K'). Every other launch,
+    // and this one if the stage 2 loader cannot start, goes on as before.
+    if (s_stage2_keep_arg[0] != '\0' && !launch_is_rom &&
+        RunLoaderElfViaStage2(intent.launch_filename,
+                              effective_party,
+                              launch_argc,
+                              launch_argv,
+                              NULL,
+                              NULL,
+                              NULL,
+                              intent.dev9_mode,
+                              intent.disc_stop,
+                              intent.skip_argv0) == 0) {
+        free(launch_argv_owned);
+        LaunchIntentRelease(&intent);
+#ifdef HDD
+        PatinfoOptionsRelease(&patinfo_opts);
+#endif
+        return;
+    }
+#endif
 
 #if EGSM_BUILD
     // For plain launches (no -gsm), require stage2 for non-ROM paths.

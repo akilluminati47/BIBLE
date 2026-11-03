@@ -179,6 +179,12 @@ void LoaderBootSoundPrime(void)
     if (s_state != BS_IDLE)
         return;
     s_state = BS_OFF;
+#if !EGSM_BUILD && !BOOTSND_STAGE2
+    // No stage 2 loader in this build (the plain memory card / USB one, which has no fileXio for it): the launch goes
+    // through ps2sdk's loader, which wipes user memory, so a read here would only make the launch wait. RIPPS2 still
+    // gets -bible-home= and reads the copy from the card itself.
+    return;
+#endif
     if (!auto_entry_is_ripps2() ||
         !bootsnd_home(s_home, sizeof(s_home), card_path, sizeof(card_path), &s_port) || !bootsnd_ram_free())
         return;
@@ -261,6 +267,7 @@ void LoaderBootSoundLaunch(const char *path)
         LoaderBootSoundQuiesce();
     }
     DPRINTF("Boot sound: the launch waited %u ms for the rest\n", (unsigned int)(Timer() - t_wait));
+    (void)t_wait;
 }
 
 int LoaderBootSoundAppArgs(char *args[], int max)
