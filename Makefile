@@ -63,7 +63,7 @@ EE_OBJS_DIR = obj/
 EE_SRC_DIR = src/
 EE_ASM_DIR = asm/
 
-EE_OBJS = main.o common_data.o console_info.o loader_config.o loader_launch.o loader_path.o loader_video.o loader_video_selector.o loader_disc.o loader_modules.o loader_hdd.o loader_platform.o loader_runtime.o loader_utils.o loader_defaults.o loader_ui.o \
+EE_OBJS = main.o common_data.o console_info.o loader_config.o loader_launch.o loader_path.o loader_video.o loader_video_selector.o loader_disc.o loader_modules.o loader_hdd.o loader_platform.o loader_runtime.o loader_utils.o loader_defaults.o loader_ui.o loader_bootsnd.o \
           util.o elf.o timer.o ps2.o ps1.o dvdplayer.o egsm_parse.o \
           libcdvd_add.o OSDHistory.o OSDInit.o OSDConfig.o game_id.o game_id_table.o splash_screen.o splash_assets.o splash_render.o \
           xparam_irx.o \

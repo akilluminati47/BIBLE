@@ -6,6 +6,7 @@
 #include "loader_path.h"
 #include "splash_render.h"
 #include "splash_screen.h"
+#include "loader_bootsnd.h"
 
 #define PAD_MASK_ANY 0xffff
 // BIBLE: buttons held from power on reach the launch keys before anything else reads them, so the page combos are
@@ -561,6 +562,7 @@ int LoaderRunLaunchWorkflow(int splash_early_presented,
                 SplashRenderHotkeyClockDate(GLOBCFG.LOGO_DISP, now);
                 SplashRenderPresent();
             }
+            LoaderBootSoundPump(); // BIBLE: the boot sound's next piece from the card, as the splash keeps its pace
 
             button = pad_button; // reset the value so we can iterate (bit-shift) again
             EnsurePadsReadyForInput();
@@ -583,6 +585,7 @@ int LoaderRunLaunchWorkflow(int splash_early_presented,
                 }
                 if (combo) {
                     DPRINTF("Page combo held: %d\n", combo);
+                    LoaderBootSoundQuiesce();
                     return combo;
                 }
             }
@@ -592,6 +595,8 @@ int LoaderRunLaunchWorkflow(int splash_early_presented,
                     int command_cancelled = 0;
                     int retry_requested = 0;
                     const char *button_name = KEYS_ID[x + 1];
+
+                    LoaderBootSoundQuiesce(); // BIBLE: the launch has the card to itself from here
                     DPRINTF("PAD detected: state=0x%04x button='%s' key=%d\n",
                             (unsigned int)(pad_state & PAD_MASK_ANY),
                             (button_name != NULL) ? button_name : "<null>",
@@ -733,6 +738,7 @@ int LoaderRunLaunchWorkflow(int splash_early_presented,
             SplashRenderEnd();
 
         DPRINTF("Wait time consummed. Running AUTO entry\n");
+        LoaderBootSoundQuiesce(); // BIBLE: the AUTO launch has the card to itself from here
         if (rescue_combo_deadline != NULL)
             *rescue_combo_deadline = 0;
         TimerEnd();

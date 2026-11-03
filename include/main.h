@@ -82,6 +82,7 @@ typedef struct
     int BIBLE_INFO;   // BIBLE: 1 shows the countdown, clock and console details on the logo splash; 0 (the default) does not
     unsigned int BIBLE_SKY[3]; // BIBLE_COLOR: the sky's top, horizon and floor, 0xRRGGBB (RIPPS2's blue by default)
     int BIBLE_WIDESCREEN; // BIBLE: BIBLE_WIDESCREEN_* for the 4:3 modes (720p and 1080i are always 16:9)
+    int BIBLE_BACKGROUND; // BIBLE: BIBLE_BACKGROUND_*, the sky or a black screen behind the logo
 } CONFIG;
 
 extern CONFIG GLOBCFG;
@@ -101,6 +102,14 @@ enum {
     BIBLE_WIDESCREEN_OFF = 0,
     BIBLE_WIDESCREEN_ON,
     BIBLE_WIDESCREEN_AUTO
+};
+
+// BIBLE_BACKGROUND = AUTO (the default: the sky when RIPPS2's settings are read beside the AUTO entry or BIBLE_COLOR is
+// set, else black, a plain boot loader), SKY or BLANK (black)
+enum {
+    BIBLE_BACKGROUND_AUTO = 0,
+    BIBLE_BACKGROUND_SKY,
+    BIBLE_BACKGROUND_BLANK
 };
 
 void RunLoaderElf(const char *filename, const char *party, int argc, char *argv[]);

@@ -3,6 +3,7 @@
 #include "loader_path.h"
 #include "splash_render.h"
 #include "splash_screen.h"
+#include "loader_bootsnd.h"
 
 #define ROMVER_MODEL_PREFIX_LEN 5
 #define CREDITS_POLL_INTERVAL_MS 50u
@@ -350,6 +351,8 @@ void LoaderRunEmergencyMode(const char *reason)
 {
     const char *rescue_path = "mass:/RESCUE.ELF";
     int rescue_family_ready = 0;
+
+    LoaderBootSoundDrop(); // BIBLE: the rescue may reset the IOP; no card read of the boot sound is left in flight
 
     if (!SplashRenderIsActive()) {
         int emergency_logo_disp = normalize_logo_display(GLOBCFG.LOGO_DISP);

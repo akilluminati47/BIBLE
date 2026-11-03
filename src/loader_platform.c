@@ -1,6 +1,7 @@
 // Platform-specific low-level boot helpers (IOP reset, PSX paths, boot certify).
 #include "main.h"
 #include "ee_asm.h"
+#include "loader_bootsnd.h"
 
 extern int g_is_psx_desr;
 
@@ -76,6 +77,7 @@ void ResetIOP(void)
 
 void ResetIOPForLaunchSwitch(void)
 {
+    LoaderBootSoundDrop(); // BIBLE: a boot sound read not yet finished goes with the IOP's memory card service
     // Launch-time driver-family switches should use the standard reset path on
     // all platforms to avoid PSX-specific re-init loops between entry attempts.
     SifInitRpc(0);

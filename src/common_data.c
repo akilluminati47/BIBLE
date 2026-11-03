@@ -92,7 +92,7 @@ const char *KEYS_ID[KEY_COUNT] = {
     };
 #endif
     const char *DEFAULT_KEYNAMES_PS2[KEY_COUNT] = {
-        "HACKED OSDSYS",
+        "RIPPS2 / HACKED OSDSYS", // BIBLE: RIPPS2 first, as in release/SYS-CONF/PS2BBL.INI
         "DISC NO LOGO",
         "R3CONFIGURATOR",
         "",
@@ -287,14 +287,14 @@ const char *KEYS_ID[KEY_COUNT] = {
     };
 #endif
     char *DEFPATH_PS2[] = {
-        "mc?:/SYS_OSDMENU/osdmenu.elf", // AUTO [0]
+        "mc?:/RIPPS2/RIPPS2.ELF", // AUTO [0] (BIBLE: RIPPS2 on a memory card, then on an SD2PSX / MMCE card)
+        "mmce?:/APPS/RIPPS2.ELF",
+        "mc?:/SYS_OSDMENU/osdmenu.elf",
         "mc?:/SYS_FMCBD-1966/FMCBD-1966.ELF",
         "mc?:/SYS_FMCBD-1965/FMCBD-1965.ELF",
         "mc?:/SYS_FMCBD-1953/FMCBD-1953.ELF",
         "mc?:/SYS_FMCBD-18C/FMCBD-18C.ELF",
         "mc?:/BOOT/BOOT2.ELF",
-        "",
-        "",
         "",
         "",
         "cdrom", // SELECT [CONFIG_KEY_INDEXES * 1]

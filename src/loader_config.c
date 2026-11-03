@@ -7,6 +7,7 @@
 #include "loader_video.h"
 #include "splash_render.h"
 #include "splash_screen.h"
+#include "loader_bootsnd.h"
 
 #define CONFIG_DEVICE_READY_POLL_INTERVAL_MS 200u
 #define CONFIG_FATAL_ERROR_DISPLAY_MS 3000u
@@ -85,18 +86,35 @@ static int parse_bible_widescreen(const char *name, const char *value)
     return 1;
 }
 
+// BIBLE_BACKGROUND = AUTO (the default), SKY or BLANK (BLACK and OFF read as BLANK, ON as SKY)
+static int parse_bible_background(const char *name, const char *value)
+{
+    if (!ci_eq(name, "BIBLE_BACKGROUND"))
+        return 0;
+    if (value != NULL && (ci_eq(value, "SKY") || ci_eq(value, "ON") || ci_eq(value, "1")))
+        GLOBCFG.BIBLE_BACKGROUND = BIBLE_BACKGROUND_SKY;
+    else if (value != NULL && (ci_eq(value, "BLANK") || ci_eq(value, "BLACK") || ci_eq(value, "OFF") || ci_eq(value, "0")))
+        GLOBCFG.BIBLE_BACKGROUND = BIBLE_BACKGROUND_BLANK;
+    else
+        GLOBCFG.BIBLE_BACKGROUND = BIBLE_BACKGROUND_AUTO;
+    return 1;
+}
+
 // BIBLE: RIPPS2 saves the sky its Color Theme draws with its settings (ripps2_bible_sky=RRGGBB,RRGGBB,RRGGBB in
 // settings_riptopl.cfg), beside its Video Mode (vmode=) and Widescreen (wide_screen=). They are read from the folder an
-// AUTO entry starts from, on a memory card only (no other drive is up yet), mc?: trying both cards: the sky unless
-// BIBLE_COLOR is set, the mode for VIDEO_MODE = AUTO and the shape for BIBLE_WIDESCREEN = AUTO. So BIBLE starts in the
-// picture RIPPS2 will show and the TV keeps one signal across the hand-off. Nothing found keeps RIPPS2's blue and the
-// console's own mode.
+// AUTO entry starts from, on a memory card only (no other drive is up yet), mc?: trying both cards; when that folder has
+// none and the AUTO entry is RIPPS2 (started from an SD2PSX, USB or the HDD), from RIPPS2's card folder mc0:/RIPPS2 or
+// mc1:/RIPPS2, where RIPPS2 saves them then (since its build 100). The sky unless BIBLE_COLOR is set, the mode for
+// VIDEO_MODE = AUTO, the shape for BIBLE_WIDESCREEN = AUTO; found, they also turn the sky on for BIBLE_BACKGROUND = AUTO.
+// So BIBLE starts in the picture RIPPS2 will show and the TV keeps one signal across the hand-off. Nothing found leaves
+// the console's own mode and, with BIBLE_BACKGROUND = AUTO, a black background (bible_sky_on).
 #define RIPPS2_SETTINGS_FILE "settings_riptopl.cfg"
 #define RIPPS2_SKY_KEY "ripps2_bible_sky="
 #define RIPPS2_VMODE_KEY "vmode="
 #define RIPPS2_WIDE_KEY "wide_screen="
 
 static int g_ripps2_wide = -1; // RIPPS2's Widescreen, -1 when no RIPPS2 settings were read
+static int g_ripps2_found = 0; // RIPPS2's settings were read (BIBLE_BACKGROUND = AUTO shows the sky)
 
 // RIPPS2's Video Mode (its list: 0 Auto, 1 PAL, 2 NTSC, 3 480p, 4 576p, 5 VGA, 6 to 9 the 704-wide rows of the same
 // four, 10 720p, 11 1080i, 12 and 13 the 240p rows, 14 and 15 flicker-free PAL and NTSC) as BIBLE's: the same signal
@@ -138,7 +156,19 @@ static int read_ripps2_settings_from(const char *path)
             g_ripps2_wide = atoi(line + strlen(RIPPS2_WIDE_KEY)) != 0;
     }
     fclose(fp);
+    g_ripps2_found = 1;
     return 1;
+}
+
+// The AUTO key's first entry, the one the launch tries first
+static const char *first_auto_entry(void)
+{
+    int j;
+
+    for (j = 0; j < CONFIG_KEY_INDEXES; j++)
+        if (GLOBCFG.KEYPATHS[0][j] != NULL && GLOBCFG.KEYPATHS[0][j][0] != '\0')
+            return GLOBCFG.KEYPATHS[0][j];
+    return NULL;
 }
 
 static void read_ripps2_settings(void)
@@ -146,6 +176,7 @@ static void read_ripps2_settings(void)
     static int done = 0;
     int j;
     int port;
+    char path[256];
 
     if (done)
         return;
@@ -153,7 +184,6 @@ static void read_ripps2_settings(void)
     for (j = 0; j < CONFIG_KEY_INDEXES; j++) {
         const char *entry = GLOBCFG.KEYPATHS[0][j];
         const char *slash;
-        char path[256];
         size_t dir_len;
 
         if (entry == NULL || strncmp(entry, "mc", 2) != 0 || entry[2] == '\0' || entry[3] != ':')
@@ -174,6 +204,13 @@ static void read_ripps2_settings(void)
                 return;
         }
     }
+    // the user, 11/03: RIPPS2 on an SD2PSX (mmce?:/APPS/RIPPS2.ELF) keeps its settings in a card's RIPPS2 folder
+    if (LoaderIsRipps2Path(first_auto_entry()))
+        for (port = 0; port < 2; port++) {
+            snprintf(path, sizeof(path), "mc%d:/RIPPS2/%s", port, RIPPS2_SETTINGS_FILE);
+            if (read_ripps2_settings_from(path))
+                return;
+        }
 }
 
 // BIBLE: Widescreen for the 4:3 modes: BIBLE_WIDESCREEN ON or OFF, or AUTO: RIPPS2's Widescreen, else the console's own
@@ -187,14 +224,28 @@ static int bible_widescreen(void)
     return OSDConfigGetScreenType() == TV_SCREEN_169;
 }
 
+// BIBLE: the sky behind the logo, or black. BIBLE_BACKGROUND SKY or BLANK decides (by hand, or from RIPPS2's BIBLE menu,
+// which edits this config); AUTO (the default) shows the sky when there is one to match: RIPPS2's, read with its
+// settings (and its Video Mode), or BIBLE_COLOR set by hand. With neither, BIBLE starts like a plain boot loader: black, in the console's own mode. The hand-off into a program is black
+// for a few seconds whatever BIBLE leaves on screen (the BIOS blanks the display while the ELF loads), so black also
+// reads as one piece with it.
+static int bible_sky_on(void)
+{
+    if (GLOBCFG.BIBLE_BACKGROUND != BIBLE_BACKGROUND_AUTO)
+        return GLOBCFG.BIBLE_BACKGROUND == BIBLE_BACKGROUND_SKY;
+    return g_ripps2_found || g_bible_color_set;
+}
+
 // BIBLE: the splash's own keys, before it begins
 void LoaderApplyBibleSplash(void)
 {
+    static const unsigned int black[3] = {0, 0, 0};
+
     read_ripps2_settings();
     SplashRenderSetWide(bible_widescreen());
     SplashRenderSetGlyphs(GLOBCFG.BIBLE_GLYPHS);
     SplashRenderSetInfo(GLOBCFG.BIBLE_INFO);
-    SplashRenderSetSky(GLOBCFG.BIBLE_SKY);
+    SplashRenderSetSky(bible_sky_on() ? GLOBCFG.BIBLE_SKY : black);
 }
 
 static int parse_scalar_int_key(const char *name, const char *value)
@@ -1177,7 +1228,8 @@ int LoaderParseConfigFile(FILE *fp,
         if (name == NULL || *name == '\0')
             continue;
 
-        if (parse_scalar_int_key(name, value) || parse_bible_color(name, value) || parse_bible_widescreen(name, value))
+        if (parse_scalar_int_key(name, value) || parse_bible_color(name, value) || parse_bible_widescreen(name, value) ||
+            parse_bible_background(name, value))
             continue;
 
         if (ci_starts_with(name, "LOAD_IRX_E")) {

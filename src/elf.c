@@ -15,6 +15,7 @@
 #include "debugprintf.h"
 #include "game_id.h"
 #include "egsm_parse.h"
+#include "loader_bootsnd.h"
 #if defined(HDD) && defined(FILEXIO)
 #include <fileXio_rpc.h>
 #include <hdd-ioctl.h>
@@ -28,6 +29,12 @@
 #define PATINFO_ELF_MEM_ADDR 0x01000000
 #define PATINFO_IOPRP_MEM_ADDR 0x01F00000
 #define DBGWAIT_LAUNCH_PAUSE_MS 2000u
+// BIBLE: what ExecPS2 carries to the next program (ps2sdk's crt0: 16 arguments, 256 bytes of text with their ends)
+#define EXEC_ARGS_MAX 16
+#define EXEC_ARGS_BYTES 256
+// BIBLE: RAM the stage 2 loader keeps when it clears memory for the ELF ("mem:<addr>:<size>", its 'K' flag): the boot
+// sound waiting for RIPPS2 (loader_bootsnd.c). Empty for every other launch.
+static char s_stage2_keep_arg[32] = "";
 #ifdef DEBUG
 #define DBGWAIT(T) delay_ms(T)
 #else
@@ -990,6 +997,7 @@ static int RunLoaderElfViaStage2(const char *launch_filename,
     int use_gsm = 0;
     int use_ioprp = 0;
     int use_elf = 0;
+    int use_keep = (s_stage2_keep_arg[0] != '\0');
     int effective_disc_stop;
     int psx_desr_runtime = 0;
     int i;
@@ -1049,6 +1057,9 @@ static int RunLoaderElfViaStage2(const char *launch_filename,
     }
 
     i = (int)strlen(loader_args);
+    // BIBLE: 'K' first, so its "mem:" argument is the one nearest "-la=" (each flag takes the next one down)
+    if (use_keep)
+        loader_args[i++] = 'K';
     if (use_gsm)
         loader_args[i++] = 'G';
     if (use_ioprp)
@@ -1070,12 +1081,15 @@ static int RunLoaderElfViaStage2(const char *launch_filename,
         loader_args[i++] = 'A';
     loader_args[i] = '\0';
     has_loader_flags = (i > 4);
-    DPRINTF("Stage2 loader flags: '%s' (has_flags=%d use_gsm=%d use_ioprp=%d use_elf=%d)\n",
+    DPRINTF("Stage2 loader flags: '%s' (has_flags=%d use_gsm=%d use_ioprp=%d use_elf=%d use_keep=%d)\n",
             loader_args,
             has_loader_flags,
             use_gsm,
             use_ioprp,
-            use_elf);
+            use_elf,
+            use_keep);
+    if (use_keep)
+        extra_count++;
 
     if (use_elf) {
         owned_elf = malloc(strlen(elf_mem_arg) + 1);
@@ -1140,6 +1154,8 @@ static int RunLoaderElfViaStage2(const char *launch_filename,
         stage2_argv[i++] = owned_ioprp;
     if (owned_gsm != NULL)
         stage2_argv[i++] = owned_gsm;
+    if (use_keep)
+        stage2_argv[i++] = s_stage2_keep_arg;
     if (has_loader_flags)
         stage2_argv[i++] = loader_args;
 
@@ -1170,6 +1186,22 @@ static int RunLoaderElfViaStage2(const char *launch_filename,
     return 0;
 }
 #endif
+
+// BIBLE: the launch's arguments with extra[] added still fit what ExecPS2 carries, with room for the stage 2 loader's
+// own (the keep range and "-la=")
+static int exec_args_fit(const char *launch, int argc, char *argv[], char *extra[], int extra_count)
+{
+    int bytes = (int)strlen(launch) + 1 + (int)sizeof("mem:00000000:00000000") + (int)sizeof("-la=KGIEADN");
+    int i;
+
+    if (1 + argc + extra_count + 2 > EXEC_ARGS_MAX)
+        return 0;
+    for (i = 0; i < argc; i++)
+        bytes += (argv[i] != NULL) ? (int)strlen(argv[i]) + 1 : 1;
+    for (i = 0; i < extra_count; i++)
+        bytes += (int)strlen(extra[i]) + 1;
+    return bytes <= EXEC_ARGS_BYTES;
+}
 
 void RunLoaderElf(const char *filename, const char *party, int argc, char *argv[])
 {
@@ -1203,6 +1235,10 @@ void RunLoaderElf(const char *filename, const char *party, int argc, char *argv[
     int patinfo_cnf_ok = 0;
 #endif
 
+    // BIBLE: a boot sound still being read is finished for RIPPS2 and let go for anything else (loader_bootsnd.c)
+    LoaderBootSoundLaunch(filename);
+    s_stage2_keep_arg[0] = '\0';
+
     LaunchIntentInit(&intent, filename);
     patinfo_path[0] = '\0';
     mx4sio_launch_path[0] = '\0';
@@ -1235,7 +1271,7 @@ void RunLoaderElf(const char *filename, const char *party, int argc, char *argv[
 #endif
 
     launch_argc = 0;
-    launch_argv_capacity = argc;
+    launch_argv_capacity = argc + 2; // BIBLE: room for RIPPS2's -bible-home= and -bible-bootsnd=
 
 #ifdef HDD
     if (patinfo_cnf_ok)
@@ -1380,6 +1416,26 @@ void RunLoaderElf(const char *filename, const char *party, int argc, char *argv[
                 legacy_launch_path,
                 intent.launch_filename);
         intent.launch_filename = legacy_launch_path;
+    }
+
+    // BIBLE: RIPPS2 is told where BIBLE's config is (-bible-home=, where its Boot Sound On (fast) keeps boot.adp) and,
+    // when BIBLE read that sound while its splash showed, where it waits in RAM (-bible-bootsnd=), which the stage 2
+    // loader then keeps. Added after the loader-control arguments are taken, so a trailing -gsm= still works.
+    if (LoaderIsRipps2Path(intent.launch_filename)) {
+        char *extra[2];
+        int extra_count = LoaderBootSoundAppArgs(extra, 2);
+        u32 keep_addr, keep_size;
+
+        if (extra_count > 0 && launch_argc + extra_count <= launch_argv_capacity &&
+            exec_args_fit(intent.launch_filename, launch_argc, launch_argv, extra, extra_count)) {
+            for (i = 0; i < extra_count; i++)
+                launch_argv[launch_argc++] = extra[i];
+            if (LoaderBootSoundKeep(&keep_addr, &keep_size))
+                snprintf(s_stage2_keep_arg, sizeof(s_stage2_keep_arg), "mem:%08X:%08X", (unsigned int)keep_addr,
+                         (unsigned int)keep_size);
+        } else if (extra_count > 0) {
+            DPRINTF("RIPPS2's BIBLE arguments do not fit beside %d others: left out\n", launch_argc);
+        }
     }
 
     // Only pass partition context for paths that actually live on mounted PFS:
