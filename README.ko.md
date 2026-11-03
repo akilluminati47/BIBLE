@@ -63,13 +63,10 @@ BIBLE은 RIPPS2가 설치하는 부트 로더로, saildot4k의 PS2BBL Extended�
 
 **이 포크에서 바뀐 점**
 
-- 스플래시: RIPPS2의 하늘 가운데에 PS2 로고, 그 아래에 버튼, 위에는 텍스트가 놓입니다.
-  `BIBLE_GLYPHS` 0 없음, 1 앞면 버튼(기본값), 2 열여섯 개 모두를 여덟 개씩 두 줄로.
-  `BIBLE_INFO` 1은 콘솔 정보, 시계, 카운트다운을 보여 줍니다(기본값은 꺼짐).
-  하늘은 RIPPS2의 Color Theme을 따릅니다: `BIBLE_COLOR`가 없으면 BIBLE은 RIPPS2가 설정과 함께 저장하는
-  하늘을, AUTO 항목이 실행하는 RIPPS2 폴더에서 읽습니다(설정 파일의 `BIBLE_COLOR`가 우선).
-  모든 비디오 모드에서 같은 모습입니다. 페이지(비디오 모드, 크레디트, 실행 키)는 어두워진 로고 위로 서서히 나타나고
-  버튼은 치워지므로, 실행 키를 차분히 읽을 수 있습니다.
+- 스플래시: RIPPS2의 하늘 가운데에 PS2 로고, 그 아래에 버튼, 위에는 글자(있으면). `BIBLE_GLYPHS` 0 없음, 1 액션 버튼(기본), 2 16개 모두를 8개씩 두 줄로. `BIBLE_INFO` 1은 본체 정보, 시계, 카운트다운을 보여줍니다(기본은 꺼짐). 하늘은 RIPPS2의 Color Theme를 따릅니다. `BIBLE_COLOR`가 없으면 BIBLE은 RIPPS2가 설정과 함께 저장하는 하늘을 AUTO 항목이 실행하는 폴더에서, 또는 AUTO 항목이 SD2PSX, USB, HDD의 RIPPS2일 때는 메모리 카드의 `RIPPS2` 폴더에서 읽습니다(설정 파일의 `BIBLE_COLOR`가 우선). 모든 비디오 모드에서 같은 모습입니다.
+- `BIBLE_BACKGROUND`: `AUTO`(기본: RIPPS2의 설정이 있거나 `BIBLE_COLOR`가 있으면 하늘, 없으면 본체 고유 모드의 검정, 평범한 부트로더처럼), `SKY` 또는 `BLANK`(검정). 프로그램으로 넘어갈 때는 어차피 몇 초 동안 검으므로, 검정이면 그와 한 덩어리로 보입니다.
+- 미리 준비한 부팅음: RIPPS2의 Boot Sound On (fast)은 `boot.adp`를 BIBLE 설정 파일 옆(`mc?:/SYS-CONF/boot.adp`)에 둘 수 있습니다. BIBLE은 스플래시가 카운트다운하는 동안 그것을 읽어 RAM으로 RIPPS2에 넘기므로, RIPPS2가 SD2PSX에서 시작할 때도 RIPPS2의 첫 프레임과 함께 울립니다(MMCE, MX4SIO, HDD 빌드. 메모리 카드 / USB 빌드는 RIPPS2에 폴더를 알려 주고 RIPPS2가 읽습니다). BIBLE은 실행할 때 아직 읽지 못한 부분을 기다립니다. `KEY_READ_WAIT_TIME = 0`이면 그것이 읽기 전체로, 메모리 카드에서 약 2초입니다. **무음이 가장 빠른 부팅입니다.** 약속과 RIPPS2 쪽: [docs/boot-sound-handoff.md](docs/boot-sound-handoff.md).
+- RIPPS2 먼저: 설정 템플릿(`release/SYS-CONF/PS2BBL.INI`)과 내장 기본값은 OSDMenu와 FMCB보다 먼저 `mc?:/RIPPS2/RIPPS2.ELF`와 `mmce?:/APPS/RIPPS2.ELF`를 시도하고, 템플릿에는 BIBLE 고유 키가 설명과 함께 있습니다. 페이지(비디오 모드, 크레딧, 실행 키)는 버튼을 치운 어두운 로고 위에 서서히 나타나, 실행 키를 차분히 읽을 수 있습니다.
 - 비디오 모드: `VIDEO_MODE`는 `576P`, `720P`, `1080I`도 받으며, 이는 RIPPS2의 나머지 모드입니다. `AUTO`(기본값)는
   AUTO 항목 옆에 RIPPS2의 설정이 있으면 그 Video Mode로, 없으면 콘솔 자체의 모드로 시작합니다.
 - `BIBLE_WIDESCREEN`: `AUTO`(기본값: RIPPS2의 Widescreen, 없으면 PS2의 16:9 화면 설정), `ON` 또는
@@ -78,7 +75,7 @@ BIBLE은 RIPPS2가 설치하는 부트 로더로, saildot4k의 PS2BBL Extended�
 - RIPPS2로 넘어갈 때 튀지 않음: 실행할 때 로고와 버튼이 사라지고 하늘은 RIPPS2의 모드로 화면에 남습니다.
   RIPPS2는 바로 그 하늘에서 시작합니다. 부팅 시 TRIANGLE + CROSS를 누르고 있으면 비디오 모드 페이지가 열리는데, 이 페이지는 항상
   콘솔 자체의 인터레이스 모드로 열립니다(컴포지트 케이블에서 720p나 1080i로부터 돌아오는 길).
-- 새 기능: 실행 키 페이지. 부팅 시 L2 + R2를 누르고 있으면 스플래시 설정과 상관없이 각 키의 실행 경로를 읽을 수 있습니다.
+- 새 기능: 실행 키 페이지. 전원을 켤 때 L2 + R2를 누르고 있으면 BIBLE이 무엇이든 실행하기 전에 멈추고, 스플래시 설정과 상관없이 각 키의 현재 실행 경로를 보여줍니다(다른 것이 아무것도 보이지 않는 `LOGO_DISPLAY = 0`에서 유용합니다).
 - 전원을 켤 때부터 누르고 있던 조합이 이제 해당 페이지를 엽니다(컨트롤러가 아직
   시작 중일 때 TRIANGLE + CROSS를 놓치곤 했습니다).
 - `KEY_READ_WAIT_TIME = 0`을 허용합니다(upstream의 최소값은 500 ms).
@@ -86,7 +83,7 @@ BIBLE은 RIPPS2가 설치하는 부트 로더로, saildot4k의 PS2BBL Extended�
 
 **RIPPS2에서 쓰는 방식**
 
-RIPPS2는 v1.3.4-beta부터 BIBLE을 서명된 부트 파일로 담고 있으며 Settings > General > Boot Loader > Manage에서 설치합니다. BIBLE은 다른 로더(FMCB, OSDMenu, SD2PSX의 로더)가 실행하는 ELF로도 동작합니다. 서명된 빌드는 [릴리스 페이지](https://github.com/akilluminati47/BIBLE/releases/tag/signed-f31c8d5)에 있습니다. 공개 당시 아직 어떤 콘솔도 바인딩하지 않았으니 먼저 여분의 메모리 카드로 시험해 보세요.
+RIPPS2는 BIBLE을 RIPPS2.elf 안에 담고 있으며 모든 빌드는 akilluminati47가 서명했습니다. 설정 > 일반 > Boot Loader > Manage에서 설치하거나 업데이트하고, 여기서 BIBLE의 키도 설정합니다: Background, Splash, Button Glyphs, Info Line, Power-on Wait, Video Mode, Widescreen. 서명된 빌드와 바로 쓰는 SD2PSX BOOT 카드는 [릴리스 페이지](https://github.com/akilluminati47/BIBLE/releases/latest)에 있습니다. BIBLE은 다른 로더(FMCB, OSDMenu, SD2PSX의 로더)가 실행하는 ELF로도 동작합니다.
 
 <p align="center"><img src="assets/readme/ripps2-icon.png" alt="RIPPS2" width="48" height="48"><br><sub>BIBLE은 <a href="https://github.com/akilluminati47/RIPPS2">RIPPS2</a>의 일부입니다.</sub></p>
 

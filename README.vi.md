@@ -63,13 +63,10 @@ BIBLE là trình khởi động mà RIPPS2 cài đặt: một bản fork của P
 
 **Bản fork này thay đổi gì**
 
-- Màn hình khởi động: logo PS2 ở giữa bầu trời của RIPPS2, các nút ở dưới và chữ (nếu có) ở trên.
-  `BIBLE_GLYPHS` 0 không có, 1 các nút mặt trước (mặc định), 2 cả mười sáu nút thành hai hàng tám.
-  `BIBLE_INFO` 1 hiện thông tin máy, đồng hồ và đếm ngược (mặc định tắt).
-  Bầu trời theo Color Theme của RIPPS2: khi không có `BIBLE_COLOR`, BIBLE đọc bầu trời mà RIPPS2 lưu cùng
-  cài đặt của nó, từ thư mục RIPPS2 mà mục AUTO khởi chạy (`BIBLE_COLOR` trong cấu hình được ưu tiên).
-  Cùng một giao diện ở mọi chế độ video. Các trang (chế độ video, ghi công, phím khởi chạy) hiện dần trên logo đã làm tối
-  với các nút được cất đi, để đọc phím khởi chạy cho thong thả.
+- Màn hình mở đầu: logo PS2 ở giữa bầu trời của RIPPS2, các nút bên dưới và chữ (nếu có) bên trên. `BIBLE_GLYPHS` 0 không có, 1 các nút hành động (mặc định), 2 cả mười sáu nút thành hai hàng tám. `BIBLE_INFO` 1 hiện thông tin máy, đồng hồ và đếm ngược (mặc định tắt). Bầu trời theo Color Theme của RIPPS2: khi không có `BIBLE_COLOR`, BIBLE đọc bầu trời mà RIPPS2 lưu cùng cài đặt của nó, từ thư mục mà mục AUTO khởi chạy, hoặc từ thư mục `RIPPS2` trên thẻ nhớ khi mục AUTO là RIPPS2 trên SD2PSX, USB hoặc ổ cứng (`BIBLE_COLOR` trong cấu hình được ưu tiên). Cùng một giao diện ở mọi chế độ video.
+- `BIBLE_BACKGROUND`: `AUTO` (mặc định: bầu trời khi tìm thấy cài đặt của RIPPS2 hoặc có `BIBLE_COLOR`, nếu không thì màu đen ở chế độ riêng của máy, như một trình nạp khởi động bình thường), `SKY` hoặc `BLANK` (đen). Lúc chuyển sang một chương trình vốn đã đen vài giây, nên màu đen trông liền một khối với nó.
+- Âm khởi động, chuẩn bị sẵn: Boot Sound On (fast) của RIPPS2 có thể giữ `boot.adp` cạnh cấu hình của BIBLE (`mc?:/SYS-CONF/boot.adp`). BIBLE đọc nó trong lúc màn hình mở đầu đếm ngược và giao cho RIPPS2 trong RAM, nên nó vang lên cùng khung hình đầu tiên của RIPPS2 ngay cả khi RIPPS2 khởi chạy từ SD2PSX (bản MMCE, MX4SIO và HDD; bản thẻ nhớ / USB báo thư mục cho RIPPS2 và RIPPS2 tự đọc). Khi khởi chạy, BIBLE chờ phần chưa đọc xong: với `KEY_READ_WAIT_TIME = 0` đó là toàn bộ lần đọc, khoảng 2 s trên thẻ nhớ. **Im lặng là khởi động nhanh nhất.** Thỏa thuận và phần của RIPPS2: [docs/boot-sound-handoff.md](docs/boot-sound-handoff.md).
+- RIPPS2 trước: mẫu cấu hình (`release/SYS-CONF/PS2BBL.INI`) và các giá trị mặc định có sẵn thử `mc?:/RIPPS2/RIPPS2.ELF` và `mmce?:/APPS/RIPPS2.ELF` trước OSDMenu và FMCB, và mẫu liệt kê các khóa riêng của BIBLE kèm ghi chú. Các trang (chế độ video, danh đề, phím khởi chạy) hiện dần trên logo đã làm tối với các nút được cất đi, để phím khởi chạy dễ đọc.
 - Chế độ video: `VIDEO_MODE` nhận cả `576P`, `720P` và `1080I`, tức các chế độ còn lại của RIPPS2. `AUTO` (mặc định)
   khởi động trong Video Mode của RIPPS2 khi tìm thấy cài đặt của nó cạnh mục AUTO, nếu không thì theo chế độ của máy.
 - `BIBLE_WIDESCREEN`: `AUTO` (mặc định: Widescreen của RIPPS2, nếu không thì cài đặt màn hình 16:9 của PS2), `ON` hoặc
@@ -78,7 +75,7 @@ BIBLE là trình khởi động mà RIPPS2 cài đặt: một bản fork của P
 - Không giật khi vào RIPPS2: khi khởi chạy, logo và các nút mờ đi còn bầu trời vẫn ở trên màn hình, trong chế độ của RIPPS2;
   RIPPS2 bắt đầu trên chính bầu trời đó. Giữ TRIANGLE + CROSS khi khởi động để mở trang chế độ video, trang này luôn mở
   ở chế độ xen kẽ của chính máy (đường quay lại từ 720p hoặc 1080i trên dây composite).
-- Mới: trang phím khởi chạy. Giữ L2 + R2 khi khởi động để đọc đường dẫn khởi chạy của từng phím, bất kể cài đặt màn hình khởi động.
+- Mới: trang phím khởi chạy. Giữ L2 + R2 khi bật máy và BIBLE dừng lại trước khi khởi chạy bất cứ gì, hiện đường dẫn khởi chạy hiện tại của mỗi phím, dù cài đặt màn hình mở đầu thế nào (tiện với `LOGO_DISPLAY = 0`, nơi không hiện gì khác).
 - Tổ hợp phím giữ từ lúc bật máy giờ mở được trang của chúng (trước đây TRIANGLE + CROSS bị bỏ lỡ khi tay cầm vẫn
   đang khởi động).
 - Cho phép `KEY_READ_WAIT_TIME = 0` (mức tối thiểu của upstream là 500 ms).
@@ -86,7 +83,7 @@ BIBLE là trình khởi động mà RIPPS2 cài đặt: một bản fork của P
 
 **RIPPS2 dùng nó thế nào**
 
-RIPPS2 mang BIBLE dưới dạng các file khởi động đã ký từ v1.3.4-beta và cài nó từ Settings > General > Boot Loader > Manage. BIBLE cũng chạy như một ELF được trình nạp khác khởi chạy (FMCB, OSDMenu, trình nạp của SD2PSX). Các bản dựng đã ký nằm ở [trang phát hành](https://github.com/akilluminati47/BIBLE/releases/tag/signed-f31c8d5); khi phát hành chưa có máy nào liên kết chúng, nên hãy thử trước trên một thẻ nhớ dự phòng.
+RIPPS2 mang BIBLE bên trong RIPPS2.elf, mọi bản dựng đều do akilluminati47 ký, và cài đặt hoặc cập nhật nó từ Cài đặt > Chung > Boot Loader > Manage, nơi cũng đặt các khóa của BIBLE: Background, Splash, Button Glyphs, Info Line, Power-on Wait, Video Mode và Widescreen. Các bản đã ký và một thẻ BOOT SD2PSX làm sẵn ở [trang phát hành](https://github.com/akilluminati47/BIBLE/releases/latest). BIBLE cũng chạy như một ELF do trình nạp khác khởi chạy (FMCB, OSDMenu, trình nạp của SD2PSX).
 
 <p align="center"><img src="assets/readme/ripps2-icon.png" alt="RIPPS2" width="48" height="48"><br><sub>BIBLE là một phần của <a href="https://github.com/akilluminati47/RIPPS2">RIPPS2</a>.</sub></p>
 

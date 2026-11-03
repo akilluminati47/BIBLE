@@ -167,10 +167,6 @@
   "en": "4793c8125dc9",
   "t": "### eGSM (external Graphics Synthesize Mode)"
  },
- "4822d5ecd6f5": {
-  "en": "4822d5ecd6f5",
-  "t": "- Nieuw: de pagina met starttoetsen. Houd bij het opstarten L2 + R2 ingedrukt om het startpad van elke toets te lezen, wat je opstartscherminstellingen ook zijn."
- },
  "4995cc5a4675": {
   "en": "4995cc5a4675",
   "t": "6. De overige argumenten houden hun volgorde en worden aan de gestarte app doorgegeven."
@@ -395,10 +391,6 @@
   "en": "9a2ff94c7bee",
   "t": "- `-ps1fast`"
  },
- "9e14e0197f55": {
-  "en": "9e14e0197f55",
-  "t": "- Het opstartscherm: het PS2-logo gecentreerd op de lucht van RIPPS2, met de knoppen eronder en eventuele tekst erboven.\n  `BIBLE_GLYPHS` 0 geen, 1 de frontknoppen (standaard), 2 alle zestien in twee rijen van acht.\n  `BIBLE_INFO` 1 toont console-info, klok en aftelling (standaard uit).\n  De lucht volgt je RIPPS2 Color Theme: zonder `BIBLE_COLOR` leest BIBLE de lucht die RIPPS2 met zijn\n  instellingen opslaat, uit de RIPPS2-map die zijn AUTO-item start (`BIBLE_COLOR` in de configuratie gaat voor).\n  Dezelfde look in elke videomodus. Pagina's (videomodus, credits, starttoetsen) faden in over het gedimde logo\n  met de knoppen opgeborgen, zodat de starttoetsen rustig te lezen zijn."
- },
  "9f17d88941ea": {
   "en": "9f17d88941ea",
   "t": "- `fp2` = progressieve scan forceren (480p/576p)"
@@ -587,10 +579,6 @@
   "en": "e3b8cc6236ca",
   "t": "  - @nathanneurotic voor de 10 paden van PS2BBLE, ideeën en overtuigingskracht"
  },
- "e448e12d4e86": {
-  "en": "e448e12d4e86",
-  "t": "RIPPS2 levert BIBLE sinds v1.3.4-beta mee als ondertekende opstartbestanden en installeert het vanuit Settings > General > Boot Loader > Manage. BIBLE draait ook als ELF die door een andere loader wordt gestart (FMCB, OSDMenu, de loader van een SD2PSX). De ondertekende builds staan op [de releasepagina](https://github.com/akilluminati47/BIBLE/releases/tag/signed-f31c8d5); geen console had ze gebonden toen ze verschenen, dus probeer eerst een reservegeheugenkaart."
- },
  "e6d271e7c0bd": {
   "en": "e6d271e7c0bd",
   "t": "Het zoeken naar de configuratie houdt nu rekening met de opstartfamilie, zodat bij het starten geen onnodige drivers worden geladen:"
@@ -662,5 +650,29 @@
  "fffd2a6caa3f": {
   "en": "fffd2a6caa3f",
   "t": "  - als `-patinfo` aanwezig is, overschrijft het eerste overgebleven argument het doel `BOOT2/BOOT/path` van de CNF.\n  Dit is voor HDD-builds.  \n  PATINFO-voorbeeld:  "
+ },
+ "6148c0d264cd": {
+  "en": "6148c0d264cd",
+  "t": "- Het startscherm: het PS2-logo midden op de lucht van RIPPS2, met de knoppen eronder en eventuele tekst erboven. `BIBLE_GLYPHS` 0 geen, 1 de actieknoppen (standaard), 2 alle zestien in twee rijen van acht. `BIBLE_INFO` 1 toont console-info, klok en aftelling (standaard uit). De lucht volgt je RIPPS2 Color Theme: zonder `BIBLE_COLOR` leest BIBLE de lucht die RIPPS2 met zijn instellingen opslaat, uit de map die zijn AUTO-regel start, of uit de map `RIPPS2` van een geheugenkaart als de AUTO-regel RIPPS2 op een SD2PSX, USB of de harde schijf is (`BIBLE_COLOR` in de configuratie wint). Dezelfde look in elke videomodus."
+ },
+ "7705781d64d9": {
+  "en": "7705781d64d9",
+  "t": "- `BIBLE_BACKGROUND`: `AUTO` (standaard: de lucht als de instellingen van RIPPS2 gevonden worden of `BIBLE_COLOR` is gezet, anders zwart in de eigen modus van de console, een gewone bootloader), `SKY` of `BLANK` (zwart). De overgang naar een programma is sowieso een paar seconden zwart, dus zwart oogt als één geheel ermee."
+ },
+ "2595eafbc56c": {
+  "en": "2595eafbc56c",
+  "t": "- Het opstartgeluid, klaargezet: Boot Sound On (fast) van RIPPS2 kan `boot.adp` naast de configuratie van BIBLE bewaren (`mc?:/SYS-CONF/boot.adp`). BIBLE leest het terwijl het startscherm aftelt en geeft het in het RAM aan RIPPS2, zodat het met het eerste beeld van RIPPS2 speelt, ook als RIPPS2 van een SD2PSX start (MMCE-, MX4SIO- en HDD-build; de geheugenkaart- / USB-build geeft RIPPS2 de map door en RIPPS2 leest het). BIBLE wacht bij het starten op het deel dat nog niet gelezen is: met `KEY_READ_WAIT_TIME = 0` is dat het hele lezen, ongeveer 2 s op een geheugenkaart. **Zonder geluid start het snelst.** De afspraak en de kant van RIPPS2: [docs/boot-sound-handoff.md](docs/boot-sound-handoff.md)."
+ },
+ "a3adb3ae35a8": {
+  "en": "a3adb3ae35a8",
+  "t": "- RIPPS2 eerst: het configuratiesjabloon (`release/SYS-CONF/PS2BBL.INI`) en de ingebouwde standaarden proberen `mc?:/RIPPS2/RIPPS2.ELF` en `mmce?:/APPS/RIPPS2.ELF` vóór OSDMenu en FMCB, en het sjabloon noemt de eigen sleutels van BIBLE met uitleg. De pagina's (videomodus, credits, startknoppen) faden in over het gedimde logo met de knoppen weggezet, zodat de startknoppen rustig te lezen zijn."
+ },
+ "3a7d07109b19": {
+  "en": "3a7d07109b19",
+  "t": "- Nieuw: de pagina met startknoppen. Houd L2 + R2 vast bij het aanzetten en BIBLE pauzeert voordat er iets start, met de huidige startpaden van elke knop, wat je startscherm-instellingen ook zijn (handig met `LOGO_DISPLAY = 0`, waar verder niets verschijnt)."
+ },
+ "6fd9ac99e195": {
+  "en": "6fd9ac99e195",
+  "t": "RIPPS2 draagt BIBLE in RIPPS2.elf, elke build ondertekend door akilluminati47, en installeert of werkt het bij via Instellingen > Algemeen > Boot Loader > Manage, waar ook de sleutels van BIBLE worden gezet: Background, Splash, Button Glyphs, Info Line, Power-on Wait, Video Mode en Widescreen. De ondertekende builds en een kant-en-klare SD2PSX BOOT-kaart staan op [de releasepagina](https://github.com/akilluminati47/BIBLE/releases/latest). BIBLE draait ook als ELF die door een andere loader wordt gestart (FMCB, OSDMenu, de loader van een SD2PSX)."
  }
 }

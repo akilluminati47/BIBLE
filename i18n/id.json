@@ -167,10 +167,6 @@
   "en": "4793c8125dc9",
   "t": "### eGSM (external Graphics Synthesize Mode)"
  },
- "4822d5ecd6f5": {
-  "en": "4822d5ecd6f5",
-  "t": "- Baru: halaman tombol peluncuran. Tahan L2 + R2 saat menyala untuk membaca jalur peluncuran setiap tombol, apa pun pengaturan layar pembuka Anda."
- },
  "4995cc5a4675": {
   "en": "4995cc5a4675",
   "t": "6. Argumen yang tersisa mempertahankan urutan dan diteruskan ke aplikasi yang diluncurkan."
@@ -395,10 +391,6 @@
   "en": "9a2ff94c7bee",
   "t": "- `-ps1fast`"
  },
- "9e14e0197f55": {
-  "en": "9e14e0197f55",
-  "t": "- Layar pembuka: logo PS2 di tengah langit RIPPS2, dengan tombol di bawahnya dan teks apa pun di atasnya.\n  `BIBLE_GLYPHS` 0 tidak ada, 1 tombol muka (bawaan), 2 keenam belas tombol dalam dua baris berisi delapan.\n  `BIBLE_INFO` 1 menampilkan info konsol, jam, dan hitung mundur (mati secara bawaan).\n  Langitnya mengikuti Color Theme RIPPS2 Anda: tanpa `BIBLE_COLOR`, BIBLE membaca langit yang disimpan RIPPS2 bersama\n  pengaturannya, dari folder RIPPS2 yang dijalankan entri AUTO-nya (`BIBLE_COLOR` di konfigurasi lebih diutamakan).\n  Tampilan yang sama di setiap mode video. Halaman (mode video, kredit, tombol peluncuran) muncul perlahan di atas logo yang diredupkan\n  dengan tombol disingkirkan, agar tombol peluncuran bisa dibaca dengan tenang."
- },
  "9f17d88941ea": {
   "en": "9f17d88941ea",
   "t": "- `fp2` = paksa pemindaian progresif (480p/576p)"
@@ -587,10 +579,6 @@
   "en": "e3b8cc6236ca",
   "t": "  - @nathanneurotic untuk 10 jalur PS2BBLE, ide, dan bujukan"
  },
- "e448e12d4e86": {
-  "en": "e448e12d4e86",
-  "t": "RIPPS2 membawa BIBLE sebagai file boot yang ditandatangani sejak v1.3.4-beta dan memasangnya dari Settings > General > Boot Loader > Manage. BIBLE juga berjalan sebagai ELF yang dijalankan loader lain (FMCB, OSDMenu, loader milik SD2PSX). Build yang ditandatangani ada di [halaman rilisnya](https://github.com/akilluminati47/BIBLE/releases/tag/signed-f31c8d5); belum ada konsol yang mengikatnya saat dirilis, jadi coba dulu di kartu memori cadangan."
- },
  "e6d271e7c0bd": {
   "en": "e6d271e7c0bd",
   "t": "Pencarian konfigurasi kini mengenali keluarga boot agar tidak memuat driver yang tidak perlu saat mulai:"
@@ -662,5 +650,29 @@
  "fffd2a6caa3f": {
   "en": "fffd2a6caa3f",
   "t": "  - jika `-patinfo` ada, argumen pertama yang tersisa menggantikan target `BOOT2/BOOT/path` milik CNF.\n  Ini untuk build HDD.  \n  Contoh PATINFO:  "
+ },
+ "6148c0d264cd": {
+  "en": "6148c0d264cd",
+  "t": "- Layar pembuka: logo PS2 di tengah langit RIPPS2, tombol di bawahnya dan teks (jika ada) di atasnya. `BIBLE_GLYPHS` 0 tidak ada, 1 tombol aksi (bawaan), 2 keenam belas dalam dua baris berisi delapan. `BIBLE_INFO` 1 menampilkan info konsol, jam, dan hitung mundur (bawaannya mati). Langit mengikuti Color Theme RIPPS2-mu: tanpa `BIBLE_COLOR`, BIBLE membaca langit yang disimpan RIPPS2 bersama pengaturannya, dari folder yang dijalankan entri AUTO-nya, atau dari folder `RIPPS2` di kartu memori saat entri AUTO adalah RIPPS2 di SD2PSX, USB, atau HDD (`BIBLE_COLOR` di konfigurasi yang menang). Tampilan yang sama di setiap mode video."
+ },
+ "7705781d64d9": {
+  "en": "7705781d64d9",
+  "t": "- `BIBLE_BACKGROUND`: `AUTO` (bawaan: langit saat pengaturan RIPPS2 ditemukan atau `BIBLE_COLOR` diatur, jika tidak hitam dalam mode konsol sendiri, seperti boot loader biasa), `SKY` atau `BLANK` (hitam). Peralihan ke sebuah program memang hitam beberapa detik, jadi hitam terlihat menyatu dengannya."
+ },
+ "2595eafbc56c": {
+  "en": "2595eafbc56c",
+  "t": "- Suara boot, disiapkan lebih dulu: Boot Sound On (fast) di RIPPS2 bisa menyimpan `boot.adp` di samping konfigurasi BIBLE (`mc?:/SYS-CONF/boot.adp`). BIBLE membacanya selama layar pembuka menghitung mundur dan menyerahkannya ke RIPPS2 di RAM, jadi suara itu berbunyi bersama frame pertama RIPPS2 bahkan saat RIPPS2 dimulai dari SD2PSX (build MMCE, MX4SIO, dan HDD; build kartu memori / USB memberi tahu RIPPS2 foldernya dan RIPPS2 membacanya). BIBLE menunggu bagian yang belum terbaca saat menjalankan: dengan `KEY_READ_WAIT_TIME = 0` itu seluruh pembacaan, sekitar 2 s di kartu memori. **Tanpa suara adalah boot tercepat.** Kesepakatan dan sisi RIPPS2: [docs/boot-sound-handoff.md](docs/boot-sound-handoff.md)."
+ },
+ "a3adb3ae35a8": {
+  "en": "a3adb3ae35a8",
+  "t": "- RIPPS2 dulu: templat konfigurasi (`release/SYS-CONF/PS2BBL.INI`) dan nilai bawaan mencoba `mc?:/RIPPS2/RIPPS2.ELF` dan `mmce?:/APPS/RIPPS2.ELF` sebelum OSDMenu dan FMCB, dan templat mendaftar kunci milik BIBLE dengan catatan. Halaman (mode video, kredit, tombol peluncuran) muncul perlahan di atas logo yang diredupkan dengan tombol disimpan, agar tombol peluncuran terbaca tenang."
+ },
+ "3a7d07109b19": {
+  "en": "3a7d07109b19",
+  "t": "- Baru: halaman tombol peluncuran. Tahan L2 + R2 saat menyalakan dan BIBLE berhenti sebelum menjalankan apa pun, menampilkan jalur peluncuran saat ini untuk setiap tombol, apa pun pengaturan layar pembukamu (berguna dengan `LOGO_DISPLAY = 0`, saat tidak ada hal lain yang tampil)."
+ },
+ "6fd9ac99e195": {
+  "en": "6fd9ac99e195",
+  "t": "RIPPS2 membawa BIBLE di dalam RIPPS2.elf, setiap build ditandatangani akilluminati47, dan memasang atau memperbaruinya dari Pengaturan > Umum > Boot Loader > Manage, yang juga mengatur kunci BIBLE: Background, Splash, Button Glyphs, Info Line, Power-on Wait, Video Mode, dan Widescreen. Build bertanda tangan dan kartu BOOT SD2PSX siap pakai ada di [halaman rilis](https://github.com/akilluminati47/BIBLE/releases/latest). BIBLE juga berjalan sebagai ELF yang dijalankan loader lain (FMCB, OSDMenu, loader SD2PSX)."
  }
 }

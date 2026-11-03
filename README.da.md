@@ -63,13 +63,10 @@ BIBLE er den bootloader, som RIPPS2 sætter op: en fork af saildot4ks PS2BBL Ext
 
 **Hvad denne fork ændrer**
 
-- Startskærmen: PS2-logoet centreret på RIPPS2's himmel, med knapperne under og eventuel tekst over.
-  `BIBLE_GLYPHS` 0 ingen, 1 frontknapperne (standard), 2 alle seksten i to rækker á otte.
-  `BIBLE_INFO` 1 viser konsolinfo, ur og nedtælling (slået fra som standard).
-  Himlen følger dit RIPPS2 Color Theme: uden `BIBLE_COLOR` læser BIBLE den himmel, RIPPS2 gemmer med sine
-  indstillinger, fra den RIPPS2-mappe, som dens AUTO-post starter (`BIBLE_COLOR` i konfigurationen vinder).
-  Det samme udseende i hver videotilstand. Sider (videotilstand, krediteringer, starttaster) toner frem over det dæmpede logo
-  med knapperne lagt væk, så starttasterne kan læses i ro.
+- Startbilledet: PS2-logoet midt på RIPPS2's himmel, med knapperne under og eventuel tekst over. `BIBLE_GLYPHS` 0 ingen, 1 handlingsknapperne (standard), 2 alle seksten i to rækker af otte. `BIBLE_INFO` 1 viser konsolinfo, ur og nedtælling (slået fra som standard). Himlen følger dit RIPPS2 Color Theme: uden `BIBLE_COLOR` læser BIBLE den himmel, RIPPS2 gemmer med sine indstillinger, fra mappen som dens AUTO-post starter, eller fra et hukommelseskorts `RIPPS2`-mappe, når AUTO-posten er RIPPS2 på en SD2PSX, USB eller harddisken (`BIBLE_COLOR` i konfigurationen vinder). Samme udseende i alle videotilstande.
+- `BIBLE_BACKGROUND`: `AUTO` (standard: himlen når RIPPS2's indstillinger findes eller `BIBLE_COLOR` er sat, ellers sort i konsollens egen tilstand, en almindelig bootloader), `SKY` eller `BLANK` (sort). Overgangen til et program er alligevel sort i et par sekunder, så sort ser ud som ét stykke med den.
+- Opstartslyden, gjort klar: RIPPS2's Boot Sound On (fast) kan gemme `boot.adp` ved siden af BIBLE's konfiguration (`mc?:/SYS-CONF/boot.adp`). BIBLE læser den, mens startbilledet tæller ned, og giver den til RIPPS2 i RAM, så den spiller med RIPPS2's første billede, også når RIPPS2 starter fra en SD2PSX (MMCE-, MX4SIO- og HDD-build; hukommelseskort- / USB-buildet fortæller RIPPS2 mappen, og RIPPS2 læser den). BIBLE venter ved starten på den del, der endnu ikke er læst: med `KEY_READ_WAIT_TIME = 0` er det hele læsningen, cirka 2 s på et hukommelseskort. **Uden lyd er den hurtigste opstart.** Aftalen og RIPPS2's side: [docs/boot-sound-handoff.md](docs/boot-sound-handoff.md).
+- RIPPS2 først: konfigurationsskabelonen (`release/SYS-CONF/PS2BBL.INI`) og de indbyggede standarder prøver `mc?:/RIPPS2/RIPPS2.ELF` og `mmce?:/APPS/RIPPS2.ELF` før OSDMenu og FMCB, og skabelonen viser BIBLE's egne nøgler med noter. Siderne (videotilstand, credits, startknapper) toner frem over det dæmpede logo med knapperne lagt væk, så startknapperne står i ro.
 - Videotilstande: `VIDEO_MODE` tager også `576P`, `720P` og `1080I`, resten af RIPPS2's. `AUTO` (standard)
   starter i RIPPS2's Video Mode, når dens indstillinger ligger ved siden af AUTO-posten, ellers i konsollens egen.
 - `BIBLE_WIDESCREEN`: `AUTO` (standard: RIPPS2's Widescreen, ellers PS2'ens 16:9-skærmindstilling), `ON` eller
@@ -78,7 +75,7 @@ BIBLE er den bootloader, som RIPPS2 sætter op: en fork af saildot4ks PS2BBL Ext
 - Intet hop ind i RIPPS2: ved start toner logo og knapper ud, og himlen bliver på skærmen i RIPPS2's tilstand;
   RIPPS2 starter på den samme himmel. Hold TRIANGLE + CROSS ved opstart for siden med videotilstand, som altid åbner i
   konsollens egen interlaced-tilstand (vejen tilbage fra 720p eller 1080i på et kompositkabel).
-- Nyt: siden med starttaster. Hold L2 + R2 ved opstart for at læse hver tasts startsti, uanset dine indstillinger for startskærmen.
+- Nyt: siden med startknapper. Hold L2 + R2 ved tænding, og BIBLE holder pause før noget starter og viser hver knaps nuværende startstier, uanset dine indstillinger for startbilledet (praktisk med `LOGO_DISPLAY = 0`, hvor intet andet vises).
 - Kombinationer holdt fra tænding åbner nu deres sider (TRIANGLE + CROSS blev misset, mens controllerne stadig
   startede op).
 - `KEY_READ_WAIT_TIME = 0` er tilladt (upstreams minimum er 500 ms).
@@ -86,7 +83,7 @@ BIBLE er den bootloader, som RIPPS2 sætter op: en fork af saildot4ks PS2BBL Ext
 
 **Sådan bruger RIPPS2 den**
 
-RIPPS2 medbringer BIBLE som signerede opstartsfiler fra v1.3.4-beta og installerer den fra Settings > General > Boot Loader > Manage. BIBLE kører også som en ELF startet af en anden loader (FMCB, OSDMenu, en SD2PSX-loader). De signerede builds ligger på [udgivelsessiden](https://github.com/akilluminati47/BIBLE/releases/tag/signed-f31c8d5); ingen konsol havde bundet dem, da de kom ud, så prøv først med et ekstra hukommelseskort.
+RIPPS2 har BIBLE inde i RIPPS2.elf, hver build signeret af akilluminati47, og installerer eller opdaterer det fra Indstillinger > Generelt > Boot Loader > Manage, som også sætter BIBLE's nøgler: Background, Splash, Button Glyphs, Info Line, Power-on Wait, Video Mode og Widescreen. De signerede builds og et færdigt SD2PSX BOOT-kort ligger på [udgivelsessiden](https://github.com/akilluminati47/BIBLE/releases/latest). BIBLE kører også som en ELF, som en anden loader starter (FMCB, OSDMenu, en SD2PSX's loader).
 
 <p align="center"><img src="assets/readme/ripps2-icon.png" alt="RIPPS2" width="48" height="48"><br><sub>BIBLE er en del af <a href="https://github.com/akilluminati47/RIPPS2">RIPPS2</a>.</sub></p>
 

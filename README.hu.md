@@ -63,13 +63,10 @@ A BIBLE az a rendszerbetöltő, amelyet a RIPPS2 telepít: saildot4k PS2BBL Exte
 
 **Mit változtat ez a fork**
 
-- Az indítóképernyő: a PS2 logó a RIPPS2 egének közepén, alatta a gombok, felette bármilyen szöveg.
-  `BIBLE_GLYPHS` 0 semmi, 1 az előlapi gombok (alapértelmezés), 2 mind a tizenhat két nyolcas sorban.
-  `BIBLE_INFO` 1 megjeleníti a konzol adatait, az órát és a visszaszámlálást (alapból ki van kapcsolva).
-  Az ég a RIPPS2 Color Theme beállításodhoz igazodik: `BIBLE_COLOR` nélkül a BIBLE azt az eget olvassa be, amelyet a RIPPS2 a
-  beállításaival ment, abból a RIPPS2 mappából, amelyet az AUTO bejegyzése indít (a konfigurációban lévő `BIBLE_COLOR` erősebb).
-  Minden videómódban ugyanaz a kinézet. Az oldalak (videómód, stáblista, indítógombok) a halványított logó fölé úsznak be,
-  elpakolt gombokkal, így az indítógombok nyugodtan olvashatók.
+- A nyitókép: a PS2 logó középen a RIPPS2 égboltján, alatta a gombok, felette az esetleges szöveg. `BIBLE_GLYPHS` 0 semmi, 1 az akciógombok (alapértelmezett), 2 mind a tizenhat két nyolcas sorban. `BIBLE_INFO` 1 mutatja a konzol adatait, az órát és a visszaszámlálást (alapból ki). Az égbolt a RIPPS2 Color Theme-et követi: `BIBLE_COLOR` nélkül a BIBLE azt az égboltot olvassa, amit a RIPPS2 a beállításaival ment, abból a mappából, amit az AUTO bejegyzése indít, vagy egy memóriakártya `RIPPS2` mappájából, ha az AUTO bejegyzés a RIPPS2 SD2PSX-en, USB-n vagy a merevlemezen (a konfigurációban lévő `BIBLE_COLOR` nyer). Ugyanaz a kinézet minden videómódban.
+- `BIBLE_BACKGROUND`: `AUTO` (alapértelmezett: az égbolt, ha megvannak a RIPPS2 beállításai vagy be van állítva `BIBLE_COLOR`, különben fekete a konzol saját módjában, egy egyszerű bootloader), `SKY` vagy `BLANK` (fekete). Az átmenet egy programba úgyis néhány másodpercig fekete, így a fekete egy darabnak hat vele.
+- Az indítási hang, előkészítve: a RIPPS2 Boot Sound On (fast) beállítása a `boot.adp` fájlt a BIBLE konfigurációja mellett tarthatja (`mc?:/SYS-CONF/boot.adp`). A BIBLE beolvassa, amíg a nyitókép visszaszámol, és a RAM-ban átadja a RIPPS2-nek, így a RIPPS2 első képkockájával szól akkor is, ha a RIPPS2 SD2PSX-ről indul (MMCE, MX4SIO és HDD build; a memóriakártyás / USB build megmondja a RIPPS2-nek a mappát, és a RIPPS2 olvassa be). A BIBLE indításkor megvárja a még be nem olvasott részt: `KEY_READ_WAIT_TIME = 0` mellett ez a teljes olvasás, kb. 2 s memóriakártyán. **Hang nélkül a leggyorsabb az indulás.** A megállapodás és a RIPPS2 oldala: [docs/boot-sound-handoff.md](docs/boot-sound-handoff.md).
+- Először a RIPPS2: a konfigurációs sablon (`release/SYS-CONF/PS2BBL.INI`) és a beépített alapértékek a `mc?:/RIPPS2/RIPPS2.ELF` és a `mmce?:/APPS/RIPPS2.ELF` útvonalat próbálják az OSDMenu és az FMCB előtt, a sablon pedig megjegyzésekkel sorolja a BIBLE saját kulcsait. Az oldalak (videómód, készítők, indítógombok) a halványított logó fölött úsznak be, a gombok elrakva, hogy az indítógombok nyugodtan olvashatók legyenek.
 - Videómódok: a `VIDEO_MODE` elfogadja a `576P`, `720P` és `1080I` értéket is, a RIPPS2 többi módját. Az `AUTO` (alapértelmezés)
   a RIPPS2 Video Mode beállításában indul, ha annak beállításai az AUTO bejegyzés mellett vannak, különben a konzol saját módjában.
 - `BIBLE_WIDESCREEN`: `AUTO` (alapértelmezés: a RIPPS2 Widescreen beállítása, különben a PS2 16:9-es képernyőbeállítása), `ON` vagy
@@ -78,7 +75,7 @@ A BIBLE az a rendszerbetöltő, amelyet a RIPPS2 telepít: saildot4k PS2BBL Exte
 - Nincs ugrás a RIPPS2-be lépéskor: indításkor a logó és a gombok elhalványulnak, az ég pedig a képernyőn marad a RIPPS2 módjában;
   a RIPPS2 ugyanezen az égen indul. Indításkor tartsd lenyomva a TRIANGLE + CROSS gombot a videómód oldalához, amely mindig
   a konzol saját váltottsoros módjában nyílik meg (az út vissza 720p-ből vagy 1080i-ből kompozit kábelen).
-- Új: az indítógombok oldala. Indításkor tartsd lenyomva az L2 + R2 gombot, hogy elolvasd minden gomb indítási útvonalát, bármi legyen is az indítóképernyő beállítása.
+- Új: az indítógombok oldala. Tartsd lenyomva az L2 + R2 gombot bekapcsoláskor, és a BIBLE megáll, mielőtt bármit elindítana, és megmutatja minden gomb jelenlegi indítási útvonalát, bármi is a nyitókép beállítása (hasznos `LOGO_DISPLAY = 0` mellett, ahol semmi más nem látszik).
 - A bekapcsolástól nyomva tartott kombinációk most megnyitják az oldalaikat (a TRIANGLE + CROSS elveszett, amíg a kontrollerek még
   indultak).
 - A `KEY_READ_WAIT_TIME = 0` megengedett (az upstream minimuma 500 ms).
@@ -86,7 +83,7 @@ A BIBLE az a rendszerbetöltő, amelyet a RIPPS2 telepít: saildot4k PS2BBL Exte
 
 **Hogyan használja a RIPPS2**
 
-A RIPPS2 a v1.3.4-beta óta aláírt indítófájlokként hozza a BIBLE-t, és a Settings > General > Boot Loader > Manage menüből telepíti. A BIBLE egy másik betöltő által indított ELF-ként is fut (FMCB, OSDMenu, egy SD2PSX betöltője). Az aláírt buildek a [kiadási oldalon](https://github.com/akilluminati47/BIBLE/releases/tag/signed-f31c8d5) vannak; megjelenésükkor még egy konzol sem kötötte őket, ezért előbb egy tartalék memóriakártyán próbáld ki.
+A RIPPS2 a RIPPS2.elf fájlban hordozza a BIBLE-t, minden buildet akilluminati47 írt alá, és a Beállítások > Általános > Boot Loader > Manage menüből telepíti vagy frissíti, ahol a BIBLE kulcsait is beállítja: Background, Splash, Button Glyphs, Info Line, Power-on Wait, Video Mode és Widescreen. Az aláírt buildek és egy kész SD2PSX BOOT kártya a [kiadások oldalán](https://github.com/akilluminati47/BIBLE/releases/latest) vannak. A BIBLE ELF-ként is fut, ha egy másik betöltő indítja (FMCB, OSDMenu, egy SD2PSX betöltője).
 
 <p align="center"><img src="assets/readme/ripps2-icon.png" alt="RIPPS2" width="48" height="48"><br><sub>A BIBLE a(z) <a href="https://github.com/akilluminati47/RIPPS2">RIPPS2</a> része.</sub></p>
 

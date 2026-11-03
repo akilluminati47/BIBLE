@@ -63,13 +63,10 @@ Ang BIBLE mao ang boot loader nga gi-set up sa RIPPS2: usa ka fork sa PS2BBL Ext
 
 **Unsa ang giusab niini nga fork**
 
-- Ang splash: ang PS2 logo sa tunga sa langit sa RIPPS2, nga ang mga button sa ilalom ug bisan unsang text sa ibabaw.
-  `BIBLE_GLYPHS` 0 wala, 1 ang mga face button (default), 2 ang tanang napulog-unom sa duha ka laray nga tig-walo.
-  `BIBLE_INFO` 1 nagpakita sa impormasyon sa console, orasan ug countdown (naka-off isip default).
-  Ang langit motugma sa imong RIPPS2 Color Theme: kung walay `BIBLE_COLOR`, basahon sa BIBLE ang langit nga gi-save sa RIPPS2 uban sa
-  mga setting niini, gikan sa RIPPS2 folder nga gisugdan sa AUTO entry niini (ang `BIBLE_COLOR` sa config ang modaog).
-  Parehas nga hitsura sa matag video mode. Ang mga page (video mode, credits, launch keys) hinay-hinay nga mogawas ibabaw sa gipalubog nga logo
-  nga gitipigan ang mga button, aron kalmado nga mabasa ang mga launch key.
+- Ang splash: ang logo sa PS2 sa tunga sa langit sa RIPPS2, ang mga button sa ubos ug ang bisan unsang teksto sa ibabaw. `BIBLE_GLYPHS` 0 wala, 1 ang mga action button (default), 2 tanang napulog-unom sa duha ka laray nga tig-walo. `BIBLE_INFO` 1 nagpakita sa info sa console, orasan ug countdown (naka-off sa default). Nagsunod ang langit sa imong Color Theme sa RIPPS2: kung walay `BIBLE_COLOR`, basahon sa BIBLE ang langit nga gi-save sa RIPPS2 uban sa mga setting niini, gikan sa folder nga ablihan sa AUTO entry niini, o gikan sa folder nga `RIPPS2` sa memory card kung ang AUTO entry kay RIPPS2 sa SD2PSX, USB o HDD (ang `BIBLE_COLOR` sa config ang modaog). Parehas nga dagway sa matag video mode.
+- `BIBLE_BACKGROUND`: `AUTO` (default: ang langit kung makit-an ang mga setting sa RIPPS2 o naay `BIBLE_COLOR`, kung dili itom sa kaugalingong mode sa console, usa ka yano nga boot loader), `SKY` o `BLANK` (itom). Itom man pud sulod sa pipila ka segundo ang pagbalhin ngadto sa usa ka program, mao nga ang itom morag usa ra ka piraso uban niini.
+- Ang boot sound, andam na daan: ang Boot Sound On (fast) sa RIPPS2 makatipig sa `boot.adp` tupad sa config sa BIBLE (`mc?:/SYS-CONF/boot.adp`). Basahon kini sa BIBLE samtang nag-countdown ang splash ug itunol sa RIPPS2 sa RAM, mao nga motunog kini uban sa unang frame sa RIPPS2 bisan kung magsugod ang RIPPS2 gikan sa SD2PSX (mga build nga MMCE, MX4SIO ug HDD; ang memory card / USB build mosulti sa RIPPS2 sa folder ug ang RIPPS2 ang mobasa). Hulaton sa BIBLE sa launch ang bahin nga wala pa mabasa: sa `KEY_READ_WAIT_TIME = 0` mao na kana ang tibuok pagbasa, mga 2 s sa memory card. **Ang walay tingog mao ang labing paspas nga boot.** Ang kasabutan ug ang bahin sa RIPPS2: [docs/boot-sound-handoff.md](docs/boot-sound-handoff.md).
+- Una ang RIPPS2: ang config template (`release/SYS-CONF/PS2BBL.INI`) ug ang mga built-in nga default mosulay sa `mc?:/RIPPS2/RIPPS2.ELF` ug `mmce?:/APPS/RIPPS2.ELF` una sa OSDMenu ug FMCB, ug ang template naglista sa kaugalingong mga key sa BIBLE nga naay mga nota. Ang mga panid (video mode, credits, launch keys) mogawas sa ibabaw sa gipangitngit nga logo nga gitabi ang mga button, aron hinay nga mabasa ang launch keys.
 - Mga video mode: modawat usab ang `VIDEO_MODE` og `576P`, `720P` ug `1080I`, ang uban pang mode sa RIPPS2. Ang `AUTO` (default)
   magsugod sa Video Mode sa RIPPS2 kung naa ang mga setting niini tupad sa AUTO entry, kung dili sa kaugalingong mode sa console.
 - `BIBLE_WIDESCREEN`: `AUTO` (default: ang Widescreen sa RIPPS2, kung dili ang 16:9 screen setting sa PS2), `ON` o
@@ -78,7 +75,7 @@ Ang BIBLE mao ang boot loader nga gi-set up sa RIPPS2: usa ka fork sa PS2BBL Ext
 - Walay paglukso pagsulod sa RIPPS2: sa pag-launch, mokupas ang logo ug mga button ug magpabilin ang langit sa screen, sa mode sa RIPPS2;
   magsugod ang RIPPS2 sa parehas nga langit. Pugngi ang TRIANGLE + CROSS sa pag-boot para sa page sa video mode, nga kanunay moabli
   sa kaugalingong interlaced mode sa console (ang dalan pabalik gikan sa 720p o 1080i sa composite cable).
-- Bag-o: ang page sa mga launch key. Pugngi ang L2 + R2 sa pag-boot aron mabasa ang launch path sa matag key, bisan unsa pa ang imong mga splash setting.
+- Bag-o: ang panid sa launch keys. Pugngi ang L2 + R2 sa pag-on ug mohunong ang BIBLE una magsugod ug bisan unsa, nagpakita sa kasamtangang launch path sa matag key, bisan unsa pa ang setting sa imong splash (magamit sa `LOGO_DISPLAY = 0`, diin walay laing mogawas).
 - Ang mga combo nga gipugngan sukad sa pag-on moabli na karon sa ilang mga page (ang TRIANGLE + CROSS malimtan samtang nagsugod pa
   ang mga controller).
 - Gitugotan ang `KEY_READ_WAIT_TIME = 0` (500 ms ang pinakaubos sa upstream).
@@ -86,7 +83,7 @@ Ang BIBLE mao ang boot loader nga gi-set up sa RIPPS2: usa ka fork sa PS2BBL Ext
 
 **Giunsa kini paggamit sa RIPPS2**
 
-Dala sa RIPPS2 ang BIBLE isip mga signed boot file sukad v1.3.4-beta ug i-install kini gikan sa Settings > General > Boot Loader > Manage. Modagan usab ang BIBLE isip ELF nga gisugdan sa laing loader (FMCB, OSDMenu, ang loader sa usa ka SD2PSX). Anaa sa [release page niini](https://github.com/akilluminati47/BIBLE/releases/tag/signed-f31c8d5) ang mga signed build; wala pay console nga nag-bind niini sa dihang gipagawas, busa sulayi una sa ekstrang memory card.
+Gidala sa RIPPS2 ang BIBLE sulod sa RIPPS2.elf, matag build gipirmahan ni akilluminati47, ug i-install o i-update kini gikan sa Settings > General > Boot Loader > Manage, nga mo-set usab sa mga key sa BIBLE: Background, Splash, Button Glyphs, Info Line, Power-on Wait, Video Mode ug Widescreen. Ang mga gipirmahan nga build ug usa ka andam nga SD2PSX BOOT card naa sa [panid sa mga release](https://github.com/akilluminati47/BIBLE/releases/latest). Modagan usab ang BIBLE isip ELF nga ablihan sa laing loader (FMCB, OSDMenu, ang loader sa SD2PSX).
 
 <p align="center"><img src="assets/readme/ripps2-icon.png" alt="RIPPS2" width="48" height="48"><br><sub>Bahin ang BIBLE sa <a href="https://github.com/akilluminati47/RIPPS2">RIPPS2</a>.</sub></p>
 

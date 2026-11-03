@@ -167,10 +167,6 @@
   "en": "4793c8125dc9",
   "t": "### eGSM (external Graphics Synthesize Mode)"
  },
- "4822d5ecd6f5": {
-  "en": "4822d5ecd6f5",
-  "t": "- Yeni: başlatma tuşları sayfası. Açılış ayarlarınız ne olursa olsun, her tuşun başlatma yolunu okumak için açılışta L2 + R2’yi basılı tutun."
- },
  "4995cc5a4675": {
   "en": "4995cc5a4675",
   "t": "6. Kalan argümanlar sıralarını korur ve başlatılan uygulamaya geçirilir."
@@ -395,10 +391,6 @@
   "en": "9a2ff94c7bee",
   "t": "- `-ps1fast`"
  },
- "9e14e0197f55": {
-  "en": "9e14e0197f55",
-  "t": "- Açılış ekranı: PS2 logosu RIPPS2’nin gökyüzünün ortasında, düğmeler altında, varsa yazı üstünde.\n  `BIBLE_GLYPHS` 0 hiçbiri, 1 ön yüz düğmeleri (varsayılan), 2 on altısı da sekizerli iki sıra hâlinde.\n  `BIBLE_INFO` 1 konsol bilgisini, saati ve geri sayımı gösterir (varsayılan olarak kapalı).\n  Gökyüzü RIPPS2 Color Theme’inize uyar: `BIBLE_COLOR` yoksa BIBLE, RIPPS2’nin ayarlarıyla birlikte kaydettiği\n  gökyüzünü, AUTO girdisinin başlattığı RIPPS2 klasöründen okur (yapılandırmadaki `BIBLE_COLOR` önceliklidir).\n  Her video modunda aynı görünüm. Sayfalar (video modu, emeği geçenler, başlatma tuşları) kısılmış logonun üzerine belirerek gelir,\n  düğmeler kaldırılmış olarak, böylece başlatma tuşları sakin sakin okunur."
- },
  "9f17d88941ea": {
   "en": "9f17d88941ea",
   "t": "- `fp2` = aşamalı taramayı zorla (480p/576p)"
@@ -587,10 +579,6 @@
   "en": "e3b8cc6236ca",
   "t": "  - PS2BBLE’ın 10 yolu, fikirler ve ikna için @nathanneurotic"
  },
- "e448e12d4e86": {
-  "en": "e448e12d4e86",
-  "t": "RIPPS2, v1.3.4-beta'dan beri BIBLE'ı imzalı önyükleme dosyaları olarak taşır ve Settings > General > Boot Loader > Manage üzerinden kurar. BIBLE ayrıca başka bir yükleyicinin başlattığı bir ELF olarak da çalışır (FMCB, OSDMenu, bir SD2PSX’in yükleyicisi). İmzalı derlemeler [sürüm sayfasında](https://github.com/akilluminati47/BIBLE/releases/tag/signed-f31c8d5); yayımlandıklarında hiçbir konsol onları bağlamamıştı, bu yüzden önce yedek bir hafıza kartında dene."
- },
  "e6d271e7c0bd": {
   "en": "e6d271e7c0bd",
   "t": "Yapılandırma araması artık açılışta gereksiz sürücüler yüklenmesin diye önyükleme ailesini dikkate alıyor:"
@@ -662,5 +650,29 @@
  "fffd2a6caa3f": {
   "en": "fffd2a6caa3f",
   "t": "  - `-patinfo` varsa kalan ilk argüman, CNF’nin `BOOT2/BOOT/path` hedefinin yerini alır.\n  Bu, HDD derlemeleri içindir.  \n  PATINFO örneği:  "
+ },
+ "6148c0d264cd": {
+  "en": "6148c0d264cd",
+  "t": "- Açılış ekranı: PS2 logosu RIPPS2'nin gökyüzünün ortasında, altında düğmeler ve üstünde varsa metin. `BIBLE_GLYPHS` 0 yok, 1 eylem düğmeleri (varsayılan), 2 on altısı da sekizerli iki sırada. `BIBLE_INFO` 1 konsol bilgisini, saati ve geri sayımı gösterir (varsayılan olarak kapalı). Gökyüzü RIPPS2 Color Theme'inize uyar: `BIBLE_COLOR` yoksa BIBLE, RIPPS2'nin ayarlarıyla kaydettiği gökyüzünü AUTO girdisinin başlattığı klasörden ya da AUTO girdisi bir SD2PSX, USB veya sabit diskteki RIPPS2 olduğunda bir hafıza kartının `RIPPS2` klasöründen okur (yapılandırmadaki `BIBLE_COLOR` önceliklidir). Her video modunda aynı görünüm."
+ },
+ "7705781d64d9": {
+  "en": "7705781d64d9",
+  "t": "- `BIBLE_BACKGROUND`: `AUTO` (varsayılan: RIPPS2'nin ayarları bulunduğunda ya da `BIBLE_COLOR` ayarlıysa gökyüzü, yoksa konsolun kendi modunda siyah, sade bir önyükleyici), `SKY` ya da `BLANK` (siyah). Bir programa geçiş zaten birkaç saniye siyah olur, bu yüzden siyah onunla tek parça gibi görünür."
+ },
+ "2595eafbc56c": {
+  "en": "2595eafbc56c",
+  "t": "- Açılış sesi, önceden hazır: RIPPS2'nin Boot Sound On (fast) ayarı `boot.adp` dosyasını BIBLE'ın yapılandırmasının yanında tutabilir (`mc?:/SYS-CONF/boot.adp`). BIBLE onu açılış ekranı geri sayarken okur ve RAM'de RIPPS2'ye verir, böylece RIPPS2 bir SD2PSX'ten başlasa bile RIPPS2'nin ilk karesiyle çalar (MMCE, MX4SIO ve HDD sürümleri; hafıza kartı / USB sürümü RIPPS2'ye klasörü söyler ve RIPPS2 okur). BIBLE başlatmada henüz okunmamış kısmı bekler: `KEY_READ_WAIT_TIME = 0` ile bu okumanın tamamıdır, bir hafıza kartında yaklaşık 2 s. **Sessiz açılış en hızlısıdır.** Anlaşma ve RIPPS2 tarafı: [docs/boot-sound-handoff.md](docs/boot-sound-handoff.md)."
+ },
+ "a3adb3ae35a8": {
+  "en": "a3adb3ae35a8",
+  "t": "- Önce RIPPS2: yapılandırma şablonu (`release/SYS-CONF/PS2BBL.INI`) ve yerleşik varsayılanlar OSDMenu ve FMCB'den önce `mc?:/RIPPS2/RIPPS2.ELF` ve `mmce?:/APPS/RIPPS2.ELF` yollarını dener, şablon da BIBLE'ın kendi anahtarlarını notlarıyla listeler. Sayfalar (video modu, emeği geçenler, başlatma tuşları) düğmeler kaldırılmış, karartılmış logonun üzerinde belirir, böylece başlatma tuşları rahatça okunur."
+ },
+ "3a7d07109b19": {
+  "en": "3a7d07109b19",
+  "t": "- Yeni: başlatma tuşları sayfası. Açılışta L2 + R2'yi basılı tutun, BIBLE bir şey başlatmadan önce durur ve açılış ekranı ayarlarınız ne olursa olsun her tuşun güncel başlatma yollarını gösterir (`LOGO_DISPLAY = 0` ile kullanışlı, orada başka hiçbir şey görünmez)."
+ },
+ "6fd9ac99e195": {
+  "en": "6fd9ac99e195",
+  "t": "RIPPS2, BIBLE'ı RIPPS2.elf içinde taşır, her sürüm akilluminati47 tarafından imzalanmıştır, ve onu Ayarlar > Genel > Boot Loader > Manage'den kurar ya da günceller; burada BIBLE'ın anahtarlarını da ayarlar: Background, Splash, Button Glyphs, Info Line, Power-on Wait, Video Mode ve Widescreen. İmzalı sürümler ve hazır bir SD2PSX BOOT kartı [sürümler sayfasında](https://github.com/akilluminati47/BIBLE/releases/latest). BIBLE başka bir yükleyicinin başlattığı bir ELF olarak da çalışır (FMCB, OSDMenu, bir SD2PSX'in yükleyicisi)."
  }
 }

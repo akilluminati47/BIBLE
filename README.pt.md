@@ -63,13 +63,10 @@ O BIBLE é o carregador de arranque que o RIPPS2 instala: um fork do PS2BBL Exte
 
 **O que este fork muda**
 
-- O ecrã inicial: o logótipo da PS2 centrado no céu do RIPPS2, com os botões por baixo e qualquer texto por cima.
-  `BIBLE_GLYPHS` 0 nenhum, 1 os botões frontais (predefinição), 2 os dezasseis em duas filas de oito.
-  `BIBLE_INFO` 1 mostra a informação da consola, o relógio e a contagem decrescente (desligado por predefinição).
-  O céu acompanha o seu Color Theme do RIPPS2: sem `BIBLE_COLOR`, o BIBLE lê o céu que o RIPPS2 guarda com as suas
-  definições, da pasta do RIPPS2 que a entrada AUTO inicia (`BIBLE_COLOR` na configuração prevalece).
-  O mesmo aspeto em todos os modos de vídeo. As páginas (modo de vídeo, créditos, teclas de arranque) surgem sobre o logótipo escurecido
-  com os botões arrumados, para que as teclas de arranque se leiam com calma.
+- O ecrã inicial: o logótipo da PS2 centrado sobre o céu do RIPPS2, com os botões por baixo e qualquer texto por cima. `BIBLE_GLYPHS` 0 nenhum, 1 os botões de ação (predefinição), 2 os dezasseis em duas filas de oito. `BIBLE_INFO` 1 mostra a informação da consola, o relógio e a contagem decrescente (desligado por predefinição). O céu acompanha o seu Color Theme do RIPPS2: sem `BIBLE_COLOR`, o BIBLE lê o céu que o RIPPS2 guarda com as definições, da pasta que a entrada AUTO inicia, ou da pasta `RIPPS2` de um cartão de memória quando a entrada AUTO é o RIPPS2 num SD2PSX, USB ou disco rígido (`BIBLE_COLOR` na configuração prevalece). O mesmo aspeto em todos os modos de vídeo.
+- `BIBLE_BACKGROUND`: `AUTO` (predefinição: o céu quando as definições do RIPPS2 são encontradas ou `BIBLE_COLOR` está definido, senão preto no modo da própria consola, um boot loader simples), `SKY` ou `BLANK` (preto). A passagem para um programa fica preta alguns segundos de qualquer forma, por isso o preto lê-se como uma só peça com ela.
+- O som de arranque, preparado: o Boot Sound On (fast) do RIPPS2 pode guardar `boot.adp` ao lado da configuração do BIBLE (`mc?:/SYS-CONF/boot.adp`). O BIBLE lê-o enquanto o ecrã inicial faz a contagem e entrega-o ao RIPPS2 na RAM, por isso toca com o primeiro fotograma do RIPPS2 mesmo quando o RIPPS2 arranca de um SD2PSX (versões MMCE, MX4SIO e HDD; a versão de cartão de memória / USB indica a pasta ao RIPPS2 e o RIPPS2 lê-o). O BIBLE espera no lançamento pela parte ainda por ler: com `KEY_READ_WAIT_TIME = 0` é a leitura inteira, cerca de 2 s num cartão de memória. **Sem som é o arranque mais rápido.** O contrato e o lado do RIPPS2: [docs/boot-sound-handoff.md](docs/boot-sound-handoff.md).
+- RIPPS2 primeiro: o modelo de configuração (`release/SYS-CONF/PS2BBL.INI`) e as predefinições internas tentam `mc?:/RIPPS2/RIPPS2.ELF` e `mmce?:/APPS/RIPPS2.ELF` antes do OSDMenu e do FMCB, e o modelo lista as chaves do próprio BIBLE com notas. As páginas (modo de vídeo, créditos, teclas de lançamento) surgem sobre o logótipo escurecido com os botões arrumados, para as teclas de lançamento se lerem com calma.
 - Modos de vídeo: `VIDEO_MODE` também aceita `576P`, `720P` e `1080I`, os restantes do RIPPS2. `AUTO` (a predefinição)
   arranca no Video Mode do RIPPS2 quando as definições dele estão ao lado da entrada AUTO, senão no da própria consola.
 - `BIBLE_WIDESCREEN`: `AUTO` (a predefinição: o Widescreen do RIPPS2, senão a definição de ecrã 16:9 da PS2), `ON` ou
@@ -78,7 +75,7 @@ O BIBLE é o carregador de arranque que o RIPPS2 instala: um fork do PS2BBL Exte
 - Sem salto ao entrar no RIPPS2: ao arrancar algo, o logótipo e os botões desvanecem e o céu fica no ecrã, no modo do RIPPS2;
   o RIPPS2 começa nesse mesmo céu. Mantenha TRIANGLE + CROSS no arranque para a página do modo de vídeo, que abre sempre
   no modo entrelaçado da própria consola (o caminho de volta de 720p ou 1080i num cabo composto).
-- Novo: a página das teclas de arranque. Mantenha L2 + R2 no arranque para ler o caminho de cada tecla, sejam quais forem as definições do ecrã inicial.
+- Novo: a página das teclas de lançamento. Mantenha L2 + R2 ao ligar e o BIBLE pausa antes de iniciar o que quer que seja, mostrando os caminhos de lançamento atuais de cada tecla, sejam quais forem as definições do ecrã inicial (útil com `LOGO_DISPLAY = 0`, onde mais nada aparece).
 - As combinações mantidas desde que se liga a consola abrem agora as suas páginas (TRIANGLE + CROSS perdia-se enquanto os comandos ainda
   arrancavam).
 - `KEY_READ_WAIT_TIME = 0` é permitido (o mínimo do upstream é 500 ms).
@@ -86,7 +83,7 @@ O BIBLE é o carregador de arranque que o RIPPS2 instala: um fork do PS2BBL Exte
 
 **Como o RIPPS2 o usa**
 
-O RIPPS2 leva o BIBLE como ficheiros de arranque assinados desde a v1.3.4-beta e instala-o a partir de Settings > General > Boot Loader > Manage. O BIBLE também corre como um ELF iniciado por outro carregador (FMCB, OSDMenu, o carregador de um SD2PSX). As builds assinadas estão na [página da versão](https://github.com/akilluminati47/BIBLE/releases/tag/signed-f31c8d5); nenhuma consola as tinha associado quando saíram, por isso experimenta primeiro num cartão de memória de reserva.
+O RIPPS2 traz o BIBLE dentro do RIPPS2.elf, cada versão assinada por akilluminati47, e instala-o ou atualiza-o em Definições > Geral > Boot Loader > Manage, que também define as chaves do BIBLE: Background, Splash, Button Glyphs, Info Line, Power-on Wait, Video Mode e Widescreen. As versões assinadas e um cartão BOOT de SD2PSX pronto estão na [página de versões](https://github.com/akilluminati47/BIBLE/releases/latest). O BIBLE também corre como ELF iniciado por outro loader (FMCB, OSDMenu, o loader de um SD2PSX).
 
 <p align="center"><img src="assets/readme/ripps2-icon.png" alt="RIPPS2" width="48" height="48"><br><sub>O BIBLE faz parte do <a href="https://github.com/akilluminati47/RIPPS2">RIPPS2</a>.</sub></p>
 

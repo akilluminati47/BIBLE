@@ -63,13 +63,10 @@ BIBLE 是 RIPPS2 安裝的開機載入程式：saildot4k 的 PS2BBL Extended 的
 
 **這個分支改了什麼**
 
-- 開機畫面：PS2 標誌置中於 RIPPS2 的天空，按鍵在下方，文字在上方。
-  `BIBLE_GLYPHS` 0 不顯示，1 正面按鍵（預設），2 全部十六個，分兩列每列八個。
-  `BIBLE_INFO` 1 顯示主機資訊、時鐘與倒數（預設關閉）。
-  天空會配合你的 RIPPS2 Color Theme：未設定 `BIBLE_COLOR` 時，BIBLE 會讀取 RIPPS2 隨其
-  設定儲存的天空，來源是其 AUTO 項目啟動的 RIPPS2 資料夾（設定檔中的 `BIBLE_COLOR` 優先）。
-  所有視訊模式下外觀一致。頁面（視訊模式、製作名單、啟動鍵）會在變暗的標誌上淡入，
-  按鍵收起，讓啟動鍵能從容閱讀。
+- 啟動畫面：PS2 標誌位於 RIPPS2 天空的中央，按鍵在下方，文字（如有）在上方。`BIBLE_GLYPHS` 0 不顯示，1 動作鍵（預設），2 全部十六個，分兩排各八個。`BIBLE_INFO` 1 顯示主機資訊、時鐘和倒數（預設關閉）。天空跟隨你的 RIPPS2 Color Theme：沒有 `BIBLE_COLOR` 時，BIBLE 讀取 RIPPS2 隨設定儲存的天空，來源是其 AUTO 項目啟動的資料夾；當 AUTO 項目是 SD2PSX、USB 或硬碟上的 RIPPS2 時，則讀記憶卡上的 `RIPPS2` 資料夾（設定中的 `BIBLE_COLOR` 優先）。每種視訊模式下外觀相同。
+- `BIBLE_BACKGROUND`：`AUTO`（預設：找到 RIPPS2 的設定或設了 `BIBLE_COLOR` 時顯示天空，否則以主機自身模式顯示黑色，如同一般開機載入程式）、`SKY` 或 `BLANK`（黑色）。切換到程式時本來就會黑幾秒，所以黑色與之渾然一體。
+- 預先備妥的開機音：RIPPS2 的 Boot Sound On (fast) 可以把 `boot.adp` 放在 BIBLE 設定旁邊（`mc?:/SYS-CONF/boot.adp`）。BIBLE 在啟動畫面倒數期間讀取它，並透過記憶體交給 RIPPS2，因此即使 RIPPS2 從 SD2PSX 啟動，它也會隨 RIPPS2 的第一個畫格響起（MMCE、MX4SIO 和 HDD 版本；記憶卡 / USB 版本把資料夾告訴 RIPPS2，由 RIPPS2 自己讀取）。啟動時 BIBLE 會等待尚未讀完的部分：`KEY_READ_WAIT_TIME = 0` 時就是整個讀取，在記憶卡上約 2 秒。**無聲開機最快。** 約定與 RIPPS2 一端：[docs/boot-sound-handoff.md](docs/boot-sound-handoff.md)。
+- RIPPS2 優先：設定範本（`release/SYS-CONF/PS2BBL.INI`）和內建預設值會先於 OSDMenu 和 FMCB 嘗試 `mc?:/RIPPS2/RIPPS2.ELF` 和 `mmce?:/APPS/RIPPS2.ELF`，範本也附說明列出 BIBLE 自己的鍵。各頁面（視訊模式、製作群、啟動鍵）會在收起按鍵、調暗的標誌上淡入，讓啟動鍵能從容閱讀。
 - 視訊模式：`VIDEO_MODE` 也接受 `576P`、`720P` 與 `1080I`，即 RIPPS2 其餘的模式。`AUTO`（預設）
   在 AUTO 項目旁找到 RIPPS2 的設定時以其 Video Mode 啟動，否則使用主機本身的模式。
 - `BIBLE_WIDESCREEN`：`AUTO`（預設：RIPPS2 的 Widescreen，否則用 PS2 的 16:9 螢幕設定）、`ON` 或
@@ -78,7 +75,7 @@ BIBLE 是 RIPPS2 安裝的開機載入程式：saildot4k 的 PS2BBL Extended 的
 - 進入 RIPPS2 不跳畫面：啟動時標誌與按鍵淡出，天空以 RIPPS2 的模式留在螢幕上；
   RIPPS2 就在同一片天空上啟動。開機時按住 TRIANGLE + CROSS 開啟視訊模式頁面，它總是以
   主機本身的交錯模式開啟（在複合端子線上從 720p 或 1080i 回來的方法）。
-- 新功能：啟動鍵頁面。開機時按住 L2 + R2，不論開機畫面怎麼設定，都能讀到每個按鍵的啟動路徑。
+- 新增：啟動鍵頁面。開機時按住 L2 + R2，BIBLE 會在啟動任何東西之前暫停，顯示每個鍵目前的啟動路徑，無論你的啟動畫面怎麼設定（在什麼都不顯示的 `LOGO_DISPLAY = 0` 下很方便）。
 - 從開機起就按住的組合鍵現在會開啟對應頁面（以前手把仍在
   初始化時會漏掉 TRIANGLE + CROSS）。
 - 允許 `KEY_READ_WAIT_TIME = 0`（upstream 的下限是 500 ms）。
@@ -86,7 +83,7 @@ BIBLE 是 RIPPS2 安裝的開機載入程式：saildot4k 的 PS2BBL Extended 的
 
 **RIPPS2 如何使用它**
 
-RIPPS2 從 v1.3.4-beta 起以簽署過的開機檔案附帶 BIBLE，並從 Settings > General > Boot Loader > Manage 安裝。BIBLE 也能作為由其他載入程式啟動的 ELF 執行（FMCB、OSDMenu、SD2PSX 的載入程式）。簽署過的組建在[發行頁面](https://github.com/akilluminati47/BIBLE/releases/tag/signed-f31c8d5)上；發行時還沒有任何主機綁定過它們，所以請先用一張備用記憶卡試試。
+RIPPS2 把 BIBLE 放在 RIPPS2.elf 裡，每個版本都由 akilluminati47 簽署，並在 設定 > 一般 > Boot Loader > Manage 中安裝或更新它，在那裡也能設定 BIBLE 的鍵：Background、Splash、Button Glyphs、Info Line、Power-on Wait、Video Mode 和 Widescreen。已簽署的版本和現成的 SD2PSX BOOT 卡在[發布頁面](https://github.com/akilluminati47/BIBLE/releases/latest)。BIBLE 也可以作為由其他載入程式（FMCB、OSDMenu、SD2PSX 的載入程式）啟動的 ELF 執行。
 
 <p align="center"><img src="assets/readme/ripps2-icon.png" alt="RIPPS2" width="48" height="48"><br><sub>BIBLE 是 <a href="https://github.com/akilluminati47/RIPPS2">RIPPS2</a> 的一部分。</sub></p>
 

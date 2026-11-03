@@ -63,13 +63,10 @@ BIBLE je zavaděč, který nastavuje RIPPS2: fork PS2BBL Extended od saildot4k.
 
 **Co tento fork mění**
 
-- Úvodní obrazovka: logo PS2 uprostřed oblohy RIPPS2, tlačítka pod ním a případný text nad ním.
-  `BIBLE_GLYPHS` 0 žádná, 1 přední tlačítka (výchozí), 2 všech šestnáct ve dvou řadách po osmi.
-  `BIBLE_INFO` 1 zobrazí informace o konzoli, hodiny a odpočet (ve výchozím stavu vypnuto).
-  Obloha odpovídá vašemu Color Theme z RIPPS2: bez `BIBLE_COLOR` čte BIBLE oblohu, kterou RIPPS2 ukládá se svým
-  nastavením, ze složky RIPPS2, kterou spouští jeho položka AUTO (`BIBLE_COLOR` v konfiguraci má přednost).
-  Stejný vzhled v každém režimu videa. Stránky (režim videa, titulky, spouštěcí klávesy) se prolnou přes ztlumené logo
-  s uklizenými tlačítky, takže se spouštěcí klávesy čtou v klidu.
+- Úvodní obrazovka: logo PS2 uprostřed oblohy RIPPS2, pod ním tlačítka a nad ním případný text. `BIBLE_GLYPHS` 0 žádná, 1 akční tlačítka (výchozí), 2 všech šestnáct ve dvou řadách po osmi. `BIBLE_INFO` 1 ukáže informace o konzoli, hodiny a odpočet (ve výchozím stavu vypnuto). Obloha odpovídá vašemu Color Theme v RIPPS2: bez `BIBLE_COLOR` čte BIBLE oblohu, kterou RIPPS2 ukládá se svým nastavením, ze složky, kterou spouští jeho položka AUTO, nebo ze složky `RIPPS2` na paměťové kartě, když je položka AUTO RIPPS2 na SD2PSX, USB nebo pevném disku (`BIBLE_COLOR` v konfiguraci vyhrává). Stejný vzhled v každém video režimu.
+- `BIBLE_BACKGROUND`: `AUTO` (výchozí: obloha, když se najde nastavení RIPPS2 nebo je nastaveno `BIBLE_COLOR`, jinak černá ve vlastním režimu konzole, obyčejný zavaděč), `SKY` nebo `BLANK` (černá). Přechod do programu je stejně pár sekund černý, takže černá s ním působí jako jeden celek.
+- Zvuk spuštění, připravený: Boot Sound On (fast) v RIPPS2 může mít `boot.adp` vedle konfigurace BIBLE (`mc?:/SYS-CONF/boot.adp`). BIBLE ho čte, zatímco úvodní obrazovka odpočítává, a předá ho RIPPS2 v RAM, takže zazní s prvním snímkem RIPPS2, i když RIPPS2 startuje z SD2PSX (sestavení MMCE, MX4SIO a HDD; sestavení pro paměťovou kartu / USB řekne RIPPS2 složku a RIPPS2 ho přečte). BIBLE při spuštění počká na část, která ještě není přečtená: s `KEY_READ_WAIT_TIME = 0` je to celé čtení, asi 2 s na paměťové kartě. **Bez zvuku je start nejrychlejší.** Dohoda a strana RIPPS2: [docs/boot-sound-handoff.md](docs/boot-sound-handoff.md).
+- RIPPS2 napřed: šablona konfigurace (`release/SYS-CONF/PS2BBL.INI`) a vestavěné výchozí hodnoty zkoušejí `mc?:/RIPPS2/RIPPS2.ELF` a `mmce?:/APPS/RIPPS2.ELF` před OSDMenu a FMCB a šablona uvádí vlastní klíče BIBLE s poznámkami. Stránky (video režim, autoři, spouštěcí tlačítka) se objeví přes ztlumené logo s uklizenými tlačítky, aby se spouštěcí tlačítka dala v klidu číst.
 - Režimy videa: `VIDEO_MODE` bere také `576P`, `720P` a `1080I`, zbytek režimů RIPPS2. `AUTO` (výchozí)
   startuje ve Video Mode RIPPS2, když najde jeho nastavení vedle položky AUTO, jinak v režimu konzole.
 - `BIBLE_WIDESCREEN`: `AUTO` (výchozí: Widescreen z RIPPS2, jinak nastavení obrazovky 16:9 v PS2), `ON` nebo
@@ -78,7 +75,7 @@ BIBLE je zavaděč, který nastavuje RIPPS2: fork PS2BBL Extended od saildot4k.
 - Žádný skok při přechodu do RIPPS2: při spuštění logo a tlačítka zmizí a obloha zůstane na obrazovce v režimu RIPPS2;
   RIPPS2 startuje na stejné obloze. Při startu podržte TRIANGLE + CROSS pro stránku režimu videa, která se vždy otevře
   ve vlastním prokládaném režimu konzole (cesta zpět z 720p nebo 1080i na kompozitním kabelu).
-- Novinka: stránka spouštěcích kláves. Při startu podržte L2 + R2 a přečtete si spouštěcí cestu každé klávesy, ať je úvodní obrazovka nastavena jakkoli.
+- Novinka: stránka spouštěcích tlačítek. Podržte L2 + R2 při zapnutí a BIBLE se zastaví dřív, než cokoli spustí, a ukáže aktuální spouštěcí cesty každého tlačítka bez ohledu na nastavení úvodní obrazovky (hodí se s `LOGO_DISPLAY = 0`, kde se nic jiného neukáže).
 - Kombinace držené od zapnutí teď otevírají své stránky (TRIANGLE + CROSS se ztrácelo, když se ovladače ještě
   spouštěly).
 - `KEY_READ_WAIT_TIME = 0` je povoleno (minimum v upstreamu je 500 ms).
@@ -86,7 +83,7 @@ BIBLE je zavaděč, který nastavuje RIPPS2: fork PS2BBL Extended od saildot4k.
 
 **Jak ho RIPPS2 používá**
 
-RIPPS2 nese BIBLE jako podepsané spouštěcí soubory od v1.3.4-beta a instaluje ho ze Settings > General > Boot Loader > Manage. BIBLE běží i jako ELF spuštěný jiným zavaděčem (FMCB, OSDMenu, zavaděč SD2PSX). Podepsané buildy jsou na [stránce vydání](https://github.com/akilluminati47/BIBLE/releases/tag/signed-f31c8d5); když vyšly, žádná konzole je ještě nesvázala, tak to nejdřív zkus na náhradní paměťové kartě.
+RIPPS2 nese BIBLE uvnitř RIPPS2.elf, každé sestavení podepsal akilluminati47, a instaluje ho nebo aktualizuje v Nastavení > Obecné > Boot Loader > Manage, kde také nastaví klíče BIBLE: Background, Splash, Button Glyphs, Info Line, Power-on Wait, Video Mode a Widescreen. Podepsaná sestavení a hotová karta BOOT pro SD2PSX jsou na [stránce vydání](https://github.com/akilluminati47/BIBLE/releases/latest). BIBLE běží také jako ELF spuštěný jiným zavaděčem (FMCB, OSDMenu, zavaděč SD2PSX).
 
 <p align="center"><img src="assets/readme/ripps2-icon.png" alt="RIPPS2" width="48" height="48"><br><sub>BIBLE je součástí <a href="https://github.com/akilluminati47/RIPPS2">RIPPS2</a>.</sub></p>
 

@@ -63,13 +63,10 @@ BIBLE は RIPPS2 がセットアップするブートローダーで、saildot4k
 
 **このフォークの変更点**
 
-- スプラッシュ：RIPPS2 の空の中央に PS2 ロゴ、その下にボタン、上にテキストを配置します。
-  `BIBLE_GLYPHS` 0 なし、1 前面ボタン（既定）、2 十六個すべてを八個ずつ二列で。
-  `BIBLE_INFO` 1 で本体情報、時計、カウントダウンを表示します（既定はオフ）。
-  空は RIPPS2 の Color Theme に合わせます：`BIBLE_COLOR` がなければ、BIBLE は RIPPS2 が設定と一緒に保存する
-  空を、AUTO エントリが起動する RIPPS2 フォルダーから読みます（設定ファイルの `BIBLE_COLOR` が優先）。
-  どのビデオモードでも同じ見た目です。ページ（ビデオモード、クレジット、起動キー）は暗くしたロゴの上にフェードインし、
-  ボタンは片付けられるので、起動キーを落ち着いて読めます。
+- スプラッシュ: RIPPS2 の空の中央に PS2 ロゴ、その下にボタン、上に文字（あれば）。`BIBLE_GLYPHS` 0 なし、1 アクションボタン（既定）、2 16 個すべてを 8 個ずつ 2 段で。`BIBLE_INFO` 1 で本体情報、時計、カウントダウンを表示（既定はオフ）。空は RIPPS2 の Color Theme に合わせます。`BIBLE_COLOR` がなければ、BIBLE は RIPPS2 が設定と一緒に保存する空を、AUTO エントリが起動するフォルダから、または AUTO エントリが SD2PSX、USB、HDD 上の RIPPS2 のときはメモリーカードの `RIPPS2` フォルダから読みます（設定ファイルの `BIBLE_COLOR` が優先）。どのビデオモードでも同じ見た目です。
+- `BIBLE_BACKGROUND`: `AUTO`（既定: RIPPS2 の設定が見つかるか `BIBLE_COLOR` があれば空、なければ本体自身のモードで黒、普通のブートローダーと同じ）、`SKY` または `BLANK`（黒）。プログラムへの切り替えはどのみち数秒黒くなるので、黒ならそれと一続きに見えます。
+- 起動音を先に用意: RIPPS2 の Boot Sound On (fast) は `boot.adp` を BIBLE の設定ファイルの隣（`mc?:/SYS-CONF/boot.adp`）に置けます。BIBLE はスプラッシュのカウントダウン中にそれを読み、RAM で RIPPS2 に渡すので、RIPPS2 が SD2PSX から起動するときでも RIPPS2 の最初のフレームで鳴ります（MMCE、MX4SIO、HDD 版。メモリーカード / USB 版は RIPPS2 にフォルダを伝え、RIPPS2 が読みます）。BIBLE は起動時にまだ読み終わっていない分を待ちます。`KEY_READ_WAIT_TIME = 0` ではそれが読み込み全体で、メモリーカードで約 2 秒です。**無音がいちばん速い起動です。** 取り決めと RIPPS2 側: [docs/boot-sound-handoff.md](docs/boot-sound-handoff.md)。
+- RIPPS2 を最初に: 設定ファイルのひな形（`release/SYS-CONF/PS2BBL.INI`）と組み込みの既定値は、OSDMenu や FMCB より先に `mc?:/RIPPS2/RIPPS2.ELF` と `mmce?:/APPS/RIPPS2.ELF` を試し、ひな形には BIBLE 独自のキーが説明付きで並びます。各ページ（ビデオモード、クレジット、起動キー）は、ボタンをしまって暗くしたロゴの上にフェードインするので、起動キーが落ち着いて読めます。
 - ビデオモード：`VIDEO_MODE` は `576P`、`720P`、`1080I` も受け付けます（RIPPS2 の残りのモード）。`AUTO`（既定）は
   AUTO エントリの隣に RIPPS2 の設定があればその Video Mode で、なければ本体自身のモードで起動します。
 - `BIBLE_WIDESCREEN`：`AUTO`（既定：RIPPS2 の Widescreen、なければ PS2 の 16:9 画面設定）、`ON` または
@@ -78,7 +75,7 @@ BIBLE は RIPPS2 がセットアップするブートローダーで、saildot4k
 - RIPPS2 に入るときのちらつきなし：起動時にロゴとボタンがフェードアウトし、空は RIPPS2 のモードのまま画面に残ります。
   RIPPS2 はその同じ空の上で始まります。起動時に TRIANGLE + CROSS を押し続けるとビデオモードのページが開き、これは常に
   本体自身のインターレースモードで開きます（コンポジットケーブルで 720p や 1080i から戻る道）。
-- 新機能：起動キーのページ。起動時に L2 + R2 を押し続けると、スプラッシュの設定に関係なく、各キーの起動パスを読めます。
+- 新機能: 起動キーのページ。電源投入時に L2 + R2 を押し続けると、BIBLE は何かを起動する前に止まり、スプラッシュの設定にかかわらず各キーの現在の起動パスを表示します（ほかに何も表示されない `LOGO_DISPLAY = 0` で便利です）。
 - 電源投入時から押し続けたコンボでページが開くようになりました（コントローラーがまだ
   起動中だと TRIANGLE + CROSS を取りこぼしていました）。
 - `KEY_READ_WAIT_TIME = 0` を許可しました（upstream の下限は 500 ms）。
@@ -86,7 +83,7 @@ BIBLE は RIPPS2 がセットアップするブートローダーで、saildot4k
 
 **RIPPS2 での使い方**
 
-RIPPS2 は v1.3.4-beta から BIBLE を署名済みのブートファイルとして同梱し、Settings > General > Boot Loader > Manage からインストールします。BIBLE はほかのローダー（FMCB、OSDMenu、SD2PSX のローダー）から起動される ELF としても動きます。署名済みビルドは[リリースページ](https://github.com/akilluminati47/BIBLE/releases/tag/signed-f31c8d5)にあります。公開時点ではまだどの本体もバインドしていないので、まず予備のメモリーカードで試してください。
+RIPPS2 は BIBLE を RIPPS2.elf の中に持っており、どのビルドも akilluminati47 が署名しています。設定 > 一般 > Boot Loader > Manage から導入や更新ができ、そこで BIBLE のキーも設定できます: Background、Splash、Button Glyphs、Info Line、Power-on Wait、Video Mode、Widescreen。署名済みビルドと SD2PSX 用の完成した BOOT カードは[リリースページ](https://github.com/akilluminati47/BIBLE/releases/latest)にあります。BIBLE はほかのローダー（FMCB、OSDMenu、SD2PSX のローダー）から起動する ELF としても動きます。
 
 <p align="center"><img src="assets/readme/ripps2-icon.png" alt="RIPPS2" width="48" height="48"><br><sub>BIBLE は <a href="https://github.com/akilluminati47/RIPPS2">RIPPS2</a> の一部です。</sub></p>
 

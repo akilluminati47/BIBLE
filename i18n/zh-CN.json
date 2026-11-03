@@ -167,10 +167,6 @@
   "en": "4793c8125dc9",
   "t": "### eGSM (external Graphics Synthesize Mode)"
  },
- "4822d5ecd6f5": {
-  "en": "4822d5ecd6f5",
-  "t": "- 新增：启动键页面。开机时按住 L2 + R2，无论启动画面如何设置，都能看到每个键的启动路径。"
- },
  "4995cc5a4675": {
   "en": "4995cc5a4675",
   "t": "6. 其余参数保持顺序并传给被启动的应用。"
@@ -395,10 +391,6 @@
   "en": "9a2ff94c7bee",
   "t": "- `-ps1fast`"
  },
- "9e14e0197f55": {
-  "en": "9e14e0197f55",
-  "t": "- 启动画面：PS2 标志居中于 RIPPS2 的天空，按键在下方，文字在上方。\n  `BIBLE_GLYPHS` 0 不显示，1 正面按键（默认），2 全部十六个，分两行每行八个。\n  `BIBLE_INFO` 1 显示主机信息、时钟和倒计时（默认关闭）。\n  天空与你的 RIPPS2 Color Theme 一致：未设置 `BIBLE_COLOR` 时，BIBLE 读取 RIPPS2 随其\n  设置保存的天空，来自其 AUTO 条目启动的 RIPPS2 文件夹（配置中的 `BIBLE_COLOR` 优先）。\n  在所有视频模式下外观一致。页面（视频模式、制作人员、启动键）在变暗的标志上淡入，\n  按键收起，让启动键可以从容阅读。"
- },
  "9f17d88941ea": {
   "en": "9f17d88941ea",
   "t": "- `fp2` = 强制逐行扫描（480p/576p）"
@@ -587,10 +579,6 @@
   "en": "e3b8cc6236ca",
   "t": "  - @nathanneurotic 的 PS2BBLE 10 路径、想法和劝说"
  },
- "e448e12d4e86": {
-  "en": "e448e12d4e86",
-  "t": "RIPPS2 从 v1.3.4-beta 起以签名启动文件的形式附带 BIBLE，并从 Settings > General > Boot Loader > Manage 安装。BIBLE 也可以作为由其他引导程序启动的 ELF 运行（FMCB、OSDMenu、SD2PSX 的引导程序）。签名构建在[发布页面](https://github.com/akilluminati47/BIBLE/releases/tag/signed-f31c8d5)上；发布时还没有任何主机绑定过它们，所以请先用一张备用记忆卡试试。"
- },
  "e6d271e7c0bd": {
   "en": "e6d271e7c0bd",
   "t": "配置搜索现在会识别启动方式，避免在启动时加载不必要的驱动："
@@ -662,5 +650,29 @@
  "fffd2a6caa3f": {
   "en": "fffd2a6caa3f",
   "t": "  - 如果有 `-patinfo`，剩下的第一个参数会覆盖 CNF 的 `BOOT2/BOOT/path` 目标。\n  这适用于 HDD 构建。  \n  PATINFO 示例：  "
+ },
+ "6148c0d264cd": {
+  "en": "6148c0d264cd",
+  "t": "- 启动画面：PS2 标志位于 RIPPS2 天空的中央，按键在下方，文字（如有）在上方。`BIBLE_GLYPHS` 0 不显示，1 动作键（默认），2 全部十六个，分两排各八个。`BIBLE_INFO` 1 显示主机信息、时钟和倒计时（默认关闭）。天空跟随你的 RIPPS2 Color Theme：没有 `BIBLE_COLOR` 时，BIBLE 读取 RIPPS2 随设置保存的天空，来源是其 AUTO 项启动的文件夹；当 AUTO 项是 SD2PSX、USB 或硬盘上的 RIPPS2 时，则读记忆卡上的 `RIPPS2` 文件夹（配置中的 `BIBLE_COLOR` 优先）。每种视频模式下外观相同。"
+ },
+ "7705781d64d9": {
+  "en": "7705781d64d9",
+  "t": "- `BIBLE_BACKGROUND`：`AUTO`（默认：找到 RIPPS2 的设置或设了 `BIBLE_COLOR` 时显示天空，否则以主机自身模式显示黑色，如同普通引导程序）、`SKY` 或 `BLANK`（黑色）。切换到程序时本来就会黑几秒，所以黑色与之浑然一体。"
+ },
+ "2595eafbc56c": {
+  "en": "2595eafbc56c",
+  "t": "- 预先备好的开机音：RIPPS2 的 Boot Sound On (fast) 可以把 `boot.adp` 放在 BIBLE 配置旁边（`mc?:/SYS-CONF/boot.adp`）。BIBLE 在启动画面倒计时期间读取它，并通过内存交给 RIPPS2，因此即使 RIPPS2 从 SD2PSX 启动，它也会随 RIPPS2 的第一帧响起（MMCE、MX4SIO 和 HDD 版本；记忆卡 / USB 版本把文件夹告诉 RIPPS2，由 RIPPS2 自己读取）。启动时 BIBLE 会等待尚未读完的部分：`KEY_READ_WAIT_TIME = 0` 时就是整个读取，在记忆卡上约 2 秒。**无声启动最快。** 约定与 RIPPS2 一侧：[docs/boot-sound-handoff.md](docs/boot-sound-handoff.md)。"
+ },
+ "a3adb3ae35a8": {
+  "en": "a3adb3ae35a8",
+  "t": "- RIPPS2 优先：配置模板（`release/SYS-CONF/PS2BBL.INI`）和内置默认值会先于 OSDMenu 和 FMCB 尝试 `mc?:/RIPPS2/RIPPS2.ELF` 和 `mmce?:/APPS/RIPPS2.ELF`，模板还附说明列出 BIBLE 自己的键。各页面（视频模式、制作人员、启动键）会在收起按键、调暗的标志上淡入，让启动键能从容阅读。"
+ },
+ "3a7d07109b19": {
+  "en": "3a7d07109b19",
+  "t": "- 新增：启动键页面。开机时按住 L2 + R2，BIBLE 会在启动任何东西之前暂停，显示每个键当前的启动路径，无论你的启动画面如何设置（在什么都不显示的 `LOGO_DISPLAY = 0` 下很方便）。"
+ },
+ "6fd9ac99e195": {
+  "en": "6fd9ac99e195",
+  "t": "RIPPS2 把 BIBLE 放在 RIPPS2.elf 里，每个版本都由 akilluminati47 签名，并在 设置 > 常规 > Boot Loader > Manage 中安装或更新它，在那里还能设置 BIBLE 的键：Background、Splash、Button Glyphs、Info Line、Power-on Wait、Video Mode 和 Widescreen。已签名的版本和现成的 SD2PSX BOOT 卡在[发布页面](https://github.com/akilluminati47/BIBLE/releases/latest)。BIBLE 也可以作为由其他引导程序（FMCB、OSDMenu、SD2PSX 的引导程序）启动的 ELF 运行。"
  }
 }

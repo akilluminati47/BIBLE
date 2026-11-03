@@ -63,13 +63,10 @@ BIBLE, RIPPS2’nin kurduğu önyükleyicidir: saildot4k’nin PS2BBL Extended�
 
 **Bu fork neyi değiştiriyor**
 
-- Açılış ekranı: PS2 logosu RIPPS2’nin gökyüzünün ortasında, düğmeler altında, varsa yazı üstünde.
-  `BIBLE_GLYPHS` 0 hiçbiri, 1 ön yüz düğmeleri (varsayılan), 2 on altısı da sekizerli iki sıra hâlinde.
-  `BIBLE_INFO` 1 konsol bilgisini, saati ve geri sayımı gösterir (varsayılan olarak kapalı).
-  Gökyüzü RIPPS2 Color Theme’inize uyar: `BIBLE_COLOR` yoksa BIBLE, RIPPS2’nin ayarlarıyla birlikte kaydettiği
-  gökyüzünü, AUTO girdisinin başlattığı RIPPS2 klasöründen okur (yapılandırmadaki `BIBLE_COLOR` önceliklidir).
-  Her video modunda aynı görünüm. Sayfalar (video modu, emeği geçenler, başlatma tuşları) kısılmış logonun üzerine belirerek gelir,
-  düğmeler kaldırılmış olarak, böylece başlatma tuşları sakin sakin okunur.
+- Açılış ekranı: PS2 logosu RIPPS2'nin gökyüzünün ortasında, altında düğmeler ve üstünde varsa metin. `BIBLE_GLYPHS` 0 yok, 1 eylem düğmeleri (varsayılan), 2 on altısı da sekizerli iki sırada. `BIBLE_INFO` 1 konsol bilgisini, saati ve geri sayımı gösterir (varsayılan olarak kapalı). Gökyüzü RIPPS2 Color Theme'inize uyar: `BIBLE_COLOR` yoksa BIBLE, RIPPS2'nin ayarlarıyla kaydettiği gökyüzünü AUTO girdisinin başlattığı klasörden ya da AUTO girdisi bir SD2PSX, USB veya sabit diskteki RIPPS2 olduğunda bir hafıza kartının `RIPPS2` klasöründen okur (yapılandırmadaki `BIBLE_COLOR` önceliklidir). Her video modunda aynı görünüm.
+- `BIBLE_BACKGROUND`: `AUTO` (varsayılan: RIPPS2'nin ayarları bulunduğunda ya da `BIBLE_COLOR` ayarlıysa gökyüzü, yoksa konsolun kendi modunda siyah, sade bir önyükleyici), `SKY` ya da `BLANK` (siyah). Bir programa geçiş zaten birkaç saniye siyah olur, bu yüzden siyah onunla tek parça gibi görünür.
+- Açılış sesi, önceden hazır: RIPPS2'nin Boot Sound On (fast) ayarı `boot.adp` dosyasını BIBLE'ın yapılandırmasının yanında tutabilir (`mc?:/SYS-CONF/boot.adp`). BIBLE onu açılış ekranı geri sayarken okur ve RAM'de RIPPS2'ye verir, böylece RIPPS2 bir SD2PSX'ten başlasa bile RIPPS2'nin ilk karesiyle çalar (MMCE, MX4SIO ve HDD sürümleri; hafıza kartı / USB sürümü RIPPS2'ye klasörü söyler ve RIPPS2 okur). BIBLE başlatmada henüz okunmamış kısmı bekler: `KEY_READ_WAIT_TIME = 0` ile bu okumanın tamamıdır, bir hafıza kartında yaklaşık 2 s. **Sessiz açılış en hızlısıdır.** Anlaşma ve RIPPS2 tarafı: [docs/boot-sound-handoff.md](docs/boot-sound-handoff.md).
+- Önce RIPPS2: yapılandırma şablonu (`release/SYS-CONF/PS2BBL.INI`) ve yerleşik varsayılanlar OSDMenu ve FMCB'den önce `mc?:/RIPPS2/RIPPS2.ELF` ve `mmce?:/APPS/RIPPS2.ELF` yollarını dener, şablon da BIBLE'ın kendi anahtarlarını notlarıyla listeler. Sayfalar (video modu, emeği geçenler, başlatma tuşları) düğmeler kaldırılmış, karartılmış logonun üzerinde belirir, böylece başlatma tuşları rahatça okunur.
 - Video modları: `VIDEO_MODE` ayrıca `576P`, `720P` ve `1080I` alır, yani RIPPS2’nin geri kalan modlarını. `AUTO` (varsayılan)
   ayarları AUTO girdisinin yanında bulunursa RIPPS2’nin Video Mode’unda, yoksa konsolun kendi modunda başlar.
 - `BIBLE_WIDESCREEN`: `AUTO` (varsayılan: RIPPS2’nin Widescreen’i, yoksa PS2’nin 16:9 ekran ayarı), `ON` ya da
@@ -78,7 +75,7 @@ BIBLE, RIPPS2’nin kurduğu önyükleyicidir: saildot4k’nin PS2BBL Extended�
 - RIPPS2’ye geçerken sıçrama yok: başlatırken logo ve düğmeler kaybolur, gökyüzü RIPPS2’nin modunda ekranda kalır;
   RIPPS2 aynı gökyüzünde başlar. Video modu sayfası için açılışta TRIANGLE + CROSS’u basılı tutun; bu sayfa her zaman
   konsolun kendi geçmeli modunda açılır (kompozit kabloda 720p ya da 1080i’den geri dönüş yolu).
-- Yeni: başlatma tuşları sayfası. Açılış ayarlarınız ne olursa olsun, her tuşun başlatma yolunu okumak için açılışta L2 + R2’yi basılı tutun.
+- Yeni: başlatma tuşları sayfası. Açılışta L2 + R2'yi basılı tutun, BIBLE bir şey başlatmadan önce durur ve açılış ekranı ayarlarınız ne olursa olsun her tuşun güncel başlatma yollarını gösterir (`LOGO_DISPLAY = 0` ile kullanışlı, orada başka hiçbir şey görünmez).
 - Açılıştan itibaren basılı tutulan kombinasyonlar artık sayfalarını açıyor (kumandalar hâlâ başlarken TRIANGLE + CROSS
   kaçırılıyordu).
 - `KEY_READ_WAIT_TIME = 0` artık serbest (upstream’in alt sınırı 500 ms).
@@ -86,7 +83,7 @@ BIBLE, RIPPS2’nin kurduğu önyükleyicidir: saildot4k’nin PS2BBL Extended�
 
 **RIPPS2 onu nasıl kullanıyor**
 
-RIPPS2, v1.3.4-beta'dan beri BIBLE'ı imzalı önyükleme dosyaları olarak taşır ve Settings > General > Boot Loader > Manage üzerinden kurar. BIBLE ayrıca başka bir yükleyicinin başlattığı bir ELF olarak da çalışır (FMCB, OSDMenu, bir SD2PSX’in yükleyicisi). İmzalı derlemeler [sürüm sayfasında](https://github.com/akilluminati47/BIBLE/releases/tag/signed-f31c8d5); yayımlandıklarında hiçbir konsol onları bağlamamıştı, bu yüzden önce yedek bir hafıza kartında dene.
+RIPPS2, BIBLE'ı RIPPS2.elf içinde taşır, her sürüm akilluminati47 tarafından imzalanmıştır, ve onu Ayarlar > Genel > Boot Loader > Manage'den kurar ya da günceller; burada BIBLE'ın anahtarlarını da ayarlar: Background, Splash, Button Glyphs, Info Line, Power-on Wait, Video Mode ve Widescreen. İmzalı sürümler ve hazır bir SD2PSX BOOT kartı [sürümler sayfasında](https://github.com/akilluminati47/BIBLE/releases/latest). BIBLE başka bir yükleyicinin başlattığı bir ELF olarak da çalışır (FMCB, OSDMenu, bir SD2PSX'in yükleyicisi).
 
 <p align="center"><img src="assets/readme/ripps2-icon.png" alt="RIPPS2" width="48" height="48"><br><sub>BIBLE, <a href="https://github.com/akilluminati47/RIPPS2">RIPPS2</a> projesinin bir parçasıdır.</sub></p>
 

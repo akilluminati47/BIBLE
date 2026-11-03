@@ -63,13 +63,10 @@ BIBLE je boot loader koji postavlja RIPPS2: fork PS2BBL Extended od saildot4k.
 
 **Što ovaj fork mijenja**
 
-- Početni zaslon: PS2 logo u sredini neba RIPPS2, s tipkama ispod i bilo kojim tekstom iznad.
-  `BIBLE_GLYPHS` 0 nijedna, 1 prednje tipke (zadano), 2 svih šesnaest u dva reda po osam.
-  `BIBLE_INFO` 1 prikazuje podatke o konzoli, sat i odbrojavanje (zadano isključeno).
-  Nebo prati vaš Color Theme iz RIPPS2: bez `BIBLE_COLOR`, BIBLE čita nebo koje RIPPS2 sprema sa svojim
-  postavkama, iz mape RIPPS2 koju pokreće njegov unos AUTO (`BIBLE_COLOR` u konfiguraciji ima prednost).
-  Isti izgled u svakom video načinu. Stranice (video način, zasluge, tipke za pokretanje) postupno se pojavljuju preko zatamnjenog loga
-  s pospremljenim tipkama, pa se tipke za pokretanje čitaju na miru.
+- Uvodni zaslon: PS2 logo u sredini neba RIPPS2-a, s tipkama ispod i eventualnim tekstom iznad. `BIBLE_GLYPHS` 0 ništa, 1 tipke za radnje (zadano), 2 svih šesnaest u dva reda po osam. `BIBLE_INFO` 1 prikazuje podatke o konzoli, sat i odbrojavanje (zadano isključeno). Nebo prati tvoj RIPPS2 Color Theme: bez `BIBLE_COLOR` BIBLE čita nebo koje RIPPS2 sprema uz svoje postavke, iz mape koju pokreće njegov unos AUTO, ili iz mape `RIPPS2` na memorijskoj kartici kad je unos AUTO RIPPS2 na SD2PSX-u, USB-u ili tvrdom disku (`BIBLE_COLOR` u konfiguraciji ima prednost). Isti izgled u svakom video načinu.
+- `BIBLE_BACKGROUND`: `AUTO` (zadano: nebo kad se nađu postavke RIPPS2-a ili je postavljen `BIBLE_COLOR`, inače crna u vlastitom načinu konzole, običan bootloader), `SKY` ili `BLANK` (crna). Prijelaz u program ionako je nekoliko sekundi crn, pa crna s njim djeluje kao jedna cjelina.
+- Zvuk pokretanja, pripremljen: Boot Sound On (fast) u RIPPS2-u može držati `boot.adp` pokraj BIBLE-ove konfiguracije (`mc?:/SYS-CONF/boot.adp`). BIBLE ga čita dok uvodni zaslon odbrojava i predaje ga RIPPS2-u u RAM-u, pa svira s prvom slikom RIPPS2-a čak i kad RIPPS2 kreće sa SD2PSX-a (verzije MMCE, MX4SIO i HDD; verzija za memorijsku karticu / USB kaže RIPPS2-u mapu i RIPPS2 ga čita). BIBLE pri pokretanju čeka dio koji još nije pročitan: s `KEY_READ_WAIT_TIME = 0` to je cijelo čitanje, oko 2 s na memorijskoj kartici. **Bez zvuka je najbrže pokretanje.** Dogovor i strana RIPPS2-a: [docs/boot-sound-handoff.md](docs/boot-sound-handoff.md).
+- RIPPS2 prvi: predložak konfiguracije (`release/SYS-CONF/PS2BBL.INI`) i ugrađene zadane vrijednosti pokušavaju `mc?:/RIPPS2/RIPPS2.ELF` i `mmce?:/APPS/RIPPS2.ELF` prije OSDMenua i FMCB-a, a predložak navodi BIBLE-ove vlastite ključeve s napomenama. Stranice (video način, zasluge, tipke za pokretanje) pojavljuju se preko zatamnjenog loga s pospremljenim tipkama, da se tipke za pokretanje mirno čitaju.
 - Video načini: `VIDEO_MODE` prima i `576P`, `720P` i `1080I`, ostatak načina RIPPS2. `AUTO` (zadano)
   pokreće se u Video Mode od RIPPS2 kad su njegove postavke pokraj unosa AUTO, inače u načinu konzole.
 - `BIBLE_WIDESCREEN`: `AUTO` (zadano: Widescreen od RIPPS2, inače postavka zaslona 16:9 na PS2), `ON` ili
@@ -78,7 +75,7 @@ BIBLE je boot loader koji postavlja RIPPS2: fork PS2BBL Extended od saildot4k.
 - Bez skoka pri ulasku u RIPPS2: pri pokretanju logo i tipke nestaju, a nebo ostaje na zaslonu u načinu RIPPS2;
   RIPPS2 počinje na tom istom nebu. Pri pokretanju držite TRIANGLE + CROSS za stranicu video načina, koja se uvijek otvara
   u vlastitom isprepletenom načinu konzole (put natrag iz 720p ili 1080i na kompozitnom kabelu).
-- Novo: stranica tipki za pokretanje. Pri pokretanju držite L2 + R2 da pročitate putanju svake tipke, bez obzira na postavke početnog zaslona.
+- Novo: stranica tipki za pokretanje. Drži L2 + R2 pri uključenju i BIBLE zastane prije nego išta pokrene, pokazujući trenutne putanje svake tipke, bez obzira na postavke uvodnog zaslona (korisno uz `LOGO_DISPLAY = 0`, gdje se ništa drugo ne prikazuje).
 - Kombinacije držane od uključivanja sada otvaraju svoje stranice (TRIANGLE + CROSS se gubio dok su se kontroleri još
   pokretali).
 - `KEY_READ_WAIT_TIME = 0` je dopušten (minimum u upstreamu je 500 ms).
@@ -86,7 +83,7 @@ BIBLE je boot loader koji postavlja RIPPS2: fork PS2BBL Extended od saildot4k.
 
 **Kako ga RIPPS2 koristi**
 
-RIPPS2 od v1.3.4-beta nosi BIBLE kao potpisane datoteke za pokretanje i instalira ga iz Settings > General > Boot Loader > Manage. BIBLE radi i kao ELF koji pokreće drugi loader (FMCB, OSDMenu, loader SD2PSX-a). Potpisani buildovi su na [stranici izdanja](https://github.com/akilluminati47/BIBLE/releases/tag/signed-f31c8d5); nijedna ih konzola nije vezala kad su izašli, pa najprije probaj na rezervnoj memorijskoj kartici.
+RIPPS2 nosi BIBLE unutar RIPPS2.elf, svaku verziju potpisao akilluminati47, i instalira ga ili ažurira u Postavke > Općenito > Boot Loader > Manage, gdje postavlja i BIBLE-ove ključeve: Background, Splash, Button Glyphs, Info Line, Power-on Wait, Video Mode i Widescreen. Potpisane verzije i gotova SD2PSX BOOT kartica su na [stranici izdanja](https://github.com/akilluminati47/BIBLE/releases/latest). BIBLE radi i kao ELF koji pokreće drugi loader (FMCB, OSDMenu, loader SD2PSX-a).
 
 <p align="center"><img src="assets/readme/ripps2-icon.png" alt="RIPPS2" width="48" height="48"><br><sub>BIBLE je dio <a href="https://github.com/akilluminati47/RIPPS2">RIPPS2</a>.</sub></p>
 
