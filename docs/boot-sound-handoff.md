@@ -24,7 +24,8 @@ in RAM.
 ## What BIBLE does
 
 1. After the config is read, if the **AUTO key's first entry** is RIPPS2 (its file name starts with `RIPPS2`, any
-   case) and `boot.adp` is there (32 bytes to 1 MB), BIBLE opens it with libmc and starts reading.
+   case) and `boot.adp` is there (32 bytes to 1 MB), BIBLE opens it with libmc and starts reading (the MMCE, MX4SIO
+   and HDD builds only; see the table below).
 2. The read goes in 32 KB pieces with libmc's asynchronous `mcRead`: one piece is in flight while the splash draws
    its frames and counts down, so the splash keeps its pace (`LoaderBootSoundPump`, once a frame).
 3. Anything else that may touch the card first waits out the piece in flight (`LoaderBootSoundQuiesce`): a key's
@@ -57,11 +58,23 @@ otherwise both are left out and the log says so):
 Both are plain `argv[]` entries after `argv[0]`. RIPPS2's `main` only looks at `argv[4]` when `argc >= 5`
 (`mini` / `bdm` auto-launch), which these never reach.
 
+### Which builds hand it over in RAM
+
+| Build | RAM hand-off | Why |
+|---|---|---|
+| PS2_MMCE, PS2_MX4SIO, PS2_HDD | yes | They load fileXio, so they embed BIBLE's stage 2 loader (built without eGSM, `BOOTSND_STAGE2`) and start RIPPS2-with-a-sound through it. |
+| PS2 (memory card / USB) | no, `-bible-home=` only | No fileXio, which the stage 2 loader's DEV9 shutdown needs (fileXio's init would wait forever). BIBLE reads nothing and never waits; RIPPS2 reads `<home>boot.adp` itself. |
+
+Every other launch, in every build, still goes through ps2sdk's `LoadELFFromFile`, unchanged.
+
 ### Why the RAM survives
 
-- BIBLE launches through its embedded stage 2 loader, which clears user memory before loading the ELF. Its new
-  **`K`** flag (`-la=K...`, with `mem:<addr>:<size>` as the argument nearest `-la=`) leaves that range as it is and
-  does not pass it on. The range is exactly the sound.
+- ps2sdk's own ELF loader (`LoadELFFromFile`) runs `wipeUserMem()` over all user RAM (`0x00100000` to the end)
+  before it loads: the lab caught it zeroing the sound the moment it started (take C below). So a RIPPS2 launch with
+  a sound goes through **BIBLE's stage 2 loader** instead, which also clears user memory but has a new **`K`** flag
+  (`-la=K...`, with `mem:<addr>:<size>` as the argument nearest `-la=`): it leaves that range as it is and does not
+  pass it on. The range is exactly the sound. BIBLE adds **`R`** with it, so the IOP is reset after the ELF is loaded,
+  as ps2sdk's loader does for every launch.
 - RIPPS2's packed ELF (build 138: one segment at `0x01A5AEF0`..`0x01D05C60`) is loaded above it; the LZMA stub
   unpacks to `0x00100000`..`0x007A8D14` (the packed header's section size) plus its BSS, below it (the header's next
   field, read as the BSS, puts the end near `0x00A4E000`). The stack is at the top of RAM.
@@ -136,6 +149,16 @@ the BIBLE menu is where the user picks.
 
 - PCSX2 with an EE_SIO build (`gh workflow run CI.yml -R akilluminati47/BIBLE --ref <branch> -f printf=EE_SIO`):
   the log says `Boot sound: reading N bytes`, `Boot sound: N bytes from mc0:/SYS-CONF/boot.adp in T ms, crc X`,
-  `the launch waited T ms`, the stage 2 argv with `mem:01400000:...` and `-la=K`.
-- With RIPPS2 running, PINE (`EnablePINE`, slot 28012) reads EE RAM at `0x01400000`: its CRC-32 matching the logged
-  one proves the sound survived the stage 2 loader, the ELF load and the unpack.
+  `the launch waited T ms`, the stage 2 argv with `mem:01400000:...` and `-la=KR`.
+- While it runs, PINE (`EnablePINE`, slot 28012) reads EE RAM at `0x01400000`. Each PINE connection is a line in
+  `emulog.txt`, so a poller that connects once per read lines its reads up with the emulator's clock exactly.
+
+### Lab results (11/03, PCSX2, RIPPS2 t138b on the card)
+
+- Take A (PS2 build, before the stage 2 change): config `mc0:/SYS-CONF/PS2BBL.INI`, RIPPS2's settings found in
+  `mc0:/RIPPS2` (the new fallback for an AUTO entry with none beside it), Blood sky, NTSC. `boot.adp` (367,904 bytes)
+  read in 623 ms while the 3 s countdown ran, CRC `0c94373a` (the file's own). RIPPS2 started with the two arguments.
+- Take B: AUTO not RIPPS2 (`$OSDSYS`): black splash in the console's own mode, no settings read, no sound read.
+- Take C: `BIBLE_BACKGROUND = BLANK` with RIPPS2 as AUTO: black splash, RIPPS2's NTSC mode. Polling RAM four times a
+  second showed the sound intact until ps2sdk's loader started, and zero from its first moments (`wipeUserMem`),
+  which is why the stage 2 path above exists.

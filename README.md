@@ -65,8 +65,21 @@ BIBLE is the boot loader RIPPS2 sets up: a fork of saildot4k's PS2BBL Extended.
   `BIBLE_GLYPHS` 0 none, 1 the face buttons (default), 2 all sixteen in two rows of eight.
   `BIBLE_INFO` 1 shows console info, clock and countdown (off by default).
   The sky matches your RIPPS2 Color Theme: with no `BIBLE_COLOR` set, BIBLE reads the sky RIPPS2 saves with its
-  settings, from the RIPPS2 folder its AUTO entry starts (`BIBLE_COLOR` in the config wins).
-  The same look in every video mode. Pages (video mode, credits, launch keys) fade in over the dimmed logo
+  settings, from the folder its AUTO entry starts, or from a memory card's `RIPPS2` folder when the AUTO entry is
+  RIPPS2 on an SD2PSX, USB or the HDD (`BIBLE_COLOR` in the config wins).
+  The same look in every video mode.
+- `BIBLE_BACKGROUND`: `AUTO` (the default: the sky when RIPPS2's settings are found or `BIBLE_COLOR` is set, else
+  black in the console's own mode, a plain boot loader), `SKY` or `BLANK` (black). The hand-off into a program is
+  black for a few seconds anyway, so black reads as one piece with it.
+- The boot sound, primed: RIPPS2's Boot Sound On (fast) can keep `boot.adp` beside BIBLE's config
+  (`mc?:/SYS-CONF/boot.adp`). BIBLE reads it while its splash counts down and hands it to RIPPS2 in RAM, so it plays
+  with RIPPS2's first frame even when RIPPS2 starts from an SD2PSX (MMCE, MX4SIO and HDD builds; the memory card /
+  USB build tells RIPPS2 the folder and RIPPS2 reads it). BIBLE waits at the launch for any part still unread: with
+  `KEY_READ_WAIT_TIME = 0` that is the whole read, about 2 s on a memory card. **Silent is the fastest boot.** The
+  contract and RIPPS2's side: [docs/boot-sound-handoff.md](docs/boot-sound-handoff.md).
+- RIPPS2 first: the config template (`release/SYS-CONF/PS2BBL.INI`) and the built-in defaults try
+  `mc?:/RIPPS2/RIPPS2.ELF` and `mmce?:/APPS/RIPPS2.ELF` before OSDMenu and FMCB, and the template lists BIBLE's own
+  keys with notes. Pages (video mode, credits, launch keys) fade in over the dimmed logo
   with the buttons put away, so the launch keys plainly rest.
 - Video modes: `VIDEO_MODE` also takes `576P`, `720P` and `1080I`, the rest of RIPPS2's. `AUTO` (the default)
   starts in RIPPS2's Video Mode when its settings are found beside the AUTO entry, else the console's own.
@@ -76,7 +89,8 @@ BIBLE is the boot loader RIPPS2 sets up: a fork of saildot4k's PS2BBL Extended.
 - No pop into RIPPS2: at a launch the logo and buttons fade away and the sky stays on screen, in RIPPS2's mode;
   RIPPS2 starts on that same sky. Hold TRIANGLE + CROSS at boot for the video mode page, which always opens in
   the console's own interlaced mode (the way back from 720p or 1080i on a composite cable).
-- New: the launch keys page. Hold L2 + R2 at boot to read every key's launch path, whatever your splash settings.
+- New: the launch keys page. Hold L2 + R2 at power on and BIBLE pauses before anything starts, showing every key's
+  current launch path(s), whatever your splash settings (handy with `LOGO_DISPLAY = 0`, where nothing else shows).
 - Boot combos held from power on now open their pages (TRIANGLE + CROSS was missed when the pads were still
   starting up).
 - `KEY_READ_WAIT_TIME = 0` is allowed (upstream's floor is 500 ms).
