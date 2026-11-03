@@ -49,11 +49,19 @@ $(EE_ASM_DIR)xfromman_irx.c: $(PSX_IOP_CACHE_DIR)xfromman.irx | $(EE_ASM_DIR)
 	$(BIN2S) $< $@ xfromman_irx
 endif
 
-# Use 1400-era MC/PAD modules for the SIO2 stack used by MMCE/MX4SIO.
-$(EE_ASM_DIR)mcman_irx.c: mcman-1400.irx | $(EE_ASM_DIR)
+# BIBLE (11/03): the homebrew SIO2 stack the MMCE and MX4SIO builds load, as RIPPS2 embeds it (freesio2, mcman, mcserv,
+# freepad), which links on the consoles RIPPS2 runs on. With mcman-1400 / padman-1400 and sio2man.irx MCMAN did not
+# link (KE_LINKERR, -200) and the builds hung on a black screen waiting for the memory card service.
+$(EE_ASM_DIR)sio2man_irx.c: freesio2.irx | $(EE_ASM_DIR)
+	$(BIN2S) $< $@ sio2man_irx
+
+$(EE_ASM_DIR)mcman_irx.c: mcman.irx | $(EE_ASM_DIR)
 	$(BIN2S) $< $@ mcman_irx
 
-$(EE_ASM_DIR)padman_irx.c: padman-1400.irx | $(EE_ASM_DIR)
+$(EE_ASM_DIR)mcserv_irx.c: mcserv.irx | $(EE_ASM_DIR)
+	$(BIN2S) $< $@ mcserv_irx
+
+$(EE_ASM_DIR)padman_irx.c: freepad.irx | $(EE_ASM_DIR)
 	$(BIN2S) $< $@ padman_irx
 
 $(EE_ASM_DIR)iomanx_irx.c: iomanX.irx | $(EE_ASM_DIR)
