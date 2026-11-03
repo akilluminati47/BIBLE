@@ -31,7 +31,7 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
-    container: ps2dev/ps2dev:latest
+    container: ps2dev/ps2dev@sha256:c64ae69c9817865ed98ff054e4ae5360b9e280ed952c97946bca95d9d35be995 # RIPPS2's pinned image (11/03: :latest's homebrew MCMAN did not link, so the MMCE and MX4SIO builds hung)
     env:
       FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: 'true'
       DEBUG: 'DEBUG=0'
