@@ -162,3 +162,9 @@ the BIBLE menu is where the user picks.
 - Take C: `BIBLE_BACKGROUND = BLANK` with RIPPS2 as AUTO: black splash, RIPPS2's NTSC mode. Polling RAM four times a
   second showed the sound intact until ps2sdk's loader started, and zero from its first moments (`wipeUserMem`),
   which is why the stage 2 path above exists.
+- Take D (MMCE build, commit 3282396): read in 440 ms, CRC `0c94373a`; the stage 2 loader got
+  `mc0:/APPS/RIPPS2.ELF`, `-bible-home=mc0:/SYS-CONF/`, `-bible-bootsnd=mem:01400000:00059D20:0C94373A`,
+  `mem:01400000:00059D20`, `-la=KR`; RIPPS2 loaded, the IOP reset, the unpack ran and RIPPS2 started. 154 header
+  reads (one per logged PINE connection) showed `APCM` from BIBLE's read to the end of the take.
+- Take E (same build): full 367,904-byte reads every 2 s gave CRC `0c94373a` through the stage 2 loader, the ELF
+  load, the unpack, and RIPPS2 running (the first one second after its `main` started, the last about 17 s later).
