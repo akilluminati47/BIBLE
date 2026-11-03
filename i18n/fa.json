@@ -163,10 +163,6 @@
   "en": "43fcd64b5833",
   "t": "5. وقتی با `DISC_STOP_AT_BOOT=1 کامپایل شده باشد"
  },
- "449dee5852ac": {
-  "en": "449dee5852ac",
-  "t": "RIPPS2 بوت‌لودر BIBLE را به‌صورت فایل‌های بوت امضاشده همراه خواهد داشت و آن را از Settings (Boot Loader) نصب می‌کند، به‌جای PS2BBL 1.2.0 که امروز همراه دارد. BIBLE همچنین به‌صورت ELF اجراشده توسط بوت‌لودری دیگر کار می‌کند (FMCB، OSDMenu، بوت‌لودر یک SD2PSX). هنوز نسخهٔ منتشرشده‌ای از BIBLE نیست."
- },
  "4793c8125dc9": {
   "en": "4793c8125dc9",
   "t": "### eGSM (external Graphics Synthesize Mode)"
@@ -590,6 +586,10 @@
  "e3b8cc6236ca": {
   "en": "e3b8cc6236ca",
   "t": "  - @nathanneurotic برای 10 مسیر PS2BBLE، ایده‌ها و ترغیب"
+ },
+ "e448e12d4e86": {
+  "en": "e448e12d4e86",
+  "t": "RIPPS2 از v1.3.4-beta بوت‌لودر BIBLE را به‌صورت فایل‌های بوت امضاشده همراه دارد و آن را از Settings > General > Boot Loader > Manage نصب می‌کند. BIBLE همچنین به‌صورت ELF اجراشده توسط بوت‌لودری دیگر کار می‌کند (FMCB، OSDMenu، بوت‌لودر یک SD2PSX). بیلدهای امضاشده در [صفحهٔ انتشار](https://github.com/akilluminati47/BIBLE/releases/tag/signed-f31c8d5) هستند؛ هنگام انتشار هنوز هیچ کنسولی آن‌ها را پیوند نداده بود، پس اول روی یک کارت حافظهٔ یدکی امتحان کن."
  },
  "e6d271e7c0bd": {
   "en": "e6d271e7c0bd",

@@ -163,10 +163,6 @@
   "en": "43fcd64b5833",
   "t": "5. Ha `DISC_STOP_AT_BOOT=1 beállítással fordították"
  },
- "449dee5852ac": {
-  "en": "449dee5852ac",
-  "t": "A RIPPS2 aláírt indítófájlokként hozza majd a BIBLE-t, és a Settings (Boot Loader) menüjéből telepíti, a ma hozott PS2BBL 1.2.0 helyett. A BIBLE egy másik betöltő által indított ELF-ként is fut (FMCB, OSDMenu, egy SD2PSX betöltője). BIBLE kiadás még nincs."
- },
  "4793c8125dc9": {
   "en": "4793c8125dc9",
   "t": "### eGSM (external Graphics Synthesize Mode)"
@@ -590,6 +586,10 @@
  "e3b8cc6236ca": {
   "en": "e3b8cc6236ca",
   "t": "  - @nathanneurotic a PS2BBLE 10 útvonaláért, az ötletekért és a rábeszélésért"
+ },
+ "e448e12d4e86": {
+  "en": "e448e12d4e86",
+  "t": "A RIPPS2 a v1.3.4-beta óta aláírt indítófájlokként hozza a BIBLE-t, és a Settings > General > Boot Loader > Manage menüből telepíti. A BIBLE egy másik betöltő által indított ELF-ként is fut (FMCB, OSDMenu, egy SD2PSX betöltője). Az aláírt buildek a [kiadási oldalon](https://github.com/akilluminati47/BIBLE/releases/tag/signed-f31c8d5) vannak; megjelenésükkor még egy konzol sem kötötte őket, ezért előbb egy tartalék memóriakártyán próbáld ki."
  },
  "e6d271e7c0bd": {
   "en": "e6d271e7c0bd",

@@ -163,10 +163,6 @@
   "en": "43fcd64b5833",
   "t": "5. Při kompilaci s `DISC_STOP_AT_BOOT=1"
  },
- "449dee5852ac": {
-  "en": "449dee5852ac",
-  "t": "RIPPS2 bude BIBLE nosit jako podepsané spouštěcí soubory a instalovat ho ze svých Settings (Boot Loader) místo PS2BBL 1.2.0, který nosí dnes. BIBLE běží i jako ELF spuštěný jiným zavaděčem (FMCB, OSDMenu, zavaděč SD2PSX). Vydání BIBLE zatím není."
- },
  "4793c8125dc9": {
   "en": "4793c8125dc9",
   "t": "### eGSM (external Graphics Synthesize Mode)"
@@ -590,6 +586,10 @@
  "e3b8cc6236ca": {
   "en": "e3b8cc6236ca",
   "t": "  - @nathanneurotic za 10 cest PS2BBLE, nápady a přemlouvání"
+ },
+ "e448e12d4e86": {
+  "en": "e448e12d4e86",
+  "t": "RIPPS2 nese BIBLE jako podepsané spouštěcí soubory od v1.3.4-beta a instaluje ho ze Settings > General > Boot Loader > Manage. BIBLE běží i jako ELF spuštěný jiným zavaděčem (FMCB, OSDMenu, zavaděč SD2PSX). Podepsané buildy jsou na [stránce vydání](https://github.com/akilluminati47/BIBLE/releases/tag/signed-f31c8d5); když vyšly, žádná konzole je ještě nesvázala, tak to nejdřív zkus na náhradní paměťové kartě."
  },
  "e6d271e7c0bd": {
   "en": "e6d271e7c0bd",

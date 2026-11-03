@@ -88,7 +88,7 @@ BIBLE هو محمّل الإقلاع الذي يجهّزه RIPPS2: فرع من P
 
 **كيف يستخدمه RIPPS2**
 
-سيحمل RIPPS2 محمّل BIBLE كملفات إقلاع موقّعة ويثبّته من Settings (Boot Loader)، بدلًا من PS2BBL 1.2.0 الذي يحمله اليوم. ويعمل BIBLE أيضًا كملف ELF يشغّله محمّل آخر (FMCB، OSDMenu، محمّل SD2PSX). لا يوجد إصدار من BIBLE بعد.
+يحمل RIPPS2 محمّل BIBLE كملفات إقلاع موقّعة منذ v1.3.4-beta ويثبّته من Settings > General > Boot Loader > Manage. ويعمل BIBLE أيضًا كملف ELF يشغّله محمّل آخر (FMCB، OSDMenu، محمّل SD2PSX). الإصدارات الموقّعة موجودة في [صفحة الإصدار](https://github.com/akilluminati47/BIBLE/releases/tag/signed-f31c8d5)؛ لم تكن أي منصة قد ربطتها حين نُشرت، لذا جرّبها أولًا على بطاقة ذاكرة احتياطية.
 
 <p align="center"><img src="assets/readme/ripps2-icon.png" alt="RIPPS2" width="48" height="48"><br><sub>BIBLE جزء من <a href="https://github.com/akilluminati47/RIPPS2">RIPPS2</a>.</sub></p>
 

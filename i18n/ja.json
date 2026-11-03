@@ -163,10 +163,6 @@
   "en": "43fcd64b5833",
   "t": "5. `DISC_STOP_AT_BOOT=1 付きでコンパイルした場合"
  },
- "449dee5852ac": {
-  "en": "449dee5852ac",
-  "t": "RIPPS2 は BIBLE を署名済みのブートファイルとして同梱し、今同梱している PS2BBL 1.2.0 の代わりに Settings（Boot Loader）からインストールする予定です。BIBLE はほかのローダー（FMCB、OSDMenu、SD2PSX のローダー）から起動される ELF としても動きます。BIBLE のリリースはまだありません。"
- },
  "4793c8125dc9": {
   "en": "4793c8125dc9",
   "t": "### eGSM (external Graphics Synthesize Mode)"
@@ -590,6 +586,10 @@
  "e3b8cc6236ca": {
   "en": "e3b8cc6236ca",
   "t": "  - PS2BBLE の 10 パス、アイデア、説得の @nathanneurotic"
+ },
+ "e448e12d4e86": {
+  "en": "e448e12d4e86",
+  "t": "RIPPS2 は v1.3.4-beta から BIBLE を署名済みのブートファイルとして同梱し、Settings > General > Boot Loader > Manage からインストールします。BIBLE はほかのローダー（FMCB、OSDMenu、SD2PSX のローダー）から起動される ELF としても動きます。署名済みビルドは[リリースページ](https://github.com/akilluminati47/BIBLE/releases/tag/signed-f31c8d5)にあります。公開時点ではまだどの本体もバインドしていないので、まず予備のメモリーカードで試してください。"
  },
  "e6d271e7c0bd": {
   "en": "e6d271e7c0bd",

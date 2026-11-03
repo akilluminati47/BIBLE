@@ -163,10 +163,6 @@
   "en": "43fcd64b5833",
   "t": "5. Kada je izgrađeno sa `DISC_STOP_AT_BOOT=1"
  },
- "449dee5852ac": {
-  "en": "449dee5852ac",
-  "t": "RIPPS2 će nositi BIBLE kao potpisane datoteke za pokretanje i instalirati ga iz svojih Settings (Boot Loader), umesto PS2BBL 1.2.0 koji danas nosi. BIBLE radi i kao ELF koji pokreće drugi loader (FMCB, OSDMenu, loader SD2PSX-a). Izdanja BIBLE-a još nema."
- },
  "4793c8125dc9": {
   "en": "4793c8125dc9",
   "t": "### eGSM (external Graphics Synthesize Mode)"
@@ -590,6 +586,10 @@
  "e3b8cc6236ca": {
   "en": "e3b8cc6236ca",
   "t": "  - @nathanneurotic za 10 putanja PS2BBLE-a, ideje i nagovaranje"
+ },
+ "e448e12d4e86": {
+  "en": "e448e12d4e86",
+  "t": "RIPPS2 od v1.3.4-beta nosi BIBLE kao potpisane datoteke za pokretanje i instalira ga iz Settings > General > Boot Loader > Manage. BIBLE radi i kao ELF koji pokreće drugi loader (FMCB, OSDMenu, loader SD2PSX-a). Potpisani buildovi su na [stranici izdanja](https://github.com/akilluminati47/BIBLE/releases/tag/signed-f31c8d5); nijedna konzola ih nije vezala kad su izašli, pa prvo probaj na rezervnoj memorijskoj kartici."
  },
  "e6d271e7c0bd": {
   "en": "e6d271e7c0bd",

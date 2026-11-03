@@ -163,10 +163,6 @@
   "en": "43fcd64b5833",
   "t": "5. عند البناء مع `DISC_STOP_AT_BOOT=1"
  },
- "449dee5852ac": {
-  "en": "449dee5852ac",
-  "t": "سيحمل RIPPS2 محمّل BIBLE كملفات إقلاع موقّعة ويثبّته من Settings (Boot Loader)، بدلًا من PS2BBL 1.2.0 الذي يحمله اليوم. ويعمل BIBLE أيضًا كملف ELF يشغّله محمّل آخر (FMCB، OSDMenu، محمّل SD2PSX). لا يوجد إصدار من BIBLE بعد."
- },
  "4793c8125dc9": {
   "en": "4793c8125dc9",
   "t": "### eGSM (external Graphics Synthesize Mode)"
@@ -590,6 +586,10 @@
  "e3b8cc6236ca": {
   "en": "e3b8cc6236ca",
   "t": "  - @nathanneurotic على مسارات PS2BBLE العشرة والأفكار والإقناع"
+ },
+ "e448e12d4e86": {
+  "en": "e448e12d4e86",
+  "t": "يحمل RIPPS2 محمّل BIBLE كملفات إقلاع موقّعة منذ v1.3.4-beta ويثبّته من Settings > General > Boot Loader > Manage. ويعمل BIBLE أيضًا كملف ELF يشغّله محمّل آخر (FMCB، OSDMenu، محمّل SD2PSX). الإصدارات الموقّعة موجودة في [صفحة الإصدار](https://github.com/akilluminati47/BIBLE/releases/tag/signed-f31c8d5)؛ لم تكن أي منصة قد ربطتها حين نُشرت، لذا جرّبها أولًا على بطاقة ذاكرة احتياطية."
  },
  "e6d271e7c0bd": {
   "en": "e6d271e7c0bd",

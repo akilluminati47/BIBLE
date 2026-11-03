@@ -86,7 +86,7 @@ BIBLE është ngarkuesi i nisjes që vendos RIPPS2: një fork i PS2BBL Extended 
 
 **Si e përdor RIPPS2**
 
-RIPPS2 do ta mbajë BIBLE si skedarë nisjeje të nënshkruar dhe do ta instalojë nga Settings (Boot Loader), në vend të PS2BBL 1.2.0 që mban sot. BIBLE punon edhe si ELF i nisur nga një ngarkues tjetër (FMCB, OSDMenu, ngarkuesi i një SD2PSX). Ende nuk ka botim të BIBLE.
+RIPPS2 mban BIBLE si skedarë nisjeje të nënshkruar që nga v1.3.4-beta dhe e instalon nga Settings > General > Boot Loader > Manage. BIBLE punon edhe si ELF i nisur nga një ngarkues tjetër (FMCB, OSDMenu, ngarkuesi i një SD2PSX). Ndërtimet e nënshkruara janë në [faqen e botimit](https://github.com/akilluminati47/BIBLE/releases/tag/signed-f31c8d5); asnjë konsolë nuk i kishte lidhur kur dolën, ndaj provoje fillimisht në një kartë memorieje rezervë.
 
 <p align="center"><img src="assets/readme/ripps2-icon.png" alt="RIPPS2" width="48" height="48"><br><sub>BIBLE është pjesë e <a href="https://github.com/akilluminati47/RIPPS2">RIPPS2</a>.</sub></p>
 

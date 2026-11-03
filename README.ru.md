@@ -86,7 +86,7 @@ BIBLE представляет собой загрузчик, который у�
 
 **Как его использует RIPPS2**
 
-RIPPS2 будет нести BIBLE в виде подписанных загрузочных файлов и устанавливать его из своих Settings (Boot Loader) вместо PS2BBL 1.2.0, который несёт сейчас. BIBLE работает и как ELF, запущенный другим загрузчиком (FMCB, OSDMenu, загрузчик SD2PSX). Выпуска BIBLE пока нет.
+RIPPS2 несёт BIBLE в виде подписанных загрузочных файлов начиная с v1.3.4-beta и устанавливает его из Settings > General > Boot Loader > Manage. BIBLE работает и как ELF, запущенный другим загрузчиком (FMCB, OSDMenu, загрузчик SD2PSX). Подписанные сборки лежат на [странице выпуска](https://github.com/akilluminati47/BIBLE/releases/tag/signed-f31c8d5); на момент выхода их ещё не привязала ни одна консоль, так что сначала попробуй на запасной карте памяти.
 
 <p align="center"><img src="assets/readme/ripps2-icon.png" alt="RIPPS2" width="48" height="48"><br><sub>BIBLE входит в <a href="https://github.com/akilluminati47/RIPPS2">RIPPS2</a>.</sub></p>
 

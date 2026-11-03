@@ -86,7 +86,7 @@ BIBLE 是 RIPPS2 安装的引导程序：saildot4k 的 PS2BBL Extended 的一个
 
 **RIPPS2 如何使用它**
 
-RIPPS2 将以签名启动文件的形式附带 BIBLE，并从其 Settings（Boot Loader）中安装，取代它现在附带的 PS2BBL 1.2.0。BIBLE 也可以作为由其他引导程序启动的 ELF 运行（FMCB、OSDMenu、SD2PSX 的引导程序）。BIBLE 还没有正式发布。
+RIPPS2 从 v1.3.4-beta 起以签名启动文件的形式附带 BIBLE，并从 Settings > General > Boot Loader > Manage 安装。BIBLE 也可以作为由其他引导程序启动的 ELF 运行（FMCB、OSDMenu、SD2PSX 的引导程序）。签名构建在[发布页面](https://github.com/akilluminati47/BIBLE/releases/tag/signed-f31c8d5)上；发布时还没有任何主机绑定过它们，所以请先用一张备用记忆卡试试。
 
 <p align="center"><img src="assets/readme/ripps2-icon.png" alt="RIPPS2" width="48" height="48"><br><sub>BIBLE 是 <a href="https://github.com/akilluminati47/RIPPS2">RIPPS2</a> 的一部分。</sub></p>
 

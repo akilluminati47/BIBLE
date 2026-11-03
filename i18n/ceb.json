@@ -163,10 +163,6 @@
   "en": "43fcd64b5833",
   "t": "5. Kung gi-compile uban sa `DISC_STOP_AT_BOOT=1"
  },
- "449dee5852ac": {
-  "en": "449dee5852ac",
-  "t": "Dad-on sa RIPPS2 ang BIBLE isip mga signed boot file ug i-install kini gikan sa Settings (Boot Loader) niini, puli sa PS2BBL 1.2.0 nga dala niini karon. Modagan usab ang BIBLE isip ELF nga gisugdan sa laing loader (FMCB, OSDMenu, ang loader sa usa ka SD2PSX). Wala pay release sa BIBLE."
- },
  "4793c8125dc9": {
   "en": "4793c8125dc9",
   "t": "### eGSM (external Graphics Synthesize Mode)"
@@ -590,6 +586,10 @@
  "e3b8cc6236ca": {
   "en": "e3b8cc6236ca",
   "t": "  - @nathanneurotic para sa 10path sa PS2BBLE, mga ideya ug pagdani"
+ },
+ "e448e12d4e86": {
+  "en": "e448e12d4e86",
+  "t": "Dala sa RIPPS2 ang BIBLE isip mga signed boot file sukad v1.3.4-beta ug i-install kini gikan sa Settings > General > Boot Loader > Manage. Modagan usab ang BIBLE isip ELF nga gisugdan sa laing loader (FMCB, OSDMenu, ang loader sa usa ka SD2PSX). Anaa sa [release page niini](https://github.com/akilluminati47/BIBLE/releases/tag/signed-f31c8d5) ang mga signed build; wala pay console nga nag-bind niini sa dihang gipagawas, busa sulayi una sa ekstrang memory card."
  },
  "e6d271e7c0bd": {
   "en": "e6d271e7c0bd",

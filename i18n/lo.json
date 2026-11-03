@@ -163,10 +163,6 @@
   "en": "43fcd64b5833",
   "t": "5. ເມື່ອຄອມໄພລ໌ດ້ວຍ `DISC_STOP_AT_BOOT=1"
  },
- "449dee5852ac": {
-  "en": "449dee5852ac",
-  "t": "RIPPS2 ຈະນຳ BIBLE ມາເປັນໄຟລ໌ບູດທີ່ເຊັນແລ້ວ ແລະ ຕິດຕັ້ງຈາກ Settings (Boot Loader) ຂອງມັນ, ແທນ PS2BBL 1.2.0 ທີ່ມັນນຳມາໃນປັດຈຸບັນ. BIBLE ຍັງແລ່ນເປັນ ELF ທີ່ໂປຣແກຣມໂຫຼດອື່ນເປີດໄດ້ (FMCB, OSDMenu, ໂປຣແກຣມໂຫຼດຂອງ SD2PSX). ຍັງບໍ່ມີລຸ້ນເຜີຍແຜ່ຂອງ BIBLE."
- },
  "4793c8125dc9": {
   "en": "4793c8125dc9",
   "t": "### eGSM (external Graphics Synthesize Mode)"
@@ -590,6 +586,10 @@
  "e3b8cc6236ca": {
   "en": "e3b8cc6236ca",
   "t": "  - @nathanneurotic ສຳລັບ 10 ເສັ້ນທາງຂອງ PS2BBLE, ແນວຄິດ ແລະ ການຊັກຊວນ"
+ },
+ "e448e12d4e86": {
+  "en": "e448e12d4e86",
+  "t": "RIPPS2 ນຳ BIBLE ມາເປັນໄຟລ໌ບູດທີ່ເຊັນແລ້ວຕັ້ງແຕ່ v1.3.4-beta ແລະ ຕິດຕັ້ງຈາກ Settings > General > Boot Loader > Manage. BIBLE ຍັງແລ່ນເປັນ ELF ທີ່ໂປຣແກຣມໂຫຼດອື່ນເປີດໄດ້ (FMCB, OSDMenu, ໂປຣແກຣມໂຫຼດຂອງ SD2PSX). ບິວທີ່ເຊັນແລ້ວຢູ່ໃນ[ໜ້າເຜີຍແຜ່](https://github.com/akilluminati47/BIBLE/releases/tag/signed-f31c8d5); ຕອນເຜີຍແຜ່ຍັງບໍ່ມີເຄື່ອງໃດຜູກມັນເທື່ອ, ສະນັ້ນລອງໃສ່ບັດຄວາມຈຳສຳຮອງກ່ອນ."
  },
  "e6d271e7c0bd": {
   "en": "e6d271e7c0bd",

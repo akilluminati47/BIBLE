@@ -163,10 +163,6 @@
   "en": "43fcd64b5833",
   "t": "5. Bila dikompilasi dengan `DISC_STOP_AT_BOOT=1"
  },
- "449dee5852ac": {
-  "en": "449dee5852ac",
-  "t": "RIPPS2 akan membawa BIBLE sebagai file boot yang ditandatangani dan memasangnya dari Settings (Boot Loader), menggantikan PS2BBL 1.2.0 yang dibawanya saat ini. BIBLE juga berjalan sebagai ELF yang dijalankan loader lain (FMCB, OSDMenu, loader milik SD2PSX). Belum ada rilis BIBLE."
- },
  "4793c8125dc9": {
   "en": "4793c8125dc9",
   "t": "### eGSM (external Graphics Synthesize Mode)"
@@ -590,6 +586,10 @@
  "e3b8cc6236ca": {
   "en": "e3b8cc6236ca",
   "t": "  - @nathanneurotic untuk 10 jalur PS2BBLE, ide, dan bujukan"
+ },
+ "e448e12d4e86": {
+  "en": "e448e12d4e86",
+  "t": "RIPPS2 membawa BIBLE sebagai file boot yang ditandatangani sejak v1.3.4-beta dan memasangnya dari Settings > General > Boot Loader > Manage. BIBLE juga berjalan sebagai ELF yang dijalankan loader lain (FMCB, OSDMenu, loader milik SD2PSX). Build yang ditandatangani ada di [halaman rilisnya](https://github.com/akilluminati47/BIBLE/releases/tag/signed-f31c8d5); belum ada konsol yang mengikatnya saat dirilis, jadi coba dulu di kartu memori cadangan."
  },
  "e6d271e7c0bd": {
   "en": "e6d271e7c0bd",

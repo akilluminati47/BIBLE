@@ -163,10 +163,6 @@
   "en": "43fcd64b5833",
   "t": "5. Når der er kompileret med `DISC_STOP_AT_BOOT=1"
  },
- "449dee5852ac": {
-  "en": "449dee5852ac",
-  "t": "RIPPS2 kommer til at medbringe BIBLE som signerede opstartsfiler og installere den fra sine Settings (Boot Loader) i stedet for den PS2BBL 1.2.0, den medbringer i dag. BIBLE kører også som en ELF startet af en anden loader (FMCB, OSDMenu, en SD2PSX-loader). Der er endnu ingen BIBLE-udgivelse."
- },
  "4793c8125dc9": {
   "en": "4793c8125dc9",
   "t": "### eGSM (external Graphics Synthesize Mode)"
@@ -590,6 +586,10 @@
  "e3b8cc6236ca": {
   "en": "e3b8cc6236ca",
   "t": "  - @nathanneurotic for PS2BBLE's 10 stier, idéer og overtalelse"
+ },
+ "e448e12d4e86": {
+  "en": "e448e12d4e86",
+  "t": "RIPPS2 medbringer BIBLE som signerede opstartsfiler fra v1.3.4-beta og installerer den fra Settings > General > Boot Loader > Manage. BIBLE kører også som en ELF startet af en anden loader (FMCB, OSDMenu, en SD2PSX-loader). De signerede builds ligger på [udgivelsessiden](https://github.com/akilluminati47/BIBLE/releases/tag/signed-f31c8d5); ingen konsol havde bundet dem, da de kom ud, så prøv først med et ekstra hukommelseskort."
  },
  "e6d271e7c0bd": {
   "en": "e6d271e7c0bd",

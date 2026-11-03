@@ -86,7 +86,7 @@ BIBLE to boot loader, który instaluje RIPPS2: fork PS2BBL Extended autorstwa sa
 
 **Jak RIPPS2 go używa**
 
-RIPPS2 będzie zawierać BIBLE jako podpisane pliki rozruchowe i instalować go ze swoich Settings (Boot Loader), w miejsce PS2BBL 1.2.0, który zawiera dziś. BIBLE działa też jako ELF uruchamiany przez inny loader (FMCB, OSDMenu, loader SD2PSX). Nie ma jeszcze wydania BIBLE.
+RIPPS2 zawiera BIBLE jako podpisane pliki rozruchowe od v1.3.4-beta i instaluje go z Settings > General > Boot Loader > Manage. BIBLE działa też jako ELF uruchamiany przez inny loader (FMCB, OSDMenu, loader SD2PSX). Podpisane buildy są na [stronie wydania](https://github.com/akilluminati47/BIBLE/releases/tag/signed-f31c8d5); żadna konsola ich jeszcze nie powiązała, gdy się ukazały, więc najpierw spróbuj na zapasowej karcie pamięci.
 
 <p align="center"><img src="assets/readme/ripps2-icon.png" alt="RIPPS2" width="48" height="48"><br><sub>BIBLE jest częścią <a href="https://github.com/akilluminati47/RIPPS2">RIPPS2</a>.</sub></p>
 

@@ -86,7 +86,7 @@ BIBLE, RIPPS2’nin kurduğu önyükleyicidir: saildot4k’nin PS2BBL Extended�
 
 **RIPPS2 onu nasıl kullanıyor**
 
-RIPPS2, BIBLE’ı imzalı önyükleme dosyaları olarak taşıyacak ve bugün taşıdığı PS2BBL 1.2.0’ın yerine Settings (Boot Loader) üzerinden kuracak. BIBLE ayrıca başka bir yükleyicinin başlattığı bir ELF olarak da çalışır (FMCB, OSDMenu, bir SD2PSX’in yükleyicisi). Henüz bir BIBLE sürümü yok.
+RIPPS2, v1.3.4-beta'dan beri BIBLE'ı imzalı önyükleme dosyaları olarak taşır ve Settings > General > Boot Loader > Manage üzerinden kurar. BIBLE ayrıca başka bir yükleyicinin başlattığı bir ELF olarak da çalışır (FMCB, OSDMenu, bir SD2PSX’in yükleyicisi). İmzalı derlemeler [sürüm sayfasında](https://github.com/akilluminati47/BIBLE/releases/tag/signed-f31c8d5); yayımlandıklarında hiçbir konsol onları bağlamamıştı, bu yüzden önce yedek bir hafıza kartında dene.
 
 <p align="center"><img src="assets/readme/ripps2-icon.png" alt="RIPPS2" width="48" height="48"><br><sub>BIBLE, <a href="https://github.com/akilluminati47/RIPPS2">RIPPS2</a> projesinin bir parçasıdır.</sub></p>
 

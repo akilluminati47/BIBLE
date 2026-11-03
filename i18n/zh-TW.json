@@ -163,10 +163,6 @@
   "en": "43fcd64b5833",
   "t": "5. 以 `DISC_STOP_AT_BOOT=1 編譯時"
  },
- "449dee5852ac": {
-  "en": "449dee5852ac",
-  "t": "RIPPS2 將以簽署過的開機檔案附帶 BIBLE，並從其 Settings（Boot Loader）安裝，取代它目前附帶的 PS2BBL 1.2.0。BIBLE 也能作為由其他載入程式啟動的 ELF 執行（FMCB、OSDMenu、SD2PSX 的載入程式）。BIBLE 尚未正式發行。"
- },
  "4793c8125dc9": {
   "en": "4793c8125dc9",
   "t": "### eGSM (external Graphics Synthesize Mode)"
@@ -590,6 +586,10 @@
  "e3b8cc6236ca": {
   "en": "e3b8cc6236ca",
   "t": "  - @nathanneurotic 的 PS2BBLE 10 路徑、點子與說服"
+ },
+ "e448e12d4e86": {
+  "en": "e448e12d4e86",
+  "t": "RIPPS2 從 v1.3.4-beta 起以簽署過的開機檔案附帶 BIBLE，並從 Settings > General > Boot Loader > Manage 安裝。BIBLE 也能作為由其他載入程式啟動的 ELF 執行（FMCB、OSDMenu、SD2PSX 的載入程式）。簽署過的組建在[發行頁面](https://github.com/akilluminati47/BIBLE/releases/tag/signed-f31c8d5)上；發行時還沒有任何主機綁定過它們，所以請先用一張備用記憶卡試試。"
  },
  "e6d271e7c0bd": {
   "en": "e6d271e7c0bd",

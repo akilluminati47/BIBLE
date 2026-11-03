@@ -163,10 +163,6 @@
   "en": "43fcd64b5833",
   "t": "5. Quando compilado com `DISC_STOP_AT_BOOT=1"
  },
- "449dee5852ac": {
-  "en": "449dee5852ac",
-  "t": "O RIPPS2 vai levar o BIBLE como ficheiros de arranque assinados e instalá-lo a partir das suas Settings (Boot Loader), em vez do PS2BBL 1.2.0 que leva hoje. O BIBLE também corre como um ELF iniciado por outro carregador (FMCB, OSDMenu, o carregador de um SD2PSX). Ainda não há versão publicada do BIBLE."
- },
  "4793c8125dc9": {
   "en": "4793c8125dc9",
   "t": "### eGSM (external Graphics Synthesize Mode)"
@@ -590,6 +586,10 @@
  "e3b8cc6236ca": {
   "en": "e3b8cc6236ca",
   "t": "  - @nathanneurotic pelos 10 caminhos do PS2BBLE, ideias e persuasão"
+ },
+ "e448e12d4e86": {
+  "en": "e448e12d4e86",
+  "t": "O RIPPS2 leva o BIBLE como ficheiros de arranque assinados desde a v1.3.4-beta e instala-o a partir de Settings > General > Boot Loader > Manage. O BIBLE também corre como um ELF iniciado por outro carregador (FMCB, OSDMenu, o carregador de um SD2PSX). As builds assinadas estão na [página da versão](https://github.com/akilluminati47/BIBLE/releases/tag/signed-f31c8d5); nenhuma consola as tinha associado quando saíram, por isso experimenta primeiro num cartão de memória de reserva."
  },
  "e6d271e7c0bd": {
   "en": "e6d271e7c0bd",

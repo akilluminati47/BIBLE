@@ -86,7 +86,7 @@ BIBLE ແມ່ນໂປຣແກຣມບູດທີ່ RIPPS2 ຕັ້ງໃ
 
 **RIPPS2 ໃຊ້ມັນແນວໃດ**
 
-RIPPS2 ຈະນຳ BIBLE ມາເປັນໄຟລ໌ບູດທີ່ເຊັນແລ້ວ ແລະ ຕິດຕັ້ງຈາກ Settings (Boot Loader) ຂອງມັນ, ແທນ PS2BBL 1.2.0 ທີ່ມັນນຳມາໃນປັດຈຸບັນ. BIBLE ຍັງແລ່ນເປັນ ELF ທີ່ໂປຣແກຣມໂຫຼດອື່ນເປີດໄດ້ (FMCB, OSDMenu, ໂປຣແກຣມໂຫຼດຂອງ SD2PSX). ຍັງບໍ່ມີລຸ້ນເຜີຍແຜ່ຂອງ BIBLE.
+RIPPS2 ນຳ BIBLE ມາເປັນໄຟລ໌ບູດທີ່ເຊັນແລ້ວຕັ້ງແຕ່ v1.3.4-beta ແລະ ຕິດຕັ້ງຈາກ Settings > General > Boot Loader > Manage. BIBLE ຍັງແລ່ນເປັນ ELF ທີ່ໂປຣແກຣມໂຫຼດອື່ນເປີດໄດ້ (FMCB, OSDMenu, ໂປຣແກຣມໂຫຼດຂອງ SD2PSX). ບິວທີ່ເຊັນແລ້ວຢູ່ໃນ[ໜ້າເຜີຍແຜ່](https://github.com/akilluminati47/BIBLE/releases/tag/signed-f31c8d5); ຕອນເຜີຍແຜ່ຍັງບໍ່ມີເຄື່ອງໃດຜູກມັນເທື່ອ, ສະນັ້ນລອງໃສ່ບັດຄວາມຈຳສຳຮອງກ່ອນ.
 
 <p align="center"><img src="assets/readme/ripps2-icon.png" alt="RIPPS2" width="48" height="48"><br><sub>BIBLE ແມ່ນສ່ວນໜຶ່ງຂອງ <a href="https://github.com/akilluminati47/RIPPS2">RIPPS2</a>.</sub></p>
 

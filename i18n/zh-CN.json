@@ -163,10 +163,6 @@
   "en": "43fcd64b5833",
   "t": "5. 使用 `DISC_STOP_AT_BOOT=1 编译时"
  },
- "449dee5852ac": {
-  "en": "449dee5852ac",
-  "t": "RIPPS2 将以签名启动文件的形式附带 BIBLE，并从其 Settings（Boot Loader）中安装，取代它现在附带的 PS2BBL 1.2.0。BIBLE 也可以作为由其他引导程序启动的 ELF 运行（FMCB、OSDMenu、SD2PSX 的引导程序）。BIBLE 还没有正式发布。"
- },
  "4793c8125dc9": {
   "en": "4793c8125dc9",
   "t": "### eGSM (external Graphics Synthesize Mode)"
@@ -590,6 +586,10 @@
  "e3b8cc6236ca": {
   "en": "e3b8cc6236ca",
   "t": "  - @nathanneurotic 的 PS2BBLE 10 路径、想法和劝说"
+ },
+ "e448e12d4e86": {
+  "en": "e448e12d4e86",
+  "t": "RIPPS2 从 v1.3.4-beta 起以签名启动文件的形式附带 BIBLE，并从 Settings > General > Boot Loader > Manage 安装。BIBLE 也可以作为由其他引导程序启动的 ELF 运行（FMCB、OSDMenu、SD2PSX 的引导程序）。签名构建在[发布页面](https://github.com/akilluminati47/BIBLE/releases/tag/signed-f31c8d5)上；发布时还没有任何主机绑定过它们，所以请先用一张备用记忆卡试试。"
  },
  "e6d271e7c0bd": {
   "en": "e6d271e7c0bd",

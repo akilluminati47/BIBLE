@@ -86,7 +86,7 @@ BIBLE este boot loaderul pe care îl instalează RIPPS2: un fork al PS2BBL Exten
 
 **Cum îl folosește RIPPS2**
 
-RIPPS2 va include BIBLE ca fișiere de pornire semnate și îl va instala din Settings (Boot Loader), în locul PS2BBL 1.2.0 pe care îl include azi. BIBLE rulează și ca ELF pornit de alt loader (FMCB, OSDMenu, loaderul unui SD2PSX). Încă nu există o versiune publicată a BIBLE.
+RIPPS2 include BIBLE ca fișiere de pornire semnate de la v1.3.4-beta și îl instalează din Settings > General > Boot Loader > Manage. BIBLE rulează și ca ELF pornit de alt loader (FMCB, OSDMenu, loaderul unui SD2PSX). Build-urile semnate sunt pe [pagina versiunii](https://github.com/akilluminati47/BIBLE/releases/tag/signed-f31c8d5); nicio consolă nu le legase când au apărut, așa că încearcă întâi pe un card de memorie de rezervă.
 
 <p align="center"><img src="assets/readme/ripps2-icon.png" alt="RIPPS2" width="48" height="48"><br><sub>BIBLE face parte din <a href="https://github.com/akilluminati47/RIPPS2">RIPPS2</a>.</sub></p>
 

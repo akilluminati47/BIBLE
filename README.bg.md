@@ -86,7 +86,7 @@ BIBLE е зареждащата програма, която RIPPS2 инстал
 
 **Как го използва RIPPS2**
 
-RIPPS2 ще носи BIBLE като подписани файлове за стартиране и ще го инсталира от своите Settings (Boot Loader), вместо PS2BBL 1.2.0, който носи днес. BIBLE работи и като ELF, стартиран от друга зареждаща програма (FMCB, OSDMenu, зареждащата програма на SD2PSX). Все още няма издание на BIBLE.
+RIPPS2 носи BIBLE като подписани файлове за стартиране от v1.3.4-beta и го инсталира от Settings > General > Boot Loader > Manage. BIBLE работи и като ELF, стартиран от друга зареждаща програма (FMCB, OSDMenu, зареждащата програма на SD2PSX). Подписаните компилации са на [страницата с изданието](https://github.com/akilluminati47/BIBLE/releases/tag/signed-f31c8d5); никоя конзола не ги беше свързала, когато излязоха, затова първо пробвай на резервна карта с памет.
 
 <p align="center"><img src="assets/readme/ripps2-icon.png" alt="RIPPS2" width="48" height="48"><br><sub>BIBLE е част от <a href="https://github.com/akilluminati47/RIPPS2">RIPPS2</a>.</sub></p>
 

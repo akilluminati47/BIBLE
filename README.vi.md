@@ -86,7 +86,7 @@ BIBLE là trình khởi động mà RIPPS2 cài đặt: một bản fork của P
 
 **RIPPS2 dùng nó thế nào**
 
-RIPPS2 sẽ mang BIBLE dưới dạng các file khởi động đã ký và cài nó từ Settings (Boot Loader), thay cho PS2BBL 1.2.0 mà nó mang hiện nay. BIBLE cũng chạy như một ELF được trình nạp khác khởi chạy (FMCB, OSDMenu, trình nạp của SD2PSX). Hiện chưa có bản phát hành BIBLE.
+RIPPS2 mang BIBLE dưới dạng các file khởi động đã ký từ v1.3.4-beta và cài nó từ Settings > General > Boot Loader > Manage. BIBLE cũng chạy như một ELF được trình nạp khác khởi chạy (FMCB, OSDMenu, trình nạp của SD2PSX). Các bản dựng đã ký nằm ở [trang phát hành](https://github.com/akilluminati47/BIBLE/releases/tag/signed-f31c8d5); khi phát hành chưa có máy nào liên kết chúng, nên hãy thử trước trên một thẻ nhớ dự phòng.
 
 <p align="center"><img src="assets/readme/ripps2-icon.png" alt="RIPPS2" width="48" height="48"><br><sub>BIBLE là một phần của <a href="https://github.com/akilluminati47/RIPPS2">RIPPS2</a>.</sub></p>
 

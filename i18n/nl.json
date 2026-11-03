@@ -163,10 +163,6 @@
   "en": "43fcd64b5833",
   "t": "5. Als gecompileerd met `DISC_STOP_AT_BOOT=1"
  },
- "449dee5852ac": {
-  "en": "449dee5852ac",
-  "t": "RIPPS2 gaat BIBLE meeleveren als ondertekende opstartbestanden en installeert het vanuit zijn Settings (Boot Loader), in plaats van de PS2BBL 1.2.0 die het nu meelevert. BIBLE draait ook als ELF die door een andere loader wordt gestart (FMCB, OSDMenu, de loader van een SD2PSX). Er is nog geen BIBLE-release."
- },
  "4793c8125dc9": {
   "en": "4793c8125dc9",
   "t": "### eGSM (external Graphics Synthesize Mode)"
@@ -590,6 +586,10 @@
  "e3b8cc6236ca": {
   "en": "e3b8cc6236ca",
   "t": "  - @nathanneurotic voor de 10 paden van PS2BBLE, ideeën en overtuigingskracht"
+ },
+ "e448e12d4e86": {
+  "en": "e448e12d4e86",
+  "t": "RIPPS2 levert BIBLE sinds v1.3.4-beta mee als ondertekende opstartbestanden en installeert het vanuit Settings > General > Boot Loader > Manage. BIBLE draait ook als ELF die door een andere loader wordt gestart (FMCB, OSDMenu, de loader van een SD2PSX). De ondertekende builds staan op [de releasepagina](https://github.com/akilluminati47/BIBLE/releases/tag/signed-f31c8d5); geen console had ze gebonden toen ze verschenen, dus probeer eerst een reservegeheugenkaart."
  },
  "e6d271e7c0bd": {
   "en": "e6d271e7c0bd",

@@ -86,7 +86,7 @@
 
 **Πώς το χρησιμοποιεί το RIPPS2**
 
-Το RIPPS2 θα φέρει το BIBLE ως υπογεγραμμένα αρχεία εκκίνησης και θα το εγκαθιστά από τα Settings του (Boot Loader), στη θέση του PS2BBL 1.2.0 που φέρει σήμερα. Το BIBLE τρέχει και ως ELF που ξεκινά από άλλον φορτωτή (FMCB, OSDMenu, τον φορτωτή ενός SD2PSX). Δεν υπάρχει ακόμη έκδοση του BIBLE.
+Το RIPPS2 φέρει το BIBLE ως υπογεγραμμένα αρχεία εκκίνησης από την v1.3.4-beta και το εγκαθιστά από τα Settings > General > Boot Loader > Manage. Το BIBLE τρέχει και ως ELF που ξεκινά από άλλον φορτωτή (FMCB, OSDMenu, τον φορτωτή ενός SD2PSX). Τα υπογεγραμμένα builds είναι στη [σελίδα της έκδοσης](https://github.com/akilluminati47/BIBLE/releases/tag/signed-f31c8d5)· καμία κονσόλα δεν τα είχε δέσει όταν βγήκαν, οπότε δοκίμασε πρώτα σε μια εφεδρική κάρτα μνήμης.
 
 <p align="center"><img src="assets/readme/ripps2-icon.png" alt="RIPPS2" width="48" height="48"><br><sub>Το BIBLE είναι μέρος του <a href="https://github.com/akilluminati47/RIPPS2">RIPPS2</a>.</sub></p>
 

@@ -86,7 +86,7 @@ A BIBLE az a rendszerbetöltő, amelyet a RIPPS2 telepít: saildot4k PS2BBL Exte
 
 **Hogyan használja a RIPPS2**
 
-A RIPPS2 aláírt indítófájlokként hozza majd a BIBLE-t, és a Settings (Boot Loader) menüjéből telepíti, a ma hozott PS2BBL 1.2.0 helyett. A BIBLE egy másik betöltő által indított ELF-ként is fut (FMCB, OSDMenu, egy SD2PSX betöltője). BIBLE kiadás még nincs.
+A RIPPS2 a v1.3.4-beta óta aláírt indítófájlokként hozza a BIBLE-t, és a Settings > General > Boot Loader > Manage menüből telepíti. A BIBLE egy másik betöltő által indított ELF-ként is fut (FMCB, OSDMenu, egy SD2PSX betöltője). Az aláírt buildek a [kiadási oldalon](https://github.com/akilluminati47/BIBLE/releases/tag/signed-f31c8d5) vannak; megjelenésükkor még egy konzol sem kötötte őket, ezért előbb egy tartalék memóriakártyán próbáld ki.
 
 <p align="center"><img src="assets/readme/ripps2-icon.png" alt="RIPPS2" width="48" height="48"><br><sub>A BIBLE a(z) <a href="https://github.com/akilluminati47/RIPPS2">RIPPS2</a> része.</sub></p>
 

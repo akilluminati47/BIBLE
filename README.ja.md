@@ -86,7 +86,7 @@ BIBLE は RIPPS2 がセットアップするブートローダーで、saildot4k
 
 **RIPPS2 での使い方**
 
-RIPPS2 は BIBLE を署名済みのブートファイルとして同梱し、今同梱している PS2BBL 1.2.0 の代わりに Settings（Boot Loader）からインストールする予定です。BIBLE はほかのローダー（FMCB、OSDMenu、SD2PSX のローダー）から起動される ELF としても動きます。BIBLE のリリースはまだありません。
+RIPPS2 は v1.3.4-beta から BIBLE を署名済みのブートファイルとして同梱し、Settings > General > Boot Loader > Manage からインストールします。BIBLE はほかのローダー（FMCB、OSDMenu、SD2PSX のローダー）から起動される ELF としても動きます。署名済みビルドは[リリースページ](https://github.com/akilluminati47/BIBLE/releases/tag/signed-f31c8d5)にあります。公開時点ではまだどの本体もバインドしていないので、まず予備のメモリーカードで試してください。
 
 <p align="center"><img src="assets/readme/ripps2-icon.png" alt="RIPPS2" width="48" height="48"><br><sub>BIBLE は <a href="https://github.com/akilluminati47/RIPPS2">RIPPS2</a> の一部です。</sub></p>
 

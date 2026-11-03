@@ -86,7 +86,7 @@ BIBLE je zavaděč, který nastavuje RIPPS2: fork PS2BBL Extended od saildot4k.
 
 **Jak ho RIPPS2 používá**
 
-RIPPS2 bude BIBLE nosit jako podepsané spouštěcí soubory a instalovat ho ze svých Settings (Boot Loader) místo PS2BBL 1.2.0, který nosí dnes. BIBLE běží i jako ELF spuštěný jiným zavaděčem (FMCB, OSDMenu, zavaděč SD2PSX). Vydání BIBLE zatím není.
+RIPPS2 nese BIBLE jako podepsané spouštěcí soubory od v1.3.4-beta a instaluje ho ze Settings > General > Boot Loader > Manage. BIBLE běží i jako ELF spuštěný jiným zavaděčem (FMCB, OSDMenu, zavaděč SD2PSX). Podepsané buildy jsou na [stránce vydání](https://github.com/akilluminati47/BIBLE/releases/tag/signed-f31c8d5); když vyšly, žádná konzole je ještě nesvázala, tak to nejdřív zkus na náhradní paměťové kartě.
 
 <p align="center"><img src="assets/readme/ripps2-icon.png" alt="RIPPS2" width="48" height="48"><br><sub>BIBLE je součástí <a href="https://github.com/akilluminati47/RIPPS2">RIPPS2</a>.</sub></p>
 

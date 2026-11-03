@@ -86,7 +86,7 @@ BIBLE är startladdaren som RIPPS2 sätter upp: en fork av saildot4ks PS2BBL Ext
 
 **Så använder RIPPS2 den**
 
-RIPPS2 kommer att bära med sig BIBLE som signerade startfiler och installera den från sina Settings (Boot Loader), i stället för den PS2BBL 1.2.0 den bär i dag. BIBLE körs också som en ELF startad av en annan laddare (FMCB, OSDMenu, en SD2PSX-laddare). Det finns ännu ingen BIBLE-version.
+RIPPS2 bär med sig BIBLE som signerade startfiler från v1.3.4-beta och installerar den från Settings > General > Boot Loader > Manage. BIBLE körs också som en ELF startad av en annan laddare (FMCB, OSDMenu, en SD2PSX-laddare). De signerade byggena finns på [versionssidan](https://github.com/akilluminati47/BIBLE/releases/tag/signed-f31c8d5); ingen konsol hade bundit dem när de kom ut, så prova först med ett extra minneskort.
 
 <p align="center"><img src="assets/readme/ripps2-icon.png" alt="RIPPS2" width="48" height="48"><br><sub>BIBLE är en del av <a href="https://github.com/akilluminati47/RIPPS2">RIPPS2</a>.</sub></p>
 

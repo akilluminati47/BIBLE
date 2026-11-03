@@ -163,10 +163,6 @@
   "en": "43fcd64b5833",
   "t": "5. Kur kompilohet me `DISC_STOP_AT_BOOT=1"
  },
- "449dee5852ac": {
-  "en": "449dee5852ac",
-  "t": "RIPPS2 do ta mbajë BIBLE si skedarë nisjeje të nënshkruar dhe do ta instalojë nga Settings (Boot Loader), në vend të PS2BBL 1.2.0 që mban sot. BIBLE punon edhe si ELF i nisur nga një ngarkues tjetër (FMCB, OSDMenu, ngarkuesi i një SD2PSX). Ende nuk ka botim të BIBLE."
- },
  "4793c8125dc9": {
   "en": "4793c8125dc9",
   "t": "### eGSM (external Graphics Synthesize Mode)"
@@ -590,6 +586,10 @@
  "e3b8cc6236ca": {
   "en": "e3b8cc6236ca",
   "t": "  - @nathanneurotic për 10 shtigjet e PS2BBLE, idetë dhe bindjen"
+ },
+ "e448e12d4e86": {
+  "en": "e448e12d4e86",
+  "t": "RIPPS2 mban BIBLE si skedarë nisjeje të nënshkruar që nga v1.3.4-beta dhe e instalon nga Settings > General > Boot Loader > Manage. BIBLE punon edhe si ELF i nisur nga një ngarkues tjetër (FMCB, OSDMenu, ngarkuesi i një SD2PSX). Ndërtimet e nënshkruara janë në [faqen e botimit](https://github.com/akilluminati47/BIBLE/releases/tag/signed-f31c8d5); asnjë konsolë nuk i kishte lidhur kur dolën, ndaj provoje fillimisht në një kartë memorieje rezervë."
  },
  "e6d271e7c0bd": {
   "en": "e6d271e7c0bd",

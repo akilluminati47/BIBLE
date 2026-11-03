@@ -163,10 +163,6 @@
   "en": "43fcd64b5833",
   "t": "5. `DISC_STOP_AT_BOOT=1 ile derlendiğinde"
  },
- "449dee5852ac": {
-  "en": "449dee5852ac",
-  "t": "RIPPS2, BIBLE’ı imzalı önyükleme dosyaları olarak taşıyacak ve bugün taşıdığı PS2BBL 1.2.0’ın yerine Settings (Boot Loader) üzerinden kuracak. BIBLE ayrıca başka bir yükleyicinin başlattığı bir ELF olarak da çalışır (FMCB, OSDMenu, bir SD2PSX’in yükleyicisi). Henüz bir BIBLE sürümü yok."
- },
  "4793c8125dc9": {
   "en": "4793c8125dc9",
   "t": "### eGSM (external Graphics Synthesize Mode)"
@@ -590,6 +586,10 @@
  "e3b8cc6236ca": {
   "en": "e3b8cc6236ca",
   "t": "  - PS2BBLE’ın 10 yolu, fikirler ve ikna için @nathanneurotic"
+ },
+ "e448e12d4e86": {
+  "en": "e448e12d4e86",
+  "t": "RIPPS2, v1.3.4-beta'dan beri BIBLE'ı imzalı önyükleme dosyaları olarak taşır ve Settings > General > Boot Loader > Manage üzerinden kurar. BIBLE ayrıca başka bir yükleyicinin başlattığı bir ELF olarak da çalışır (FMCB, OSDMenu, bir SD2PSX’in yükleyicisi). İmzalı derlemeler [sürüm sayfasında](https://github.com/akilluminati47/BIBLE/releases/tag/signed-f31c8d5); yayımlandıklarında hiçbir konsol onları bağlamamıştı, bu yüzden önce yedek bir hafıza kartında dene."
  },
  "e6d271e7c0bd": {
   "en": "e6d271e7c0bd",

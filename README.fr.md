@@ -86,7 +86,7 @@ BIBLE est le chargeur d'amorçage que RIPPS2 installe : un fork de PS2BBL Extend
 
 **Comment RIPPS2 l'utilise**
 
-RIPPS2 embarquera BIBLE sous forme de fichiers d'amorçage signés et l'installera depuis ses Settings (Boot Loader), à la place du PS2BBL 1.2.0 qu'il embarque aujourd'hui. BIBLE fonctionne aussi comme un ELF lancé par un autre chargeur (FMCB, OSDMenu, le chargeur d'un SD2PSX). Il n'y a pas encore de version publiée de BIBLE.
+RIPPS2 embarque BIBLE sous forme de fichiers d'amorçage signés depuis la v1.3.4-beta et l'installe depuis Settings > General > Boot Loader > Manage. BIBLE fonctionne aussi comme un ELF lancé par un autre chargeur (FMCB, OSDMenu, le chargeur d'un SD2PSX). Les builds signées sont sur [sa page de version](https://github.com/akilluminati47/BIBLE/releases/tag/signed-f31c8d5) ; aucune console ne les avait liées à leur sortie, alors essayez d'abord une carte mémoire de rechange.
 
 <p align="center"><img src="assets/readme/ripps2-icon.png" alt="RIPPS2" width="48" height="48"><br><sub>BIBLE fait partie de <a href="https://github.com/akilluminati47/RIPPS2">RIPPS2</a>.</sub></p>
 

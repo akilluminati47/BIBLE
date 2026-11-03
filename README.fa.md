@@ -88,7 +88,7 @@ BIBLE بوت‌لودری است که RIPPS2 راه‌اندازی می‌کند
 
 **RIPPS2 چگونه از آن استفاده می‌کند**
 
-RIPPS2 بوت‌لودر BIBLE را به‌صورت فایل‌های بوت امضاشده همراه خواهد داشت و آن را از Settings (Boot Loader) نصب می‌کند، به‌جای PS2BBL 1.2.0 که امروز همراه دارد. BIBLE همچنین به‌صورت ELF اجراشده توسط بوت‌لودری دیگر کار می‌کند (FMCB، OSDMenu، بوت‌لودر یک SD2PSX). هنوز نسخهٔ منتشرشده‌ای از BIBLE نیست.
+RIPPS2 از v1.3.4-beta بوت‌لودر BIBLE را به‌صورت فایل‌های بوت امضاشده همراه دارد و آن را از Settings > General > Boot Loader > Manage نصب می‌کند. BIBLE همچنین به‌صورت ELF اجراشده توسط بوت‌لودری دیگر کار می‌کند (FMCB، OSDMenu، بوت‌لودر یک SD2PSX). بیلدهای امضاشده در [صفحهٔ انتشار](https://github.com/akilluminati47/BIBLE/releases/tag/signed-f31c8d5) هستند؛ هنگام انتشار هنوز هیچ کنسولی آن‌ها را پیوند نداده بود، پس اول روی یک کارت حافظهٔ یدکی امتحان کن.
 
 <p align="center"><img src="assets/readme/ripps2-icon.png" alt="RIPPS2" width="48" height="48"><br><sub>BIBLE بخشی از <a href="https://github.com/akilluminati47/RIPPS2">RIPPS2</a> است.</sub></p>
 

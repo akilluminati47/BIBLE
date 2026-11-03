@@ -163,10 +163,6 @@
   "en": "43fcd64b5833",
   "t": "5. Când e compilat cu `DISC_STOP_AT_BOOT=1"
  },
- "449dee5852ac": {
-  "en": "449dee5852ac",
-  "t": "RIPPS2 va include BIBLE ca fișiere de pornire semnate și îl va instala din Settings (Boot Loader), în locul PS2BBL 1.2.0 pe care îl include azi. BIBLE rulează și ca ELF pornit de alt loader (FMCB, OSDMenu, loaderul unui SD2PSX). Încă nu există o versiune publicată a BIBLE."
- },
  "4793c8125dc9": {
   "en": "4793c8125dc9",
   "t": "### eGSM (external Graphics Synthesize Mode)"
@@ -590,6 +586,10 @@
  "e3b8cc6236ca": {
   "en": "e3b8cc6236ca",
   "t": "  - @nathanneurotic pentru cele 10 căi ale PS2BBLE, idei și convingere"
+ },
+ "e448e12d4e86": {
+  "en": "e448e12d4e86",
+  "t": "RIPPS2 include BIBLE ca fișiere de pornire semnate de la v1.3.4-beta și îl instalează din Settings > General > Boot Loader > Manage. BIBLE rulează și ca ELF pornit de alt loader (FMCB, OSDMenu, loaderul unui SD2PSX). Build-urile semnate sunt pe [pagina versiunii](https://github.com/akilluminati47/BIBLE/releases/tag/signed-f31c8d5); nicio consolă nu le legase când au apărut, așa că încearcă întâi pe un card de memorie de rezervă."
  },
  "e6d271e7c0bd": {
   "en": "e6d271e7c0bd",
