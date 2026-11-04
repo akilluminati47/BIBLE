@@ -107,6 +107,10 @@
   "en": "33014f963b64",
   "t": "1. PS2BBL analizza e consuma solo gli argomenti di controllo del loader in fondo a `ARG_*`: `-appid`, `-titleid=`, `-dev9=`, `-patinfo`, `-disc_stop`, `-gsm=`."
  },
+ "33b450ea343d": {
+  "en": "33b450ea343d",
+  "t": "- Il suono di avvio, preparato: il Boot Sound On (fast) di RIPPS2 può tenere `boot.adp` accanto alla configurazione di BIBLE (`mc?:/SYS-CONF/boot.adp`). Viene letto prima dell'avvio di qualsiasi unità. BIBLE può anche passarlo a RIPPS2 in RAM, ma finora ha funzionato solo in laboratorio: su un vero SD2PSX, RIPPS2 ha letto da solo la copia sulla scheda. **Senza suono è l'avvio più rapido.** L'accordo e la parte di RIPPS2: [docs/boot-sound-handoff.md](docs/boot-sound-handoff.md)."
+ },
  "34f273d336d6": {
   "en": "34f273d336d6",
   "t": "BIBLE è il boot loader che RIPPS2 installa: un fork di PS2BBL Extended di saildot4k."
@@ -122,6 +126,10 @@
  "391adc91b06c": {
   "en": "391adc91b06c",
   "t": "- Chiave/valore globale: `DISC_STOP = 0/1`"
+ },
+ "3a7d07109b19": {
+  "en": "3a7d07109b19",
+  "t": "- Novità: la pagina dei tasti di avvio. Tieni premuti L2 + R2 all'accensione e BIBLE si ferma prima di avviare qualsiasi cosa, mostrando i percorsi di avvio attuali di ogni tasto, qualunque siano le impostazioni della schermata iniziale (utile con `LOGO_DISPLAY = 0`, dove non compare altro)."
  },
  "3adb267042c1": {
   "en": "3adb267042c1",
@@ -251,6 +259,10 @@
   "en": "6071ff1f11ca",
   "t": "### ID visivo del gioco di Retrogem"
  },
+ "6148c0d264cd": {
+  "en": "6148c0d264cd",
+  "t": "- La schermata iniziale: il logo PS2 al centro del cielo di RIPPS2, con i tasti sotto e l'eventuale testo sopra. `BIBLE_GLYPHS` 0 nessuno, 1 i tasti azione (predefinito), 2 tutti e sedici in due file da otto. `BIBLE_INFO` 1 mostra informazioni sulla console, orologio e conto alla rovescia (spento di default). Il cielo segue il tuo Color Theme di RIPPS2: senza `BIBLE_COLOR`, BIBLE legge il cielo che RIPPS2 salva con le sue impostazioni, dalla cartella che avvia la sua voce AUTO, o dalla cartella `RIPPS2` di una memory card quando la voce AUTO è RIPPS2 su un SD2PSX, una USB o l'HDD (`BIBLE_COLOR` nella configurazione ha la precedenza). Lo stesso aspetto in ogni modalità video."
+ },
  "61eb73b67bf7": {
   "en": "61eb73b67bf7",
   "t": "    - le opzioni della modalità video da [NHDDL](https://github.com/pcm720/nhddl)"
@@ -283,6 +295,10 @@
   "en": "6debe9f38567",
   "t": "Esempio per avviare NHDDL in modalità video 480p e cercare ISO su mmce e su un HDD exFAT senza bisogno di nhddl.yaml. Il vantaggio è non perdere tempo a caricare driver, cercare e caricare nhddl.yaml. È il modo più rapido per avviare NHDDL e mostrare l'elenco delle ISO."
  },
+ "6fd9ac99e195": {
+  "en": "6fd9ac99e195",
+  "t": "RIPPS2 porta BIBLE dentro RIPPS2.elf, ogni build firmata da akilluminati47, e lo installa o aggiorna da Impostazioni > Generale > Boot Loader > Manage, che imposta anche le chiavi di BIBLE: Background, Splash, Button Glyphs, Info Line, Power-on Wait, Video Mode e Widescreen. Le build firmate e una card BOOT per SD2PSX pronta sono nella [pagina delle release](https://github.com/akilluminati47/BIBLE/releases/latest). BIBLE funziona anche come ELF avviato da un altro loader (FMCB, OSDMenu, il loader di un SD2PSX)."
+ },
  "704784bb456b": {
   "en": "704784bb456b",
   "t": "- `2` = inversione dei campi tipo 2"
@@ -302,6 +318,10 @@
  "767d07f95351": {
   "en": "767d07f95351",
   "t": "- `-nologo`"
+ },
+ "7705781d64d9": {
+  "en": "7705781d64d9",
+  "t": "- `BIBLE_BACKGROUND`: `AUTO` (predefinito: il cielo quando si trovano le impostazioni di RIPPS2 o `BIBLE_COLOR` è impostato, altrimenti nero nella modalità propria della console, un boot loader semplice), `SKY` o `BLANK` (nero). Il passaggio a un programma è comunque nero per qualche secondo, così il nero si legge come un tutt'uno con esso."
  },
  "7bb989a3fb7e": {
   "en": "7bb989a3fb7e",
@@ -406,6 +426,10 @@
  "a3a65a7af403": {
   "en": "a3a65a7af403",
   "t": "- Si apre con `TRIANGLE + CROSS` durante l'avvio"
+ },
+ "a3adb3ae35a8": {
+  "en": "a3adb3ae35a8",
+  "t": "- Prima RIPPS2: il modello di configurazione (`release/SYS-CONF/PS2BBL.INI`) e i valori interni provano `mc?:/RIPPS2/RIPPS2.ELF` e `mmce?:/APPS/RIPPS2.ELF` prima di OSDMenu e FMCB, e il modello elenca le chiavi di BIBLE con note. Le pagine (modalità video, crediti, tasti di avvio) compaiono in dissolvenza sul logo scurito con i tasti messi via, così i tasti di avvio si leggono con calma."
  },
  "a44babacaf8b": {
   "en": "a44babacaf8b",
@@ -531,6 +555,10 @@
   "en": "d5c51f8e6ac2",
   "t": "- `-titleid=SLUS_123.45` sostituisce l'ID del titolo dell'app (fino a 11 caratteri)."
  },
+ "d94994509e95": {
+  "en": "d94994509e95",
+  "t": "- Il passaggio a RIPPS2: all'avvio il logo e i tasti svaniscono e il cielo resta finché la console non carica il programma successivo, che oscura lo schermo (circa 7 s in laboratorio con RIPPS2 su una memory card). Poi RIPPS2 appare nella stessa modalità video e con gli stessi colori. Tieni premuti TRIANGLE + CROSS all'avvio per la pagina della modalità video, che si apre sempre\n  nella modalità interlacciata della console (la via del ritorno da 720p o 1080i con un cavo composito)."
+ },
  "da330e7a0139": {
   "en": "da330e7a0139",
   "t": "- `mc0:/`, `mc1:/`, `mc?:/`"
@@ -599,10 +627,6 @@
   "en": "eae8f93205fd",
   "t": "  - `0` Niente logo né informazioni della console"
  },
- "ed21c5ac66ff": {
-  "en": "ed21c5ac66ff",
-  "t": "- Nessuno scatto entrando in RIPPS2: all'avvio il logo e i tasti svaniscono e il cielo resta sullo schermo, nella modalità di RIPPS2;\n  RIPPS2 parte su quello stesso cielo. Tieni premuti TRIANGLE + CROSS all'avvio per la pagina della modalità video, che si apre sempre\n  nella modalità interlacciata della console (la via del ritorno da 720p o 1080i con un cavo composito)."
- },
  "ed675d1ac190": {
   "en": "ed675d1ac190",
   "t": "- DECKARD IE 75K e successive: XPARAM.IRX viene applicato automaticamente quando serve per gli avvii senza logo."
@@ -650,29 +674,5 @@
  "fffd2a6caa3f": {
   "en": "fffd2a6caa3f",
   "t": "  - se `-patinfo` è presente, il primo argomento rimasto sostituisce la destinazione `BOOT2/BOOT/path` del CNF.\n  Questo vale per le build HDD.  \n  Esempio di PATINFO:  "
- },
- "6148c0d264cd": {
-  "en": "6148c0d264cd",
-  "t": "- La schermata iniziale: il logo PS2 al centro del cielo di RIPPS2, con i tasti sotto e l'eventuale testo sopra. `BIBLE_GLYPHS` 0 nessuno, 1 i tasti azione (predefinito), 2 tutti e sedici in due file da otto. `BIBLE_INFO` 1 mostra informazioni sulla console, orologio e conto alla rovescia (spento di default). Il cielo segue il tuo Color Theme di RIPPS2: senza `BIBLE_COLOR`, BIBLE legge il cielo che RIPPS2 salva con le sue impostazioni, dalla cartella che avvia la sua voce AUTO, o dalla cartella `RIPPS2` di una memory card quando la voce AUTO è RIPPS2 su un SD2PSX, una USB o l'HDD (`BIBLE_COLOR` nella configurazione ha la precedenza). Lo stesso aspetto in ogni modalità video."
- },
- "7705781d64d9": {
-  "en": "7705781d64d9",
-  "t": "- `BIBLE_BACKGROUND`: `AUTO` (predefinito: il cielo quando si trovano le impostazioni di RIPPS2 o `BIBLE_COLOR` è impostato, altrimenti nero nella modalità propria della console, un boot loader semplice), `SKY` o `BLANK` (nero). Il passaggio a un programma è comunque nero per qualche secondo, così il nero si legge come un tutt'uno con esso."
- },
- "2595eafbc56c": {
-  "en": "2595eafbc56c",
-  "t": "- Il suono di avvio, preparato: il Boot Sound On (fast) di RIPPS2 può tenere `boot.adp` accanto alla configurazione di BIBLE (`mc?:/SYS-CONF/boot.adp`). BIBLE lo legge mentre la schermata iniziale fa il conto alla rovescia e lo passa a RIPPS2 in RAM, così suona con il primo fotogramma di RIPPS2 anche quando RIPPS2 parte da un SD2PSX (build MMCE, MX4SIO e HDD; la build per memory card / USB dice la cartella a RIPPS2 e RIPPS2 lo legge). BIBLE aspetta all'avvio la parte non ancora letta: con `KEY_READ_WAIT_TIME = 0` è tutta la lettura, circa 2 s su una memory card. **Senza suono è l'avvio più rapido.** L'accordo e la parte di RIPPS2: [docs/boot-sound-handoff.md](docs/boot-sound-handoff.md)."
- },
- "a3adb3ae35a8": {
-  "en": "a3adb3ae35a8",
-  "t": "- Prima RIPPS2: il modello di configurazione (`release/SYS-CONF/PS2BBL.INI`) e i valori interni provano `mc?:/RIPPS2/RIPPS2.ELF` e `mmce?:/APPS/RIPPS2.ELF` prima di OSDMenu e FMCB, e il modello elenca le chiavi di BIBLE con note. Le pagine (modalità video, crediti, tasti di avvio) compaiono in dissolvenza sul logo scurito con i tasti messi via, così i tasti di avvio si leggono con calma."
- },
- "3a7d07109b19": {
-  "en": "3a7d07109b19",
-  "t": "- Novità: la pagina dei tasti di avvio. Tieni premuti L2 + R2 all'accensione e BIBLE si ferma prima di avviare qualsiasi cosa, mostrando i percorsi di avvio attuali di ogni tasto, qualunque siano le impostazioni della schermata iniziale (utile con `LOGO_DISPLAY = 0`, dove non compare altro)."
- },
- "6fd9ac99e195": {
-  "en": "6fd9ac99e195",
-  "t": "RIPPS2 porta BIBLE dentro RIPPS2.elf, ogni build firmata da akilluminati47, e lo installa o aggiorna da Impostazioni > Generale > Boot Loader > Manage, che imposta anche le chiavi di BIBLE: Background, Splash, Button Glyphs, Info Line, Power-on Wait, Video Mode e Widescreen. Le build firmate e una card BOOT per SD2PSX pronta sono nella [pagina delle release](https://github.com/akilluminati47/BIBLE/releases/latest). BIBLE funziona anche come ELF avviato da un altro loader (FMCB, OSDMenu, il loader di un SD2PSX)."
  }
 }

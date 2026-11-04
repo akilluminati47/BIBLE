@@ -107,6 +107,10 @@
   "en": "33014f963b64",
   "t": "1. PS2BBL 只解析並消耗 `ARG_*` 末端的載入程式控制參數：`-appid`、`-titleid=`、`-dev9=`、`-patinfo`、`-disc_stop`、`-gsm=`。"
  },
+ "33b450ea343d": {
+  "en": "33b450ea343d",
+  "t": "- 預先備妥的開機音：RIPPS2 的 Boot Sound On (fast) 可以把 `boot.adp` 放在 BIBLE 設定旁邊（`mc?:/SYS-CONF/boot.adp`）。它在任何磁碟機啟動之前讀取。BIBLE 也可以透過記憶體把它交給 RIPPS2，但目前只在實驗環境通過：在真實的 SD2PSX 上，RIPPS2 自己讀取了卡上的副本。**無聲開機最快。** 約定與 RIPPS2 一端：[docs/boot-sound-handoff.md](docs/boot-sound-handoff.md)。"
+ },
  "34f273d336d6": {
   "en": "34f273d336d6",
   "t": "BIBLE 是 RIPPS2 安裝的開機載入程式：saildot4k 的 PS2BBL Extended 的分支。"
@@ -122,6 +126,10 @@
  "391adc91b06c": {
   "en": "391adc91b06c",
   "t": "- 全域鍵/值：`DISC_STOP = 0/1`"
+ },
+ "3a7d07109b19": {
+  "en": "3a7d07109b19",
+  "t": "- 新增：啟動鍵頁面。開機時按住 L2 + R2，BIBLE 會在啟動任何東西之前暫停，顯示每個鍵目前的啟動路徑，無論你的啟動畫面怎麼設定（在什麼都不顯示的 `LOGO_DISPLAY = 0` 下很方便）。"
  },
  "3adb267042c1": {
   "en": "3adb267042c1",
@@ -251,6 +259,10 @@
   "en": "6071ff1f11ca",
   "t": "### Retrogem 視覺遊戲 ID"
  },
+ "6148c0d264cd": {
+  "en": "6148c0d264cd",
+  "t": "- 啟動畫面：PS2 標誌位於 RIPPS2 天空的中央，按鍵在下方，文字（如有）在上方。`BIBLE_GLYPHS` 0 不顯示，1 動作鍵（預設），2 全部十六個，分兩排各八個。`BIBLE_INFO` 1 顯示主機資訊、時鐘和倒數（預設關閉）。天空跟隨你的 RIPPS2 Color Theme：沒有 `BIBLE_COLOR` 時，BIBLE 讀取 RIPPS2 隨設定儲存的天空，來源是其 AUTO 項目啟動的資料夾；當 AUTO 項目是 SD2PSX、USB 或硬碟上的 RIPPS2 時，則讀記憶卡上的 `RIPPS2` 資料夾（設定中的 `BIBLE_COLOR` 優先）。每種視訊模式下外觀相同。"
+ },
  "61eb73b67bf7": {
   "en": "61eb73b67bf7",
   "t": "    - 來自 [NHDDL](https://github.com/pcm720/nhddl) 的視訊模式選項"
@@ -283,6 +295,10 @@
   "en": "6debe9f38567",
   "t": "以 480p 視訊模式啟動 NHDDL，並在不需要 nhddl.yaml 的情況下於 mmce 與 exfat HDD 上尋找 ISO 的範例。好處是不必浪費時間載入驅動程式、尋找與載入 nhddl.yaml。這是啟動 NHDDL 並顯示 ISO 清單最快的方式。"
  },
+ "6fd9ac99e195": {
+  "en": "6fd9ac99e195",
+  "t": "RIPPS2 把 BIBLE 放在 RIPPS2.elf 裡，每個版本都由 akilluminati47 簽署，並在 設定 > 一般 > Boot Loader > Manage 中安裝或更新它，在那裡也能設定 BIBLE 的鍵：Background、Splash、Button Glyphs、Info Line、Power-on Wait、Video Mode 和 Widescreen。已簽署的版本和現成的 SD2PSX BOOT 卡在[發布頁面](https://github.com/akilluminati47/BIBLE/releases/latest)。BIBLE 也可以作為由其他載入程式（FMCB、OSDMenu、SD2PSX 的載入程式）啟動的 ELF 執行。"
+ },
  "704784bb456b": {
   "en": "704784bb456b",
   "t": "- `2` = 圖場翻轉類型 2"
@@ -302,6 +318,10 @@
  "767d07f95351": {
   "en": "767d07f95351",
   "t": "- `-nologo`"
+ },
+ "7705781d64d9": {
+  "en": "7705781d64d9",
+  "t": "- `BIBLE_BACKGROUND`：`AUTO`（預設：找到 RIPPS2 的設定或設了 `BIBLE_COLOR` 時顯示天空，否則以主機自身模式顯示黑色，如同一般開機載入程式）、`SKY` 或 `BLANK`（黑色）。切換到程式時本來就會黑幾秒，所以黑色與之渾然一體。"
  },
  "7bb989a3fb7e": {
   "en": "7bb989a3fb7e",
@@ -406,6 +426,10 @@
  "a3a65a7af403": {
   "en": "a3a65a7af403",
   "t": "- 開機時按 `TRIANGLE + CROSS` 進入"
+ },
+ "a3adb3ae35a8": {
+  "en": "a3adb3ae35a8",
+  "t": "- RIPPS2 優先：設定範本（`release/SYS-CONF/PS2BBL.INI`）和內建預設值會先於 OSDMenu 和 FMCB 嘗試 `mc?:/RIPPS2/RIPPS2.ELF` 和 `mmce?:/APPS/RIPPS2.ELF`，範本也附說明列出 BIBLE 自己的鍵。各頁面（視訊模式、製作群、啟動鍵）會在收起按鍵、調暗的標誌上淡入，讓啟動鍵能從容閱讀。"
  },
  "a44babacaf8b": {
   "en": "a44babacaf8b",
@@ -531,6 +555,10 @@
   "en": "d5c51f8e6ac2",
   "t": "- `-titleid=SLUS_123.45` 覆寫應用程式的標題 ID（最多 11 個字元）。"
  },
+ "d94994509e95": {
+  "en": "d94994509e95",
+  "t": "- 進入 RIPPS2 的過程：啟動時標誌與按鍵淡出，天空一直留到主機載入下一個程式，此時螢幕變黑（實驗環境中 RIPPS2 在記憶卡上時約 7 秒）。隨後 RIPPS2 以相同的視訊模式與顏色出現。開機時按住 TRIANGLE + CROSS 開啟視訊模式頁面，它總是以\n  主機本身的交錯模式開啟（在複合端子線上從 720p 或 1080i 回來的方法）。"
+ },
  "da330e7a0139": {
   "en": "da330e7a0139",
   "t": "- `mc0:/`, `mc1:/`, `mc?:/`"
@@ -599,10 +627,6 @@
   "en": "eae8f93205fd",
   "t": "  - `0` 無標誌、無主機資訊"
  },
- "ed21c5ac66ff": {
-  "en": "ed21c5ac66ff",
-  "t": "- 進入 RIPPS2 不跳畫面：啟動時標誌與按鍵淡出，天空以 RIPPS2 的模式留在螢幕上；\n  RIPPS2 就在同一片天空上啟動。開機時按住 TRIANGLE + CROSS 開啟視訊模式頁面，它總是以\n  主機本身的交錯模式開啟（在複合端子線上從 720p 或 1080i 回來的方法）。"
- },
  "ed675d1ac190": {
   "en": "ed675d1ac190",
   "t": "- DECKARD IE 75K 及之後：無標誌啟動需要時會自動套用 XPARAM.IRX。"
@@ -650,29 +674,5 @@
  "fffd2a6caa3f": {
   "en": "fffd2a6caa3f",
   "t": "  - 若有 `-patinfo`，剩下的第一個參數會覆寫 CNF 的 `BOOT2/BOOT/path` 目標。\n  這適用於 HDD 組建。  \n  PATINFO 範例：  "
- },
- "6148c0d264cd": {
-  "en": "6148c0d264cd",
-  "t": "- 啟動畫面：PS2 標誌位於 RIPPS2 天空的中央，按鍵在下方，文字（如有）在上方。`BIBLE_GLYPHS` 0 不顯示，1 動作鍵（預設），2 全部十六個，分兩排各八個。`BIBLE_INFO` 1 顯示主機資訊、時鐘和倒數（預設關閉）。天空跟隨你的 RIPPS2 Color Theme：沒有 `BIBLE_COLOR` 時，BIBLE 讀取 RIPPS2 隨設定儲存的天空，來源是其 AUTO 項目啟動的資料夾；當 AUTO 項目是 SD2PSX、USB 或硬碟上的 RIPPS2 時，則讀記憶卡上的 `RIPPS2` 資料夾（設定中的 `BIBLE_COLOR` 優先）。每種視訊模式下外觀相同。"
- },
- "7705781d64d9": {
-  "en": "7705781d64d9",
-  "t": "- `BIBLE_BACKGROUND`：`AUTO`（預設：找到 RIPPS2 的設定或設了 `BIBLE_COLOR` 時顯示天空，否則以主機自身模式顯示黑色，如同一般開機載入程式）、`SKY` 或 `BLANK`（黑色）。切換到程式時本來就會黑幾秒，所以黑色與之渾然一體。"
- },
- "2595eafbc56c": {
-  "en": "2595eafbc56c",
-  "t": "- 預先備妥的開機音：RIPPS2 的 Boot Sound On (fast) 可以把 `boot.adp` 放在 BIBLE 設定旁邊（`mc?:/SYS-CONF/boot.adp`）。BIBLE 在啟動畫面倒數期間讀取它，並透過記憶體交給 RIPPS2，因此即使 RIPPS2 從 SD2PSX 啟動，它也會隨 RIPPS2 的第一個畫格響起（MMCE、MX4SIO 和 HDD 版本；記憶卡 / USB 版本把資料夾告訴 RIPPS2，由 RIPPS2 自己讀取）。啟動時 BIBLE 會等待尚未讀完的部分：`KEY_READ_WAIT_TIME = 0` 時就是整個讀取，在記憶卡上約 2 秒。**無聲開機最快。** 約定與 RIPPS2 一端：[docs/boot-sound-handoff.md](docs/boot-sound-handoff.md)。"
- },
- "a3adb3ae35a8": {
-  "en": "a3adb3ae35a8",
-  "t": "- RIPPS2 優先：設定範本（`release/SYS-CONF/PS2BBL.INI`）和內建預設值會先於 OSDMenu 和 FMCB 嘗試 `mc?:/RIPPS2/RIPPS2.ELF` 和 `mmce?:/APPS/RIPPS2.ELF`，範本也附說明列出 BIBLE 自己的鍵。各頁面（視訊模式、製作群、啟動鍵）會在收起按鍵、調暗的標誌上淡入，讓啟動鍵能從容閱讀。"
- },
- "3a7d07109b19": {
-  "en": "3a7d07109b19",
-  "t": "- 新增：啟動鍵頁面。開機時按住 L2 + R2，BIBLE 會在啟動任何東西之前暫停，顯示每個鍵目前的啟動路徑，無論你的啟動畫面怎麼設定（在什麼都不顯示的 `LOGO_DISPLAY = 0` 下很方便）。"
- },
- "6fd9ac99e195": {
-  "en": "6fd9ac99e195",
-  "t": "RIPPS2 把 BIBLE 放在 RIPPS2.elf 裡，每個版本都由 akilluminati47 簽署，並在 設定 > 一般 > Boot Loader > Manage 中安裝或更新它，在那裡也能設定 BIBLE 的鍵：Background、Splash、Button Glyphs、Info Line、Power-on Wait、Video Mode 和 Widescreen。已簽署的版本和現成的 SD2PSX BOOT 卡在[發布頁面](https://github.com/akilluminati47/BIBLE/releases/latest)。BIBLE 也可以作為由其他載入程式（FMCB、OSDMenu、SD2PSX 的載入程式）啟動的 ELF 執行。"
  }
 }

@@ -107,6 +107,10 @@
   "en": "33014f963b64",
   "t": "1. PS2BBL は `ARG_*` の末尾にあるローダー制御用の引数だけを解析して取り除きます：`-appid`、`-titleid=`、`-dev9=`、`-patinfo`、`-disc_stop`、`-gsm=`。"
  },
+ "33b450ea343d": {
+  "en": "33b450ea343d",
+  "t": "- 起動音を先に用意: RIPPS2 の Boot Sound On (fast) は `boot.adp` を BIBLE の設定ファイルの隣（`mc?:/SYS-CONF/boot.adp`）に置けます。どのドライブが起動するよりも前に読み込まれます。BIBLE は RAM で RIPPS2 に渡すこともできますが、これまでに成功したのはラボだけです。実機の SD2PSX では、RIPPS2 がカード上のコピーを自分で読み込みました。**無音がいちばん速い起動です。** 取り決めと RIPPS2 側: [docs/boot-sound-handoff.md](docs/boot-sound-handoff.md)。"
+ },
  "34f273d336d6": {
   "en": "34f273d336d6",
   "t": "BIBLE は RIPPS2 がセットアップするブートローダーで、saildot4k の PS2BBL Extended のフォークです。"
@@ -122,6 +126,10 @@
  "391adc91b06c": {
   "en": "391adc91b06c",
   "t": "- 全体のキー/値：`DISC_STOP = 0/1`"
+ },
+ "3a7d07109b19": {
+  "en": "3a7d07109b19",
+  "t": "- 新機能: 起動キーのページ。電源投入時に L2 + R2 を押し続けると、BIBLE は何かを起動する前に止まり、スプラッシュの設定にかかわらず各キーの現在の起動パスを表示します（ほかに何も表示されない `LOGO_DISPLAY = 0` で便利です）。"
  },
  "3adb267042c1": {
   "en": "3adb267042c1",
@@ -251,6 +259,10 @@
   "en": "6071ff1f11ca",
   "t": "### Retrogem の視覚的なゲーム ID"
  },
+ "6148c0d264cd": {
+  "en": "6148c0d264cd",
+  "t": "- スプラッシュ: RIPPS2 の空の中央に PS2 ロゴ、その下にボタン、上に文字（あれば）。`BIBLE_GLYPHS` 0 なし、1 アクションボタン（既定）、2 16 個すべてを 8 個ずつ 2 段で。`BIBLE_INFO` 1 で本体情報、時計、カウントダウンを表示（既定はオフ）。空は RIPPS2 の Color Theme に合わせます。`BIBLE_COLOR` がなければ、BIBLE は RIPPS2 が設定と一緒に保存する空を、AUTO エントリが起動するフォルダから、または AUTO エントリが SD2PSX、USB、HDD 上の RIPPS2 のときはメモリーカードの `RIPPS2` フォルダから読みます（設定ファイルの `BIBLE_COLOR` が優先）。どのビデオモードでも同じ見た目です。"
+ },
  "61eb73b67bf7": {
   "en": "61eb73b67bf7",
   "t": "    - [NHDDL](https://github.com/pcm720/nhddl) のビデオモードのオプション"
@@ -283,6 +295,10 @@
   "en": "6debe9f38567",
   "t": "NHDDL をビデオモード 480p で起動し、nhddl.yaml なしで mmce と exfat の HDD から ISO を探す例です。ドライバーの読み込みや nhddl.yaml の検索と読み込みで時間を無駄にしないのが利点です。NHDDL を起動して ISO 一覧を表示する最速の方法です。"
  },
+ "6fd9ac99e195": {
+  "en": "6fd9ac99e195",
+  "t": "RIPPS2 は BIBLE を RIPPS2.elf の中に持っており、どのビルドも akilluminati47 が署名しています。設定 > 一般 > Boot Loader > Manage から導入や更新ができ、そこで BIBLE のキーも設定できます: Background、Splash、Button Glyphs、Info Line、Power-on Wait、Video Mode、Widescreen。署名済みビルドと SD2PSX 用の完成した BOOT カードは[リリースページ](https://github.com/akilluminati47/BIBLE/releases/latest)にあります。BIBLE はほかのローダー（FMCB、OSDMenu、SD2PSX のローダー）から起動する ELF としても動きます。"
+ },
  "704784bb456b": {
   "en": "704784bb456b",
   "t": "- `2` = フィールド反転 タイプ 2"
@@ -302,6 +318,10 @@
  "767d07f95351": {
   "en": "767d07f95351",
   "t": "- `-nologo`"
+ },
+ "7705781d64d9": {
+  "en": "7705781d64d9",
+  "t": "- `BIBLE_BACKGROUND`: `AUTO`（既定: RIPPS2 の設定が見つかるか `BIBLE_COLOR` があれば空、なければ本体自身のモードで黒、普通のブートローダーと同じ）、`SKY` または `BLANK`（黒）。プログラムへの切り替えはどのみち数秒黒くなるので、黒ならそれと一続きに見えます。"
  },
  "7bb989a3fb7e": {
   "en": "7bb989a3fb7e",
@@ -406,6 +426,10 @@
  "a3a65a7af403": {
   "en": "a3a65a7af403",
   "t": "- 起動中に `TRIANGLE + CROSS` で入ります"
+ },
+ "a3adb3ae35a8": {
+  "en": "a3adb3ae35a8",
+  "t": "- RIPPS2 を最初に: 設定ファイルのひな形（`release/SYS-CONF/PS2BBL.INI`）と組み込みの既定値は、OSDMenu や FMCB より先に `mc?:/RIPPS2/RIPPS2.ELF` と `mmce?:/APPS/RIPPS2.ELF` を試し、ひな形には BIBLE 独自のキーが説明付きで並びます。各ページ（ビデオモード、クレジット、起動キー）は、ボタンをしまって暗くしたロゴの上にフェードインするので、起動キーが落ち着いて読めます。"
  },
  "a44babacaf8b": {
   "en": "a44babacaf8b",
@@ -531,6 +555,10 @@
   "en": "d5c51f8e6ac2",
   "t": "- `-titleid=SLUS_123.45` でアプリのタイトル ID を上書きします（最大 11 文字）。"
  },
+ "d94994509e95": {
+  "en": "d94994509e95",
+  "t": "- RIPPS2 への移行：起動時にロゴとボタンがフェードアウトし、本体が次のプログラムを読み込むまで空が残ります。読み込み中は画面が暗くなります（メモリーカード上の RIPPS2 でラボでは約 7 秒）。その後、RIPPS2 が同じビデオモードと同じ色で現れます。起動時に TRIANGLE + CROSS を押し続けるとビデオモードのページが開き、これは常に\n  本体自身のインターレースモードで開きます（コンポジットケーブルで 720p や 1080i から戻る道）。"
+ },
  "da330e7a0139": {
   "en": "da330e7a0139",
   "t": "- `mc0:/`, `mc1:/`, `mc?:/`"
@@ -599,10 +627,6 @@
   "en": "eae8f93205fd",
   "t": "  - `0` ロゴも本体情報もなし"
  },
- "ed21c5ac66ff": {
-  "en": "ed21c5ac66ff",
-  "t": "- RIPPS2 に入るときのちらつきなし：起動時にロゴとボタンがフェードアウトし、空は RIPPS2 のモードのまま画面に残ります。\n  RIPPS2 はその同じ空の上で始まります。起動時に TRIANGLE + CROSS を押し続けるとビデオモードのページが開き、これは常に\n  本体自身のインターレースモードで開きます（コンポジットケーブルで 720p や 1080i から戻る道）。"
- },
  "ed675d1ac190": {
   "en": "ed675d1ac190",
   "t": "- DECKARD IE 75K 以降：ロゴなし起動で必要なときは XPARAM.IRX を自動で適用します。"
@@ -650,29 +674,5 @@
  "fffd2a6caa3f": {
   "en": "fffd2a6caa3f",
   "t": "  - `-patinfo` がある場合、残った最初の引数が CNF の `BOOT2/BOOT/path` の対象を上書きします。\n  これは HDD ビルド向けです。  \n  PATINFO の例：  "
- },
- "6148c0d264cd": {
-  "en": "6148c0d264cd",
-  "t": "- スプラッシュ: RIPPS2 の空の中央に PS2 ロゴ、その下にボタン、上に文字（あれば）。`BIBLE_GLYPHS` 0 なし、1 アクションボタン（既定）、2 16 個すべてを 8 個ずつ 2 段で。`BIBLE_INFO` 1 で本体情報、時計、カウントダウンを表示（既定はオフ）。空は RIPPS2 の Color Theme に合わせます。`BIBLE_COLOR` がなければ、BIBLE は RIPPS2 が設定と一緒に保存する空を、AUTO エントリが起動するフォルダから、または AUTO エントリが SD2PSX、USB、HDD 上の RIPPS2 のときはメモリーカードの `RIPPS2` フォルダから読みます（設定ファイルの `BIBLE_COLOR` が優先）。どのビデオモードでも同じ見た目です。"
- },
- "7705781d64d9": {
-  "en": "7705781d64d9",
-  "t": "- `BIBLE_BACKGROUND`: `AUTO`（既定: RIPPS2 の設定が見つかるか `BIBLE_COLOR` があれば空、なければ本体自身のモードで黒、普通のブートローダーと同じ）、`SKY` または `BLANK`（黒）。プログラムへの切り替えはどのみち数秒黒くなるので、黒ならそれと一続きに見えます。"
- },
- "2595eafbc56c": {
-  "en": "2595eafbc56c",
-  "t": "- 起動音を先に用意: RIPPS2 の Boot Sound On (fast) は `boot.adp` を BIBLE の設定ファイルの隣（`mc?:/SYS-CONF/boot.adp`）に置けます。BIBLE はスプラッシュのカウントダウン中にそれを読み、RAM で RIPPS2 に渡すので、RIPPS2 が SD2PSX から起動するときでも RIPPS2 の最初のフレームで鳴ります（MMCE、MX4SIO、HDD 版。メモリーカード / USB 版は RIPPS2 にフォルダを伝え、RIPPS2 が読みます）。BIBLE は起動時にまだ読み終わっていない分を待ちます。`KEY_READ_WAIT_TIME = 0` ではそれが読み込み全体で、メモリーカードで約 2 秒です。**無音がいちばん速い起動です。** 取り決めと RIPPS2 側: [docs/boot-sound-handoff.md](docs/boot-sound-handoff.md)。"
- },
- "a3adb3ae35a8": {
-  "en": "a3adb3ae35a8",
-  "t": "- RIPPS2 を最初に: 設定ファイルのひな形（`release/SYS-CONF/PS2BBL.INI`）と組み込みの既定値は、OSDMenu や FMCB より先に `mc?:/RIPPS2/RIPPS2.ELF` と `mmce?:/APPS/RIPPS2.ELF` を試し、ひな形には BIBLE 独自のキーが説明付きで並びます。各ページ（ビデオモード、クレジット、起動キー）は、ボタンをしまって暗くしたロゴの上にフェードインするので、起動キーが落ち着いて読めます。"
- },
- "3a7d07109b19": {
-  "en": "3a7d07109b19",
-  "t": "- 新機能: 起動キーのページ。電源投入時に L2 + R2 を押し続けると、BIBLE は何かを起動する前に止まり、スプラッシュの設定にかかわらず各キーの現在の起動パスを表示します（ほかに何も表示されない `LOGO_DISPLAY = 0` で便利です）。"
- },
- "6fd9ac99e195": {
-  "en": "6fd9ac99e195",
-  "t": "RIPPS2 は BIBLE を RIPPS2.elf の中に持っており、どのビルドも akilluminati47 が署名しています。設定 > 一般 > Boot Loader > Manage から導入や更新ができ、そこで BIBLE のキーも設定できます: Background、Splash、Button Glyphs、Info Line、Power-on Wait、Video Mode、Widescreen。署名済みビルドと SD2PSX 用の完成した BOOT カードは[リリースページ](https://github.com/akilluminati47/BIBLE/releases/latest)にあります。BIBLE はほかのローダー（FMCB、OSDMenu、SD2PSX のローダー）から起動する ELF としても動きます。"
  }
 }

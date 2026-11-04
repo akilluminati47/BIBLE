@@ -107,6 +107,10 @@
   "en": "33014f963b64",
   "t": "1. PS2BBL analyse et consomme seulement les arguments de contrôle du chargeur placés à la fin de `ARG_*` : `-appid`, `-titleid=`, `-dev9=`, `-patinfo`, `-disc_stop`, `-gsm=`."
  },
+ "33b450ea343d": {
+  "en": "33b450ea343d",
+  "t": "- Le son de démarrage, préparé : le Boot Sound On (fast) de RIPPS2 peut garder `boot.adp` à côté de la configuration de BIBLE (`mc?:/SYS-CONF/boot.adp`). Il est lu avant le démarrage de tout lecteur. BIBLE peut aussi le transmettre à RIPPS2 en RAM, mais cela n'a été validé qu'en laboratoire : sur un vrai SD2PSX, RIPPS2 a lu lui-même la copie de la carte. **Sans son, c'est le démarrage le plus rapide.** Le contrat et la partie RIPPS2 : [docs/boot-sound-handoff.md](docs/boot-sound-handoff.md)."
+ },
  "34f273d336d6": {
   "en": "34f273d336d6",
   "t": "BIBLE est le chargeur d'amorçage que RIPPS2 installe : un fork de PS2BBL Extended de saildot4k."
@@ -122,6 +126,10 @@
  "391adc91b06c": {
   "en": "391adc91b06c",
   "t": "- Clé/valeur globale : `DISC_STOP = 0/1`"
+ },
+ "3a7d07109b19": {
+  "en": "3a7d07109b19",
+  "t": "- Nouveau : la page des touches de lancement. Maintenez L2 + R2 à l'allumage et BIBLE fait une pause avant de lancer quoi que ce soit, en montrant les chemins de lancement actuels de chaque touche, quels que soient vos réglages d'écran de démarrage (pratique avec `LOGO_DISPLAY = 0`, où rien d'autre ne s'affiche)."
  },
  "3adb267042c1": {
   "en": "3adb267042c1",
@@ -251,6 +259,10 @@
   "en": "6071ff1f11ca",
   "t": "### ID visuel de jeu Retrogem"
  },
+ "6148c0d264cd": {
+  "en": "6148c0d264cd",
+  "t": "- L'écran de démarrage : le logo PS2 centré sur le ciel de RIPPS2, les boutons dessous et le texte éventuel dessus. `BIBLE_GLYPHS` 0 aucun, 1 les boutons d'action (par défaut), 2 les seize sur deux rangées de huit. `BIBLE_INFO` 1 affiche les infos de la console, l'horloge et le compte à rebours (désactivé par défaut). Le ciel suit votre Color Theme de RIPPS2 : sans `BIBLE_COLOR`, BIBLE lit le ciel que RIPPS2 enregistre avec ses réglages, dans le dossier que lance son entrée AUTO, ou dans le dossier `RIPPS2` d'une carte mémoire quand l'entrée AUTO est RIPPS2 sur un SD2PSX, une clé USB ou le disque dur (`BIBLE_COLOR` dans la configuration l'emporte). Le même rendu dans chaque mode vidéo."
+ },
  "61eb73b67bf7": {
   "en": "61eb73b67bf7",
   "t": "    - les options de mode vidéo de [NHDDL](https://github.com/pcm720/nhddl)"
@@ -283,6 +295,10 @@
   "en": "6debe9f38567",
   "t": "Exemple pour lancer NHDDL en mode vidéo 480p et chercher les ISO sur mmce et sur un HDD exFAT sans avoir besoin de nhddl.yaml. L'avantage : aucun temps perdu à charger des pilotes, ni à trouver et charger nhddl.yaml. C'est le moyen le plus rapide de démarrer NHDDL et d'afficher la liste des ISO."
  },
+ "6fd9ac99e195": {
+  "en": "6fd9ac99e195",
+  "t": "RIPPS2 porte BIBLE dans RIPPS2.elf, chaque version signée par akilluminati47, et l'installe ou le met à jour depuis Paramètres > Général > Boot Loader > Manage, qui règle aussi les clés de BIBLE : Background, Splash, Button Glyphs, Info Line, Power-on Wait, Video Mode et Widescreen. Les versions signées et une carte BOOT SD2PSX prête sont sur [la page des versions](https://github.com/akilluminati47/BIBLE/releases/latest). BIBLE fonctionne aussi comme ELF lancé par un autre chargeur (FMCB, OSDMenu, le chargeur d'un SD2PSX)."
+ },
  "704784bb456b": {
   "en": "704784bb456b",
   "t": "- `2` = inversion de trames type 2"
@@ -302,6 +318,10 @@
  "767d07f95351": {
   "en": "767d07f95351",
   "t": "- `-nologo`"
+ },
+ "7705781d64d9": {
+  "en": "7705781d64d9",
+  "t": "- `BIBLE_BACKGROUND` : `AUTO` (par défaut : le ciel quand les réglages de RIPPS2 sont trouvés ou que `BIBLE_COLOR` est défini, sinon noir dans le mode propre de la console, un simple chargeur d'amorçage), `SKY` ou `BLANK` (noir). Le passage vers un programme est noir quelques secondes de toute façon, donc le noir ne fait qu'un avec lui."
  },
  "7bb989a3fb7e": {
   "en": "7bb989a3fb7e",
@@ -406,6 +426,10 @@
  "a3a65a7af403": {
   "en": "a3a65a7af403",
   "t": "- S'ouvre avec `TRIANGLE + CROSS` pendant le démarrage"
+ },
+ "a3adb3ae35a8": {
+  "en": "a3adb3ae35a8",
+  "t": "- RIPPS2 d'abord : le modèle de configuration (`release/SYS-CONF/PS2BBL.INI`) et les valeurs intégrées essaient `mc?:/RIPPS2/RIPPS2.ELF` et `mmce?:/APPS/RIPPS2.ELF` avant OSDMenu et FMCB, et le modèle liste les clés propres à BIBLE avec des notes. Les pages (mode vidéo, crédits, touches de lancement) apparaissent en fondu sur le logo assombri, boutons rangés, pour que les touches de lancement se lisent au calme."
  },
  "a44babacaf8b": {
   "en": "a44babacaf8b",
@@ -531,6 +555,10 @@
   "en": "d5c51f8e6ac2",
   "t": "- `-titleid=SLUS_123.45` remplace l'ID de titre de l'app (jusqu'à 11 caractères)."
  },
+ "d94994509e95": {
+  "en": "d94994509e95",
+  "t": "- Le passage à RIPPS2 : au lancement, le logo et les boutons s'effacent et le ciel reste jusqu'à ce que la console charge le programme suivant, ce qui met l'écran au noir (environ 7 s en laboratoire avec RIPPS2 sur une carte mémoire). RIPPS2 apparaît ensuite dans le même mode vidéo et les mêmes couleurs. Maintenez TRIANGLE + CROSS au démarrage pour la page du mode vidéo, qui s'ouvre toujours dans\n  le mode entrelacé de la console (le chemin du retour depuis 720p ou 1080i sur un câble composite)."
+ },
  "da330e7a0139": {
   "en": "da330e7a0139",
   "t": "- `mc0:/`, `mc1:/`, `mc?:/`"
@@ -599,10 +627,6 @@
   "en": "eae8f93205fd",
   "t": "  - `0` Ni logo ni infos de la console"
  },
- "ed21c5ac66ff": {
-  "en": "ed21c5ac66ff",
-  "t": "- Pas de saut en entrant dans RIPPS2 : au lancement, le logo et les boutons s'effacent et le ciel reste à l'écran, dans le mode de RIPPS2 ;\n  RIPPS2 démarre sur ce même ciel. Maintenez TRIANGLE + CROSS au démarrage pour la page du mode vidéo, qui s'ouvre toujours dans\n  le mode entrelacé de la console (le chemin du retour depuis 720p ou 1080i sur un câble composite)."
- },
  "ed675d1ac190": {
   "en": "ed675d1ac190",
   "t": "- DECKARD IE 75K et ultérieurs : XPARAM.IRX est appliqué automatiquement quand il le faut pour les lancements sans logo."
@@ -650,29 +674,5 @@
  "fffd2a6caa3f": {
   "en": "fffd2a6caa3f",
   "t": "  - si `-patinfo` est présent, le premier argument restant remplace la cible `BOOT2/BOOT/path` du CNF.\n  Ceci concerne les compilations HDD.  \n  Exemple de PATINFO :  "
- },
- "6148c0d264cd": {
-  "en": "6148c0d264cd",
-  "t": "- L'écran de démarrage : le logo PS2 centré sur le ciel de RIPPS2, les boutons dessous et le texte éventuel dessus. `BIBLE_GLYPHS` 0 aucun, 1 les boutons d'action (par défaut), 2 les seize sur deux rangées de huit. `BIBLE_INFO` 1 affiche les infos de la console, l'horloge et le compte à rebours (désactivé par défaut). Le ciel suit votre Color Theme de RIPPS2 : sans `BIBLE_COLOR`, BIBLE lit le ciel que RIPPS2 enregistre avec ses réglages, dans le dossier que lance son entrée AUTO, ou dans le dossier `RIPPS2` d'une carte mémoire quand l'entrée AUTO est RIPPS2 sur un SD2PSX, une clé USB ou le disque dur (`BIBLE_COLOR` dans la configuration l'emporte). Le même rendu dans chaque mode vidéo."
- },
- "7705781d64d9": {
-  "en": "7705781d64d9",
-  "t": "- `BIBLE_BACKGROUND` : `AUTO` (par défaut : le ciel quand les réglages de RIPPS2 sont trouvés ou que `BIBLE_COLOR` est défini, sinon noir dans le mode propre de la console, un simple chargeur d'amorçage), `SKY` ou `BLANK` (noir). Le passage vers un programme est noir quelques secondes de toute façon, donc le noir ne fait qu'un avec lui."
- },
- "2595eafbc56c": {
-  "en": "2595eafbc56c",
-  "t": "- Le son de démarrage, préparé : le Boot Sound On (fast) de RIPPS2 peut garder `boot.adp` à côté de la configuration de BIBLE (`mc?:/SYS-CONF/boot.adp`). BIBLE le lit pendant le compte à rebours de son écran de démarrage et le passe à RIPPS2 en RAM, il joue donc avec la première image de RIPPS2 même quand RIPPS2 démarre depuis un SD2PSX (versions MMCE, MX4SIO et HDD ; la version carte mémoire / USB indique le dossier à RIPPS2, qui le lit). BIBLE attend au lancement la partie encore non lue : avec `KEY_READ_WAIT_TIME = 0`, c'est toute la lecture, environ 2 s sur une carte mémoire. **Sans son, c'est le démarrage le plus rapide.** Le contrat et la partie RIPPS2 : [docs/boot-sound-handoff.md](docs/boot-sound-handoff.md)."
- },
- "a3adb3ae35a8": {
-  "en": "a3adb3ae35a8",
-  "t": "- RIPPS2 d'abord : le modèle de configuration (`release/SYS-CONF/PS2BBL.INI`) et les valeurs intégrées essaient `mc?:/RIPPS2/RIPPS2.ELF` et `mmce?:/APPS/RIPPS2.ELF` avant OSDMenu et FMCB, et le modèle liste les clés propres à BIBLE avec des notes. Les pages (mode vidéo, crédits, touches de lancement) apparaissent en fondu sur le logo assombri, boutons rangés, pour que les touches de lancement se lisent au calme."
- },
- "3a7d07109b19": {
-  "en": "3a7d07109b19",
-  "t": "- Nouveau : la page des touches de lancement. Maintenez L2 + R2 à l'allumage et BIBLE fait une pause avant de lancer quoi que ce soit, en montrant les chemins de lancement actuels de chaque touche, quels que soient vos réglages d'écran de démarrage (pratique avec `LOGO_DISPLAY = 0`, où rien d'autre ne s'affiche)."
- },
- "6fd9ac99e195": {
-  "en": "6fd9ac99e195",
-  "t": "RIPPS2 porte BIBLE dans RIPPS2.elf, chaque version signée par akilluminati47, et l'installe ou le met à jour depuis Paramètres > Général > Boot Loader > Manage, qui règle aussi les clés de BIBLE : Background, Splash, Button Glyphs, Info Line, Power-on Wait, Video Mode et Widescreen. Les versions signées et une carte BOOT SD2PSX prête sont sur [la page des versions](https://github.com/akilluminati47/BIBLE/releases/latest). BIBLE fonctionne aussi comme ELF lancé par un autre chargeur (FMCB, OSDMenu, le chargeur d'un SD2PSX)."
  }
 }

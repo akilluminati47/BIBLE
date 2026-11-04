@@ -65,15 +65,14 @@ BIBLE 是 RIPPS2 安装的引导程序：saildot4k 的 PS2BBL Extended 的一个
 
 - 启动画面：PS2 标志位于 RIPPS2 天空的中央，按键在下方，文字（如有）在上方。`BIBLE_GLYPHS` 0 不显示，1 动作键（默认），2 全部十六个，分两排各八个。`BIBLE_INFO` 1 显示主机信息、时钟和倒计时（默认关闭）。天空跟随你的 RIPPS2 Color Theme：没有 `BIBLE_COLOR` 时，BIBLE 读取 RIPPS2 随设置保存的天空，来源是其 AUTO 项启动的文件夹；当 AUTO 项是 SD2PSX、USB 或硬盘上的 RIPPS2 时，则读记忆卡上的 `RIPPS2` 文件夹（配置中的 `BIBLE_COLOR` 优先）。每种视频模式下外观相同。
 - `BIBLE_BACKGROUND`：`AUTO`（默认：找到 RIPPS2 的设置或设了 `BIBLE_COLOR` 时显示天空，否则以主机自身模式显示黑色，如同普通引导程序）、`SKY` 或 `BLANK`（黑色）。切换到程序时本来就会黑几秒，所以黑色与之浑然一体。
-- 预先备好的开机音：RIPPS2 的 Boot Sound On (fast) 可以把 `boot.adp` 放在 BIBLE 配置旁边（`mc?:/SYS-CONF/boot.adp`）。BIBLE 在启动画面倒计时期间读取它，并通过内存交给 RIPPS2，因此即使 RIPPS2 从 SD2PSX 启动，它也会随 RIPPS2 的第一帧响起（MMCE、MX4SIO 和 HDD 版本；记忆卡 / USB 版本把文件夹告诉 RIPPS2，由 RIPPS2 自己读取）。启动时 BIBLE 会等待尚未读完的部分：`KEY_READ_WAIT_TIME = 0` 时就是整个读取，在记忆卡上约 2 秒。**无声启动最快。** 约定与 RIPPS2 一侧：[docs/boot-sound-handoff.md](docs/boot-sound-handoff.md)。
+- 预先备好的开机音：RIPPS2 的 Boot Sound On (fast) 可以把 `boot.adp` 放在 BIBLE 配置旁边（`mc?:/SYS-CONF/boot.adp`）。它在任何驱动器启动之前读取。BIBLE 也可以通过内存把它交给 RIPPS2，但目前只在实验环境通过：在真实的 SD2PSX 上，RIPPS2 自己读取了卡上的副本。**无声启动最快。** 约定与 RIPPS2 一侧：[docs/boot-sound-handoff.md](docs/boot-sound-handoff.md)。
 - RIPPS2 优先：配置模板（`release/SYS-CONF/PS2BBL.INI`）和内置默认值会先于 OSDMenu 和 FMCB 尝试 `mc?:/RIPPS2/RIPPS2.ELF` 和 `mmce?:/APPS/RIPPS2.ELF`，模板还附说明列出 BIBLE 自己的键。各页面（视频模式、制作人员、启动键）会在收起按键、调暗的标志上淡入，让启动键能从容阅读。
 - 视频模式：`VIDEO_MODE` 也接受 `576P`、`720P` 和 `1080I`，即 RIPPS2 的其余模式。`AUTO`（默认）
   在 AUTO 条目旁找到 RIPPS2 的设置时以其 Video Mode 启动，否则使用主机自身的模式。
 - `BIBLE_WIDESCREEN`：`AUTO`（默认：RIPPS2 的 Widescreen，否则用 PS2 的 16:9 屏幕设置）、`ON` 或
   `OFF`。在 480i、576i、480p 和 576p 下，启动画面为会把画面拉伸到 16:9 的电视绘制，不会
   被压扁。720p 和 1080i 本来就是 16:9。
-- 进入 RIPPS2 不跳屏：启动时标志和按键淡出，天空以 RIPPS2 的模式留在屏幕上；
-  RIPPS2 就在同一片天空上启动。开机时按住 TRIANGLE + CROSS 打开视频模式页面，它总是以
+- 进入 RIPPS2 的过程：启动时标志和按键淡出，天空一直留到主机加载下一个程序，此时屏幕变黑（实验环境中 RIPPS2 在记忆卡上时约 7 秒）。随后 RIPPS2 以相同的视频模式和颜色出现。开机时按住 TRIANGLE + CROSS 打开视频模式页面，它总是以
   主机自身的隔行模式打开（在复合线上从 720p 或 1080i 回来的方法）。
 - 新增：启动键页面。开机时按住 L2 + R2，BIBLE 会在启动任何东西之前暂停，显示每个键当前的启动路径，无论你的启动画面如何设置（在什么都不显示的 `LOGO_DISPLAY = 0` 下很方便）。
 - 从开机起就按住的组合键现在会打开相应页面（以前手柄仍在

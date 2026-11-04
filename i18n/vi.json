@@ -107,6 +107,10 @@
   "en": "33014f963b64",
   "t": "1. PS2BBL chỉ phân tích và lấy đi các đối số điều khiển trình nạp ở cuối `ARG_*`: `-appid`, `-titleid=`, `-dev9=`, `-patinfo`, `-disc_stop`, `-gsm=`."
  },
+ "33b450ea343d": {
+  "en": "33b450ea343d",
+  "t": "- Âm khởi động, chuẩn bị sẵn: Boot Sound On (fast) của RIPPS2 có thể giữ `boot.adp` cạnh cấu hình của BIBLE (`mc?:/SYS-CONF/boot.adp`). Nó được đọc trước khi bất kỳ ổ nào khởi động. BIBLE cũng có thể trao nó cho RIPPS2 trong RAM, nhưng việc đó mới chỉ đạt trong phòng thử nghiệm: trên SD2PSX thật, RIPPS2 tự đọc bản sao trên thẻ. **Im lặng là khởi động nhanh nhất.** Thỏa thuận và phần của RIPPS2: [docs/boot-sound-handoff.md](docs/boot-sound-handoff.md)."
+ },
  "34f273d336d6": {
   "en": "34f273d336d6",
   "t": "BIBLE là trình khởi động mà RIPPS2 cài đặt: một bản fork của PS2BBL Extended do saildot4k làm."
@@ -122,6 +126,10 @@
  "391adc91b06c": {
   "en": "391adc91b06c",
   "t": "- Khóa/giá trị chung: `DISC_STOP = 0/1`"
+ },
+ "3a7d07109b19": {
+  "en": "3a7d07109b19",
+  "t": "- Mới: trang phím khởi chạy. Giữ L2 + R2 khi bật máy và BIBLE dừng lại trước khi khởi chạy bất cứ gì, hiện đường dẫn khởi chạy hiện tại của mỗi phím, dù cài đặt màn hình mở đầu thế nào (tiện với `LOGO_DISPLAY = 0`, nơi không hiện gì khác)."
  },
  "3adb267042c1": {
   "en": "3adb267042c1",
@@ -251,6 +259,10 @@
   "en": "6071ff1f11ca",
   "t": "### ID game trực quan của Retrogem"
  },
+ "6148c0d264cd": {
+  "en": "6148c0d264cd",
+  "t": "- Màn hình mở đầu: logo PS2 ở giữa bầu trời của RIPPS2, các nút bên dưới và chữ (nếu có) bên trên. `BIBLE_GLYPHS` 0 không có, 1 các nút hành động (mặc định), 2 cả mười sáu nút thành hai hàng tám. `BIBLE_INFO` 1 hiện thông tin máy, đồng hồ và đếm ngược (mặc định tắt). Bầu trời theo Color Theme của RIPPS2: khi không có `BIBLE_COLOR`, BIBLE đọc bầu trời mà RIPPS2 lưu cùng cài đặt của nó, từ thư mục mà mục AUTO khởi chạy, hoặc từ thư mục `RIPPS2` trên thẻ nhớ khi mục AUTO là RIPPS2 trên SD2PSX, USB hoặc ổ cứng (`BIBLE_COLOR` trong cấu hình được ưu tiên). Cùng một giao diện ở mọi chế độ video."
+ },
  "61eb73b67bf7": {
   "en": "61eb73b67bf7",
   "t": "    - các tùy chọn chế độ video từ [NHDDL](https://github.com/pcm720/nhddl)"
@@ -283,6 +295,10 @@
   "en": "6debe9f38567",
   "t": "Ví dụ khởi chạy NHDDL ở chế độ video 480p và tìm ISO trên mmce và HDD exfat mà không cần nhddl.yaml. Lợi ích là không mất thời gian nạp driver, tìm và nạp nhddl.yaml. Đây là cách nhanh nhất để khởi động NHDDL và hiện danh sách ISO."
  },
+ "6fd9ac99e195": {
+  "en": "6fd9ac99e195",
+  "t": "RIPPS2 mang BIBLE bên trong RIPPS2.elf, mọi bản dựng đều do akilluminati47 ký, và cài đặt hoặc cập nhật nó từ Cài đặt > Chung > Boot Loader > Manage, nơi cũng đặt các khóa của BIBLE: Background, Splash, Button Glyphs, Info Line, Power-on Wait, Video Mode và Widescreen. Các bản đã ký và một thẻ BOOT SD2PSX làm sẵn ở [trang phát hành](https://github.com/akilluminati47/BIBLE/releases/latest). BIBLE cũng chạy như một ELF do trình nạp khác khởi chạy (FMCB, OSDMenu, trình nạp của SD2PSX)."
+ },
  "704784bb456b": {
   "en": "704784bb456b",
   "t": "- `2` = lật trường kiểu 2"
@@ -302,6 +318,10 @@
  "767d07f95351": {
   "en": "767d07f95351",
   "t": "- `-nologo`"
+ },
+ "7705781d64d9": {
+  "en": "7705781d64d9",
+  "t": "- `BIBLE_BACKGROUND`: `AUTO` (mặc định: bầu trời khi tìm thấy cài đặt của RIPPS2 hoặc có `BIBLE_COLOR`, nếu không thì màu đen ở chế độ riêng của máy, như một trình nạp khởi động bình thường), `SKY` hoặc `BLANK` (đen). Lúc chuyển sang một chương trình vốn đã đen vài giây, nên màu đen trông liền một khối với nó."
  },
  "7bb989a3fb7e": {
   "en": "7bb989a3fb7e",
@@ -406,6 +426,10 @@
  "a3a65a7af403": {
   "en": "a3a65a7af403",
   "t": "- Vào bằng `TRIANGLE + CROSS` trong lúc khởi động"
+ },
+ "a3adb3ae35a8": {
+  "en": "a3adb3ae35a8",
+  "t": "- RIPPS2 trước: mẫu cấu hình (`release/SYS-CONF/PS2BBL.INI`) và các giá trị mặc định có sẵn thử `mc?:/RIPPS2/RIPPS2.ELF` và `mmce?:/APPS/RIPPS2.ELF` trước OSDMenu và FMCB, và mẫu liệt kê các khóa riêng của BIBLE kèm ghi chú. Các trang (chế độ video, danh đề, phím khởi chạy) hiện dần trên logo đã làm tối với các nút được cất đi, để phím khởi chạy dễ đọc."
  },
  "a44babacaf8b": {
   "en": "a44babacaf8b",
@@ -531,6 +555,10 @@
   "en": "d5c51f8e6ac2",
   "t": "- `-titleid=SLUS_123.45` thay ID tiêu đề của ứng dụng (tối đa 11 ký tự)."
  },
+ "d94994509e95": {
+  "en": "d94994509e95",
+  "t": "- Chuyển sang RIPPS2: khi khởi chạy, logo và các nút mờ đi còn bầu trời ở lại cho đến khi máy nạp chương trình tiếp theo, làm màn hình tối đen (khoảng 7 s trong phòng thử nghiệm với RIPPS2 trên thẻ nhớ). Sau đó RIPPS2 xuất hiện ở cùng chế độ video và cùng màu. Giữ TRIANGLE + CROSS khi khởi động để mở trang chế độ video, trang này luôn mở\n  ở chế độ xen kẽ của chính máy (đường quay lại từ 720p hoặc 1080i trên dây composite)."
+ },
  "da330e7a0139": {
   "en": "da330e7a0139",
   "t": "- `mc0:/`, `mc1:/`, `mc?:/`"
@@ -599,10 +627,6 @@
   "en": "eae8f93205fd",
   "t": "  - `0` Không có logo và thông tin máy"
  },
- "ed21c5ac66ff": {
-  "en": "ed21c5ac66ff",
-  "t": "- Không giật khi vào RIPPS2: khi khởi chạy, logo và các nút mờ đi còn bầu trời vẫn ở trên màn hình, trong chế độ của RIPPS2;\n  RIPPS2 bắt đầu trên chính bầu trời đó. Giữ TRIANGLE + CROSS khi khởi động để mở trang chế độ video, trang này luôn mở\n  ở chế độ xen kẽ của chính máy (đường quay lại từ 720p hoặc 1080i trên dây composite)."
- },
  "ed675d1ac190": {
   "en": "ed675d1ac190",
   "t": "- DECKARD IE 75K trở về sau: XPARAM.IRX được áp dụng tự động khi cần cho các lần khởi chạy không logo."
@@ -650,29 +674,5 @@
  "fffd2a6caa3f": {
   "en": "fffd2a6caa3f",
   "t": "  - nếu có `-patinfo`, đối số đầu tiên còn lại sẽ thay đích `BOOT2/BOOT/path` của CNF.\n  Phần này dành cho bản build HDD.  \n  Ví dụ PATINFO:  "
- },
- "6148c0d264cd": {
-  "en": "6148c0d264cd",
-  "t": "- Màn hình mở đầu: logo PS2 ở giữa bầu trời của RIPPS2, các nút bên dưới và chữ (nếu có) bên trên. `BIBLE_GLYPHS` 0 không có, 1 các nút hành động (mặc định), 2 cả mười sáu nút thành hai hàng tám. `BIBLE_INFO` 1 hiện thông tin máy, đồng hồ và đếm ngược (mặc định tắt). Bầu trời theo Color Theme của RIPPS2: khi không có `BIBLE_COLOR`, BIBLE đọc bầu trời mà RIPPS2 lưu cùng cài đặt của nó, từ thư mục mà mục AUTO khởi chạy, hoặc từ thư mục `RIPPS2` trên thẻ nhớ khi mục AUTO là RIPPS2 trên SD2PSX, USB hoặc ổ cứng (`BIBLE_COLOR` trong cấu hình được ưu tiên). Cùng một giao diện ở mọi chế độ video."
- },
- "7705781d64d9": {
-  "en": "7705781d64d9",
-  "t": "- `BIBLE_BACKGROUND`: `AUTO` (mặc định: bầu trời khi tìm thấy cài đặt của RIPPS2 hoặc có `BIBLE_COLOR`, nếu không thì màu đen ở chế độ riêng của máy, như một trình nạp khởi động bình thường), `SKY` hoặc `BLANK` (đen). Lúc chuyển sang một chương trình vốn đã đen vài giây, nên màu đen trông liền một khối với nó."
- },
- "2595eafbc56c": {
-  "en": "2595eafbc56c",
-  "t": "- Âm khởi động, chuẩn bị sẵn: Boot Sound On (fast) của RIPPS2 có thể giữ `boot.adp` cạnh cấu hình của BIBLE (`mc?:/SYS-CONF/boot.adp`). BIBLE đọc nó trong lúc màn hình mở đầu đếm ngược và giao cho RIPPS2 trong RAM, nên nó vang lên cùng khung hình đầu tiên của RIPPS2 ngay cả khi RIPPS2 khởi chạy từ SD2PSX (bản MMCE, MX4SIO và HDD; bản thẻ nhớ / USB báo thư mục cho RIPPS2 và RIPPS2 tự đọc). Khi khởi chạy, BIBLE chờ phần chưa đọc xong: với `KEY_READ_WAIT_TIME = 0` đó là toàn bộ lần đọc, khoảng 2 s trên thẻ nhớ. **Im lặng là khởi động nhanh nhất.** Thỏa thuận và phần của RIPPS2: [docs/boot-sound-handoff.md](docs/boot-sound-handoff.md)."
- },
- "a3adb3ae35a8": {
-  "en": "a3adb3ae35a8",
-  "t": "- RIPPS2 trước: mẫu cấu hình (`release/SYS-CONF/PS2BBL.INI`) và các giá trị mặc định có sẵn thử `mc?:/RIPPS2/RIPPS2.ELF` và `mmce?:/APPS/RIPPS2.ELF` trước OSDMenu và FMCB, và mẫu liệt kê các khóa riêng của BIBLE kèm ghi chú. Các trang (chế độ video, danh đề, phím khởi chạy) hiện dần trên logo đã làm tối với các nút được cất đi, để phím khởi chạy dễ đọc."
- },
- "3a7d07109b19": {
-  "en": "3a7d07109b19",
-  "t": "- Mới: trang phím khởi chạy. Giữ L2 + R2 khi bật máy và BIBLE dừng lại trước khi khởi chạy bất cứ gì, hiện đường dẫn khởi chạy hiện tại của mỗi phím, dù cài đặt màn hình mở đầu thế nào (tiện với `LOGO_DISPLAY = 0`, nơi không hiện gì khác)."
- },
- "6fd9ac99e195": {
-  "en": "6fd9ac99e195",
-  "t": "RIPPS2 mang BIBLE bên trong RIPPS2.elf, mọi bản dựng đều do akilluminati47 ký, và cài đặt hoặc cập nhật nó từ Cài đặt > Chung > Boot Loader > Manage, nơi cũng đặt các khóa của BIBLE: Background, Splash, Button Glyphs, Info Line, Power-on Wait, Video Mode và Widescreen. Các bản đã ký và một thẻ BOOT SD2PSX làm sẵn ở [trang phát hành](https://github.com/akilluminati47/BIBLE/releases/latest). BIBLE cũng chạy như một ELF do trình nạp khác khởi chạy (FMCB, OSDMenu, trình nạp của SD2PSX)."
  }
 }

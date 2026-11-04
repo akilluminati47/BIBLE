@@ -107,6 +107,10 @@
   "en": "33014f963b64",
   "t": "1. PS2BBL obrađuje i troši samo završne kontrolne argumente loadera iz `ARG_*`: `-appid`, `-titleid=`, `-dev9=`, `-patinfo`, `-disc_stop`, `-gsm=`."
  },
+ "33b450ea343d": {
+  "en": "33b450ea343d",
+  "t": "- Zvuk pokretanja, pripremljen: Boot Sound On (fast) u RIPPS2-u može da drži `boot.adp` pored BIBLE-ove konfiguracije (`mc?:/SYS-CONF/boot.adp`). Čita se pre pokretanja bilo kog uređaja. BIBLE može da ga preda RIPPS2-u i u RAM-u, ali je to zasad prošlo samo u laboratoriji: na pravom SD2PSX-u RIPPS2 je sam pročitao kopiju sa kartice. **Bez zvuka je najbrže pokretanje.** Dogovor i strana RIPPS2-a: [docs/boot-sound-handoff.md](docs/boot-sound-handoff.md)."
+ },
  "34f273d336d6": {
   "en": "34f273d336d6",
   "t": "BIBLE je boot loader koji podešava RIPPS2: fork PS2BBL Extended od saildot4k."
@@ -122,6 +126,10 @@
  "391adc91b06c": {
   "en": "391adc91b06c",
   "t": "- Globalni ključ/vrednost: `DISC_STOP = 0/1`"
+ },
+ "3a7d07109b19": {
+  "en": "3a7d07109b19",
+  "t": "- Novo: stranica tastera za pokretanje. Drži L2 + R2 pri uključenju i BIBLE zastane pre nego što išta pokrene, pokazujući trenutne putanje svakog tastera, bez obzira na podešavanja uvodnog ekrana (korisno uz `LOGO_DISPLAY = 0`, gde se ništa drugo ne prikazuje)."
  },
  "3adb267042c1": {
   "en": "3adb267042c1",
@@ -251,6 +259,10 @@
   "en": "6071ff1f11ca",
   "t": "### Vizuelni ID igre od Retrogema"
  },
+ "6148c0d264cd": {
+  "en": "6148c0d264cd",
+  "t": "- Uvodni ekran: PS2 logo u sredini neba RIPPS2-a, sa tasterima ispod i eventualnim tekstom iznad. `BIBLE_GLYPHS` 0 ništa, 1 tasteri za radnje (podrazumevano), 2 svih šesnaest u dva reda po osam. `BIBLE_INFO` 1 prikazuje podatke o konzoli, sat i odbrojavanje (podrazumevano isključeno). Nebo prati tvoj RIPPS2 Color Theme: bez `BIBLE_COLOR` BIBLE čita nebo koje RIPPS2 čuva uz svoja podešavanja, iz fascikle koju pokreće njegov unos AUTO, ili iz fascikle `RIPPS2` na memorijskoj kartici kad je unos AUTO RIPPS2 na SD2PSX-u, USB-u ili hard disku (`BIBLE_COLOR` u konfiguraciji ima prednost). Isti izgled u svakom video režimu."
+ },
  "61eb73b67bf7": {
   "en": "61eb73b67bf7",
   "t": "    - opcije video režima iz [NHDDL](https://github.com/pcm720/nhddl)"
@@ -283,6 +295,10 @@
   "en": "6debe9f38567",
   "t": "Primer pokretanja NHDDL-a u video režimu 480p uz traženje ISO datoteka na mmce i exFAT HDD-u bez potrebe za nhddl.yaml. Prednost je što se ne gubi vreme na učitavanje drajvera i traženje i učitavanje nhddl.yaml. To je najbrži način da pokrenete NHDDL i prikažete spisak ISO datoteka."
  },
+ "6fd9ac99e195": {
+  "en": "6fd9ac99e195",
+  "t": "RIPPS2 nosi BIBLE unutar RIPPS2.elf, svaku verziju potpisao akilluminati47, i instalira ga ili ažurira u Podešavanja > Opšte > Boot Loader > Manage, gde postavlja i BIBLE-ove ključeve: Background, Splash, Button Glyphs, Info Line, Power-on Wait, Video Mode i Widescreen. Potpisane verzije i gotova SD2PSX BOOT kartica su na [stranici izdanja](https://github.com/akilluminati47/BIBLE/releases/latest). BIBLE radi i kao ELF koji pokreće drugi loader (FMCB, OSDMenu, loader SD2PSX-a)."
+ },
  "704784bb456b": {
   "en": "704784bb456b",
   "t": "- `2` = zamena poluslika tip 2"
@@ -302,6 +318,10 @@
  "767d07f95351": {
   "en": "767d07f95351",
   "t": "- `-nologo`"
+ },
+ "7705781d64d9": {
+  "en": "7705781d64d9",
+  "t": "- `BIBLE_BACKGROUND`: `AUTO` (podrazumevano: nebo kad se nađu podešavanja RIPPS2-a ili je postavljen `BIBLE_COLOR`, inače crna u sopstvenom režimu konzole, običan bootloader), `SKY` ili `BLANK` (crna). Prelaz u program ionako je nekoliko sekundi crn, pa crna sa njim deluje kao jedna celina."
  },
  "7bb989a3fb7e": {
   "en": "7bb989a3fb7e",
@@ -406,6 +426,10 @@
  "a3a65a7af403": {
   "en": "a3a65a7af403",
   "t": "- Otvara se sa `TRIANGLE + CROSS` tokom pokretanja"
+ },
+ "a3adb3ae35a8": {
+  "en": "a3adb3ae35a8",
+  "t": "- RIPPS2 prvi: šablon konfiguracije (`release/SYS-CONF/PS2BBL.INI`) i ugrađene podrazumevane vrednosti pokušavaju `mc?:/RIPPS2/RIPPS2.ELF` i `mmce?:/APPS/RIPPS2.ELF` pre OSDMenu-a i FMCB-a, a šablon navodi BIBLE-ove sopstvene ključeve sa napomenama. Stranice (video režim, zasluge, tasteri za pokretanje) pojavljuju se preko zatamnjenog loga sa sklonjenim tasterima, da se tasteri za pokretanje mirno čitaju."
  },
  "a44babacaf8b": {
   "en": "a44babacaf8b",
@@ -531,6 +555,10 @@
   "en": "d5c51f8e6ac2",
   "t": "- `-titleid=SLUS_123.45` zamenjuje ID naslova aplikacije (do 11 znakova)."
  },
+ "d94994509e95": {
+  "en": "d94994509e95",
+  "t": "- Prelaz u RIPPS2: pri pokretanju logo i tasteri nestaju, a nebo ostaje dok konzola ne učita sledeći program, što zatamni ekran (oko 7 s u laboratoriji sa RIPPS2-om na memorijskoj kartici). Zatim se RIPPS2 pojavljuje u istom video režimu i istim bojama. Pri pokretanju držite TRIANGLE + CROSS za stranicu video režima, koja se uvek otvara\n  u sopstvenom proplitanom režimu konzole (put nazad iz 720p ili 1080i na kompozitnom kablu)."
+ },
  "da330e7a0139": {
   "en": "da330e7a0139",
   "t": "- `mc0:/`, `mc1:/`, `mc?:/`"
@@ -599,10 +627,6 @@
   "en": "eae8f93205fd",
   "t": "  - `0` Bez loga i podataka o konzoli"
  },
- "ed21c5ac66ff": {
-  "en": "ed21c5ac66ff",
-  "t": "- Bez skoka pri ulasku u RIPPS2: pri pokretanju logo i tasteri nestaju, a nebo ostaje na ekranu u režimu RIPPS2;\n  RIPPS2 počinje na tom istom nebu. Pri pokretanju držite TRIANGLE + CROSS za stranicu video režima, koja se uvek otvara\n  u sopstvenom proplitanom režimu konzole (put nazad iz 720p ili 1080i na kompozitnom kablu)."
- },
  "ed675d1ac190": {
   "en": "ed675d1ac190",
   "t": "- DECKARD IE 75K i noviji: XPARAM.IRX se primenjuje automatski kada je potrebno za pokretanja bez loga."
@@ -650,29 +674,5 @@
  "fffd2a6caa3f": {
   "en": "fffd2a6caa3f",
   "t": "  - ako je prisutan `-patinfo`, prvi preostali argument zamenjuje cilj `BOOT2/BOOT/path` iz CNF-a.\n  Ovo je za izgradnje HDD.  \n  Primer PATINFO:  "
- },
- "6148c0d264cd": {
-  "en": "6148c0d264cd",
-  "t": "- Uvodni ekran: PS2 logo u sredini neba RIPPS2-a, sa tasterima ispod i eventualnim tekstom iznad. `BIBLE_GLYPHS` 0 ništa, 1 tasteri za radnje (podrazumevano), 2 svih šesnaest u dva reda po osam. `BIBLE_INFO` 1 prikazuje podatke o konzoli, sat i odbrojavanje (podrazumevano isključeno). Nebo prati tvoj RIPPS2 Color Theme: bez `BIBLE_COLOR` BIBLE čita nebo koje RIPPS2 čuva uz svoja podešavanja, iz fascikle koju pokreće njegov unos AUTO, ili iz fascikle `RIPPS2` na memorijskoj kartici kad je unos AUTO RIPPS2 na SD2PSX-u, USB-u ili hard disku (`BIBLE_COLOR` u konfiguraciji ima prednost). Isti izgled u svakom video režimu."
- },
- "7705781d64d9": {
-  "en": "7705781d64d9",
-  "t": "- `BIBLE_BACKGROUND`: `AUTO` (podrazumevano: nebo kad se nađu podešavanja RIPPS2-a ili je postavljen `BIBLE_COLOR`, inače crna u sopstvenom režimu konzole, običan bootloader), `SKY` ili `BLANK` (crna). Prelaz u program ionako je nekoliko sekundi crn, pa crna sa njim deluje kao jedna celina."
- },
- "2595eafbc56c": {
-  "en": "2595eafbc56c",
-  "t": "- Zvuk pokretanja, pripremljen: Boot Sound On (fast) u RIPPS2-u može da drži `boot.adp` pored BIBLE-ove konfiguracije (`mc?:/SYS-CONF/boot.adp`). BIBLE ga čita dok uvodni ekran odbrojava i predaje ga RIPPS2-u u RAM-u, pa svira sa prvom slikom RIPPS2-a čak i kad RIPPS2 kreće sa SD2PSX-a (verzije MMCE, MX4SIO i HDD; verzija za memorijsku karticu / USB kaže RIPPS2-u fasciklu i RIPPS2 ga čita). BIBLE pri pokretanju čeka deo koji još nije pročitan: sa `KEY_READ_WAIT_TIME = 0` to je celo čitanje, oko 2 s na memorijskoj kartici. **Bez zvuka je najbrže pokretanje.** Dogovor i strana RIPPS2-a: [docs/boot-sound-handoff.md](docs/boot-sound-handoff.md)."
- },
- "a3adb3ae35a8": {
-  "en": "a3adb3ae35a8",
-  "t": "- RIPPS2 prvi: šablon konfiguracije (`release/SYS-CONF/PS2BBL.INI`) i ugrađene podrazumevane vrednosti pokušavaju `mc?:/RIPPS2/RIPPS2.ELF` i `mmce?:/APPS/RIPPS2.ELF` pre OSDMenu-a i FMCB-a, a šablon navodi BIBLE-ove sopstvene ključeve sa napomenama. Stranice (video režim, zasluge, tasteri za pokretanje) pojavljuju se preko zatamnjenog loga sa sklonjenim tasterima, da se tasteri za pokretanje mirno čitaju."
- },
- "3a7d07109b19": {
-  "en": "3a7d07109b19",
-  "t": "- Novo: stranica tastera za pokretanje. Drži L2 + R2 pri uključenju i BIBLE zastane pre nego što išta pokrene, pokazujući trenutne putanje svakog tastera, bez obzira na podešavanja uvodnog ekrana (korisno uz `LOGO_DISPLAY = 0`, gde se ništa drugo ne prikazuje)."
- },
- "6fd9ac99e195": {
-  "en": "6fd9ac99e195",
-  "t": "RIPPS2 nosi BIBLE unutar RIPPS2.elf, svaku verziju potpisao akilluminati47, i instalira ga ili ažurira u Podešavanja > Opšte > Boot Loader > Manage, gde postavlja i BIBLE-ove ključeve: Background, Splash, Button Glyphs, Info Line, Power-on Wait, Video Mode i Widescreen. Potpisane verzije i gotova SD2PSX BOOT kartica su na [stranici izdanja](https://github.com/akilluminati47/BIBLE/releases/latest). BIBLE radi i kao ELF koji pokreće drugi loader (FMCB, OSDMenu, loader SD2PSX-a)."
  }
 }

@@ -65,15 +65,14 @@ BIBLE은 RIPPS2가 설치하는 부트 로더로, saildot4k의 PS2BBL Extended�
 
 - 스플래시: RIPPS2의 하늘 가운데에 PS2 로고, 그 아래에 버튼, 위에는 글자(있으면). `BIBLE_GLYPHS` 0 없음, 1 액션 버튼(기본), 2 16개 모두를 8개씩 두 줄로. `BIBLE_INFO` 1은 본체 정보, 시계, 카운트다운을 보여줍니다(기본은 꺼짐). 하늘은 RIPPS2의 Color Theme를 따릅니다. `BIBLE_COLOR`가 없으면 BIBLE은 RIPPS2가 설정과 함께 저장하는 하늘을 AUTO 항목이 실행하는 폴더에서, 또는 AUTO 항목이 SD2PSX, USB, HDD의 RIPPS2일 때는 메모리 카드의 `RIPPS2` 폴더에서 읽습니다(설정 파일의 `BIBLE_COLOR`가 우선). 모든 비디오 모드에서 같은 모습입니다.
 - `BIBLE_BACKGROUND`: `AUTO`(기본: RIPPS2의 설정이 있거나 `BIBLE_COLOR`가 있으면 하늘, 없으면 본체 고유 모드의 검정, 평범한 부트로더처럼), `SKY` 또는 `BLANK`(검정). 프로그램으로 넘어갈 때는 어차피 몇 초 동안 검으므로, 검정이면 그와 한 덩어리로 보입니다.
-- 미리 준비한 부팅음: RIPPS2의 Boot Sound On (fast)은 `boot.adp`를 BIBLE 설정 파일 옆(`mc?:/SYS-CONF/boot.adp`)에 둘 수 있습니다. BIBLE은 스플래시가 카운트다운하는 동안 그것을 읽어 RAM으로 RIPPS2에 넘기므로, RIPPS2가 SD2PSX에서 시작할 때도 RIPPS2의 첫 프레임과 함께 울립니다(MMCE, MX4SIO, HDD 빌드. 메모리 카드 / USB 빌드는 RIPPS2에 폴더를 알려 주고 RIPPS2가 읽습니다). BIBLE은 실행할 때 아직 읽지 못한 부분을 기다립니다. `KEY_READ_WAIT_TIME = 0`이면 그것이 읽기 전체로, 메모리 카드에서 약 2초입니다. **무음이 가장 빠른 부팅입니다.** 약속과 RIPPS2 쪽: [docs/boot-sound-handoff.md](docs/boot-sound-handoff.md).
+- 미리 준비한 부팅음: RIPPS2의 Boot Sound On (fast)은 `boot.adp`를 BIBLE 설정 파일 옆(`mc?:/SYS-CONF/boot.adp`)에 둘 수 있습니다. 어떤 드라이브보다 먼저 읽습니다. BIBLE은 RAM으로 RIPPS2에 넘겨줄 수도 있지만, 지금까지는 실험실에서만 통과했습니다. 실제 SD2PSX에서는 RIPPS2가 카드의 사본을 직접 읽었습니다. **무음이 가장 빠른 부팅입니다.** 약속과 RIPPS2 쪽: [docs/boot-sound-handoff.md](docs/boot-sound-handoff.md).
 - RIPPS2 먼저: 설정 템플릿(`release/SYS-CONF/PS2BBL.INI`)과 내장 기본값은 OSDMenu와 FMCB보다 먼저 `mc?:/RIPPS2/RIPPS2.ELF`와 `mmce?:/APPS/RIPPS2.ELF`를 시도하고, 템플릿에는 BIBLE 고유 키가 설명과 함께 있습니다. 페이지(비디오 모드, 크레딧, 실행 키)는 버튼을 치운 어두운 로고 위에 서서히 나타나, 실행 키를 차분히 읽을 수 있습니다.
 - 비디오 모드: `VIDEO_MODE`는 `576P`, `720P`, `1080I`도 받으며, 이는 RIPPS2의 나머지 모드입니다. `AUTO`(기본값)는
   AUTO 항목 옆에 RIPPS2의 설정이 있으면 그 Video Mode로, 없으면 콘솔 자체의 모드로 시작합니다.
 - `BIBLE_WIDESCREEN`: `AUTO`(기본값: RIPPS2의 Widescreen, 없으면 PS2의 16:9 화면 설정), `ON` 또는
   `OFF`. 480i, 576i, 480p, 576p에서는 화면을 16:9로 늘리는 TV에 맞게 스플래시를 그리므로
   찌그러지지 않습니다. 720p와 1080i는 이미 16:9입니다.
-- RIPPS2로 넘어갈 때 튀지 않음: 실행할 때 로고와 버튼이 사라지고 하늘은 RIPPS2의 모드로 화면에 남습니다.
-  RIPPS2는 바로 그 하늘에서 시작합니다. 부팅 시 TRIANGLE + CROSS를 누르고 있으면 비디오 모드 페이지가 열리는데, 이 페이지는 항상
+- RIPPS2로 넘어가기: 실행할 때 로고와 버튼이 사라지고, 콘솔이 다음 프로그램을 불러올 때까지 하늘이 남습니다. 이때 화면이 꺼집니다(메모리 카드의 RIPPS2로 실험실에서 약 7초). 그런 다음 RIPPS2가 같은 비디오 모드와 같은 색으로 나타납니다. 부팅 시 TRIANGLE + CROSS를 누르고 있으면 비디오 모드 페이지가 열리는데, 이 페이지는 항상
   콘솔 자체의 인터레이스 모드로 열립니다(컴포지트 케이블에서 720p나 1080i로부터 돌아오는 길).
 - 새 기능: 실행 키 페이지. 전원을 켤 때 L2 + R2를 누르고 있으면 BIBLE이 무엇이든 실행하기 전에 멈추고, 스플래시 설정과 상관없이 각 키의 현재 실행 경로를 보여줍니다(다른 것이 아무것도 보이지 않는 `LOGO_DISPLAY = 0`에서 유용합니다).
 - 전원을 켤 때부터 누르고 있던 조합이 이제 해당 페이지를 엽니다(컨트롤러가 아직

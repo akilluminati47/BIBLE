@@ -107,6 +107,10 @@
   "en": "33014f963b64",
   "t": "1. PS2BBL analizon dhe konsumon vetëm argumentet e kontrollit të ngarkuesit në fund të `ARG_*`: `-appid`, `-titleid=`, `-dev9=`, `-patinfo`, `-disc_stop`, `-gsm=`."
  },
+ "33b450ea343d": {
+  "en": "33b450ea343d",
+  "t": "- Tingulli i nisjes, i përgatitur: Boot Sound On (fast) i RIPPS2 mund ta mbajë `boot.adp` pranë konfigurimit të BIBLE (`mc?:/SYS-CONF/boot.adp`). Lexohet para se të niset çdo njësi. BIBLE mund t'ia dorëzojë edhe RIPPS2 në RAM, por kjo ka kaluar vetëm në laborator: në një SD2PSX të vërtetë, RIPPS2 e lexoi vetë kopjen e kartës. **Pa tingull nisja është më e shpejta.** Marrëveshja dhe ana e RIPPS2: [docs/boot-sound-handoff.md](docs/boot-sound-handoff.md)."
+ },
  "34f273d336d6": {
   "en": "34f273d336d6",
   "t": "BIBLE është ngarkuesi i nisjes që vendos RIPPS2: një fork i PS2BBL Extended të saildot4k."
@@ -122,6 +126,10 @@
  "391adc91b06c": {
   "en": "391adc91b06c",
   "t": "- Çelës/vlerë globale: `DISC_STOP = 0/1`"
+ },
+ "3a7d07109b19": {
+  "en": "3a7d07109b19",
+  "t": "- E re: faqja e tasteve të nisjes. Mbaj L2 + R2 kur ndez dhe BIBLE ndalon para se të nisë diçka, duke treguar shtigjet aktuale të nisjes për çdo tast, cilado qofshin cilësimet e ekranit të hapjes (e dobishme me `LOGO_DISPLAY = 0`, ku s'shfaqet asgjë tjetër)."
  },
  "3adb267042c1": {
   "en": "3adb267042c1",
@@ -251,6 +259,10 @@
   "en": "6071ff1f11ca",
   "t": "### ID vizuale e lojës nga Retrogem"
  },
+ "6148c0d264cd": {
+  "en": "6148c0d264cd",
+  "t": "- Ekrani i hapjes: logoja e PS2 në mes të qiellit të RIPPS2, me butonat poshtë saj dhe çdo tekst sipër. `BIBLE_GLYPHS` 0 asnjë, 1 butonat e veprimit (parazgjedhje), 2 të gjashtëmbëdhjetë në dy rreshta me tetë. `BIBLE_INFO` 1 shfaq të dhënat e konsolës, orën dhe numërimin mbrapsht (i fikur si parazgjedhje). Qielli ndjek Color Theme-n tënd të RIPPS2: pa `BIBLE_COLOR`, BIBLE lexon qiellin që RIPPS2 ruan me cilësimet e tij, nga dosja që nis hyrja e tij AUTO, ose nga dosja `RIPPS2` e një karte memorieje kur hyrja AUTO është RIPPS2 në një SD2PSX, USB ose diskun e ngurtë (`BIBLE_COLOR` në konfigurim fiton). E njëjta pamje në çdo mënyrë video."
+ },
  "61eb73b67bf7": {
   "en": "61eb73b67bf7",
   "t": "    - opsionet e mënyrës video nga [NHDDL](https://github.com/pcm720/nhddl)"
@@ -283,6 +295,10 @@
   "en": "6debe9f38567",
   "t": "Shembull për të nisur NHDDL në mënyrën video 480p dhe për të kërkuar ISO në mmce dhe në një HDD exFAT pa pasur nevojë për nhddl.yaml. Përfitimi është se nuk humbet kohë me ngarkimin e drejtuesve, gjetjen dhe ngarkimin e nhddl.yaml. Kjo është mënyra më e shpejtë për të nisur NHDDL dhe për të shfaqur listën e ISO-ve."
  },
+ "6fd9ac99e195": {
+  "en": "6fd9ac99e195",
+  "t": "RIPPS2 e mbart BIBLE brenda RIPPS2.elf, çdo version i nënshkruar nga akilluminati47, dhe e instalon ose e përditëson nga Cilësimet > Të përgjithshme > Boot Loader > Manage, që vendos edhe çelësat e BIBLE: Background, Splash, Button Glyphs, Info Line, Power-on Wait, Video Mode dhe Widescreen. Versionet e nënshkruara dhe një kartë BOOT SD2PSX e gatshme janë në [faqen e versioneve](https://github.com/akilluminati47/BIBLE/releases/latest). BIBLE punon edhe si ELF i nisur nga një ngarkues tjetër (FMCB, OSDMenu, ngarkuesi i një SD2PSX)."
+ },
  "704784bb456b": {
   "en": "704784bb456b",
   "t": "- `2` = përmbysje e fushave lloji 2"
@@ -302,6 +318,10 @@
  "767d07f95351": {
   "en": "767d07f95351",
   "t": "- `-nologo`"
+ },
+ "7705781d64d9": {
+  "en": "7705781d64d9",
+  "t": "- `BIBLE_BACKGROUND`: `AUTO` (parazgjedhje: qielli kur gjenden cilësimet e RIPPS2 ose është vendosur `BIBLE_COLOR`, përndryshe e zezë në mënyrën e vetë konsolës, një ngarkues i thjeshtë), `SKY` ose `BLANK` (e zezë). Kalimi në një program është gjithsesi i zi për disa sekonda, ndaj e zeza duket një copë e vetme me të."
  },
  "7bb989a3fb7e": {
   "en": "7bb989a3fb7e",
@@ -406,6 +426,10 @@
  "a3a65a7af403": {
   "en": "a3a65a7af403",
   "t": "- Hapet me `TRIANGLE + CROSS` gjatë nisjes"
+ },
+ "a3adb3ae35a8": {
+  "en": "a3adb3ae35a8",
+  "t": "- RIPPS2 i pari: shablloni i konfigurimit (`release/SYS-CONF/PS2BBL.INI`) dhe vlerat e brendshme provojnë `mc?:/RIPPS2/RIPPS2.ELF` dhe `mmce?:/APPS/RIPPS2.ELF` para OSDMenu dhe FMCB, dhe shablloni rendit çelësat e vetë BIBLE me shënime. Faqet (mënyra video, kreditet, tastet e nisjes) shfaqen mbi logon e zbehur me butonat të mënjanuar, që tastet e nisjes të lexohen qetë."
  },
  "a44babacaf8b": {
   "en": "a44babacaf8b",
@@ -531,6 +555,10 @@
   "en": "d5c51f8e6ac2",
   "t": "- `-titleid=SLUS_123.45` zëvendëson ID-në e titullit të aplikacionit (deri në 11 karaktere)."
  },
+ "d94994509e95": {
+  "en": "d94994509e95",
+  "t": "- Kalimi në RIPPS2: gjatë nisjes logoja dhe butonat zbehen dhe qielli mbetet derisa konsola të ngarkojë programin tjetër, gjë që e nxin ekranin (rreth 7 s në laborator me RIPPS2 në një kartë memorie). Pastaj RIPPS2 shfaqet në të njëjtën mënyrë video dhe me të njëjtat ngjyra. Mbaj TRIANGLE + CROSS gjatë ndezjes për faqen e mënyrës video, që hapet gjithmonë\n  në mënyrën e ndërthurur të vetë konsolës (rruga e kthimit nga 720p ose 1080i me kabllo kompozit)."
+ },
  "da330e7a0139": {
   "en": "da330e7a0139",
   "t": "- `mc0:/`, `mc1:/`, `mc?:/`"
@@ -599,10 +627,6 @@
   "en": "eae8f93205fd",
   "t": "  - `0` Pa logo dhe pa informacion konsole"
  },
- "ed21c5ac66ff": {
-  "en": "ed21c5ac66ff",
-  "t": "- Pa kërcim kur hyn në RIPPS2: gjatë nisjes logoja dhe butonat zbehen dhe qielli mbetet në ekran, në mënyrën e RIPPS2;\n  RIPPS2 nis mbi të njëjtin qiell. Mbaj TRIANGLE + CROSS gjatë ndezjes për faqen e mënyrës video, që hapet gjithmonë\n  në mënyrën e ndërthurur të vetë konsolës (rruga e kthimit nga 720p ose 1080i me kabllo kompozit)."
- },
  "ed675d1ac190": {
   "en": "ed675d1ac190",
   "t": "- DECKARD IE 75K e më të rinj: XPARAM.IRX zbatohet automatikisht kur nevojitet për nisjet pa logo."
@@ -650,29 +674,5 @@
  "fffd2a6caa3f": {
   "en": "fffd2a6caa3f",
   "t": "  - nëse `-patinfo` është i pranishëm, argumenti i parë i mbetur zëvendëson objektivin `BOOT2/BOOT/path` të CNF.\n  Kjo vlen për ndërtimet HDD.  \n  Shembull PATINFO:  "
- },
- "6148c0d264cd": {
-  "en": "6148c0d264cd",
-  "t": "- Ekrani i hapjes: logoja e PS2 në mes të qiellit të RIPPS2, me butonat poshtë saj dhe çdo tekst sipër. `BIBLE_GLYPHS` 0 asnjë, 1 butonat e veprimit (parazgjedhje), 2 të gjashtëmbëdhjetë në dy rreshta me tetë. `BIBLE_INFO` 1 shfaq të dhënat e konsolës, orën dhe numërimin mbrapsht (i fikur si parazgjedhje). Qielli ndjek Color Theme-n tënd të RIPPS2: pa `BIBLE_COLOR`, BIBLE lexon qiellin që RIPPS2 ruan me cilësimet e tij, nga dosja që nis hyrja e tij AUTO, ose nga dosja `RIPPS2` e një karte memorieje kur hyrja AUTO është RIPPS2 në një SD2PSX, USB ose diskun e ngurtë (`BIBLE_COLOR` në konfigurim fiton). E njëjta pamje në çdo mënyrë video."
- },
- "7705781d64d9": {
-  "en": "7705781d64d9",
-  "t": "- `BIBLE_BACKGROUND`: `AUTO` (parazgjedhje: qielli kur gjenden cilësimet e RIPPS2 ose është vendosur `BIBLE_COLOR`, përndryshe e zezë në mënyrën e vetë konsolës, një ngarkues i thjeshtë), `SKY` ose `BLANK` (e zezë). Kalimi në një program është gjithsesi i zi për disa sekonda, ndaj e zeza duket një copë e vetme me të."
- },
- "2595eafbc56c": {
-  "en": "2595eafbc56c",
-  "t": "- Tingulli i nisjes, i përgatitur: Boot Sound On (fast) i RIPPS2 mund ta mbajë `boot.adp` pranë konfigurimit të BIBLE (`mc?:/SYS-CONF/boot.adp`). BIBLE e lexon ndërsa ekrani i hapjes numëron mbrapsht dhe ia jep RIPPS2 në RAM, kështu tingëllon me kuadrin e parë të RIPPS2 edhe kur RIPPS2 niset nga një SD2PSX (versionet MMCE, MX4SIO dhe HDD; versioni për kartë memorieje / USB i tregon RIPPS2 dosjen dhe RIPPS2 e lexon). BIBLE pret në nisje pjesën që ende s'është lexuar: me `KEY_READ_WAIT_TIME = 0` është i gjithë leximi, rreth 2 s në një kartë memorieje. **Pa tingull nisja është më e shpejta.** Marrëveshja dhe ana e RIPPS2: [docs/boot-sound-handoff.md](docs/boot-sound-handoff.md)."
- },
- "a3adb3ae35a8": {
-  "en": "a3adb3ae35a8",
-  "t": "- RIPPS2 i pari: shablloni i konfigurimit (`release/SYS-CONF/PS2BBL.INI`) dhe vlerat e brendshme provojnë `mc?:/RIPPS2/RIPPS2.ELF` dhe `mmce?:/APPS/RIPPS2.ELF` para OSDMenu dhe FMCB, dhe shablloni rendit çelësat e vetë BIBLE me shënime. Faqet (mënyra video, kreditet, tastet e nisjes) shfaqen mbi logon e zbehur me butonat të mënjanuar, që tastet e nisjes të lexohen qetë."
- },
- "3a7d07109b19": {
-  "en": "3a7d07109b19",
-  "t": "- E re: faqja e tasteve të nisjes. Mbaj L2 + R2 kur ndez dhe BIBLE ndalon para se të nisë diçka, duke treguar shtigjet aktuale të nisjes për çdo tast, cilado qofshin cilësimet e ekranit të hapjes (e dobishme me `LOGO_DISPLAY = 0`, ku s'shfaqet asgjë tjetër)."
- },
- "6fd9ac99e195": {
-  "en": "6fd9ac99e195",
-  "t": "RIPPS2 e mbart BIBLE brenda RIPPS2.elf, çdo version i nënshkruar nga akilluminati47, dhe e instalon ose e përditëson nga Cilësimet > Të përgjithshme > Boot Loader > Manage, që vendos edhe çelësat e BIBLE: Background, Splash, Button Glyphs, Info Line, Power-on Wait, Video Mode dhe Widescreen. Versionet e nënshkruara dhe një kartë BOOT SD2PSX e gatshme janë në [faqen e versioneve](https://github.com/akilluminati47/BIBLE/releases/latest). BIBLE punon edhe si ELF i nisur nga një ngarkues tjetër (FMCB, OSDMenu, ngarkuesi i një SD2PSX)."
  }
 }
