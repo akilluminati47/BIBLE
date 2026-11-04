@@ -4,6 +4,7 @@ import { EffectComposer } from 'three/addons/postprocessing/EffectComposer.js';
 import { RenderPass } from 'three/addons/postprocessing/RenderPass.js';
 import { UnrealBloomPass } from 'three/addons/postprocessing/UnrealBloomPass.js';
 import { OutputPass } from 'three/addons/postprocessing/OutputPass.js';
+import { ShaderPass } from 'three/addons/postprocessing/ShaderPass.js';
 import { RoomEnvironment } from 'three/addons/environments/RoomEnvironment.js';
 import { buildKV27V42 } from '../tvkit/kv27v42.js';
 import { buildBravia } from '../tvkit/bravia.js';
@@ -30,6 +31,7 @@ try {
   if (!renderer.capabilities.isWebGL2) throw new Error('WebGL 2');
 } catch {
   $('nogl').hidden = false;
+  $('noglimg').src = 'assets/bible-splash.gif';
   throw new Error('no WebGL');
 }
 renderer.toneMapping = THREE.NoToneMapping; // the sky's colours are BIBLE's own, exact
@@ -45,6 +47,14 @@ scene.environment = pmrem.fromScene(new RoomEnvironment(renderer), 0.04).texture
 
 const composer = new EffectComposer(renderer, new THREE.WebGLRenderTarget(4, 4, { type: THREE.HalfFloatType, samples: q.level ? 4 : 2 }));
 composer.addPass(new RenderPass(scene, camera));
+composer.addPass(new ShaderPass({
+  uniforms: { tDiffuse: { value: null } },
+  vertexShader: 'varying vec2 vUv; void main(){ vUv = uv; gl_Position = projectionMatrix * modelViewMatrix * vec4(position, 1.0); }',
+  fragmentShader: `uniform sampler2D tDiffuse; varying vec2 vUv;
+    void main(){ vec3 c = texture2D(tDiffuse, vUv).rgb;
+      if (!(c.r >= 0.0)) c.r = 0.0; if (!(c.g >= 0.0)) c.g = 0.0; if (!(c.b >= 0.0)) c.b = 0.0;
+      gl_FragColor = vec4(min(c, vec3(24.0)), 1.0); }`,
+}));
 const bloom = new UnrealBloomPass(new THREE.Vector2(1, 1), 0.3, 0.5, 0.82);
 composer.addPass(bloom);
 composer.addPass(new OutputPass());
@@ -74,10 +84,11 @@ const floor = new THREE.Mesh(new THREE.PlaneGeometry(60, 60), new THREE.ShaderMa
       vec2 p = vW.xz; float d = length(p);
       vec2 c = p / 0.4 + 0.5; vec2 g = abs(fract(c - 0.5) - 0.5) / fwidth(c); float line = 1.0 - min(min(g.x, g.y), 1.0);
       vec3 col = uFar * 0.34 + uGrid * line * 0.5 * exp(-d * 0.22);
-      float spill = exp(-pow(max(0.0, p.y - 0.05) * 1.1, 2.0)) * exp(-pow(p.x * 1.05, 2.0)) * step(0.0, p.y + 0.02);
+      float sy = max(0.0, p.y - 0.05) * 1.1, sx = p.x * 1.05;
+      float spill = exp(-sy * sy) * exp(-sx * sx) * step(0.0, p.y + 0.02);
       col += uGlow * spill * 0.24;
       vec2 s = (abs(p - vec2(0.0, -uHalf.y * 0.55)) - uHalf * vec2(0.9, 0.62)) ;
-      float contact = smoothstep(0.34, 0.0, max(s.x, s.y));
+      float contact = 1.0 - smoothstep(0.0, 0.34, max(s.x, s.y));
       col *= 1.0 - contact * 0.85;
       float burn = smoothstep(0.42, 0.75, noise(p * 7.0) * 0.5 + 0.5 - length(p - vec2(0.0, 0.12)) * 0.62) * uBurn;
       col = mix(col, vec3(0.002), burn * 0.9);

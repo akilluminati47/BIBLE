@@ -9,7 +9,7 @@ const VERT = /* glsl */ `
   uniform float uTime, uScale;
   varying float vAge, vKind, vSeed;
   void main() {
-    float a = uTime - aT.x, life = aT.y;
+    float a = uTime - aT.x, life = max(aT.y, 0.001);
     vAge = a / life; vKind = aT.w; vSeed = aSeed;
     if (a < 0.0 || vAge >= 1.0) { gl_Position = vec4(0.0, 0.0, 2.0, 1.0); gl_PointSize = 0.0; return; }
     vec3 p = position;
@@ -31,7 +31,7 @@ const VERT = /* glsl */ `
     }
     vec4 mv = modelViewMatrix * vec4(p, 1.0);
     gl_Position = projectionMatrix * mv;
-    gl_PointSize = size * uScale / max(0.05, -mv.z);
+    gl_PointSize = max(0.0, size) * uScale / max(0.05, -mv.z);
   }
 `;
 const FRAG_ADD = /* glsl */ `
@@ -58,7 +58,7 @@ const FRAG_SMOKE = /* glsl */ `
     vec2 c = gl_PointCoord - 0.5;
     float r = length(c) * 2.0;
     if (r > 1.0) discard;
-    float a = smoothstep(1.0, 0.2, r) * smoothstep(0.0, 0.12, vAge) * (1.0 - vAge) * 0.4;
+    float a = (1.0 - smoothstep(0.2, 1.0, r)) * smoothstep(0.0, 0.12, vAge) * (1.0 - vAge) * 0.4;
     gl_FragColor = vec4(vec3(0.035 + vSeed * 0.03), a);
   }
 `;
@@ -73,7 +73,7 @@ class Pool {
     this.vel = add('aV', 3);
     this.tim = add('aT', 4);
     this.see = add('aSeed', 1);
-    this.tim.array.fill(-100);
+    for (let i = 0; i < size; i++) this.tim.setXYZW(i, -1000, 1, 0, 0);
     this.points = new THREE.Points(g, material);
     this.points.frustumCulled = false;
   }

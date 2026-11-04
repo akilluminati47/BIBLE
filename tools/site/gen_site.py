@@ -39,5 +39,6 @@ for f in ('logo_ps2bble.png', 'hotkeys.png'):
 for f in ('planet-n-compact.ttf', 'ripps2-one.ttf', 'ripps2-sleek-bold.ttf', 'ripps2-sleek-case.ttf'):
     if (FONTS / f).exists():
         shutil.copyfile(FONTS / f, a / f)
-shutil.copyfile(ROOT / 'assets' / 'readme' / 'ripps2-icon.png', a / 'ripps2-icon.png')
+for f in ('ripps2-icon.png', 'bible-splash.gif'):
+    shutil.copyfile(ROOT / 'assets' / 'readme' / f, a / f)
 print(len(glyphs), 'glyphs;', 'shaders', len(out) - 1)
