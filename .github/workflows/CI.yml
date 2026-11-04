@@ -12,6 +12,9 @@ on:
       - '**.MD'
       - '**.gitkeep'
       - '**.gitignore'
+      - 'site/**'
+      - 'tools/site/**'
+      - '.github/workflows/pages.yml'
   pull_request:
   workflow_dispatch:
     inputs:

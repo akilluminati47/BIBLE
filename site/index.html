@@ -1,0 +1,107 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover, interactive-widget=resizes-content">
+<title>BIBLE: the boot loader for the PlayStation 2</title>
+<meta name="description" content="BIBLE, the signed boot loader RIPPS2 sets up, playing on a Sony KV-27V42. Try every setting, watch the loop from power on to the towers, and blow up the TV.">
+<meta name="theme-color" content="#04081a">
+<meta property="og:title" content="BIBLE: the boot loader for the PlayStation 2">
+<meta property="og:description" content="Try every setting on a Trinitron. Pick 16:9 and it does not survive.">
+<meta property="og:type" content="website">
+<meta property="og:image" content="https://akilluminati47.github.io/BIBLE/assets/og.jpg">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" type="image/png" href="assets/ripps2-icon.png">
+<link rel="preload" href="assets/ripps2-sleek-bold.ttf" as="font" type="font/ttf" crossorigin>
+<link rel="stylesheet" href="css/site.css">
+<script type="importmap">{ "imports": { "three": "./vendor/three.module.js", "three/addons/": "./vendor/addons/" } }</script>
+</head>
+<body>
+<canvas id="stage" aria-label="A Sony KV-27V42 playing BIBLE's splash. Click or tap it to blow it up."></canvas>
+<div id="flash" aria-hidden="true"></div>
+<div id="veil" aria-hidden="true"><span>Warming up the tube</span></div>
+
+<header id="top">
+  <div class="brand">
+    <h1>BIBLE</h1>
+    <p id="caption">the boot loader</p>
+  </div>
+  <div class="top-r">
+    <div id="score" aria-live="off"><span>Blown up</span><b id="count">0</b></div>
+    <button id="mute" class="icon" type="button" aria-pressed="true" aria-label="Explosion sound">
+      <svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true"><path fill="currentColor" d="M4 9v6h4l5 4V5L8 9H4z"/><path id="waves" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" d="M16 9.2a4 4 0 0 1 0 5.6M18.6 6.6a7.6 7.6 0 0 1 0 10.8"/><path id="cross" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" d="M16.5 9.5l5 5m0-5l-5 5" hidden/></svg>
+    </button>
+  </div>
+</header>
+
+<div id="ready" aria-hidden="true"></div>
+<p id="hint" aria-hidden="true"></p>
+
+<footer id="hud">
+  <div id="bar" role="img" aria-label="The loop"></div>
+  <div class="row">
+    <p id="readout" aria-live="off"></p>
+    <div class="actions">
+      <button id="boom" type="button" class="ghost">Boom</button>
+      <a id="get" class="ghost" href="https://github.com/akilluminati47/BIBLE/releases/latest">Get BIBLE</a>
+      <button id="open" type="button" class="primary" aria-haspopup="dialog" aria-controls="panel">Settings</button>
+    </div>
+  </div>
+</footer>
+
+<div id="scrim"></div>
+<aside id="panel" role="dialog" aria-modal="true" aria-labelledby="ptitle" tabindex="-1" inert>
+  <div class="phead">
+    <h2 id="ptitle">Settings</h2>
+    <button id="close" type="button" class="primary">Resume</button>
+  </div>
+  <div class="pbody">
+    <div class="preview">
+      <canvas id="pv" aria-label="BIBLE's splash with these settings"></canvas>
+      <div class="pvside">
+        <p class="pvnum"><b id="pvtotal"></b><span>one loop</span></p>
+        <div id="pvbar"></div>
+        <p class="pvnote" id="pvnote"></p>
+      </div>
+    </div>
+    <div id="rows"></div>
+
+    <section class="sect">
+      <h3>Your PS2BBL.INI</h3>
+      <p class="note">These settings as the lines they are. Or let RIPPS2's Manage write them: Settings &gt; General &gt; Boot Loader &gt; Manage.</p>
+      <pre id="ini" tabindex="0"></pre>
+      <div class="btns"><button id="copy" type="button" class="ghost">Copy</button> <button id="reset" type="button" class="ghost">Back to defaults</button></div>
+    </section>
+
+    <section class="sect">
+      <h3>Get it</h3>
+      <ul class="links">
+        <li><a href="https://github.com/akilluminati47/RIPPS2/releases/latest/download/RIPPS2.elf">RIPPS2.elf, which sets BIBLE up for you</a></li>
+        <li><a href="https://github.com/akilluminati47/BIBLE/releases/latest">Signed builds and the SD2PSX BOOT card</a></li>
+        <li><a href="https://youtu.be/sTjjmDd6r1g">The reel on YouTube</a></li>
+        <li><a href="https://www.psx-place.com/threads/bible.51524/">BIBLE's thread on psx-place</a></li>
+        <li><a href="https://github.com/akilluminati47/BIBLE">Source and every setting (GPL-3.0)</a></li>
+        <li><a href="https://akilluminati47.github.io/RIPPS2/">RIPPS2</a></li>
+      </ul>
+    </section>
+
+    <section class="sect">
+      <h3>Where the numbers come from</h3>
+      <p class="note">The splash is drawn from BIBLE's own layout, font, logo and button sheet, and the sky and towers from RIPPS2's. The towers stop at 3.2 s, where RIPPS2's menu comes in and a legacy theme takes over.</p>
+      <p class="note">Black time is measured from PCSX2 frames with RIPPS2 on a memory card. The console figure is an estimate: only RIPPS2's own start was timed on a real SCPH-39001, from its DIAG.TXT. The drive wait is the lab's too.</p>
+      <p class="note">Both TVs are fan-made in code from published sizes and photographs. <a href="studio.html">Open the model studio</a>.</p>
+      <p class="note fine">Unofficial fan project. Sony, Trinitron, BRAVIA, PlayStation and PS2 are trademarks of Sony Group Corporation or its affiliates. Made by akilluminati47, built with Claude. BIBLE builds on PS2BBL by El Isra and PS2BBL Extended by saildot4k.</p>
+    </section>
+  </div>
+</aside>
+
+<div id="nogl" hidden>
+  <h2>This page needs WebGL</h2>
+  <p>Your browser could not start it, so here is BIBLE's splash as a picture instead.</p>
+  <img src="https://raw.githubusercontent.com/akilluminati47/BIBLE/main/assets/readme/bible-splash.gif" width="480" alt="BIBLE's splash">
+  <p><a href="https://github.com/akilluminati47/BIBLE">BIBLE on GitHub</a></p>
+</div>
+<noscript><p style="padding:24px;color:#dfe6fb">This page needs JavaScript. <a style="color:#8fc4ff" href="https://github.com/akilluminati47/BIBLE">BIBLE on GitHub</a></p></noscript>
+<script type="module" src="js/main.js"></script>
+</body>
+</html>
