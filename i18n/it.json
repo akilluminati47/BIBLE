@@ -674,5 +674,9 @@
  "fffd2a6caa3f": {
   "en": "fffd2a6caa3f",
   "t": "  - se `-patinfo` è presente, il primo argomento rimasto sostituisce la destinazione `BOOT2/BOOT/path` del CNF.\n  Questo vale per le build HDD.  \n  Esempio di PATINFO:  "
+ },
+ "b4891f908a36": {
+  "en": "b4891f908a36",
+  "t": "  <a href=\"https://akilluminati47.github.io/BIBLE/\">Sito</a> ·"
  }
 }

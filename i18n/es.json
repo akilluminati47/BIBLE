@@ -674,5 +674,9 @@
  "fffd2a6caa3f": {
   "en": "fffd2a6caa3f",
   "t": "  - si `-patinfo` está presente, el primer argumento restante sustituye el destino `BOOT2/BOOT/path` del CNF.\n  Esto es para compilaciones HDD.  \n  Ejemplo de PATINFO:  "
+ },
+ "b4891f908a36": {
+  "en": "b4891f908a36",
+  "t": "  <a href=\"https://akilluminati47.github.io/BIBLE/\">Web</a> ·"
  }
 }

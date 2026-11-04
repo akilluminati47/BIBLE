@@ -674,5 +674,9 @@
  "fffd2a6caa3f": {
   "en": "fffd2a6caa3f",
   "t": "  - `-patinfo` がある場合、残った最初の引数が CNF の `BOOT2/BOOT/path` の対象を上書きします。\n  これは HDD ビルド向けです。  \n  PATINFO の例：  "
+ },
+ "b4891f908a36": {
+  "en": "b4891f908a36",
+  "t": "  <a href=\"https://akilluminati47.github.io/BIBLE/\">ウェブサイト</a> ·"
  }
 }

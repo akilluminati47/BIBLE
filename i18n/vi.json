@@ -674,5 +674,9 @@
  "fffd2a6caa3f": {
   "en": "fffd2a6caa3f",
   "t": "  - nếu có `-patinfo`, đối số đầu tiên còn lại sẽ thay đích `BOOT2/BOOT/path` của CNF.\n  Phần này dành cho bản build HDD.  \n  Ví dụ PATINFO:  "
+ },
+ "b4891f908a36": {
+  "en": "b4891f908a36",
+  "t": "  <a href=\"https://akilluminati47.github.io/BIBLE/\">Trang web</a> ·"
  }
 }

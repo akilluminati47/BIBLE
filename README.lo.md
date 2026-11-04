@@ -42,6 +42,7 @@
 
 <h1 align="center">BIBLE</h1>
 <p align="center">
+  <a href="https://akilluminati47.github.io/BIBLE/">ເວັບໄຊ</a> ·
   <a href="https://github.com/akilluminati47/RIPPS2">RIPPS2</a> ·
   <a href="https://github.com/akilluminati47/BIBLE/actions">ລຸ້ນສ້າງ</a> ·
   <a href="https://github.com/saildot4k/PlayStation2-Basic-BootLoader-Extended">PS2BBL Extended</a> ·

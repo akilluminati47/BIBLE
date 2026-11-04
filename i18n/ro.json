@@ -674,5 +674,9 @@
  "fffd2a6caa3f": {
   "en": "fffd2a6caa3f",
   "t": "  - dacă `-patinfo` este prezent, primul argument rămas înlocuiește ținta `BOOT2/BOOT/path` din CNF.\n  Asta e pentru compilările HDD.  \n  Exemplu PATINFO:  "
+ },
+ "b4891f908a36": {
+  "en": "b4891f908a36",
+  "t": "  <a href=\"https://akilluminati47.github.io/BIBLE/\">Site</a> ·"
  }
 }

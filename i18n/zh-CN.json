@@ -674,5 +674,9 @@
  "fffd2a6caa3f": {
   "en": "fffd2a6caa3f",
   "t": "  - 如果有 `-patinfo`，剩下的第一个参数会覆盖 CNF 的 `BOOT2/BOOT/path` 目标。\n  这适用于 HDD 构建。  \n  PATINFO 示例：  "
+ },
+ "b4891f908a36": {
+  "en": "b4891f908a36",
+  "t": "  <a href=\"https://akilluminati47.github.io/BIBLE/\">网站</a> ·"
  }
 }

@@ -674,5 +674,9 @@
  "fffd2a6caa3f": {
   "en": "fffd2a6caa3f",
   "t": "  - إذا وُجد `-patinfo`، يستبدل أول وسيط متبقٍّ هدف `BOOT2/BOOT/path` في CNF.\n  هذا لبنيات HDD.  \n  مثال PATINFO:  "
+ },
+ "b4891f908a36": {
+  "en": "b4891f908a36",
+  "t": "  <a href=\"https://akilluminati47.github.io/BIBLE/\">الموقع</a> ·"
  }
 }

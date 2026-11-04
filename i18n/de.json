@@ -674,5 +674,9 @@
  "fffd2a6caa3f": {
   "en": "fffd2a6caa3f",
   "t": "  - ist `-patinfo` gesetzt, überschreibt das erste verbleibende Argument das Ziel `BOOT2/BOOT/path` der CNF.\n  Das gilt für HDD-Builds.  \n  PATINFO-Beispiel:  "
+ },
+ "b4891f908a36": {
+  "en": "b4891f908a36",
+  "t": "  <a href=\"https://akilluminati47.github.io/BIBLE/\">Website</a> ·"
  }
 }
