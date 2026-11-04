@@ -741,7 +741,9 @@ int LoaderRunLaunchWorkflow(int splash_early_presented,
         LoaderBootSoundQuiesce(); // BIBLE: the AUTO launch has the card to itself from here
         if (rescue_combo_deadline != NULL)
             *rescue_combo_deadline = 0;
-        TimerEnd();
+        // BIBLE: the timer runs while the list is searched and ends where a launch begins. Ended here, as it was, Timer()
+        // stood still and ResolveLaunchPathForEntry's wait for a driver just loaded never timed out: an MMCE build with no
+        // mmce?:/APPS/RIPPS2.ELF stopped on the splash for good and never reached the next entry
 
         for (j = 0; j < CONFIG_KEY_INDEXES; j++) {
             const char *entry_path = GLOBCFG.KEYPATHS[0][j];
@@ -765,7 +767,9 @@ int LoaderRunLaunchWorkflow(int splash_early_presented,
                 ShowLaunchStatus(entry_path);
                 LoaderPathSetPendingCommandAutoMode(1);
                 LoaderPathSetPendingCommandArgs(GLOBCFG.KEYARGC[0][j], GLOBCFG.KEYARGS[0][j]);
+                TimerEnd();
                 execpaths[j] = CheckPath(entry_path);
+                TimerInit(); // a command that came back: the rest of the list needs the timer
                 LoaderPathSetPendingCommandArgs(0, NULL);
                 LoaderPathSetPendingCommandAutoMode(0);
                 if (LoaderPathConsumeCdvdCancelled())
@@ -802,6 +806,7 @@ int LoaderRunLaunchWorkflow(int splash_early_presented,
                                      j,
                                      GLOBCFG.KEYARGC[0][j],
                                      GLOBCFG.KEYARGS[0][j]);
+                TimerEnd();
                 CleanUp();
                 RunLoaderElf(execpaths[j], MPART, GLOBCFG.KEYARGC[0][j], GLOBCFG.KEYARGS[0][j]);
             }
@@ -810,6 +815,7 @@ int LoaderRunLaunchWorkflow(int splash_early_presented,
         {
             int retry_requested;
 
+            TimerEnd(); // it is still running unless the last entry was a command
             TimerInit();
             EnsurePadsReadyForInput();
             retry_requested = WaitForMissingPathAction("AUTO",
