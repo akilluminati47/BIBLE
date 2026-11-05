@@ -8,7 +8,7 @@
 #include "splash_render.h"
 #include "splash_screen.h"
 #include "loader_bootsnd.h"
-#include "OSDInit.h"
+const char *OSDGetSystemExecFolder(void); // OSDInit.c: this console's system folder
 
 #define CONFIG_DEVICE_READY_POLL_INTERVAL_MS 200u
 #define CONFIG_FATAL_ERROR_DISPLAY_MS 3000u
