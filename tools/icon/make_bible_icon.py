@@ -2,6 +2,13 @@
 under it, the same family as the plate icons FMCB and PS2BBL show in the browser, so a BIBLE folder sits with them.
 Every point here is drawn by this file; nothing comes out of another icon.
 
+Two kinds of renderer show it. The PS2's browser has a z-buffer. RIPPS2's Memory Files viewer (ripps2ViewSaveIcon) does
+not: it sorts triangles far first by their centre, with no culling. A big triangle's centre says little about the rest
+of it, so here every surface is cut into tiles small enough for that sort to come out right, and the plate has a hole
+under the book instead of a cover lying just above it. painter.py is that viewer on the PC and scores a model against a
+z-buffer. The two also differ in brightness: the viewer shows a vertex colour of 0x80 at full strength and the browser
+at about half, so a colour lifted for the browser (SHINE) has to stay below where the viewer clips, or blue turns cyan.
+
 The format is the one RIPPS2's hat uses (ps2-pillars elf/theme/tools/make_hat_icon.py): a 20-byte header (0x00010000,
 shapes, texture type 0x0E, 1.0, vertices), per vertex an 8-byte position, an 8-byte normal, a 4-byte UV and a 4-byte
 RGBA (4.12 fixed point), the animation block, then a 128 x 128 RLE texture. One shape only: a v1.60 browser calls any
@@ -46,7 +53,7 @@ def make_texture():
         c = top + (mid - top) * (t / 0.3) if t < 0.3 else mid + (foot - mid) * ((t - 0.3) / 0.7)
         img[y0 + y, x0:x0 + w] = c
     fill(img, SIDE, (60, 66, 92))
-    fill(img, BLUE, (62, 148, 245))
+    fill(img, BLUE, (36, 90, 245))
     fill(img, BLUED, (22, 62, 150))
     fill(img, COVER, (30, 72, 190))
     fill(img, EDGE, (176, 180, 192))
@@ -79,13 +86,37 @@ def tri(a, b, c, uv, normal=None, shine=0x7F):
 SHINE = {BLUE: 0xFF, BLUED: 0xB0, PAGE: 0xC0, EDGE: 0xA0, COVER: 0xC0}
 
 
-def quad(a, b, c, d, region, normal=None, uvs=((0, 1), (1, 1), (1, 0), (0, 0))):
-    """a, b, c, d counter-clockwise from outside; uvs give the region's corners for each."""
-    t = [texel(u, v, region) for u, v in uvs]
+def quad(a, b, c, d, region, normal=None, uvs=((0, 1), (1, 1), (1, 0), (0, 0)), size=None):
+    """a, b, c, d counter-clockwise from outside; uvs give the region's corners for each. size cuts it into tiles no
+    longer than that on either side."""
+    a, b, c, d = (np.array(p, float) for p in (a, b, c, d))
+    uvs = np.array(uvs, float)
+    nu = max(1, math.ceil(max(np.linalg.norm(b - a), np.linalg.norm(c - d)) / size - 1e-6)) if size else 1
+    nv = max(1, math.ceil(max(np.linalg.norm(d - a), np.linalg.norm(c - b)) / size - 1e-6)) if size else 1
     shine = SHINE.get(region, 0x7F)
-    tri(a, b, c, (t[0], t[1], t[2]), normal, shine)
-    tri(a, c, d, (t[0], t[2], t[3]), normal, shine)
 
+    def at(s, r, corners):
+        return (corners[0] * (1 - s) + corners[1] * s) * (1 - r) + (corners[3] * (1 - s) + corners[2] * s) * r
+
+    for i in range(nu):
+        for j in range(nv):
+            corners = [(i / nu, j / nv), ((i + 1) / nu, j / nv), ((i + 1) / nu, (j + 1) / nv), (i / nu, (j + 1) / nv)]
+            q = [at(s, r, (a, b, c, d)) for s, r in corners]
+            t = [texel(*at(s, r, uvs), region) for s, r in corners]
+            tri(q[0], q[1], q[2], (t[0], t[1], t[2]), normal, shine)
+            tri(q[0], q[2], q[3], (t[0], t[2], t[3]), normal, shine)
+
+
+# how long a tile may be: on the plate under the logo, elsewhere on the plate, on the logo, on the book, on the back and edges
+TILE_LOGO_BAND = 0.5
+TILE_FACE = 0.8
+TILE_RIBBON = 0.4
+TILE_BOOK = 0.5
+TILE_SHELL = 1.0
+
+# the book: two pages opened in a shallow V, their outer edges toward the viewer, on a cover a little wider
+BX, BY, BW, BH = 0.0, 1.22, 0.74, 0.9  # the spine's middle, a page's width and height
+CX0, CX1, CY0, CY1 = BX - BW - 0.11, BX + BW + 0.11, BY - BH / 2 - 0.12, BY + BH / 2 + 0.1  # the cover
 
 # the plate
 W, H, D, B = 4.2, 3.5, 0.5, 0.07
@@ -93,12 +124,26 @@ x1, y1, zf, zb = W / 2, H, D / 2, -D / 2
 inner = [(-x1 + B, B), (x1 - B, B), (x1 - B, y1 - B), (-x1 + B, y1 - B)]
 outer = [(-x1, 0), (x1, 0), (x1, y1), (-x1, y1)]
 ir = (inner[0][0], inner[0][1], inner[2][0], inner[2][1])
-quad((*inner[0], zf), (*inner[1], zf), (*inner[2], zf), (*inner[3], zf), FACE, (0, 0, 1))
+
+
+def face(x0, y0, x3, y3, size):
+    """A piece of the plate's front; its texture is one picture over the whole face."""
+    u = lambda x: (x - ir[0]) / (ir[2] - ir[0])
+    v = lambda y: 1 - (y - ir[1]) / (ir[3] - ir[1])
+    quad((x0, y0, zf), (x3, y0, zf), (x3, y3, zf), (x0, y3, zf), FACE, (0, 0, 1),
+         ((u(x0), v(y0)), (u(x3), v(y0)), (u(x3), v(y3)), (u(x0), v(y3))), size)
+
+
+# the front, around the hole the cover fills: above it, below it, left and right of it
+face(ir[0], CY1, ir[2], ir[3], TILE_LOGO_BAND)
+face(ir[0], ir[1], ir[2], CY0, TILE_FACE)
+face(ir[0], CY0, CX0, CY1, TILE_FACE)
+face(CX1, CY0, ir[2], CY1, TILE_FACE)
 for k in range(4):  # the bevel, then the edge behind it, then the back
     m = (k + 1) % 4
-    quad((*outer[k], zf - B), (*outer[m], zf - B), (*inner[m], zf), (*inner[k], zf), BEVEL)
-    quad((*outer[k], zb), (*outer[m], zb), (*outer[m], zf - B), (*outer[k], zf - B), SIDE)
-quad((*outer[1], zb), (*outer[0], zb), (*outer[3], zb), (*outer[2], zb), SIDE, (0, 0, -1))
+    quad((*outer[k], zf - B), (*outer[m], zf - B), (*inner[m], zf), (*inner[k], zf), BEVEL, size=TILE_SHELL)
+    quad((*outer[k], zb), (*outer[m], zb), (*outer[m], zf - B), (*outer[k], zf - B), SIDE, size=TILE_SHELL)
+quad((*outer[1], zb), (*outer[0], zb), (*outer[3], zb), (*outer[2], zb), SIDE, (0, 0, -1), size=TILE_SHELL)
 
 
 def centreline(points, radius, arc=1):
@@ -130,9 +175,9 @@ def stroke(points, width, z0, z1, radius):
     right = np.array([c[i] - np.array([-dirs[i][1], dirs[i][0]]) * width / 2 for i in range(n)])
     for i in range(n - 1):
         l0, l1, r0, r1 = left[i], left[i + 1], right[i], right[i + 1]
-        quad((*r0, z1), (*r1, z1), (*l1, z1), (*l0, z1), BLUE, (0, 0, 1))
-        quad((*l1, z0), (*l0, z0), (*l0, z1), (*l1, z1), BLUED)
-        quad((*r0, z0), (*r1, z0), (*r1, z1), (*r0, z1), BLUED)
+        quad((*r0, z1), (*r1, z1), (*l1, z1), (*l0, z1), BLUE, (0, 0, 1), size=TILE_RIBBON)
+        quad((*l1, z0), (*l0, z0), (*l0, z1), (*l1, z1), BLUED, size=TILE_RIBBON)
+        quad((*r0, z0), (*r1, z0), (*r1, z1), (*r0, z1), BLUED, size=TILE_RIBBON)
     quad((*left[0], z0), (*right[0], z0), (*right[0], z1), (*left[0], z1), BLUED)
     quad((*right[-1], z0), (*left[-1], z0), (*left[-1], z1), (*right[-1], z1), BLUED)
 
@@ -143,7 +188,7 @@ LW = 3.6                          # across
 PX = LW / 382                     # one of the logo's pixels
 SW, RAD = 0.1, 0.03               # the stroke and its corners (all but square, as the logo's are)
 LX, LY = -LW / 2, 2.3             # its left foot on the plate (high: the browser looks down, so what is raised reads lower)
-RAISE = 0.2
+RAISE = 0.25
 
 
 def lp(x, y):
@@ -163,10 +208,9 @@ letters = [
 for path in letters:
     stroke(path, SW, zf, zf + RAISE, RAD)
 
-# the book: two pages opened in a shallow V, their outer edges toward the viewer, on a cover a little wider
-BX, BY, BW, BH = 0.0, 1.22, 0.74, 0.9  # the spine's middle, a page's width and height
+# the book, on the numbers above
 STRIPS = 3
-Z0, ZOUT = zf + 0.08, zf + 0.3
+Z0, ZOUT = zf + 0.12, zf + 0.34
 
 
 def page_point(s, v, side):
@@ -185,24 +229,29 @@ for side in (-1, 1):
         u0, u1 = (s0, s1)
         uvs = ((u0, 1), (u1, 1), (u1, 0), (u0, 0))
         if side > 0:
-            quad(a, b, c, d, PAGE, None, uvs)
+            quad(a, b, c, d, PAGE, None, uvs, TILE_BOOK)
         else:
-            quad(b, a, d, c, PAGE, None, (uvs[1], uvs[0], uvs[3], uvs[2]))
+            quad(b, a, d, c, PAGE, None, (uvs[1], uvs[0], uvs[3], uvs[2]), TILE_BOOK)
         # the block of pages under the foot and the head, down to the plate
         for v, flip in ((0, False), (1, True)):
             p, q = page_point(s0, v, side), page_point(s1, v, side)
             p0, q0 = (p[0], p[1], zf), (q[0], q[1], zf)
             quads = (p0, q0, q, p) if (side > 0) != flip else (q0, p0, p, q)
-            quad(*quads, EDGE)
+            quad(*quads, EDGE, size=TILE_BOOK)
     # the outer edge of the block
     p, q = page_point(1, 0, side), page_point(1, 1, side)
     p0, q0 = (p[0], p[1], zf), (q[0], q[1], zf)
     quads = (p0, q0, q, p) if side > 0 else (q0, p0, p, q)
-    quad(*quads, EDGE)
-# the cover showing round the pages, flat on the plate
-cx0, cx1, cy0, cy1 = BX - BW - 0.11, BX + BW + 0.11, BY - BH / 2 - 0.12, BY + BH / 2 + 0.1
-zc = zf + 0.035
-quad((cx0, cy0, zc), (cx1, cy0, zc), (cx1, cy1, zc), (cx0, cy1, zc), COVER, (0, 0, 1))
+    quad(*quads, EDGE, size=TILE_BOOK)
+# the cover: a ring in the plate's own plane, filling the hole around the pages. Its inside edge runs a little under the
+# block of pages (their foot and head bow), so no gap shows, and the spine closes the gap between the two pages.
+hx0, hx1, hy0, hy1 = BX - BW - 0.005, BX + BW + 0.005, BY - BH / 2 + 0.09, BY + BH / 2 - 0.07
+quad((CX0, CY0, zf), (CX1, CY0, zf), (CX1, hy0, zf), (CX0, hy0, zf), COVER, (0, 0, 1), size=TILE_BOOK)
+quad((CX0, hy1, zf), (CX1, hy1, zf), (CX1, CY1, zf), (CX0, CY1, zf), COVER, (0, 0, 1), size=TILE_BOOK)
+quad((CX0, hy0, zf), (hx0, hy0, zf), (hx0, hy1, zf), (CX0, hy1, zf), COVER, (0, 0, 1), size=TILE_BOOK)
+quad((hx1, hy0, zf), (CX1, hy0, zf), (CX1, hy1, zf), (hx1, hy1, zf), COVER, (0, 0, 1), size=TILE_BOOK)
+quad((BX - 0.025, BY - BH / 2, Z0), (BX + 0.025, BY - BH / 2, Z0), (BX + 0.025, BY + BH / 2, Z0), (BX - 0.025, BY + BH / 2, Z0),
+     COVER, (0, 0, 1), size=TILE_BOOK)
 
 # ---- into icon space and out ---------------------------------------------------------------------------------
 FOOT = -0.75  # where y = 0 (the plate's foot) lands
