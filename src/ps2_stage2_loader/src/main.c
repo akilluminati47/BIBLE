@@ -85,42 +85,6 @@ static uint32_t eGSMFlags = 0;
 static uint32_t skipArgv0 = 0;
 // Whether disc should be stopped right after target ELF is loaded
 static uint32_t stopDiscAfterElfLoad = 0;
-// BIBLE: RAM kept for the target ELF ('K', mem:<addr>:<size>): RIPPS2's boot sound, which BIBLE read for it
-static uint32_t keepMem = 0;
-static uint32_t keepSize = 0;
-
-// BIBLE: clears user memory except a and b (either may be empty) and keepMem
-static void clearUserMemory(uint32_t a, uint32_t aSize, uint32_t b, uint32_t bSize) {
-  uint32_t lo[3], hi[3], from = USER_MEM_START_ADDR, t;
-  int n = 0, i, j;
-
-  if (aSize) {
-    lo[n] = a;
-    hi[n++] = a + aSize;
-  }
-  if (bSize) {
-    lo[n] = b;
-    hi[n++] = b + bSize;
-  }
-  if (keepSize) {
-    lo[n] = keepMem;
-    hi[n++] = keepMem + keepSize;
-  }
-  for (i = 0; i < n; i++) // in address order
-    for (j = i + 1; j < n; j++)
-      if (lo[j] < lo[i]) {
-        t = lo[i]; lo[i] = lo[j]; lo[j] = t;
-        t = hi[i]; hi[i] = hi[j]; hi[j] = t;
-      }
-  for (i = 0; i < n; i++) {
-    if (lo[i] > from && lo[i] <= USER_MEM_END_ADDR)
-      memset((void *)from, 0, lo[i] - from);
-    if (hi[i] > from)
-      from = hi[i];
-  }
-  if (from < USER_MEM_END_ADDR)
-    memset((void *)from, 0, USER_MEM_END_ADDR - from);
-}
 
 // Resets IOP
 void resetIOP();
@@ -181,8 +145,6 @@ static void stopDiscIfRequested() {
 //   - 'E': The argv[argc-2] argument contains ELF memory location to use instead of argv[0]
 //   - 'A': Do not pass argv[0] to the target ELF and start with argv[1]
 //   - 'S': Stop disc after target ELF has been loaded (before ExecPS2)
-//   - 'K': BIBLE: the argv[argc-2] argument is a memory location (mem:) the memory clear leaves as it is, for data the
-//          target ELF is handed in RAM (RIPPS2's boot sound); it is not passed on to the target
 //   - 'G': Force video mode via eGSM. The argv[argc-2] argument contains eGSM arguments:
 //          The argument format is inherited from Neutrino GSM and defined as `v[:c]`, where
 //          v — video mode:
@@ -252,13 +214,6 @@ int main(int argc, char *argv[]) {
         break;
       case 'S':
         stopDiscAfterElfLoad = 1;
-        break;
-      case 'K':
-        // BIBLE: RAM kept for the target ELF
-        if (sscanf(argv[argc - 2], "mem:%08X:%08X", (int *)&keepMem, (int *)&keepSize) < 2 ||
-            keepMem < USER_MEM_START_ADDR || keepSize > USER_MEM_END_ADDR - keepMem)
-          keepMem = keepSize = 0;
-        argc--;
         break;
       default:
       }
@@ -349,7 +304,8 @@ int loadEmbeddedELF(int argc, char *argv[]) {
 
   // Clear the memory
   if (elfMem >= USER_MEM_START_ADDR) {
-    clearUserMemory(elfMem, elfSize, 0, 0);
+    memset((void *)USER_MEM_START_ADDR, 0, elfMem - USER_MEM_START_ADDR);
+    memset((void *)(elfMem + elfSize), 0, USER_MEM_END_ADDR - (elfMem + elfSize));
     FlushCache(0);
   }
 
@@ -379,11 +335,13 @@ int loadELFFromFile(int argc, char *argv[]) {
       return -EINVAL;
     }
 
-    if (mem >= USER_MEM_START_ADDR)
-      clearUserMemory(mem, size, 0, 0);
+    if (mem >= USER_MEM_START_ADDR) {
+      memset((void *)USER_MEM_START_ADDR, 0, mem - USER_MEM_START_ADDR);
+      memset((void *)(mem + size), 0, USER_MEM_END_ADDR - (mem + size));
+    }
   } else
-    // Clear all user memory (BIBLE: but the kept range)
-    clearUserMemory(0, 0, 0, 0);
+    // Clear all user memory
+    memset((void *)USER_MEM_START_ADDR, 0, USER_MEM_END_ADDR - USER_MEM_START_ADDR);
 
   FlushCache(0);
 

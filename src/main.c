@@ -10,7 +10,6 @@
 #include "loader_video_selector.h"
 #include "splash_render.h"
 #include "splash_screen.h"
-#include "loader_bootsnd.h"
 
 int g_is_psx_desr = 0;
 
@@ -275,7 +274,6 @@ int main(int argc, char *argv[])
                                                    LoaderParseVideoModeValue,
                                                    LoaderApplyVideoMode);
     ArmDiscStopAfterConfigBootstrap(config_source);
-    LoaderBootSoundPrime(); // BIBLE: RIPPS2's boot.adp beside the config, read while the splash shows
 
     // Optional rescue flow: allow user to adjust VIDEO_MODE before launch dispatch.
     // BIBLE: the launch keys hand a held page combo back (TRIANGLE + CROSS, L2 + R2), so the pages and the launch keys
@@ -283,7 +281,6 @@ int main(int argc, char *argv[])
     while (1) {
         int workflow_result;
 
-        LoaderBootSoundQuiesce(); // BIBLE: a page may write the config: no card read of the boot sound in flight
         if (g_video_mode_selector_requested) {
             LoaderRunEmergencyVideoModeSelector(&g_hotkey_launches_enabled,
                                                 &g_block_hotkeys_until_release,
