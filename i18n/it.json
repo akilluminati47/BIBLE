@@ -87,6 +87,10 @@
   "en": "2b406c409d68",
   "t": "## Crediti e ringraziamenti"
  },
+ "2bca2c808338": {
+  "en": "2bca2c808338",
+  "t": "- Il suono di avvio: il Boot Sound On (fast) di RIPPS2 può tenere `boot.adp` accanto alla configurazione di BIBLE (`mc?:/SYS-CONF/boot.adp`), e RIPPS2 lo legge prima dell'avvio di qualsiasi unità. BIBLE non lo legge mai: indica solo la cartella a RIPPS2. **Senza suono è l'avvio più rapido.** L'accordo e la parte di RIPPS2: [docs/boot-sound-handoff.md](docs/boot-sound-handoff.md)."
+ },
  "2d1c0c3dc3a3": {
   "en": "2d1c0c3dc3a3",
   "t": "- Da [El Isra](https://israpps.github.io/) (sviluppatore di PS2BBL): "
@@ -106,10 +110,6 @@
  "33014f963b64": {
   "en": "33014f963b64",
   "t": "1. PS2BBL analizza e consuma solo gli argomenti di controllo del loader in fondo a `ARG_*`: `-appid`, `-titleid=`, `-dev9=`, `-patinfo`, `-disc_stop`, `-gsm=`."
- },
- "33b450ea343d": {
-  "en": "33b450ea343d",
-  "t": "- Il suono di avvio, preparato: il Boot Sound On (fast) di RIPPS2 può tenere `boot.adp` accanto alla configurazione di BIBLE (`mc?:/SYS-CONF/boot.adp`). Viene letto prima dell'avvio di qualsiasi unità. BIBLE può anche passarlo a RIPPS2 in RAM, ma finora ha funzionato solo in laboratorio: su un vero SD2PSX, RIPPS2 ha letto da solo la copia sulla scheda. **Senza suono è l'avvio più rapido.** L'accordo e la parte di RIPPS2: [docs/boot-sound-handoff.md](docs/boot-sound-handoff.md)."
  },
  "34f273d336d6": {
   "en": "34f273d336d6",
@@ -475,6 +475,10 @@
   "en": "b471aa6e5908",
   "t": "- `-gsm=fp2`"
  },
+ "b4891f908a36": {
+  "en": "b4891f908a36",
+  "t": "  <a href=\"https://akilluminati47.github.io/BIBLE/\">Sito</a> ·"
+ },
  "b739b09f5b15": {
   "en": "b739b09f5b15",
   "t": "  - @uyjulian e @fjtrujy perché mi aiutano sempre"
@@ -674,9 +678,5 @@
  "fffd2a6caa3f": {
   "en": "fffd2a6caa3f",
   "t": "  - se `-patinfo` è presente, il primo argomento rimasto sostituisce la destinazione `BOOT2/BOOT/path` del CNF.\n  Questo vale per le build HDD.  \n  Esempio di PATINFO:  "
- },
- "b4891f908a36": {
-  "en": "b4891f908a36",
-  "t": "  <a href=\"https://akilluminati47.github.io/BIBLE/\">Sito</a> ·"
  }
 }

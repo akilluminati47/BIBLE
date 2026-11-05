@@ -72,10 +72,9 @@ BIBLE is the boot loader RIPPS2 sets up: a fork of saildot4k's PS2BBL Extended.
 - `BIBLE_BACKGROUND`: `AUTO` (the default: the sky when RIPPS2's settings are found or `BIBLE_COLOR` is set, else
   black in the console's own mode, a plain boot loader), `SKY` or `BLANK` (black). The hand-off into a program is
   black for a few seconds anyway, so black reads as one piece with it.
-- The boot sound, primed: RIPPS2's Boot Sound On (fast) can keep `boot.adp` beside BIBLE's config
-  (`mc?:/SYS-CONF/boot.adp`). It is read before any drive starts. BIBLE can also hand it to RIPPS2 in RAM, but that has
-  only passed in the lab: on a real SD2PSX, RIPPS2 read the card's copy itself. **Silent is the fastest boot.** The
-  contract and RIPPS2's side: [docs/boot-sound-handoff.md](docs/boot-sound-handoff.md).
+- The boot sound: RIPPS2's Boot Sound On (fast) can keep `boot.adp` beside BIBLE's config (`mc?:/SYS-CONF/boot.adp`), and
+  RIPPS2 reads it before any drive starts. BIBLE never reads it: it only tells RIPPS2 the folder. **Silent is the fastest
+  boot.** The contract and RIPPS2's side: [docs/boot-sound-handoff.md](docs/boot-sound-handoff.md).
 - RIPPS2 first: the config template (`release/SYS-CONF/PS2BBL.INI`) and the built-in defaults try
   `mc?:/RIPPS2/RIPPS2.ELF` and `mmce?:/APPS/RIPPS2.ELF` before OSDMenu and FMCB, and the template lists BIBLE's own
   keys with notes. Pages (video mode, credits, launch keys) fade in over the dimmed logo

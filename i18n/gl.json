@@ -87,6 +87,10 @@
   "en": "2b406c409d68",
   "t": "## Créditos e agradecementos"
  },
+ "2bca2c808338": {
+  "en": "2bca2c808338",
+  "t": "- O son de inicio: o Boot Sound On (fast) de RIPPS2 pode gardar `boot.adp` xunto á configuración de BIBLE (`mc?:/SYS-CONF/boot.adp`), e RIPPS2 leo antes de que arranque calquera unidade. BIBLE nunca o le: só lle indica a RIPPS2 o cartafol. **Sen son é o arranque máis rápido.** O acordo e a parte de RIPPS2: [docs/boot-sound-handoff.md](docs/boot-sound-handoff.md)."
+ },
  "2d1c0c3dc3a3": {
   "en": "2d1c0c3dc3a3",
   "t": "- De [El Isra](https://israpps.github.io/) (desenvolvedor de PS2BBL): "
@@ -106,10 +110,6 @@
  "33014f963b64": {
   "en": "33014f963b64",
   "t": "1. PS2BBL analiza e consome só os argumentos finais de control do cargador de `ARG_*`: `-appid`, `-titleid=`, `-dev9=`, `-patinfo`, `-disc_stop`, `-gsm=`."
- },
- "33b450ea343d": {
-  "en": "33b450ea343d",
-  "t": "- O son de inicio, preparado: o Boot Sound On (fast) de RIPPS2 pode gardar `boot.adp` xunto á configuración de BIBLE (`mc?:/SYS-CONF/boot.adp`). Lese antes de que arranque calquera unidade. BIBLE tamén llo pode pasar a RIPPS2 en RAM, pero iso só se comprobou no laboratorio: nunha SD2PSX real, RIPPS2 leu el mesmo a copia da tarxeta. **Sen son é o arranque máis rápido.** O acordo e a parte de RIPPS2: [docs/boot-sound-handoff.md](docs/boot-sound-handoff.md)."
  },
  "34f273d336d6": {
   "en": "34f273d336d6",
@@ -475,6 +475,10 @@
   "en": "b471aa6e5908",
   "t": "- `-gsm=fp2`"
  },
+ "b4891f908a36": {
+  "en": "b4891f908a36",
+  "t": "  <a href=\"https://akilluminati47.github.io/BIBLE/\">Web</a> ·"
+ },
  "b739b09f5b15": {
   "en": "b739b09f5b15",
   "t": "  - @uyjulian e @fjtrujy por axudarme sempre"
@@ -674,9 +678,5 @@
  "fffd2a6caa3f": {
   "en": "fffd2a6caa3f",
   "t": "  - se `-patinfo` está presente, o primeiro argumento restante substitúe o destino `BOOT2/BOOT/path` do CNF.\n  Isto é para compilacións HDD.  \n  Exemplo de PATINFO:  "
- },
- "b4891f908a36": {
-  "en": "b4891f908a36",
-  "t": "  <a href=\"https://akilluminati47.github.io/BIBLE/\">Web</a> ·"
  }
 }

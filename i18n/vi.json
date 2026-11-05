@@ -87,6 +87,10 @@
   "en": "2b406c409d68",
   "t": "## Ghi công và cảm ơn"
  },
+ "2bca2c808338": {
+  "en": "2bca2c808338",
+  "t": "- Âm khởi động: Boot Sound On (fast) của RIPPS2 có thể giữ `boot.adp` cạnh cấu hình của BIBLE (`mc?:/SYS-CONF/boot.adp`), và RIPPS2 đọc nó trước khi bất kỳ ổ nào khởi động. BIBLE không bao giờ đọc nó: chỉ cho RIPPS2 biết thư mục. **Im lặng là khởi động nhanh nhất.** Thỏa thuận và phần của RIPPS2: [docs/boot-sound-handoff.md](docs/boot-sound-handoff.md)."
+ },
  "2d1c0c3dc3a3": {
   "en": "2d1c0c3dc3a3",
   "t": "- Từ [El Isra](https://israpps.github.io/) (nhà phát triển PS2BBL): "
@@ -106,10 +110,6 @@
  "33014f963b64": {
   "en": "33014f963b64",
   "t": "1. PS2BBL chỉ phân tích và lấy đi các đối số điều khiển trình nạp ở cuối `ARG_*`: `-appid`, `-titleid=`, `-dev9=`, `-patinfo`, `-disc_stop`, `-gsm=`."
- },
- "33b450ea343d": {
-  "en": "33b450ea343d",
-  "t": "- Âm khởi động, chuẩn bị sẵn: Boot Sound On (fast) của RIPPS2 có thể giữ `boot.adp` cạnh cấu hình của BIBLE (`mc?:/SYS-CONF/boot.adp`). Nó được đọc trước khi bất kỳ ổ nào khởi động. BIBLE cũng có thể trao nó cho RIPPS2 trong RAM, nhưng việc đó mới chỉ đạt trong phòng thử nghiệm: trên SD2PSX thật, RIPPS2 tự đọc bản sao trên thẻ. **Im lặng là khởi động nhanh nhất.** Thỏa thuận và phần của RIPPS2: [docs/boot-sound-handoff.md](docs/boot-sound-handoff.md)."
  },
  "34f273d336d6": {
   "en": "34f273d336d6",
@@ -475,6 +475,10 @@
   "en": "b471aa6e5908",
   "t": "- `-gsm=fp2`"
  },
+ "b4891f908a36": {
+  "en": "b4891f908a36",
+  "t": "  <a href=\"https://akilluminati47.github.io/BIBLE/\">Trang web</a> ·"
+ },
  "b739b09f5b15": {
   "en": "b739b09f5b15",
   "t": "  - @uyjulian và @fjtrujy vì luôn giúp đỡ tôi"
@@ -674,9 +678,5 @@
  "fffd2a6caa3f": {
   "en": "fffd2a6caa3f",
   "t": "  - nếu có `-patinfo`, đối số đầu tiên còn lại sẽ thay đích `BOOT2/BOOT/path` của CNF.\n  Phần này dành cho bản build HDD.  \n  Ví dụ PATINFO:  "
- },
- "b4891f908a36": {
-  "en": "b4891f908a36",
-  "t": "  <a href=\"https://akilluminati47.github.io/BIBLE/\">Trang web</a> ·"
  }
 }

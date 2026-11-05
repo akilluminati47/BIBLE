@@ -87,6 +87,10 @@
   "en": "2b406c409d68",
   "t": "## 致谢"
  },
+ "2bca2c808338": {
+  "en": "2bca2c808338",
+  "t": "- 开机音：RIPPS2 的 Boot Sound On (fast) 可以把 `boot.adp` 放在 BIBLE 配置旁边（`mc?:/SYS-CONF/boot.adp`），RIPPS2 在任何驱动器启动之前读取它。BIBLE 从不读取它，只告诉 RIPPS2 文件夹。**无声启动最快。** 约定与 RIPPS2 一侧：[docs/boot-sound-handoff.md](docs/boot-sound-handoff.md)。"
+ },
  "2d1c0c3dc3a3": {
   "en": "2d1c0c3dc3a3",
   "t": "- 来自 [El Isra](https://israpps.github.io/)（PS2BBL 开发者）： "
@@ -106,10 +110,6 @@
  "33014f963b64": {
   "en": "33014f963b64",
   "t": "1. PS2BBL 只解析并消耗 `ARG_*` 末尾的引导程序控制参数：`-appid`、`-titleid=`、`-dev9=`、`-patinfo`、`-disc_stop`、`-gsm=`。"
- },
- "33b450ea343d": {
-  "en": "33b450ea343d",
-  "t": "- 预先备好的开机音：RIPPS2 的 Boot Sound On (fast) 可以把 `boot.adp` 放在 BIBLE 配置旁边（`mc?:/SYS-CONF/boot.adp`）。它在任何驱动器启动之前读取。BIBLE 也可以通过内存把它交给 RIPPS2，但目前只在实验环境通过：在真实的 SD2PSX 上，RIPPS2 自己读取了卡上的副本。**无声启动最快。** 约定与 RIPPS2 一侧：[docs/boot-sound-handoff.md](docs/boot-sound-handoff.md)。"
  },
  "34f273d336d6": {
   "en": "34f273d336d6",
@@ -475,6 +475,10 @@
   "en": "b471aa6e5908",
   "t": "- `-gsm=fp2`"
  },
+ "b4891f908a36": {
+  "en": "b4891f908a36",
+  "t": "  <a href=\"https://akilluminati47.github.io/BIBLE/\">网站</a> ·"
+ },
  "b739b09f5b15": {
   "en": "b739b09f5b15",
   "t": "  - @uyjulian 和 @fjtrujy，总是帮助我"
@@ -674,9 +678,5 @@
  "fffd2a6caa3f": {
   "en": "fffd2a6caa3f",
   "t": "  - 如果有 `-patinfo`，剩下的第一个参数会覆盖 CNF 的 `BOOT2/BOOT/path` 目标。\n  这适用于 HDD 构建。  \n  PATINFO 示例：  "
- },
- "b4891f908a36": {
-  "en": "b4891f908a36",
-  "t": "  <a href=\"https://akilluminati47.github.io/BIBLE/\">网站</a> ·"
  }
 }

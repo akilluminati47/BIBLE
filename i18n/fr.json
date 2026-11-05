@@ -87,6 +87,10 @@
   "en": "2b406c409d68",
   "t": "## Crédits et remerciements"
  },
+ "2bca2c808338": {
+  "en": "2bca2c808338",
+  "t": "- Le son de démarrage : le Boot Sound On (fast) de RIPPS2 peut garder `boot.adp` à côté de la configuration de BIBLE (`mc?:/SYS-CONF/boot.adp`), et RIPPS2 le lit avant le démarrage de tout lecteur. BIBLE ne le lit jamais : il indique seulement le dossier à RIPPS2. **Sans son, c'est le démarrage le plus rapide.** Le contrat et la partie RIPPS2 : [docs/boot-sound-handoff.md](docs/boot-sound-handoff.md)."
+ },
  "2d1c0c3dc3a3": {
   "en": "2d1c0c3dc3a3",
   "t": "- De [El Isra](https://israpps.github.io/) (développeur de PS2BBL) : "
@@ -106,10 +110,6 @@
  "33014f963b64": {
   "en": "33014f963b64",
   "t": "1. PS2BBL analyse et consomme seulement les arguments de contrôle du chargeur placés à la fin de `ARG_*` : `-appid`, `-titleid=`, `-dev9=`, `-patinfo`, `-disc_stop`, `-gsm=`."
- },
- "33b450ea343d": {
-  "en": "33b450ea343d",
-  "t": "- Le son de démarrage, préparé : le Boot Sound On (fast) de RIPPS2 peut garder `boot.adp` à côté de la configuration de BIBLE (`mc?:/SYS-CONF/boot.adp`). Il est lu avant le démarrage de tout lecteur. BIBLE peut aussi le transmettre à RIPPS2 en RAM, mais cela n'a été validé qu'en laboratoire : sur un vrai SD2PSX, RIPPS2 a lu lui-même la copie de la carte. **Sans son, c'est le démarrage le plus rapide.** Le contrat et la partie RIPPS2 : [docs/boot-sound-handoff.md](docs/boot-sound-handoff.md)."
  },
  "34f273d336d6": {
   "en": "34f273d336d6",
@@ -475,6 +475,10 @@
   "en": "b471aa6e5908",
   "t": "- `-gsm=fp2`"
  },
+ "b4891f908a36": {
+  "en": "b4891f908a36",
+  "t": "  <a href=\"https://akilluminati47.github.io/BIBLE/\">Site web</a> ·"
+ },
  "b739b09f5b15": {
   "en": "b739b09f5b15",
   "t": "  - @uyjulian et @fjtrujy pour m'avoir toujours aidé"
@@ -674,9 +678,5 @@
  "fffd2a6caa3f": {
   "en": "fffd2a6caa3f",
   "t": "  - si `-patinfo` est présent, le premier argument restant remplace la cible `BOOT2/BOOT/path` du CNF.\n  Ceci concerne les compilations HDD.  \n  Exemple de PATINFO :  "
- },
- "b4891f908a36": {
-  "en": "b4891f908a36",
-  "t": "  <a href=\"https://akilluminati47.github.io/BIBLE/\">Site web</a> ·"
  }
 }

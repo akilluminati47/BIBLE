@@ -87,6 +87,10 @@
   "en": "2b406c409d68",
   "t": "## Kredit & Terima Kasih"
  },
+ "2bca2c808338": {
+  "en": "2bca2c808338",
+  "t": "- Suara boot: Boot Sound On (fast) di RIPPS2 bisa menyimpan `boot.adp` di samping konfigurasi BIBLE (`mc?:/SYS-CONF/boot.adp`), dan RIPPS2 membacanya sebelum drive apa pun menyala. BIBLE tidak pernah membacanya: BIBLE hanya memberi tahu RIPPS2 foldernya. **Tanpa suara adalah boot tercepat.** Kesepakatan dan sisi RIPPS2: [docs/boot-sound-handoff.md](docs/boot-sound-handoff.md)."
+ },
  "2d1c0c3dc3a3": {
   "en": "2d1c0c3dc3a3",
   "t": "- Dari [El Isra](https://israpps.github.io/) (Pengembang PS2BBL): "
@@ -106,10 +110,6 @@
  "33014f963b64": {
   "en": "33014f963b64",
   "t": "1. PS2BBL mengurai dan memakai hanya argumen kendali loader di akhir `ARG_*`: `-appid`, `-titleid=`, `-dev9=`, `-patinfo`, `-disc_stop`, `-gsm=`."
- },
- "33b450ea343d": {
-  "en": "33b450ea343d",
-  "t": "- Suara boot, disiapkan lebih dulu: Boot Sound On (fast) di RIPPS2 bisa menyimpan `boot.adp` di samping konfigurasi BIBLE (`mc?:/SYS-CONF/boot.adp`). File ini dibaca sebelum drive apa pun menyala. BIBLE juga bisa menyerahkannya ke RIPPS2 di RAM, tetapi itu baru lulus di lab: pada SD2PSX sungguhan, RIPPS2 membaca sendiri salinan di kartu. **Tanpa suara adalah boot tercepat.** Kesepakatan dan sisi RIPPS2: [docs/boot-sound-handoff.md](docs/boot-sound-handoff.md)."
  },
  "34f273d336d6": {
   "en": "34f273d336d6",
@@ -475,6 +475,10 @@
   "en": "b471aa6e5908",
   "t": "- `-gsm=fp2`"
  },
+ "b4891f908a36": {
+  "en": "b4891f908a36",
+  "t": "  <a href=\"https://akilluminati47.github.io/BIBLE/\">Situs</a> ·"
+ },
  "b739b09f5b15": {
   "en": "b739b09f5b15",
   "t": "  - @uyjulian dan @fjtrujy karena selalu membantu saya"
@@ -674,9 +678,5 @@
  "fffd2a6caa3f": {
   "en": "fffd2a6caa3f",
   "t": "  - jika `-patinfo` ada, argumen pertama yang tersisa menggantikan target `BOOT2/BOOT/path` milik CNF.\n  Ini untuk build HDD.  \n  Contoh PATINFO:  "
- },
- "b4891f908a36": {
-  "en": "b4891f908a36",
-  "t": "  <a href=\"https://akilluminati47.github.io/BIBLE/\">Situs</a> ·"
  }
 }

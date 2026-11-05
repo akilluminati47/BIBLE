@@ -87,6 +87,10 @@
   "en": "2b406c409d68",
   "t": "## 크레디트와 감사"
  },
+ "2bca2c808338": {
+  "en": "2bca2c808338",
+  "t": "- 부팅음: RIPPS2의 Boot Sound On (fast)은 `boot.adp`를 BIBLE 설정 파일 옆(`mc?:/SYS-CONF/boot.adp`)에 둘 수 있고, RIPPS2가 어떤 드라이브보다 먼저 읽습니다. BIBLE은 이 파일을 읽지 않습니다. RIPPS2에 폴더만 알려 줍니다. **무음이 가장 빠른 부팅입니다.** 약속과 RIPPS2 쪽: [docs/boot-sound-handoff.md](docs/boot-sound-handoff.md)."
+ },
  "2d1c0c3dc3a3": {
   "en": "2d1c0c3dc3a3",
   "t": "- [El Isra](https://israpps.github.io/)(PS2BBL 개발자)로부터: "
@@ -106,10 +110,6 @@
  "33014f963b64": {
   "en": "33014f963b64",
   "t": "1. PS2BBL은 `ARG_*` 끝에 있는 로더 제어 인수만 해석해 소비합니다: `-appid`, `-titleid=`, `-dev9=`, `-patinfo`, `-disc_stop`, `-gsm=`."
- },
- "33b450ea343d": {
-  "en": "33b450ea343d",
-  "t": "- 미리 준비한 부팅음: RIPPS2의 Boot Sound On (fast)은 `boot.adp`를 BIBLE 설정 파일 옆(`mc?:/SYS-CONF/boot.adp`)에 둘 수 있습니다. 어떤 드라이브보다 먼저 읽습니다. BIBLE은 RAM으로 RIPPS2에 넘겨줄 수도 있지만, 지금까지는 실험실에서만 통과했습니다. 실제 SD2PSX에서는 RIPPS2가 카드의 사본을 직접 읽었습니다. **무음이 가장 빠른 부팅입니다.** 약속과 RIPPS2 쪽: [docs/boot-sound-handoff.md](docs/boot-sound-handoff.md)."
  },
  "34f273d336d6": {
   "en": "34f273d336d6",
@@ -475,6 +475,10 @@
   "en": "b471aa6e5908",
   "t": "- `-gsm=fp2`"
  },
+ "b4891f908a36": {
+  "en": "b4891f908a36",
+  "t": "  <a href=\"https://akilluminati47.github.io/BIBLE/\">웹사이트</a> ·"
+ },
  "b739b09f5b15": {
   "en": "b739b09f5b15",
   "t": "  - 늘 도와주는 @uyjulian과 @fjtrujy"
@@ -674,9 +678,5 @@
  "fffd2a6caa3f": {
   "en": "fffd2a6caa3f",
   "t": "  - `-patinfo`가 있으면 남은 첫 인수가 CNF의 `BOOT2/BOOT/path` 대상을 덮어씁니다.\n  HDD 빌드용입니다.  \n  PATINFO 예:  "
- },
- "b4891f908a36": {
-  "en": "b4891f908a36",
-  "t": "  <a href=\"https://akilluminati47.github.io/BIBLE/\">웹사이트</a> ·"
  }
 }

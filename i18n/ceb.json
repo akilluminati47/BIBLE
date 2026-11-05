@@ -87,6 +87,10 @@
   "en": "2b406c409d68",
   "t": "## Mga kredito ug pasalamat"
  },
+ "2bca2c808338": {
+  "en": "2bca2c808338",
+  "t": "- Ang boot sound: ang Boot Sound On (fast) sa RIPPS2 makatipig sa `boot.adp` tupad sa config sa BIBLE (`mc?:/SYS-CONF/boot.adp`), ug basahon kini sa RIPPS2 sa dili pa magsugod ang bisan unsang drive. Dili gayod kini basahon sa BIBLE: ang folder ra ang isulti niini sa RIPPS2. **Ang walay tingog mao ang labing paspas nga boot.** Ang kasabutan ug ang bahin sa RIPPS2: [docs/boot-sound-handoff.md](docs/boot-sound-handoff.md)."
+ },
  "2d1c0c3dc3a3": {
   "en": "2d1c0c3dc3a3",
   "t": "- Gikan kang [El Isra](https://israpps.github.io/) (Developer sa PS2BBL): "
@@ -106,10 +110,6 @@
  "33014f963b64": {
   "en": "33014f963b64",
   "t": "1. Ang PS2BBL mag-parse ug mokonsumo lang sa mga trailing loader-control arg gikan sa `ARG_*`: `-appid`, `-titleid=`, `-dev9=`, `-patinfo`, `-disc_stop`, `-gsm=`."
- },
- "33b450ea343d": {
-  "en": "33b450ea343d",
-  "t": "- Ang boot sound, andam na daan: ang Boot Sound On (fast) sa RIPPS2 makatipig sa `boot.adp` tupad sa config sa BIBLE (`mc?:/SYS-CONF/boot.adp`). Basahon kini sa dili pa magsugod ang bisan unsang drive. Mahimo usab kini ihatag sa BIBLE ngadto sa RIPPS2 sa RAM, apan sa lab pa lang kini nakapasar: sa tinuod nga SD2PSX, ang RIPPS2 mismo ang nagbasa sa kopya sa card. **Ang walay tingog mao ang labing paspas nga boot.** Ang kasabutan ug ang bahin sa RIPPS2: [docs/boot-sound-handoff.md](docs/boot-sound-handoff.md)."
  },
  "34f273d336d6": {
   "en": "34f273d336d6",
@@ -475,6 +475,10 @@
   "en": "b471aa6e5908",
   "t": "- `-gsm=fp2`"
  },
+ "b4891f908a36": {
+  "en": "b4891f908a36",
+  "t": "  <a href=\"https://akilluminati47.github.io/BIBLE/\">Website</a> ·"
+ },
  "b739b09f5b15": {
   "en": "b739b09f5b15",
   "t": "  - @uyjulian ug @fjtrujy sa kanunay nga pagtabang nako"
@@ -674,9 +678,5 @@
  "fffd2a6caa3f": {
   "en": "fffd2a6caa3f",
   "t": "  - kung naa ang `-patinfo`, ang unang nahibilin nga argument moilis sa target nga `BOOT2/BOOT/path` sa CNF.\n  Para kini sa mga HDD build.  \n  Pananglitan sa PATINFO:  "
- },
- "b4891f908a36": {
-  "en": "b4891f908a36",
-  "t": "  <a href=\"https://akilluminati47.github.io/BIBLE/\">Website</a> ·"
  }
 }

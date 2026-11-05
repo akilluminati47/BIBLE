@@ -87,6 +87,10 @@
   "en": "2b406c409d68",
   "t": "## Twórcy i podziękowania"
  },
+ "2bca2c808338": {
+  "en": "2bca2c808338",
+  "t": "- Dźwięk startu: Boot Sound On (fast) w RIPPS2 może trzymać `boot.adp` obok konfiguracji BIBLE (`mc?:/SYS-CONF/boot.adp`), a RIPPS2 odczytuje go, zanim wystartuje jakikolwiek napęd. BIBLE nigdy go nie czyta: podaje RIPPS2 tylko folder. **Bez dźwięku start jest najszybszy.** Umowa i strona RIPPS2: [docs/boot-sound-handoff.md](docs/boot-sound-handoff.md)."
+ },
  "2d1c0c3dc3a3": {
   "en": "2d1c0c3dc3a3",
   "t": "- Od [El Isra](https://israpps.github.io/) (twórcy PS2BBL): "
@@ -106,10 +110,6 @@
  "33014f963b64": {
   "en": "33014f963b64",
   "t": "1. PS2BBL analizuje i zużywa tylko końcowe argumenty sterujące loadera z `ARG_*`: `-appid`, `-titleid=`, `-dev9=`, `-patinfo`, `-disc_stop`, `-gsm=`."
- },
- "33b450ea343d": {
-  "en": "33b450ea343d",
-  "t": "- Dźwięk startu, przygotowany: Boot Sound On (fast) w RIPPS2 może trzymać `boot.adp` obok konfiguracji BIBLE (`mc?:/SYS-CONF/boot.adp`). Jest odczytywany, zanim wystartuje jakikolwiek napęd. BIBLE może też przekazać go do RIPPS2 w RAM, ale to przeszło tylko w laboratorium: na prawdziwym SD2PSX RIPPS2 sam odczytał kopię z karty. **Bez dźwięku start jest najszybszy.** Umowa i strona RIPPS2: [docs/boot-sound-handoff.md](docs/boot-sound-handoff.md)."
  },
  "34f273d336d6": {
   "en": "34f273d336d6",
@@ -475,6 +475,10 @@
   "en": "b471aa6e5908",
   "t": "- `-gsm=fp2`"
  },
+ "b4891f908a36": {
+  "en": "b4891f908a36",
+  "t": "  <a href=\"https://akilluminati47.github.io/BIBLE/\">Strona</a> ·"
+ },
  "b739b09f5b15": {
   "en": "b739b09f5b15",
   "t": "  - @uyjulian i @fjtrujy za to, że zawsze mi pomagają"
@@ -674,9 +678,5 @@
  "fffd2a6caa3f": {
   "en": "fffd2a6caa3f",
   "t": "  - jeśli jest `-patinfo`, pierwszy pozostały argument zastępuje cel `BOOT2/BOOT/path` z CNF.\n  To dotyczy kompilacji HDD.  \n  Przykład PATINFO:  "
- },
- "b4891f908a36": {
-  "en": "b4891f908a36",
-  "t": "  <a href=\"https://akilluminati47.github.io/BIBLE/\">Strona</a> ·"
  }
 }

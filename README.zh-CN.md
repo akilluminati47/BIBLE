@@ -66,7 +66,7 @@ BIBLE 是 RIPPS2 安装的引导程序：saildot4k 的 PS2BBL Extended 的一个
 
 - 启动画面：PS2 标志位于 RIPPS2 天空的中央，按键在下方，文字（如有）在上方。`BIBLE_GLYPHS` 0 不显示，1 动作键（默认），2 全部十六个，分两排各八个。`BIBLE_INFO` 1 显示主机信息、时钟和倒计时（默认关闭）。天空跟随你的 RIPPS2 Color Theme：没有 `BIBLE_COLOR` 时，BIBLE 读取 RIPPS2 随设置保存的天空，来源是其 AUTO 项启动的文件夹；当 AUTO 项是 SD2PSX、USB 或硬盘上的 RIPPS2 时，则读记忆卡上的 `RIPPS2` 文件夹（配置中的 `BIBLE_COLOR` 优先）。每种视频模式下外观相同。
 - `BIBLE_BACKGROUND`：`AUTO`（默认：找到 RIPPS2 的设置或设了 `BIBLE_COLOR` 时显示天空，否则以主机自身模式显示黑色，如同普通引导程序）、`SKY` 或 `BLANK`（黑色）。切换到程序时本来就会黑几秒，所以黑色与之浑然一体。
-- 预先备好的开机音：RIPPS2 的 Boot Sound On (fast) 可以把 `boot.adp` 放在 BIBLE 配置旁边（`mc?:/SYS-CONF/boot.adp`）。它在任何驱动器启动之前读取。BIBLE 也可以通过内存把它交给 RIPPS2，但目前只在实验环境通过：在真实的 SD2PSX 上，RIPPS2 自己读取了卡上的副本。**无声启动最快。** 约定与 RIPPS2 一侧：[docs/boot-sound-handoff.md](docs/boot-sound-handoff.md)。
+- 开机音：RIPPS2 的 Boot Sound On (fast) 可以把 `boot.adp` 放在 BIBLE 配置旁边（`mc?:/SYS-CONF/boot.adp`），RIPPS2 在任何驱动器启动之前读取它。BIBLE 从不读取它，只告诉 RIPPS2 文件夹。**无声启动最快。** 约定与 RIPPS2 一侧：[docs/boot-sound-handoff.md](docs/boot-sound-handoff.md)。
 - RIPPS2 优先：配置模板（`release/SYS-CONF/PS2BBL.INI`）和内置默认值会先于 OSDMenu 和 FMCB 尝试 `mc?:/RIPPS2/RIPPS2.ELF` 和 `mmce?:/APPS/RIPPS2.ELF`，模板还附说明列出 BIBLE 自己的键。各页面（视频模式、制作人员、启动键）会在收起按键、调暗的标志上淡入，让启动键能从容阅读。
 - 视频模式：`VIDEO_MODE` 也接受 `576P`、`720P` 和 `1080I`，即 RIPPS2 的其余模式。`AUTO`（默认）
   在 AUTO 条目旁找到 RIPPS2 的设置时以其 Video Mode 启动，否则使用主机自身的模式。

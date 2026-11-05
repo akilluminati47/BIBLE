@@ -87,6 +87,10 @@
   "en": "2b406c409d68",
   "t": "## Köszönet és elismerés"
  },
+ "2bca2c808338": {
+  "en": "2bca2c808338",
+  "t": "- Az indítási hang: a RIPPS2 Boot Sound On (fast) beállítása a `boot.adp` fájlt a BIBLE konfigurációja mellett tarthatja (`mc?:/SYS-CONF/boot.adp`), és a RIPPS2 bármelyik meghajtó indulása előtt beolvassa. A BIBLE sosem olvassa: csak a mappát mondja meg a RIPPS2-nek. **Hang nélkül a leggyorsabb az indulás.** A megállapodás és a RIPPS2 oldala: [docs/boot-sound-handoff.md](docs/boot-sound-handoff.md)."
+ },
  "2d1c0c3dc3a3": {
   "en": "2d1c0c3dc3a3",
   "t": "- [El Isra](https://israpps.github.io/) (a PS2BBL fejlesztője) részéről: "
@@ -106,10 +110,6 @@
  "33014f963b64": {
   "en": "33014f963b64",
   "t": "1. A PS2BBL csak az `ARG_*` végén álló betöltővezérlő argumentumokat dolgozza fel és használja el: `-appid`, `-titleid=`, `-dev9=`, `-patinfo`, `-disc_stop`, `-gsm=`."
- },
- "33b450ea343d": {
-  "en": "33b450ea343d",
-  "t": "- Az indítási hang, előkészítve: a RIPPS2 Boot Sound On (fast) beállítása a `boot.adp` fájlt a BIBLE konfigurációja mellett tarthatja (`mc?:/SYS-CONF/boot.adp`). Ezt bármelyik meghajtó indulása előtt beolvassa. A BIBLE a RIPPS2-nek RAM-ban is átadhatja, de ez eddig csak a laborban vált be: valódi SD2PSX-en a RIPPS2 maga olvasta be a kártyán lévő másolatot. **Hang nélkül a leggyorsabb az indulás.** A megállapodás és a RIPPS2 oldala: [docs/boot-sound-handoff.md](docs/boot-sound-handoff.md)."
  },
  "34f273d336d6": {
   "en": "34f273d336d6",
@@ -475,6 +475,10 @@
   "en": "b471aa6e5908",
   "t": "- `-gsm=fp2`"
  },
+ "b4891f908a36": {
+  "en": "b4891f908a36",
+  "t": "  <a href=\"https://akilluminati47.github.io/BIBLE/\">Weboldal</a> ·"
+ },
  "b739b09f5b15": {
   "en": "b739b09f5b15",
   "t": "  - @uyjulian és @fjtrujy, mert mindig segítenek"
@@ -674,9 +678,5 @@
  "fffd2a6caa3f": {
   "en": "fffd2a6caa3f",
   "t": "  - ha a `-patinfo` jelen van, az első megmaradt argumentum felülírja a CNF `BOOT2/BOOT/path` célját.\n  Ez a HDD buildekre vonatkozik.  \n  PATINFO példa:  "
- },
- "b4891f908a36": {
-  "en": "b4891f908a36",
-  "t": "  <a href=\"https://akilluminati47.github.io/BIBLE/\">Weboldal</a> ·"
  }
 }

@@ -87,6 +87,10 @@
   "en": "2b406c409d68",
   "t": "## クレジットと謝辞"
  },
+ "2bca2c808338": {
+  "en": "2bca2c808338",
+  "t": "- 起動音: RIPPS2 の Boot Sound On (fast) は `boot.adp` を BIBLE の設定ファイルの隣（`mc?:/SYS-CONF/boot.adp`）に置けます。どのドライブが起動するよりも前に RIPPS2 が読み込みます。BIBLE はこのファイルを読みません。RIPPS2 にフォルダを伝えるだけです。 **無音がいちばん速い起動です。** 取り決めと RIPPS2 側: [docs/boot-sound-handoff.md](docs/boot-sound-handoff.md)。"
+ },
  "2d1c0c3dc3a3": {
   "en": "2d1c0c3dc3a3",
   "t": "- [El Isra](https://israpps.github.io/)（PS2BBL の開発者）より： "
@@ -106,10 +110,6 @@
  "33014f963b64": {
   "en": "33014f963b64",
   "t": "1. PS2BBL は `ARG_*` の末尾にあるローダー制御用の引数だけを解析して取り除きます：`-appid`、`-titleid=`、`-dev9=`、`-patinfo`、`-disc_stop`、`-gsm=`。"
- },
- "33b450ea343d": {
-  "en": "33b450ea343d",
-  "t": "- 起動音を先に用意: RIPPS2 の Boot Sound On (fast) は `boot.adp` を BIBLE の設定ファイルの隣（`mc?:/SYS-CONF/boot.adp`）に置けます。どのドライブが起動するよりも前に読み込まれます。BIBLE は RAM で RIPPS2 に渡すこともできますが、これまでに成功したのはラボだけです。実機の SD2PSX では、RIPPS2 がカード上のコピーを自分で読み込みました。**無音がいちばん速い起動です。** 取り決めと RIPPS2 側: [docs/boot-sound-handoff.md](docs/boot-sound-handoff.md)。"
  },
  "34f273d336d6": {
   "en": "34f273d336d6",
@@ -475,6 +475,10 @@
   "en": "b471aa6e5908",
   "t": "- `-gsm=fp2`"
  },
+ "b4891f908a36": {
+  "en": "b4891f908a36",
+  "t": "  <a href=\"https://akilluminati47.github.io/BIBLE/\">ウェブサイト</a> ·"
+ },
  "b739b09f5b15": {
   "en": "b739b09f5b15",
   "t": "  - いつも助けてくれる @uyjulian と @fjtrujy"
@@ -674,9 +678,5 @@
  "fffd2a6caa3f": {
   "en": "fffd2a6caa3f",
   "t": "  - `-patinfo` がある場合、残った最初の引数が CNF の `BOOT2/BOOT/path` の対象を上書きします。\n  これは HDD ビルド向けです。  \n  PATINFO の例：  "
- },
- "b4891f908a36": {
-  "en": "b4891f908a36",
-  "t": "  <a href=\"https://akilluminati47.github.io/BIBLE/\">ウェブサイト</a> ·"
  }
 }

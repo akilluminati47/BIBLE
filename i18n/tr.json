@@ -87,6 +87,10 @@
   "en": "2b406c409d68",
   "t": "## Emeği geçenler ve teşekkürler"
  },
+ "2bca2c808338": {
+  "en": "2bca2c808338",
+  "t": "- Açılış sesi: RIPPS2'nin Boot Sound On (fast) ayarı `boot.adp` dosyasını BIBLE'ın yapılandırmasının yanında tutabilir (`mc?:/SYS-CONF/boot.adp`), ve RIPPS2 onu herhangi bir sürücü başlamadan önce okur. BIBLE onu asla okumaz: RIPPS2'ye yalnızca klasörü söyler. **Sessiz açılış en hızlısıdır.** Anlaşma ve RIPPS2 tarafı: [docs/boot-sound-handoff.md](docs/boot-sound-handoff.md)."
+ },
  "2d1c0c3dc3a3": {
   "en": "2d1c0c3dc3a3",
   "t": "- [El Isra](https://israpps.github.io/)’dan (PS2BBL geliştiricisi): "
@@ -106,10 +110,6 @@
  "33014f963b64": {
   "en": "33014f963b64",
   "t": "1. PS2BBL, `ARG_*` içinden yalnızca sondaki yükleyici denetim argümanlarını ayrıştırır ve tüketir: `-appid`, `-titleid=`, `-dev9=`, `-patinfo`, `-disc_stop`, `-gsm=`."
- },
- "33b450ea343d": {
-  "en": "33b450ea343d",
-  "t": "- Açılış sesi, önceden hazır: RIPPS2'nin Boot Sound On (fast) ayarı `boot.adp` dosyasını BIBLE'ın yapılandırmasının yanında tutabilir (`mc?:/SYS-CONF/boot.adp`). Herhangi bir sürücü başlamadan önce okunur. BIBLE bunu RAM'de RIPPS2'ye de verebilir, ancak bu yalnızca laboratuvarda geçti: gerçek bir SD2PSX'te RIPPS2 karttaki kopyayı kendisi okudu. **Sessiz açılış en hızlısıdır.** Anlaşma ve RIPPS2 tarafı: [docs/boot-sound-handoff.md](docs/boot-sound-handoff.md)."
  },
  "34f273d336d6": {
   "en": "34f273d336d6",
@@ -475,6 +475,10 @@
   "en": "b471aa6e5908",
   "t": "- `-gsm=fp2`"
  },
+ "b4891f908a36": {
+  "en": "b4891f908a36",
+  "t": "  <a href=\"https://akilluminati47.github.io/BIBLE/\">Web sitesi</a> ·"
+ },
  "b739b09f5b15": {
   "en": "b739b09f5b15",
   "t": "  - Bana her zaman yardım eden @uyjulian ve @fjtrujy"
@@ -674,9 +678,5 @@
  "fffd2a6caa3f": {
   "en": "fffd2a6caa3f",
   "t": "  - `-patinfo` varsa kalan ilk argüman, CNF’nin `BOOT2/BOOT/path` hedefinin yerini alır.\n  Bu, HDD derlemeleri içindir.  \n  PATINFO örneği:  "
- },
- "b4891f908a36": {
-  "en": "b4891f908a36",
-  "t": "  <a href=\"https://akilluminati47.github.io/BIBLE/\">Web sitesi</a> ·"
  }
 }

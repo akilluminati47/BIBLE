@@ -66,7 +66,7 @@ BIBLE は RIPPS2 がセットアップするブートローダーで、saildot4k
 
 - スプラッシュ: RIPPS2 の空の中央に PS2 ロゴ、その下にボタン、上に文字（あれば）。`BIBLE_GLYPHS` 0 なし、1 アクションボタン（既定）、2 16 個すべてを 8 個ずつ 2 段で。`BIBLE_INFO` 1 で本体情報、時計、カウントダウンを表示（既定はオフ）。空は RIPPS2 の Color Theme に合わせます。`BIBLE_COLOR` がなければ、BIBLE は RIPPS2 が設定と一緒に保存する空を、AUTO エントリが起動するフォルダから、または AUTO エントリが SD2PSX、USB、HDD 上の RIPPS2 のときはメモリーカードの `RIPPS2` フォルダから読みます（設定ファイルの `BIBLE_COLOR` が優先）。どのビデオモードでも同じ見た目です。
 - `BIBLE_BACKGROUND`: `AUTO`（既定: RIPPS2 の設定が見つかるか `BIBLE_COLOR` があれば空、なければ本体自身のモードで黒、普通のブートローダーと同じ）、`SKY` または `BLANK`（黒）。プログラムへの切り替えはどのみち数秒黒くなるので、黒ならそれと一続きに見えます。
-- 起動音を先に用意: RIPPS2 の Boot Sound On (fast) は `boot.adp` を BIBLE の設定ファイルの隣（`mc?:/SYS-CONF/boot.adp`）に置けます。どのドライブが起動するよりも前に読み込まれます。BIBLE は RAM で RIPPS2 に渡すこともできますが、これまでに成功したのはラボだけです。実機の SD2PSX では、RIPPS2 がカード上のコピーを自分で読み込みました。**無音がいちばん速い起動です。** 取り決めと RIPPS2 側: [docs/boot-sound-handoff.md](docs/boot-sound-handoff.md)。
+- 起動音: RIPPS2 の Boot Sound On (fast) は `boot.adp` を BIBLE の設定ファイルの隣（`mc?:/SYS-CONF/boot.adp`）に置けます。どのドライブが起動するよりも前に RIPPS2 が読み込みます。BIBLE はこのファイルを読みません。RIPPS2 にフォルダを伝えるだけです。 **無音がいちばん速い起動です。** 取り決めと RIPPS2 側: [docs/boot-sound-handoff.md](docs/boot-sound-handoff.md)。
 - RIPPS2 を最初に: 設定ファイルのひな形（`release/SYS-CONF/PS2BBL.INI`）と組み込みの既定値は、OSDMenu や FMCB より先に `mc?:/RIPPS2/RIPPS2.ELF` と `mmce?:/APPS/RIPPS2.ELF` を試し、ひな形には BIBLE 独自のキーが説明付きで並びます。各ページ（ビデオモード、クレジット、起動キー）は、ボタンをしまって暗くしたロゴの上にフェードインするので、起動キーが落ち着いて読めます。
 - ビデオモード：`VIDEO_MODE` は `576P`、`720P`、`1080I` も受け付けます（RIPPS2 の残りのモード）。`AUTO`（既定）は
   AUTO エントリの隣に RIPPS2 の設定があればその Video Mode で、なければ本体自身のモードで起動します。

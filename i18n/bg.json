@@ -87,6 +87,10 @@
   "en": "2b406c409d68",
   "t": "## Благодарности"
  },
+ "2bca2c808338": {
+  "en": "2bca2c808338",
+  "t": "- Звукът при стартиране: Boot Sound On (fast) на RIPPS2 може да държи `boot.adp` до конфигурацията на BIBLE (`mc?:/SYS-CONF/boot.adp`), а RIPPS2 го чете, преди да стартира което и да е устройство. BIBLE никога не го чете: само казва на RIPPS2 папката. **Без звук стартира най-бързо.** Уговорката и страната на RIPPS2: [docs/boot-sound-handoff.md](docs/boot-sound-handoff.md)."
+ },
  "2d1c0c3dc3a3": {
   "en": "2d1c0c3dc3a3",
   "t": "- От [El Isra](https://israpps.github.io/) (разработчик на PS2BBL): "
@@ -106,10 +110,6 @@
  "33014f963b64": {
   "en": "33014f963b64",
   "t": "1. PS2BBL анализира и използва само крайните управляващи аргументи на зареждащата програма от `ARG_*`: `-appid`, `-titleid=`, `-dev9=`, `-patinfo`, `-disc_stop`, `-gsm=`."
- },
- "33b450ea343d": {
-  "en": "33b450ea343d",
-  "t": "- Звукът при стартиране, подготвен: Boot Sound On (fast) на RIPPS2 може да държи `boot.adp` до конфигурацията на BIBLE (`mc?:/SYS-CONF/boot.adp`). Чете се, преди да стартира което и да е устройство. BIBLE може и да го предаде на RIPPS2 в RAM, но това засега е минало само в лабораторията: на истински SD2PSX RIPPS2 сам прочете копието от картата. **Без звук стартира най-бързо.** Уговорката и страната на RIPPS2: [docs/boot-sound-handoff.md](docs/boot-sound-handoff.md)."
  },
  "34f273d336d6": {
   "en": "34f273d336d6",
@@ -475,6 +475,10 @@
   "en": "b471aa6e5908",
   "t": "- `-gsm=fp2`"
  },
+ "b4891f908a36": {
+  "en": "b4891f908a36",
+  "t": "  <a href=\"https://akilluminati47.github.io/BIBLE/\">Сайт</a> ·"
+ },
  "b739b09f5b15": {
   "en": "b739b09f5b15",
   "t": "  - @uyjulian и @fjtrujy, че винаги ми помагат"
@@ -674,9 +678,5 @@
  "fffd2a6caa3f": {
   "en": "fffd2a6caa3f",
   "t": "  - ако има `-patinfo`, първият оставащ аргумент заменя целта `BOOT2/BOOT/path` от CNF.\n  Това е за компилации HDD.  \n  Пример за PATINFO:  "
- },
- "b4891f908a36": {
-  "en": "b4891f908a36",
-  "t": "  <a href=\"https://akilluminati47.github.io/BIBLE/\">Сайт</a> ·"
  }
 }

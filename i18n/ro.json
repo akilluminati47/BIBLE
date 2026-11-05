@@ -87,6 +87,10 @@
   "en": "2b406c409d68",
   "t": "## Credite și mulțumiri"
  },
+ "2bca2c808338": {
+  "en": "2bca2c808338",
+  "t": "- Sunetul de pornire: Boot Sound On (fast) din RIPPS2 poate ține `boot.adp` lângă configurația BIBLE (`mc?:/SYS-CONF/boot.adp`), iar RIPPS2 îl citește înainte de pornirea oricărei unități. BIBLE nu îl citește niciodată: doar îi spune lui RIPPS2 dosarul. **Fără sunet pornește cel mai repede.** Înțelegerea și partea RIPPS2: [docs/boot-sound-handoff.md](docs/boot-sound-handoff.md)."
+ },
  "2d1c0c3dc3a3": {
   "en": "2d1c0c3dc3a3",
   "t": "- De la [El Isra](https://israpps.github.io/) (dezvoltatorul PS2BBL): "
@@ -106,10 +110,6 @@
  "33014f963b64": {
   "en": "33014f963b64",
   "t": "1. PS2BBL analizează și consumă doar argumentele de control ale loaderului de la finalul `ARG_*`: `-appid`, `-titleid=`, `-dev9=`, `-patinfo`, `-disc_stop`, `-gsm=`."
- },
- "33b450ea343d": {
-  "en": "33b450ea343d",
-  "t": "- Sunetul de pornire, pregătit: Boot Sound On (fast) din RIPPS2 poate ține `boot.adp` lângă configurația BIBLE (`mc?:/SYS-CONF/boot.adp`). Este citit înainte de pornirea oricărei unități. BIBLE îl poate preda și lui RIPPS2 în RAM, dar asta a trecut doar în laborator: pe un SD2PSX real, RIPPS2 a citit singur copia de pe card. **Fără sunet pornește cel mai repede.** Înțelegerea și partea RIPPS2: [docs/boot-sound-handoff.md](docs/boot-sound-handoff.md)."
  },
  "34f273d336d6": {
   "en": "34f273d336d6",
@@ -475,6 +475,10 @@
   "en": "b471aa6e5908",
   "t": "- `-gsm=fp2`"
  },
+ "b4891f908a36": {
+  "en": "b4891f908a36",
+  "t": "  <a href=\"https://akilluminati47.github.io/BIBLE/\">Site</a> ·"
+ },
  "b739b09f5b15": {
   "en": "b739b09f5b15",
   "t": "  - @uyjulian și @fjtrujy pentru că mă ajută mereu"
@@ -674,9 +678,5 @@
  "fffd2a6caa3f": {
   "en": "fffd2a6caa3f",
   "t": "  - dacă `-patinfo` este prezent, primul argument rămas înlocuiește ținta `BOOT2/BOOT/path` din CNF.\n  Asta e pentru compilările HDD.  \n  Exemplu PATINFO:  "
- },
- "b4891f908a36": {
-  "en": "b4891f908a36",
-  "t": "  <a href=\"https://akilluminati47.github.io/BIBLE/\">Site</a> ·"
  }
 }

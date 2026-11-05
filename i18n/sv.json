@@ -87,6 +87,10 @@
   "en": "2b406c409d68",
   "t": "## Tack och erkännanden"
  },
+ "2bca2c808338": {
+  "en": "2bca2c808338",
+  "t": "- Startljudet: RIPPS2:s Boot Sound On (fast) kan lägga `boot.adp` bredvid BIBLE:s konfiguration (`mc?:/SYS-CONF/boot.adp`), och RIPPS2 läser den innan någon enhet startar. BIBLE läser den aldrig: den talar bara om mappen för RIPPS2. **Utan ljud går starten snabbast.** Överenskommelsen och RIPPS2:s sida: [docs/boot-sound-handoff.md](docs/boot-sound-handoff.md)."
+ },
  "2d1c0c3dc3a3": {
   "en": "2d1c0c3dc3a3",
   "t": "- Från [El Isra](https://israpps.github.io/) (utvecklare av PS2BBL): "
@@ -106,10 +110,6 @@
  "33014f963b64": {
   "en": "33014f963b64",
   "t": "1. PS2BBL läser och förbrukar bara laddarens styrargument i slutet av `ARG_*`: `-appid`, `-titleid=`, `-dev9=`, `-patinfo`, `-disc_stop`, `-gsm=`."
- },
- "33b450ea343d": {
-  "en": "33b450ea343d",
-  "t": "- Startljudet, förberett: RIPPS2:s Boot Sound On (fast) kan lägga `boot.adp` bredvid BIBLE:s konfiguration (`mc?:/SYS-CONF/boot.adp`). Den läses innan någon enhet startar. BIBLE kan också lämna den till RIPPS2 i RAM, men det har bara klarats i labbet: på en riktig SD2PSX läste RIPPS2 själv kopian på kortet. **Utan ljud går starten snabbast.** Överenskommelsen och RIPPS2:s sida: [docs/boot-sound-handoff.md](docs/boot-sound-handoff.md)."
  },
  "34f273d336d6": {
   "en": "34f273d336d6",
@@ -475,6 +475,10 @@
   "en": "b471aa6e5908",
   "t": "- `-gsm=fp2`"
  },
+ "b4891f908a36": {
+  "en": "b4891f908a36",
+  "t": "  <a href=\"https://akilluminati47.github.io/BIBLE/\">Webbplats</a> ·"
+ },
  "b739b09f5b15": {
   "en": "b739b09f5b15",
   "t": "  - @uyjulian och @fjtrujy för att de alltid hjälper mig"
@@ -674,9 +678,5 @@
  "fffd2a6caa3f": {
   "en": "fffd2a6caa3f",
   "t": "  - om `-patinfo` finns ersätter det första återstående argumentet CNF-målet `BOOT2/BOOT/path`.\n  Det här gäller HDD-byggen.  \n  PATINFO-exempel:  "
- },
- "b4891f908a36": {
-  "en": "b4891f908a36",
-  "t": "  <a href=\"https://akilluminati47.github.io/BIBLE/\">Webbplats</a> ·"
  }
 }

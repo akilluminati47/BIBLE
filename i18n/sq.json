@@ -87,6 +87,10 @@
   "en": "2b406c409d68",
   "t": "## Kreditet dhe falënderimet"
  },
+ "2bca2c808338": {
+  "en": "2bca2c808338",
+  "t": "- Tingulli i nisjes: Boot Sound On (fast) i RIPPS2 mund ta mbajë `boot.adp` pranë konfigurimit të BIBLE (`mc?:/SYS-CONF/boot.adp`), dhe RIPPS2 e lexon para se të niset çdo njësi. BIBLE nuk e lexon kurrë: vetëm i tregon RIPPS2 dosjen. **Pa tingull nisja është më e shpejta.** Marrëveshja dhe ana e RIPPS2: [docs/boot-sound-handoff.md](docs/boot-sound-handoff.md)."
+ },
  "2d1c0c3dc3a3": {
   "en": "2d1c0c3dc3a3",
   "t": "- Nga [El Isra](https://israpps.github.io/) (zhvilluesi i PS2BBL): "
@@ -106,10 +110,6 @@
  "33014f963b64": {
   "en": "33014f963b64",
   "t": "1. PS2BBL analizon dhe konsumon vetëm argumentet e kontrollit të ngarkuesit në fund të `ARG_*`: `-appid`, `-titleid=`, `-dev9=`, `-patinfo`, `-disc_stop`, `-gsm=`."
- },
- "33b450ea343d": {
-  "en": "33b450ea343d",
-  "t": "- Tingulli i nisjes, i përgatitur: Boot Sound On (fast) i RIPPS2 mund ta mbajë `boot.adp` pranë konfigurimit të BIBLE (`mc?:/SYS-CONF/boot.adp`). Lexohet para se të niset çdo njësi. BIBLE mund t'ia dorëzojë edhe RIPPS2 në RAM, por kjo ka kaluar vetëm në laborator: në një SD2PSX të vërtetë, RIPPS2 e lexoi vetë kopjen e kartës. **Pa tingull nisja është më e shpejta.** Marrëveshja dhe ana e RIPPS2: [docs/boot-sound-handoff.md](docs/boot-sound-handoff.md)."
  },
  "34f273d336d6": {
   "en": "34f273d336d6",
@@ -475,6 +475,10 @@
   "en": "b471aa6e5908",
   "t": "- `-gsm=fp2`"
  },
+ "b4891f908a36": {
+  "en": "b4891f908a36",
+  "t": "  <a href=\"https://akilluminati47.github.io/BIBLE/\">Faqja</a> ·"
+ },
  "b739b09f5b15": {
   "en": "b739b09f5b15",
   "t": "  - @uyjulian dhe @fjtrujy që më ndihmojnë gjithmonë"
@@ -674,9 +678,5 @@
  "fffd2a6caa3f": {
   "en": "fffd2a6caa3f",
   "t": "  - nëse `-patinfo` është i pranishëm, argumenti i parë i mbetur zëvendëson objektivin `BOOT2/BOOT/path` të CNF.\n  Kjo vlen për ndërtimet HDD.  \n  Shembull PATINFO:  "
- },
- "b4891f908a36": {
-  "en": "b4891f908a36",
-  "t": "  <a href=\"https://akilluminati47.github.io/BIBLE/\">Faqja</a> ·"
  }
 }

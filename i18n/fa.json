@@ -87,6 +87,10 @@
   "en": "2b406c409d68",
   "t": "## سپاس و قدردانی"
  },
+ "2bca2c808338": {
+  "en": "2bca2c808338",
+  "t": "- صدای راه‌اندازی: گزینهٔ Boot Sound On (fast) در RIPPS2 می‌تواند `boot.adp` را کنار پیکربندی BIBLE نگه دارد (`mc?:/SYS-CONF/boot.adp`)، و RIPPS2 آن را پیش از شروع هر درایوی می‌خواند. BIBLE هرگز آن را نمی‌خواند: فقط پوشه را به RIPPS2 می‌گوید. **بی‌صدا سریع‌ترین راه‌اندازی است.** قرارداد و سهم RIPPS2: [docs/boot-sound-handoff.md](docs/boot-sound-handoff.md)."
+ },
  "2d1c0c3dc3a3": {
   "en": "2d1c0c3dc3a3",
   "t": "- از [El Isra](https://israpps.github.io/) (توسعه‌دهندهٔ PS2BBL): "
@@ -106,10 +110,6 @@
  "33014f963b64": {
   "en": "33014f963b64",
   "t": "1. PS2BBL فقط آرگومان‌های کنترلی بوت‌لودر در انتهای `ARG_*` را تجزیه و مصرف می‌کند: `-appid`، `-titleid=`، `-dev9=`، `-patinfo`، `-disc_stop`، `-gsm=`."
- },
- "33b450ea343d": {
-  "en": "33b450ea343d",
-  "t": "- صدای راه‌اندازی، از پیش آماده: گزینهٔ Boot Sound On (fast) در RIPPS2 می‌تواند `boot.adp` را کنار پیکربندی BIBLE نگه دارد (`mc?:/SYS-CONF/boot.adp`). پیش از شروع هر درایوی خوانده می‌شود. BIBLE می‌تواند آن را در RAM هم به RIPPS2 بدهد، اما این فقط در آزمایشگاه موفق بوده است: روی یک SD2PSX واقعی، RIPPS2 خودش نسخهٔ روی کارت را خواند. **بی‌صدا سریع‌ترین راه‌اندازی است.** قرارداد و سهم RIPPS2: [docs/boot-sound-handoff.md](docs/boot-sound-handoff.md)."
  },
  "34f273d336d6": {
   "en": "34f273d336d6",
@@ -475,6 +475,10 @@
   "en": "b471aa6e5908",
   "t": "- `-gsm=fp2`"
  },
+ "b4891f908a36": {
+  "en": "b4891f908a36",
+  "t": "  <a href=\"https://akilluminati47.github.io/BIBLE/\">وب‌سایت</a> ·"
+ },
  "b739b09f5b15": {
   "en": "b739b09f5b15",
   "t": "  - @uyjulian و @fjtrujy که همیشه کمکم می‌کنند"
@@ -674,9 +678,5 @@
  "fffd2a6caa3f": {
   "en": "fffd2a6caa3f",
   "t": "  - اگر `-patinfo` باشد، نخستین آرگومان باقی‌مانده جای مقصد `BOOT2/BOOT/path` در CNF را می‌گیرد.\n  این برای بیلدهای HDD است.  \n  نمونهٔ PATINFO:  "
- },
- "b4891f908a36": {
-  "en": "b4891f908a36",
-  "t": "  <a href=\"https://akilluminati47.github.io/BIBLE/\">وب‌سایت</a> ·"
  }
 }

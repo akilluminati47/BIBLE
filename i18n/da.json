@@ -87,6 +87,10 @@
   "en": "2b406c409d68",
   "t": "## Krediteringer og tak"
  },
+ "2bca2c808338": {
+  "en": "2bca2c808338",
+  "t": "- Opstartslyden: RIPPS2's Boot Sound On (fast) kan gemme `boot.adp` ved siden af BIBLE's konfiguration (`mc?:/SYS-CONF/boot.adp`), og RIPPS2 læser den, før noget drev starter. BIBLE læser den aldrig: den fortæller kun RIPPS2 mappen. **Uden lyd er den hurtigste opstart.** Aftalen og RIPPS2's side: [docs/boot-sound-handoff.md](docs/boot-sound-handoff.md)."
+ },
  "2d1c0c3dc3a3": {
   "en": "2d1c0c3dc3a3",
   "t": "- Fra [El Isra](https://israpps.github.io/) (udvikler af PS2BBL): "
@@ -106,10 +110,6 @@
  "33014f963b64": {
   "en": "33014f963b64",
   "t": "1. PS2BBL læser og forbruger kun loaderens styreargumenter i slutningen af `ARG_*`: `-appid`, `-titleid=`, `-dev9=`, `-patinfo`, `-disc_stop`, `-gsm=`."
- },
- "33b450ea343d": {
-  "en": "33b450ea343d",
-  "t": "- Opstartslyden, gjort klar: RIPPS2's Boot Sound On (fast) kan gemme `boot.adp` ved siden af BIBLE's konfiguration (`mc?:/SYS-CONF/boot.adp`). Den læses, før noget drev starter. BIBLE kan også give den til RIPPS2 i RAM, men det er kun bestået i laboratoriet: på en rigtig SD2PSX læste RIPPS2 selv kopien på kortet. **Uden lyd er den hurtigste opstart.** Aftalen og RIPPS2's side: [docs/boot-sound-handoff.md](docs/boot-sound-handoff.md)."
  },
  "34f273d336d6": {
   "en": "34f273d336d6",
@@ -475,6 +475,10 @@
   "en": "b471aa6e5908",
   "t": "- `-gsm=fp2`"
  },
+ "b4891f908a36": {
+  "en": "b4891f908a36",
+  "t": "  <a href=\"https://akilluminati47.github.io/BIBLE/\">Websted</a> ·"
+ },
  "b739b09f5b15": {
   "en": "b739b09f5b15",
   "t": "  - @uyjulian og @fjtrujy, fordi de altid hjælper mig"
@@ -674,9 +678,5 @@
  "fffd2a6caa3f": {
   "en": "fffd2a6caa3f",
   "t": "  - hvis `-patinfo` er til stede, overskriver det første resterende argument CNF-målet `BOOT2/BOOT/path`.\n  Dette gælder HDD-builds.  \n  PATINFO-eksempel:  "
- },
- "b4891f908a36": {
-  "en": "b4891f908a36",
-  "t": "  <a href=\"https://akilluminati47.github.io/BIBLE/\">Websted</a> ·"
  }
 }
