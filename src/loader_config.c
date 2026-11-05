@@ -8,6 +8,7 @@
 #include "splash_render.h"
 #include "splash_screen.h"
 #include "loader_bootsnd.h"
+#include "OSDInit.h"
 
 #define CONFIG_DEVICE_READY_POLL_INTERVAL_MS 200u
 #define CONFIG_FATAL_ERROR_DISPLAY_MS 3000u
@@ -751,6 +752,9 @@ int LoaderFindConfigFile(FILE **fp_out,
     const char *mc_sysconf_compat_config_path = g_is_psx_desr
                                                     ? "mc?:/SYS-CONF/PS2BBL.INI"
                                                     : NULL;
+    // BIBLE: everything it keeps on a memory card lives in the one folder the browser shows as BIBLE, its system folder, so its
+    // settings are read from there first. SYS-CONF stays the fallback, for a card set up before this build.
+    char mc_bible_config_path[48] = "";
 #ifdef DISC_STOP_AT_BOOT
     int disc_boot_mc_fallback_profile = 0;
 #endif
@@ -765,6 +769,8 @@ int LoaderFindConfigFile(FILE **fp_out,
         path_out[0] = '\0';
     s_resolved_config_path[0] = '\0';
     s_requested_config_path[0] = '\0';
+    if (!g_is_psx_desr)
+        snprintf(mc_bible_config_path, sizeof(mc_bible_config_path), "mc?:/%s/PS2BBL.INI", OSDGetSystemExecFolder());
 
     boot_cwd_config = LoaderGetBootCwdConfigPath();
     boot_family_config = LoaderGetBootConfigPath();
@@ -957,6 +963,8 @@ int LoaderFindConfigFile(FILE **fp_out,
         }
 #endif
 
+        if (source == 3 && mc_bible_config_path[0] != '\0')
+            primary_count = append_unique_candidate(primary_candidates, primary_count, 8, mc_bible_config_path);
         generic_mass_boot_path = (boot_from_legacy_mass && path_is_generic_legacy_mass(config_path));
         if (!generic_mass_boot_path) {
             primary_count = append_unique_candidate(primary_candidates, primary_count, 8, config_path);
