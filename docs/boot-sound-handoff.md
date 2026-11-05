@@ -50,7 +50,7 @@ the emulator answering to RIPPS2's towers, polled over PINE; "before" is 3282396
 | Config | Before | After |
 |---|---|---|
 | 0 ms, splash on (`LOGO_DISPLAY = 2`) | 5.26, 5.26 | 4.85, 4.79 |
-| 0 ms, no splash (`LOGO_DISPLAY = 0`, what Manage writes) | 5.16 | 3.99 |
+| 0 ms, no splash (`LOGO_DISPLAY = 0`, what Manage writes) | 5.16, 4.88, 4.73 | 3.99, 4.31, 3.95 |
 | 3 s countdown (`LOGO_DISPLAY = 3`) | 7.60 | 7.55, 7.27 |
 | The sound after the towers, every take | 0.13 | 0.14 |
 
