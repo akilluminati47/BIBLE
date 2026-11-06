@@ -752,9 +752,12 @@ int LoaderFindConfigFile(FILE **fp_out,
     const char *mc_sysconf_compat_config_path = g_is_psx_desr
                                                     ? "mc?:/SYS-CONF/PS2BBL.INI"
                                                     : NULL;
-    // BIBLE: everything it keeps on a memory card lives in the one folder the browser shows as BIBLE, its system folder, so its
-    // settings are read from there first. SYS-CONF stays the fallback, for a card set up before this build.
-    char mc_bible_config_path[48] = "";
+    // BIBLE: a card has one settings file, in a system folder: this console's first, then another region's (a card set up on a
+    // console of another region, whose folder here holds only the boot file). SYS-CONF stays the fallback, for a card set up
+    // before this build.
+    static const char *const bible_folders[4] = {"BAEXEC-SYSTEM", "BEEXEC-SYSTEM", "BIEXEC-SYSTEM", "BCEXEC-SYSTEM"};
+    char mc_bible_config_paths[5][48];
+    int mc_bible_config_count = 0;
 #ifdef DISC_STOP_AT_BOOT
     int disc_boot_mc_fallback_profile = 0;
 #endif
@@ -769,8 +772,13 @@ int LoaderFindConfigFile(FILE **fp_out,
         path_out[0] = '\0';
     s_resolved_config_path[0] = '\0';
     s_requested_config_path[0] = '\0';
-    if (!g_is_psx_desr)
-        snprintf(mc_bible_config_path, sizeof(mc_bible_config_path), "mc?:/%s/PS2BBL.INI", OSDGetSystemExecFolder());
+    if (!g_is_psx_desr) {
+        int f;
+        snprintf(mc_bible_config_paths[mc_bible_config_count++], sizeof(mc_bible_config_paths[0]), "mc?:/%s/PS2BBL.INI", OSDGetSystemExecFolder());
+        for (f = 0; f < 4; f++)
+            if (!ci_eq(bible_folders[f], OSDGetSystemExecFolder()))
+                snprintf(mc_bible_config_paths[mc_bible_config_count++], sizeof(mc_bible_config_paths[0]), "mc?:/%s/PS2BBL.INI", bible_folders[f]);
+    }
 
     boot_cwd_config = LoaderGetBootCwdConfigPath();
     boot_family_config = LoaderGetBootConfigPath();
@@ -963,8 +971,11 @@ int LoaderFindConfigFile(FILE **fp_out,
         }
 #endif
 
-        if (source == 3 && mc_bible_config_path[0] != '\0')
-            primary_count = append_unique_candidate(primary_candidates, primary_count, 8, mc_bible_config_path);
+        if (source == 3) {
+            int f;
+            for (f = 0; f < mc_bible_config_count; f++)
+                primary_count = append_unique_candidate(primary_candidates, primary_count, 8, mc_bible_config_paths[f]);
+        }
         generic_mass_boot_path = (boot_from_legacy_mass && path_is_generic_legacy_mass(config_path));
         if (!generic_mass_boot_path) {
             primary_count = append_unique_candidate(primary_candidates, primary_count, 8, config_path);
